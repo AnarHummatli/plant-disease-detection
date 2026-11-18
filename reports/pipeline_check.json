@@ -1,4 +1,5 @@
 {
+  "note": "Measured on 18 Nov 2026 before D-010 (train 36,963 / val 6,147). Final splits are 36,779 / 6,121 / 10,709; the speed figures still apply.",
   "tensorflow": "2.21.0",
   "gpu": [
     "/physical_device:GPU:0"

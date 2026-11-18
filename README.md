@@ -7,7 +7,8 @@ Grad-CAM explanations, a "not sure" answer for low-confidence inputs, and a Grad
 Neural Networks group project, Azerbaijan State Oil and Industry University, Fall 2026 (topic 06).
 
 > **Status:** stages 1–2 of 8 done (foundation; leakage-checked data, input pipeline, data card).
-> Models, results and the demo link will appear here in the next stages.
+> Stage 3 code is in (classical baselines, generic trainer, CNN from scratch); results, the
+> transfer-learning model and the demo link will appear here in the next stages.
 
 ## Why this project is different
 
@@ -52,14 +53,32 @@ make env     # environment report
 make test    # unit tests
 ```
 
+### Training and baselines
+
+Every experiment is a YAML config that extends `configs/base.yaml`. On Colab, use
+`notebooks/05_baselines.ipynb` (CPU is enough) and `notebooks/06_train.ipynb` (T4 GPU); both write
+runs to Drive and export the results for the repository. From a shell, with the images extracted to
+`DATA` (the folder that contains `raw/color/`):
+
+```bash
+make baselines DATA=/content/data                          # colour/HOG/LBP + LogReg / linear SVM
+make train CONFIG=configs/cnn.yaml DATA=/content/data      # CNN from scratch
+```
+
+Model selection uses validation macro-F1 only; the test split is evaluated once, on the final
+models. Every run writes `config.yaml`, `history.csv`, `best.keras` and `metrics_val.json` to
+`<artifacts>/runs/<run_id>/` and one row to the shared results table.
+
 ## Project layout
 
 ```
 configs/          experiment configs (YAML, inherit from base.yaml)
-src/plantdx/      all logic: data/ (source, splits, duplicates, sameleaf, pipeline, card), models/, viz
-notebooks/        00 bootstrap, 01 EDA + first audit, 02 duplicate search, 03 pipeline check, 04 leaf groups
+src/plantdx/      all logic: data/ (source, splits, duplicates, sameleaf, pipeline, card), baselines/,
+                  models/, train, metrics, results, viz
+notebooks/        00 bootstrap, 01 EDA + first audit, 02 duplicate search, 03 pipeline check, 04 leaf groups,
+                  05 classical baselines, 06 train a neural network
 splits/           train/val/test CSVs with leaf_id and group_id, grouping pairs (committed)
-tests/            pytest: splits, pipeline, models
+tests/            pytest: splits, pipeline, baselines, models, trainer, metrics
 app/gradio/       demo
 docs/             problem statement, data card, decision log (later: report)
 reports/figures/  every figure used in the report and this README

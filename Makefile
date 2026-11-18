@@ -1,9 +1,11 @@
 # One entry point per stage of the plan. Targets for later stages print which
 # plan step implements them until that step is done.
 PY ?= python
-CONFIG ?= configs/mobilenetv2_ft.yaml
+CONFIG ?= configs/cnn.yaml
+# folder that contains raw/<variant>/ (Colab: notebooks extract the images to /content/data)
+DATA ?= /content/data
 
-.PHONY: help install install-local env data card train eval demo test lint format
+.PHONY: help install install-local env data card baselines train eval demo test lint format
 
 help:
 	@echo "install        core + dev deps (Colab/Kaggle: TensorFlow already present)"
@@ -11,6 +13,7 @@ help:
 	@echo "env            print Python / TF / GPU / artifacts report"
 	@echo "data           rebuild the leaf- and duplicate-grouped splits          (step 2)"
 	@echo "card           refresh the class table in docs/data_card.md"
+	@echo "baselines      colour/HOG/LBP features + LogReg / linear SVM            (step 3.2)"
 	@echo "train          train a model: make train CONFIG=configs/<name>.yaml  (steps 3-4)"
 	@echo "eval           evaluate a trained run                                 (step 5)"
 	@echo "demo           launch the Gradio demo                                 (step 6)"
@@ -31,8 +34,11 @@ data:
 card:
 	$(PY) -m plantdx.data.card
 
+baselines:
+	$(PY) -m plantdx.baselines.run --data-root $(DATA)
+
 train:
-	@echo "Not implemented yet: plan steps 3.3 and 4.1 (plantdx.train --config $(CONFIG))"
+	$(PY) -m plantdx.train --config $(CONFIG) --data-root $(DATA)
 
 eval:
 	@echo "Not implemented yet: plan step 5 (plantdx.evaluate)"

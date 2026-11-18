@@ -1,0 +1,22 @@
+# CNN trained from scratch (plan step 3.3, D-012). Train with:
+#   make train CONFIG=configs/cnn.yaml DATA=/content/data
+extends: base.yaml
+run_id: cnn_scratch
+
+model:
+  name: cnn
+  filters: [32, 64, 128, 256]
+  convs_per_block: 2          # D-012: 2 x Conv3x3 per block (plan had 1)
+  dropout: 0.3
+
+train:
+  epochs: 30
+  optimizer: adam
+  learning_rate: 1.0e-3
+  label_smoothing: 0.0
+  class_weight: false         # imbalance handled by selecting on macro-F1; a weighted run is a variant
+  early_stopping_patience: 5  # on val_loss
+  reduce_lr_patience: 2       # on val_loss, x0.5, down to min_lr
+  reduce_lr_factor: 0.5
+  min_lr: 1.0e-6
+  mixed_precision: true       # float16 compute on the T4's tensor cores; softmax stays float32 (D-012)

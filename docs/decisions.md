@@ -259,3 +259,51 @@ classes), where they are kept next to a class table generated from the splits.
   on the leaf-verified subset (8,033 images, 30 classes), where it is excluded by construction;
   the gap estimates its effect. Local-feature matching (keypoints + geometric check) could find
   more re-shots, but not other-side photos; it is left as possible future work.
+
+## D-011 · Classical baseline: HOG reduced with PCA, colour and LBP kept
+
+- **Context** (plan 3.1–3.2). The baseline features are an HSV histogram (96 values), HOG
+  (1,764) and a uniform LBP histogram (10) at 128 × 128, 1,870 values per image. On 36,779 train
+  images, one logistic-regression fit on all 1,870 standardised features did not finish within
+  10 minutes on a 2-core machine, so a grid of 4 C values × 2 models would take hours on Colab.
+- **Decision.** HOG alone is standardised and reduced to **256 PCA components** (randomised SVD,
+  seed 42); the colour and LBP histograms are passed through unchanged, then everything is
+  standardised again (`plantdx.baselines.classical.make_model`). PCA over all features would be
+  dominated by the 1,764 HOG values and could drop the colour histogram, which carries most of the
+  symptom colour. With 362 inputs, one fit takes about 7 s (logistic regression) and about 50 s
+  (linear SVM, primal solver) on train-sized data.
+- **Protocol.** `class_weight="balanced"`; C ∈ {0.01, 0.1, 1, 10} chosen on val macro-F1, ties to
+  the smaller C; fit on train only; test untouched until the final evaluation. Features are cached
+  on Drive as .npz (name = split, size, feature version, hash of the file list).
+
+## D-012 · CNN from scratch and the training protocol
+
+- **Architecture.** The plan had one Conv3×3 per block (4 blocks, 32–256 filters). With one
+  convolution the receptive field after the last pooling is 46 px, a fifth of the 224 px image;
+  two convolutions per block (VGG style) give 76 px, enough to see a lesion with its surroundings,
+  for 1.18 M parameters instead of 0.40 M. Conv layers have no bias (BatchNorm follows), GAP,
+  Dropout 0.3, softmax in float32. `model.convs_per_block` keeps the plan's variant available.
+- **Selection vs stopping.** The checkpoint keeps the epoch with the best **val macro-F1** (the
+  selection metric, computed in-graph with `keras.metrics.F1Score`); EarlyStopping (patience 5)
+  and ReduceLROnPlateau (×0.5, patience 2, min 1e-6) watch **val loss**, which is far smoother on a
+  validation set whose smallest class has 12 images. After training the checkpoint is re-scored
+  with scikit-learn (exact macro-F1, per-class scores) and its val probabilities are saved for
+  threshold selection and error analysis.
+- **Mixed precision** (`train.mixed_precision: true` in `cnn.yaml`): float16 compute on the T4's
+  tensor cores, about 2–3× faster; the output layer stays float32. A saved model keeps the
+  float16 layers; for CPU inference (demo, timing) the evaluation code rebuilds the model in
+  float32 and loads the weights.
+- **Results table.** Every model writes one row per (run, split) to `<artifacts>/reports/results.csv`
+  (Drive), the same columns for classical and neural models; notebooks export it with the small
+  run files (`plantdx.results.export_for_repo`) so it can be committed under `reports/`.
+
+## D-013 · Grad-CAM and the "not sure" answer are required, not optional
+
+- **Context.** Plan v1.0 listed Grad-CAM and the "not sure" threshold as optional (5.5), to be
+  dropped first if time ran short, while the problem statement (success criteria 4–5) and the
+  README already promised both.
+- **Decision.** Both are part of the minimum, in a light form: Grad-CAM for the final model on the
+  failure cases and in the demo; one confidence threshold chosen on val from the
+  coverage–accuracy curve. Together they take a few hours and answer the main data risk named in
+  the data card (class-correlated backgrounds): whether the model looks at the lesions or at the
+  background. Still optional: Hugging Face Spaces, a second fine-tuning variant.

@@ -233,3 +233,34 @@ def plot_images_per_leaf(table: pd.DataFrame, out: str | Path) -> Path:
     ax.legend(fontsize=8)
     fig.tight_layout()
     return _save(fig, out, dpi=130)
+
+
+def plot_learning_curves(history_csv: str | Path, out: str | Path, title: str = "") -> Path:
+    """Loss, accuracy and macro-F1 per epoch, train vs val, from a Keras CSVLogger file."""
+    hist = pd.read_csv(history_csv)
+    epochs = hist["epoch"].to_numpy() + 1 if "epoch" in hist else np.arange(1, len(hist) + 1)
+    panels = [(m, m.replace("_", "-")) for m in ("loss", "accuracy", "macro_f1") if m in hist]
+    fig, axes = plt.subplots(1, len(panels), figsize=(4.2 * len(panels), 3.4), squeeze=False)
+    for ax, (metric, label) in zip(axes[0], panels, strict=True):
+        ax.plot(epochs, hist[metric], marker=".", label="train")
+        if f"val_{metric}" in hist:
+            ax.plot(epochs, hist[f"val_{metric}"], marker=".", label="val")
+        ax.set_xlabel("epoch")
+        ax.set_title(label)
+        ax.grid(alpha=0.3)
+    if "val_macro_f1" in hist:
+        best = int(hist["val_macro_f1"].to_numpy().argmax())
+        for ax in axes[0]:
+            ax.axvline(epochs[best], color="k", ls=":", lw=1)
+        axes[0][-1].annotate(
+            f"best {hist['val_macro_f1'].iloc[best]:.4f}",
+            (epochs[best], hist["val_macro_f1"].iloc[best]),
+            textcoords="offset points",
+            xytext=(-60, -14),
+            fontsize=8,
+        )
+    axes[0][0].legend(fontsize=8)
+    if title:
+        fig.suptitle(title, fontsize=10)
+    fig.tight_layout()
+    return _save(fig, out, dpi=130)

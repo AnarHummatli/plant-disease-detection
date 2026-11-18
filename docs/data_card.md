@@ -1,6 +1,6 @@
 # Data card · PlantVillage (colour) as used in this project
 
-**Version:** 1.1 · 18 November 2026 · splits frozen after D-010
+**Version:** 1.2 · 19 November 2026 · splits frozen after D-010 (1.2: text fixes only)
 **Owner:** Yarpaq Həkimləri (ASOIU Neural Networks project, topic 06)
 
 ## 1. Summary
@@ -36,17 +36,17 @@ and most leaves were photographed several times. Consequences for this project:
 
 - A model can reach very high accuracy here and still do much worse on field photos (cluttered
   backgrounds, several leaves, other lighting). Field performance is out of scope for part A and is
-  measured later on PlantDoc (plan step 10.1).
+  left as future work (e.g. on PlantDoc; section 7).
 - Background colour differs between groups of classes (grey, purple-grey, pink-brown; some images
   look pre-segmented on black). A model could learn the background instead of the symptoms; this is
-  checked with Grad-CAM (plan step 5.5) and, in part B, with the segmented variant.
+  checked with Grad-CAM in the evaluation; a test on the segmented variant is future work.
 - Several photos of one leaf must never be split across train and test (section 5).
 
 ## 4. Composition
 
 Class sizes range from 152 images (Potato healthy) to about 5,500 (Orange Haunglongbing), a ratio
 of about 36 : 1. Because of this imbalance **macro-F1 is the main metric**; accuracy is reported but
-not used for model selection. The smallest classes have only 16 validation and 32 test images, so
+not used for model selection. The smallest class (Potato healthy) has only 12 validation and 32 test images, so
 their per-class scores are noisy and are always reported together with the image count.
 
 "No leaf id" is the share of images that have no entry in the official leaf map; their leaf is
@@ -168,13 +168,13 @@ Files: `splits/{train,val,test}.csv` (`path, label, label_index, leaf_id, group_
 
 | Limitation | Effect | What we do |
 |---|---|---|
-| Lab photos, plain backgrounds | Optimistic accuracy; weak transfer to field photos | State it; field test in part B (PlantDoc) |
-| Class-correlated backgrounds | Possible shortcut learning | Grad-CAM check; segmented variant in part B |
+| Lab photos, plain backgrounds | Optimistic accuracy; weak transfer to field photos | State it; field test (PlantDoc) is future work |
+| Class-correlated backgrounds | Possible shortcut learning | Grad-CAM check; segmented variant is future work |
 | 24.3% of images without verified leaf ids; most of their other photos cannot be found (D-010 recall 0.4%) | Photos of one leaf can still sit in train and test, mainly in the 8 classes without verified ids and in Tomato classes; the full-test score may be optimistic | Test metrics reported twice: full test and leaf-verified subset (8,033 images, 30 classes, leakage excluded by construction); the gap is discussed |
 | Near-identical re-shots below r = 0.92 and same-leaf pairs below cosine 0.94 are not grouped | Same as above | Conservative cut-offs chosen to avoid wrong merges; stated in the report |
 | Strong class imbalance (36 : 1) | Accuracy hides weak classes | Macro-F1 for selection; per-class scores with counts |
-| Only 14 crops, 26 diseases | Other crops or diseases are misclassified, not rejected | "Not sure" threshold (plan 5.6); OOD detection in part B |
-| Labels from the dataset authors | Label noise unknown | Failure cases are inspected by eye (plan 5.4) |
+| Only 14 crops, 26 diseases | Other crops or diseases are misclassified, not rejected | "Not sure" threshold chosen on val; OOD detection is future work |
+| Labels from the dataset authors | Label noise unknown | Failure cases are inspected by eye (evaluation) |
 
 ## 8. Intended use
 

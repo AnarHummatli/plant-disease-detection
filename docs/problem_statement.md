@@ -2,7 +2,7 @@
 
 **Project:** Plant Disease Detection Using Neural Networks (topic 06)
 **Team:** Yarpaq Həkimləri · Neural Networks group project · ASOIU, Fall 2026
-**Version:** 1.1 · 18 November 2026
+**Version:** 1.2 · 19 November 2026
 
 ## 1. Problem
 
@@ -46,10 +46,10 @@ indicate and when it is worth asking an expert.
 
 - Detecting or localising **several leaves or several diseases** in one photo (no object detection or segmentation).
 - **Crops and diseases outside the 38 PlantVillage classes**; such inputs may be misclassified (out-of-distribution
-  detection is planned for the portfolio phase, step 10.5).
+  detection is future work).
 - **Severity estimation**, treatment plans, pesticide names or doses.
 - Any claim of **field-ready or safety-critical** use. PlantVillage photos were taken under lab conditions on plain
-  backgrounds; accuracy on real field photos is expected to be lower and is measured separately later (PlantDoc, step 10.1).
+  backgrounds; accuracy on real field photos is expected to be lower and would need a separate field test (e.g. PlantDoc), which is future work.
 
 ## 6. Responsible use
 
