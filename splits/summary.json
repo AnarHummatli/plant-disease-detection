@@ -1,32 +1,32 @@
 {
-  "dropped_train_images": 486,
-  "dropped_leaf_ids": 273,
-  "dropped_groups": 247,
+  "dropped_train_images": 696,
+  "dropped_leaf_ids": 482,
+  "dropped_groups": 356,
   "dropped_by_leaf_source": {
-    "fallback": 304,
+    "fallback": 514,
     "map": 182
   },
-  "merged_groups": 27,
+  "merged_groups": 241,
   "train": {
-    "images": 36963,
-    "leaves": 13586,
-    "groups": 13567,
+    "images": 36779,
+    "leaves": 13406,
+    "groups": 13183,
     "classes": 38,
-    "map_images": 28221,
-    "fallback_images": 8742
+    "map_images": 28214,
+    "fallback_images": 8565
   },
   "val": {
-    "images": 6147,
-    "leaves": 2265,
-    "groups": 2261,
+    "images": 6121,
+    "leaves": 2236,
+    "groups": 2196,
     "classes": 38,
-    "map_images": 4675,
-    "fallback_images": 1472
+    "map_images": 4682,
+    "fallback_images": 1439
   },
   "test": {
     "images": 10709,
     "leaves": 4118,
-    "groups": 4112,
+    "groups": 4085,
     "classes": 38,
     "map_images": 8033,
     "fallback_images": 2676
@@ -38,7 +38,10 @@
     "val_fraction_requested": 0.15,
     "official_train": 43596,
     "official_test": 10709,
-    "duplicate_pairs": 84,
+    "grouping_pairs": {
+      "duplicate_pairs": 84,
+      "sameleaf_pairs": 565
+    },
     "duplicates_meta": {
       "method": "Pearson correlation of greyscale thumbnails, best of 8 D4 transforms; stage 1 at 32x32, stage 2 at 96x96 (plantdx.data.duplicates)",
       "stage1_min_corr": 0.9,
@@ -47,6 +50,18 @@
       "confirmed_pairs": 176,
       "pairs_joining_different_leaf_ids": 84,
       "date": "2026-11-18"
+    },
+    "sameleaf_meta": {
+      "method": "MobileNetV2 (ImageNet) global-average embeddings, cosine k-NN inside each class (plantdx.data.sameleaf)",
+      "variant": "none",
+      "k": 10,
+      "threshold": 0.94,
+      "calibration_on_verified_leaves": {
+        "precision": 0.9626,
+        "recall": 0.0041
+      },
+      "pairs": 565,
+      "cross_split_pairs_before": 253
     }
   }
 }

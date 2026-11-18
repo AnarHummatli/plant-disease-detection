@@ -1,0 +1,5 @@
+variant,threshold,pairs,same_leaf,precision,recall
+none,0.94,535.0,515.0,0.9626,0.0041
+none mutual,0.94,535.0,515.0,0.9626,0.0041
+d4,0.98,231.0,228.0,0.987,0.0018
+d4 mutual,0.98,231.0,228.0,0.987,0.0018

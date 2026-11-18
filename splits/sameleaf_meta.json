@@ -1,0 +1,12 @@
+{
+  "method": "MobileNetV2 (ImageNet) global-average embeddings, cosine k-NN inside each class (plantdx.data.sameleaf)",
+  "variant": "none",
+  "k": 10,
+  "threshold": 0.94,
+  "calibration_on_verified_leaves": {
+    "precision": 0.9626,
+    "recall": 0.0041
+  },
+  "pairs": 565,
+  "cross_split_pairs_before": 253
+}

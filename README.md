@@ -34,12 +34,12 @@ them:
 
 | Step | Where | What it does |
 |---|---|---|
-| `python -m plantdx.data.prepare` | any machine, ~1 min | Rebuilds `splits/*.csv` from the official index files and `splits/duplicate_pairs.csv`; fails if anything leaks. |
+| `python -m plantdx.data.prepare` | any machine, ~1 min | Rebuilds `splits/*.csv` from the official index files and the grouping pairs (`splits/duplicate_pairs.csv`, `splits/sameleaf_pairs.csv`); fails if anything leaks. |
 | `notebooks/01_data_audit_eda.ipynb` | Colab, ~10 min | Downloads the images, EDA figures, first (withdrawn) hash audit. |
 | `notebooks/02_duplicates_and_resplit.ipynb` | Colab, ~15 min | Searches all images for near-identical pairs, measures each cut-off, writes `splits/duplicate_pairs.csv`, rebuilds and verifies the splits. |
 | `notebooks/03_pipeline_check.ipynb` | Colab (T4), ~10 min | Checks the `tf.data` pipeline on the real images, saves augmentation examples, measures speed and memory. |
-| `notebooks/04_sameleaf_groups.ipynb` | Colab (T4), ~25 min | Recovers the leaf groups of images without a verified leaf id with CNN embeddings calibrated on verified leaves; writes `splits/sameleaf_pairs.csv` and rebuilds the splits (D-010). |
-| `python -m plantdx.data.card` | any machine | Regenerates the class table in `docs/data_card.md` from `splits/`. |
+| `notebooks/04_sameleaf_groups.ipynb` | Colab (T4), ~35 min (~10 with cached embeddings) | Recovers the leaf groups of images without a verified leaf id with CNN embeddings calibrated on verified leaves; writes `splits/sameleaf_pairs.csv` and rebuilds the splits (D-010). |
+| `python -m plantdx.data.card` | any machine | Regenerates the class table and the images-per-leaf table in `docs/data_card.md` from `splits/`. |
 
 ### Local
 
@@ -58,7 +58,7 @@ make test    # unit tests
 configs/          experiment configs (YAML, inherit from base.yaml)
 src/plantdx/      all logic: data/ (source, splits, duplicates, sameleaf, pipeline, card), models/, viz
 notebooks/        00 bootstrap, 01 EDA + first audit, 02 duplicate search, 03 pipeline check, 04 leaf groups
-splits/           train/val/test CSVs with leaf_id and group_id, duplicate pairs (committed)
+splits/           train/val/test CSVs with leaf_id and group_id, grouping pairs (committed)
 tests/            pytest: splits, pipeline, models
 app/gradio/       demo
 docs/             problem statement, data card, decision log (later: report)
@@ -74,11 +74,11 @@ Full description, per-class table and limitations: **[`docs/data_card.md`](docs/
 
 | Split | Images | Leaves | Leaf id verified |
 |---|---:|---:|---:|
-| train | 36,963 | 13,586 | 76% |
-| val | 6,147 | 2,265 | 76% |
+| train | 36,779 | 13,406 | 77% |
+| val | 6,121 | 2,236 | 77% |
 | test (official, unchanged) | 10,709 | 4,118 | 75% |
 
-What the data checks found (details in `docs/decisions.md`, D-004 and D-006):
+What the data checks found (details in `docs/decisions.md`, D-004, D-006 and D-010):
 
 - 24.3% of the images have no entry in the dataset's leaf map, so their leaf is identified only
   by file name. The official split shares 227 such file-name leaf ids between train and test.
@@ -87,10 +87,15 @@ What the data checks found (details in `docs/decisions.md`, D-004 and D-006):
 - A correlation search over all 54,305 images (with flips and rotations) found that the images
   crossing the splits are **re-shots of the same leaf**, not plain copies, including in classes
   whose leaf ids come from the official leaf map. Such pairs are grouped before splitting: 43
-  cross-split pairs before, 0 after. In total 486 train images (1.1%) were removed; the official
-  test set is unchanged.
-- No method can recognise every different photo of the same leaf, so results are also reported
-  on the leaf-verified part of the test set (8,033 images).
+  cross-split pairs before, 0 after.
+- Verified leaves have a median of 4 photos, but file-name ids almost always hold one, so the other
+  photos of those leaves were not grouped. CNN embeddings calibrated on verified leaves recover
+  only the clearest cases: at 96% precision they find 0.4% of same-leaf pairs. The 565 pairs above
+  that cut-off are grouped (253 crossed the splits before, 0 after). This is reported as a
+  **negative result**: most hidden same-leaf pairs cannot be recovered from the images.
+- In total 696 train images (1.6%) were removed; the official test set is unchanged. Because some
+  leakage may remain, test results are also reported on the leaf-verified part of the test set
+  (8,033 images, 30 classes), where leakage is excluded by construction.
 
 ![One example per class](reports/figures/eda_sample_grid.jpg)
 

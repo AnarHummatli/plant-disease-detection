@@ -128,6 +128,7 @@ original plan (v1.0, 18 Nov 2026). Each entry: context → decision → conseque
     train/val 12 (plus 7 pairs between the already-removed images and test). After: **0**.
   - Removed from train in total: 486 images (the earlier 290 + 196), 304 fallback and 182 map.
   - Final sizes: **train 36,963 / val 6,147 / test 10,709** (test unchanged, image for image).
+    Superseded by D-010, which adds same-leaf pairs.
   - Validation is one fold of `StratifiedGroupKFold`, so changing the groups re-draws it:
     10,574 images swapped between train and val. No model had been trained yet, so nothing
     is affected.
@@ -233,7 +234,28 @@ classes), where they are kept next to a class table generated from the splits.
   5. Pairs above the chosen cut-off that involve a fallback image go to
      `splits/sameleaf_pairs.csv`; the split builder joins them like D-006 pairs
      (`load_group_pairs` reads both files; `tests/test_splits.py` checks both).
-- **Results.** *To be filled in from the notebook 04 run.*
-- **If the calibration is poor** (no cut-off reaches the precision bar with useful recall), the
-  splits stay as they are and the report states the limitation; the main test metric is then
-  discussed per class, with fallback-only classes flagged.
+- **Results** (Colab T4, 18 Nov 2026; `reports/sameleaf_*.csv`, `reports/figures/sameleaf_calibration.png`).
+  - Calibration: ImageNet features separate "this leaf" from "another leaf of the same class"
+    poorly. Precision stays ≥ 0.95 only at the top: plain embeddings at cosine ≥ 0.94 give precision
+    0.963 and recall **0.004**; D4-averaged ones need ≥ 0.98 (precision 0.987, recall 0.002). At
+    10–15% recall precision is only 0.28–0.55, depending on the variant. (On synthetic data D4 had won; on the real
+    images the plain variant reaches the bar earlier.) Likely reason: all leaves of a class were
+    shot on the same background under the same light, and other photos of a leaf often show
+    another side or pose.
+  - Visual check of pairs with a file-name image: above 0.94 every sampled pair is the same leaf;
+    in 0.88–0.94 similar but different leaves appear.
+  - Cost per cut-off (with the D-006 pairs): 0.94 → 562 pairs, 207 train/val images to remove;
+    0.92 → 2,442 and 1,044; 0.88 → 14,202 and 3,474, largest group 1,037 (chaining). Even at 0.88
+    the single-image share of file-name groups only falls from 95% to 86%.
+- **Decision.** Plain embeddings, cut-off **0.94** (`splits/sameleaf_meta.json`). 565 pairs, 381
+  of them in Tomato Yellow Leaf Curl Virus. Lower cut-offs would merge different leaves and remove
+  thousands of images without closing the gap.
+- **Effect.** 253 of these pairs crossed the splits before, 0 after; 210 more train images removed
+  (696 in total: 290 leaf ids + 196 near-identical + 210 same-leaf). Final sizes: **train 36,779 /
+  val 6,121 / test 10,709** (test unchanged). Single-image share of file-name groups: 96.8% → 94.9%.
+- **Conclusion: a documented negative result.** Hidden same-leaf pairs among file-name images
+  cannot be recovered reliably with generic CNN features, so some leakage may remain. It is
+  handled in evaluation (stage 4): every test metric is reported on the full official test set and
+  on the leaf-verified subset (8,033 images, 30 classes), where it is excluded by construction;
+  the gap estimates its effect. Local-feature matching (keypoints + geometric check) could find
+  more re-shots, but not other-side photos; it is left as possible future work.
