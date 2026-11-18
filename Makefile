@@ -25,7 +25,7 @@ env:
 	$(PY) -m plantdx.env
 
 data:
-	@echo "Not implemented yet: plan step 2.1-2.3 (plantdx.data.prepare)"
+	$(PY) -m plantdx.data.prepare
 
 train:
 	@echo "Not implemented yet: plan steps 3.3 and 4.1 (plantdx.train --config $(CONFIG))"

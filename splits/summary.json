@@ -1,0 +1,33 @@
+{
+  "dropped_train_images": 290,
+  "dropped_leaf_ids": 227,
+  "train": {
+    "images": 37122,
+    "leaves": 13629,
+    "classes": 38,
+    "map_images": 28349,
+    "fallback_images": 8773
+  },
+  "val": {
+    "images": 6184,
+    "leaves": 2268,
+    "classes": 38,
+    "map_images": 4729,
+    "fallback_images": 1455
+  },
+  "test": {
+    "images": 10709,
+    "leaves": 4118,
+    "classes": 38,
+    "map_images": 8033,
+    "fallback_images": 2676
+  },
+  "settings": {
+    "source": "mohanty/PlantVillage",
+    "variant": "color",
+    "seed": 42,
+    "val_fraction_requested": 0.15,
+    "official_train": 43596,
+    "official_test": 10709
+  }
+}

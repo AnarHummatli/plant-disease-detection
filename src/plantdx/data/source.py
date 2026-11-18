@@ -108,6 +108,16 @@ def parse_path(rel_path: str) -> Record | None:
     return Record(path=rel_path, label=label, crop=crop, disease=disease or "unknown")
 
 
+def relative_path(member_path: str) -> str:
+    """'raw/color/<class>/<file>' -> '<class>/<file>' (the form stored in splits/*.csv)."""
+    return member_path.split("/", 2)[2]
+
+
+def zip_member(variant: str, rel_path: str) -> str:
+    """Inverse of `relative_path`: the member name inside data.zip."""
+    return f"raw/{variant}/{rel_path}"
+
+
 def read_split_index(path: str | Path) -> list[Record]:
     """Read an official split file, skipping blank and malformed lines."""
     records = []
