@@ -1,5 +1,5 @@
 # Data and model artifacts never go into git (plan 5.3: only download code is stored)
-data/
+/data/
 artifacts/
 checkpoints/
 *.zip
