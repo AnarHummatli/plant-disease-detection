@@ -1,0 +1,5 @@
+query_split,leaf_source,images,<= 0,<= 5,<= 10,<= 20
+test,fallback,2676,0.0,0.0,0.0,0.0
+test,map,8033,0.0,0.0,0.0,0.0
+val,fallback,1455,0.0,0.0,0.0,0.0
+val,map,4729,0.0,0.0,0.0,0.0
