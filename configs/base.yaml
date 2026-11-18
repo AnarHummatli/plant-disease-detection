@@ -1,0 +1,22 @@
+# Shared settings. Every experiment config (cnn.yaml, mobilenetv2_head.yaml, ...)
+# starts from these values and overrides only what differs (plan 9.1).
+
+seed: 42
+
+data:
+  hf_repo: mohanty/PlantVillage
+  variant: color            # color | grayscale | segmented (segmented = B part, E6)
+  val_fraction: 0.15        # carved out of the official train split, grouped by leaf_id
+  image_size: 224
+  num_classes: 38
+
+train:
+  batch_size: 64
+  mixed_precision: false
+
+paths:
+  # Relative paths resolve against PLANTDX_ARTIFACTS (Drive on Colab) or ./artifacts locally.
+  artifacts: artifacts
+  splits: splits
+  figures: reports/figures
+  results_csv: reports/results.csv

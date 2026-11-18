@@ -1,0 +1,15 @@
+# Core dependencies (mirrors pyproject.toml). Exact versions go to
+# requirements.lock after the first full working run (plan step 7.2).
+numpy>=1.26
+pandas>=2.0
+scikit-learn>=1.4
+scikit-image>=0.22
+matplotlib>=3.8
+pillow>=10.0
+pyyaml>=6.0
+huggingface_hub>=0.24
+tqdm>=4.66
+
+# Local machine only. Colab/Kaggle already provide a GPU-ready TensorFlow.
+# tensorflow>=2.19
+# gradio>=5.0

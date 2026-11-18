@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plantdx"
+version = "0.1.0"
+description = "Plant disease detection from leaf images: leakage-free evaluation, MobileNet transfer learning, Grad-CAM, Gradio demo."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Anar Hummatli" }]
+requires-python = ">=3.10"
+# TensorFlow is NOT a core dependency on purpose: Colab and Kaggle ship a
+# CUDA-matched TensorFlow, and reinstalling it there can break the GPU setup.
+# Install it locally with:  pip install -e ".[tf]"
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.0",
+    "scikit-learn>=1.4",
+    "scikit-image>=0.22",
+    "matplotlib>=3.8",
+    "pillow>=10.0",
+    "pyyaml>=6.0",
+    "huggingface_hub>=0.24",
+    "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+tf = ["tensorflow>=2.19"]
+demo = ["gradio>=5.0"]
+dev = ["pytest>=8.0", "ruff>=0.6", "pre-commit>=3.7", "nbformat>=5.9"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["notebooks"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]

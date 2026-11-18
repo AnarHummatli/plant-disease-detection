@@ -1,0 +1,36 @@
+# Data and model artifacts never go into git (plan 5.3: only download code is stored)
+data/
+artifacts/
+checkpoints/
+*.zip
+*.keras
+*.h5
+*.tflite
+*.onnx
+*.npz
+logs/
+runs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Secrets
+.env
