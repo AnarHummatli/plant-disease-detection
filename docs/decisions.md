@@ -152,23 +152,37 @@ classes), where they are kept next to a class table generated from the splits.
   official one; no leaf, group or near-identical pair is shared) and reports the official
   split's 227 shared leaf ids as information instead of a failed check.
 
-## D-008 · Input pipeline: raw pixels out, augmentation on batches, uint8 cache
+## D-008 · Input pipeline: raw pixels out, augmentation on the GPU, uint8 caches
 
 - **Decision** (`plantdx.data.pipeline`, settings in `configs/base.yaml`).
   1. Images leave the pipeline as float32 in **0–255**; each model scales its own input inside the
      model. The demo and exported models can then take raw pixels, and a preprocessing mismatch
      between training and serving is impossible.
   2. Labels are **one-hot** (CategoricalCrossentropy; label smoothing possible later).
-  3. **Augmentation only for training**, applied to whole batches with seeded Keras layers: flips
-     (horizontal and vertical: leaf photos have no natural "up"), rotation ±20°, zoom ±15%,
-     brightness and contrast ±15%. Rotation and zoom fill corners by reflection. Colour hue is not
-     changed, because yellowing and colour of lesions carry the diagnosis.
-  4. Decoded images are **cached as uint8**: val + test take about 2.5 GB of RAM (float32 would be
-     about 10 GB). The training set (about 5.5 GB) is not cached by default; it can be cached to a
-     local file (`data.cache_train`).
-  5. File names are shuffled every epoch over the whole training split; evaluation keeps the CSV
-     order, so predictions line up with `splits/*.csv`.
-- **Checks.** `tests/test_pipeline.py` (15 tests: shapes, value range, one-hot, order, reshuffling,
-  augmentation only in training, grayscale/PNG decoding, caches, config). CI now installs
-  CPU-only TensorFlow (`.[dev,cpu]`) so these tests run there. Notebook `03_pipeline_check` checks
-  the real data, saves augmentation examples and measures speed and memory.
+  3. **Augmentation only for training**, with seeded Keras layers: flips (horizontal and
+     vertical: leaf photos have no natural "up"), rotation ±20°, zoom ±15%, brightness and
+     contrast ±15%. Hue is not changed, because yellowing and lesion colour carry the
+     diagnosis. Rotation/zoom corners are filled by reflection; this sometimes mirrors a piece of
+     the leaf at the edge (`reports/figures/aug_examples.jpg`), which we accept: black corners
+     would add a new background cue, and edge stretching creates streaks.
+  4. **Augmentation runs on the GPU as the first model layers** (`train.augment_on: model`;
+     `augmentation_from_config` builds them, Keras turns them off at inference). First
+     measurement on Colab (T4, 2 CPU cores) with augmentation inside tf.data: **67.5 images/s**,
+     i.e. about 9 minutes of input work per training epoch, while decoding alone ran at about
+     317 images/s. The tf.data option (`augment_on: pipeline`) is kept for CPU-only use.
+  5. **Caches hold decoded uint8 images**: val + test in memory (about 2.5 GB; float32 would be
+     4×), train (about 5.5 GB) as a file on the VM's local disk (`cache_train: disk`,
+     `PLANTDX_CACHE`, `/content/cache` on Colab). Cache names contain the image size and a hash of
+     the file list, so a changed split cannot reuse a stale cache. Val from memory: 6,147 images in
+     1.6 s instead of 19.4 s.
+  6. **Order.** The CSVs are sorted by class. Without a cache the whole file list is reshuffled
+     every epoch. With a cache the file list is shuffled once with the seed **before** decoding,
+     then a 4,096-image buffer reshuffles every epoch. (A first version shuffled only the cached,
+     class-sorted stream with a small buffer, which would have produced batches of one or two
+     classes; caught while reviewing the speed fix, now covered by a regression test.)
+     Evaluation keeps the CSV order, so predictions line up with `splits/*.csv`.
+- **Checks.** `tests/test_pipeline.py` (18 tests: shapes, value range, one-hot, order,
+  reshuffling, class mixing with a cache, augmentation only in training or only in the model,
+  grayscale/PNG decoding, memory and disk caches, cache naming, config). CI installs CPU-only
+  TensorFlow (`.[dev,cpu]`) so they run there. Notebook `03_pipeline_check` checks the real data,
+  saves augmentation examples and measures speed (results: `reports/pipeline_check.json`).

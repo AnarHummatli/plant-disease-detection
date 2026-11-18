@@ -133,7 +133,9 @@ Files: `splits/{train,val,test}.csv` (`path, label, label_index, leaf_id, group_
 - Decode as RGB → resize to 224 × 224 (bilinear, antialiased) → float32 in 0–255. Model-specific
   scaling happens inside each model.
 - Training only: random horizontal and vertical flip, rotation up to ±20°, zoom ±15%, brightness
-  and contrast ±15% (`configs/base.yaml`, `augment:`). Example: `reports/figures/aug_examples.jpg`.
+  and contrast ±15% (`configs/base.yaml`, `augment:`), applied on the GPU as the first layers of
+  the model. Example: `reports/figures/aug_examples.jpg`.
+- Decoded images are cached as uint8 (val/test in memory, train on local disk).
 - Labels are one-hot over the 38 classes in `classes.json` order.
 
 ## 7. Known limitations

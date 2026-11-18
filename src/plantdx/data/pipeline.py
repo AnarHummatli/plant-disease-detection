@@ -1,7 +1,8 @@
 """tf.data input pipeline (plan step 2.5).
 
-    read file -> decode (RGB) -> resize to image_size x image_size -> [cache] -> batch
-    -> float32 in [0, 255] -> [augment: train only] -> one-hot labels -> prefetch
+    [train: fixed shuffle of file names] -> read file -> decode (RGB) -> resize to S x S
+    -> [cache, uint8] -> [train: shuffle] -> batch -> float32 in [0, 255]
+    -> [augment, only if augment_on == "pipeline"] -> one-hot labels -> prefetch
 
 Design choices (D-008):
 
@@ -9,15 +10,21 @@ Design choices (D-008):
   preprocessing (e.g. MobileNetV2's [-1, 1] scaling) inside the model, so the demo and the
   exported models can take raw pixels.
 * Labels are one-hot, for CategoricalCrossentropy (and label smoothing later).
-* Augmentation runs only for training, on batches, with Keras preprocessing layers seeded
-  from the config: random flips, rotation, zoom, brightness and contrast.
-* Decoded images are cached as uint8 (a 224x224x3 image is 147 KB; float32 would be 4x).
-  Caching the training set in memory would need about 5.5 GB, so by default only val and test
-  are cached; training data can be cached to a file on local disk.
+* Augmentation (random flips, rotation, zoom, brightness, contrast; seeded Keras layers) runs
+  by default **on the GPU as the first layers of the model** (`augment_on: model`): measured
+  on Colab (2 CPU cores), doing it in tf.data limited training input to 67 images/s.
+  `augmentation_from_config` builds those layers; Keras switches them off at inference.
+* Decoded images are cached as uint8 (a 224x224x3 image is 147 KB; float32 would be 4x):
+  val/test in memory, train (about 5.5 GB) in a file on local disk (`cache: disk`). Cache file
+  names contain the image size and a hash of the file list, so a changed split never reuses a
+  stale cache.
+* Training order: the file list is shuffled once with the seed **before** decoding/caching
+  (the CSVs are sorted by class), then a buffer shuffle runs every epoch on top.
 """
 
 from __future__ import annotations
 
+import hashlib
 from collections.abc import Mapping
 from dataclasses import dataclass, fields
 from pathlib import Path
@@ -28,7 +35,7 @@ import pandas as pd
 
 from plantdx.data.images import image_path
 from plantdx.data.source import CLASSES
-from plantdx.paths import repo_root
+from plantdx.paths import cache_dir, repo_root
 
 SPLITS = ("train", "val", "test")
 
@@ -44,6 +51,10 @@ class AugmentConfig:
     zoom: float = 0.15  # zoom in/out by up to this fraction
     brightness: float = 0.15  # shift by up to this fraction of the 0-255 range
     contrast: float = 0.15  # contrast factor drawn from [1 - c, 1 + c]
+
+    @classmethod
+    def disabled(cls) -> AugmentConfig:
+        return cls(flip="none", rotation_deg=0, zoom=0, brightness=0, contrast=0)
 
     @classmethod
     def from_dict(cls, values: Mapping[str, Any] | None) -> AugmentConfig:
@@ -112,6 +123,13 @@ def _decode(path, image_size: int):
     return img
 
 
+def cache_file(paths: list[str], image_size: int, tag: str = "") -> Path:
+    """Disk cache prefix under cache_dir(): <tag>_<size>px_<hash of the file list>."""
+    digest = hashlib.sha1("\n".join(paths).encode()).hexdigest()[:12]
+    name = f"{tag + '_' if tag else ''}{image_size}px_{digest}"
+    return cache_dir() / name / "cache"
+
+
 def make_dataset(
     frame: pd.DataFrame,
     root: str | Path,
@@ -122,16 +140,18 @@ def make_dataset(
     augment: AugmentConfig | None = None,
     seed: int = 42,
     cache: str | None = None,
-    shuffle_buffer: int = 2048,
+    cache_tag: str = "",
+    shuffle_buffer: int = 4096,
     num_classes: int = len(CLASSES),
     drop_remainder: bool = False,
 ):
     """Batched dataset of (images float32 [B, S, S, 3] in 0-255, one-hot labels [B, C]).
 
-    `training=True` shuffles every epoch and applies `augment` (default AugmentConfig();
-    pass AugmentConfig(flip="none", rotation_deg=0, zoom=0, brightness=0, contrast=0) to
-    switch augmentation off). `cache` is None, "memory" or a file path prefix; it stores
-    decoded uint8 images, so augmentation stays random every epoch.
+    `training=True` shuffles every epoch and applies `augment` in the pipeline (default
+    AugmentConfig(); pass AugmentConfig.disabled() when augmentation runs in the model).
+    `cache` is None, "memory", "disk" (a file under cache_dir(), named by `cache_tag`, size and
+    file-list hash) or an explicit file prefix. Caches hold decoded uint8 images, so
+    augmentation stays random every epoch.
     """
     import tensorflow as tf
 
@@ -140,6 +160,20 @@ def make_dataset(
     labels = frame["label_index"].to_numpy(dtype=np.int32)
     if len(paths) == 0:
         raise ValueError("empty frame")
+
+    if training and cache:
+        # The CSVs are sorted by class and a cache replays one fixed order, so mix the file
+        # list once here; the per-epoch buffer shuffle below then works on a mixed stream.
+        order = np.random.default_rng(seed).permutation(len(paths))
+        paths = [paths[i] for i in order]
+        labels = labels[order]
+
+    if cache == "disk":
+        prefix = cache_file(paths, image_size, cache_tag)
+        prefix.parent.mkdir(parents=True, exist_ok=True)
+        cache = str(prefix)
+    elif cache not in (None, "memory"):
+        Path(cache).parent.mkdir(parents=True, exist_ok=True)
 
     ds = tf.data.Dataset.from_tensor_slices((paths, labels))
     if training and not cache:
@@ -172,6 +206,25 @@ def make_dataset(
     return ds.prefetch(autotune)
 
 
+def augment_on(cfg: Mapping[str, Any]) -> str:
+    where = cfg.get("train", {}).get("augment_on", "model")
+    if where not in ("model", "pipeline"):
+        raise ValueError(f"train.augment_on must be 'model' or 'pipeline', not {where!r}")
+    return where
+
+
+def augmentation_from_config(cfg: Mapping[str, Any]):
+    """The augmentation layers to put at the start of the model, or None.
+
+    None when `train.augment_on` is "pipeline" (augmentation already happens in tf.data) or
+    when every factor is 0.
+    """
+    if augment_on(cfg) != "model":
+        return None
+    aug = build_augmentation(AugmentConfig.from_dict(cfg.get("augment")), seed=cfg.get("seed", 42))
+    return aug if aug.layers else None
+
+
 def datasets_from_config(
     cfg: Mapping[str, Any], root: str | Path, splits_dir: str | Path | None = None
 ) -> dict:
@@ -185,17 +238,27 @@ def datasets_from_config(
         "seed": cfg.get("seed", 42),
         "num_classes": data.get("num_classes", len(CLASSES)),
     }
-    augment = AugmentConfig.from_dict(cfg.get("augment"))
+    augment = (
+        AugmentConfig.from_dict(cfg.get("augment"))
+        if augment_on(cfg) == "pipeline"
+        else AugmentConfig.disabled()
+    )
     return {
         "train": make_dataset(
             load_split("train", splits_dir),
             training=True,
             augment=augment,
             cache=data.get("cache_train"),
+            cache_tag="train",
             **common,
         ),
-        "val": make_dataset(load_split("val", splits_dir), cache=data.get("cache_eval"), **common),
-        "test": make_dataset(
-            load_split("test", splits_dir), cache=data.get("cache_eval"), **common
-        ),
+        **{
+            split: make_dataset(
+                load_split(split, splits_dir),
+                cache=data.get("cache_eval"),
+                cache_tag=split,
+                **common,
+            )
+            for split in ("val", "test")
+        },
     }

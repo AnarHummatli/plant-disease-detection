@@ -10,9 +10,9 @@ data:
   image_size: 224
   num_classes: 38
   cache_eval: memory        # val/test decoded once, kept as uint8 (~2.5 GB in RAM)
-  cache_train: null         # null = no cache; or a file prefix on local disk, e.g. /content/cache/train
+  cache_train: disk         # null | memory | disk (~5.5 GB under PLANTDX_CACHE, /content/cache on Colab)
 
-augment:                    # training only (plantdx.data.pipeline.AugmentConfig)
+augment:                    # training only (plantdx.data.pipeline.AugmentConfig); where: train.augment_on
   flip: horizontal_and_vertical
   rotation_deg: 20
   zoom: 0.15
@@ -21,6 +21,7 @@ augment:                    # training only (plantdx.data.pipeline.AugmentConfig
 
 train:
   batch_size: 64
+  augment_on: model         # model = first layers of the model, on the GPU (D-008); or pipeline
   mixed_precision: false
 
 paths:

@@ -39,3 +39,24 @@ def run_dir(run_id: str, create: bool = True) -> Path:
     if create:
         path.mkdir(parents=True, exist_ok=True)
     return path
+
+
+ENV_CACHE = "PLANTDX_CACHE"
+
+
+def cache_dir(create: bool = True) -> Path:
+    """Fast local disk for tf.data cache files (several GB; never Google Drive).
+
+    PLANTDX_CACHE if set; on Colab /content/cache (the VM's local disk); otherwise
+    <artifacts>/cache.
+    """
+    env = os.environ.get(ENV_CACHE)
+    if env:
+        path = Path(env).expanduser()
+    elif Path("/content").is_dir():
+        path = Path("/content/cache")
+    else:
+        path = artifacts_dir(create=create) / "cache"
+    if create:
+        path.mkdir(parents=True, exist_ok=True)
+    return path

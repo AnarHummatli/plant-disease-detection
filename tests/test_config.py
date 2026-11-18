@@ -49,3 +49,14 @@ def test_artifacts_dir_respects_env(tmp_path, monkeypatch):
 
 def test_repo_root_has_pyproject():
     assert (repo_root() / "pyproject.toml").exists()
+
+
+def test_cache_dir_env_and_fallback(tmp_path, monkeypatch):
+    from plantdx.paths import ENV_CACHE, cache_dir
+
+    monkeypatch.setenv(ENV_CACHE, str(tmp_path / "fast"))
+    assert cache_dir() == tmp_path / "fast" and (tmp_path / "fast").is_dir()
+    monkeypatch.delenv(ENV_CACHE)
+    monkeypatch.setenv(ENV_ARTIFACTS, str(tmp_path / "art"))
+    expected = Path("/content/cache") if Path("/content").is_dir() else tmp_path / "art" / "cache"
+    assert cache_dir(create=False) == expected

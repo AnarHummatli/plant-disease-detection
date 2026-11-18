@@ -197,3 +197,98 @@ def test_plot_augmentations_writes_figure(tmp_path):
         frame, tmp_path, "color", tmp_path / "aug0.jpg", augment=NO_AUG, image_size=32, n_aug=2
     )
     assert no_aug.exists()
+
+
+def sorted_frame(root, n_classes=20, per_class=10):
+    """Frame sorted by class, like splits/*.csv, with tiny images."""
+    rows = []
+    rng = np.random.default_rng(1)
+    for c in range(n_classes):
+        for k in range(per_class):
+            rel = f"C{c:02d}___d/{k}.png"
+            path = root / "raw" / "color" / rel
+            path.parent.mkdir(parents=True, exist_ok=True)
+            Image.fromarray(rng.integers(0, 256, (8, 8, 3), dtype=np.uint8)).save(path)
+            rows.append({"path": rel, "label": f"C{c:02d}___d", "label_index": c})
+    return pd.DataFrame(rows)
+
+
+def test_cached_training_batches_mix_classes(tmp_path):
+    """Regression: a small shuffle buffer over a class-sorted cache gave 1-2 classes per batch."""
+    frame = sorted_frame(tmp_path)
+    ds = make_dataset(
+        frame,
+        tmp_path,
+        image_size=8,
+        batch_size=20,
+        training=True,
+        augment=NO_AUG,
+        cache="memory",
+        shuffle_buffer=16,
+        num_classes=20,
+    )
+    for _ in range(2):
+        _, y = first_batch(ds)
+        assert len(set(y.argmax(1))) >= 8
+
+
+def test_disk_cache_named_by_size_and_file_list(tmp_path, monkeypatch):
+    from plantdx.data.pipeline import cache_file
+
+    monkeypatch.setenv("PLANTDX_CACHE", str(tmp_path / "cache"))
+    a = cache_file(["x", "y"], 224, "train")
+    assert a.parent.parent == tmp_path / "cache" and a.parent.name.startswith("train_224px_")
+    assert cache_file(["x", "y"], 224, "train") == a
+    assert cache_file(["x", "y"], 192, "train") != a
+    assert cache_file(["x", "z"], 224, "train") != a
+
+    frame = write_images(tmp_path, n=6)
+    ds = make_dataset(
+        frame,
+        tmp_path,
+        image_size=16,
+        batch_size=3,
+        training=True,
+        augment=NO_AUG,
+        cache="disk",
+        cache_tag="train",
+        num_classes=6,
+    )
+    epoch1 = sorted(float(x.numpy().sum()) for b, _ in ds for x in b)
+    epoch2 = sorted(float(x.numpy().sum()) for b, _ in ds for x in b)
+    assert epoch1 == epoch2 and len(epoch1) == 6
+    assert any((tmp_path / "cache").rglob("cache*"))
+
+
+def test_augment_on_model_keeps_pipeline_plain(tmp_path):
+    from plantdx.data.pipeline import augment_on, augmentation_from_config
+
+    frame = write_images(tmp_path, n=4)
+    splits = tmp_path / "splits"
+    splits.mkdir()
+    for name in ("train", "val", "test"):
+        frame.to_csv(splits / f"{name}.csv", index=False)
+    base = {"data": {"image_size": 16, "num_classes": 4}, "train": {"batch_size": 4}}
+
+    ds = datasets_from_config(base, tmp_path, splits_dir=splits)  # default: augment_on model
+    plain = {round(float(x.sum()), 3) for x in first_batch(ds["val"])[0]}
+    train = {round(float(x.sum()), 3) for x in first_batch(ds["train"])[0]}
+    assert train == plain  # no augmentation in tf.data
+    assert augment_on(base) == "model"
+    assert augmentation_from_config(base) is not None
+
+    cfg = {**base, "train": {"batch_size": 4, "augment_on": "pipeline"}}
+    assert augmentation_from_config(cfg) is None
+    train_aug = {
+        round(float(x.sum()), 3)
+        for x in first_batch(datasets_from_config(cfg, tmp_path, splits_dir=splits)["train"])[0]
+    }
+    assert train_aug != plain
+
+    off = {
+        **base,
+        "augment": {"flip": "none", "rotation_deg": 0, "zoom": 0, "brightness": 0, "contrast": 0},
+    }
+    assert augmentation_from_config(off) is None
+    with pytest.raises(ValueError, match="augment_on"):
+        augment_on({"train": {"augment_on": "gpu"}})
