@@ -45,7 +45,8 @@ original plan (v1.0, 18 Nov 2026). Each entry: context → decision → conseque
   Corn healthy and Corn Northern_Leaf_Blight are 100% fallback). Among the official train and
   test splits, 227 leaf ids occur in both; **all 227 are fallback ids** (290 train and 243 test
   images). Examples: `GH_HL Leaf 220.JPG` appears in train and test under different UUID
-  prefixes. Images with a leaf-map entry show no overlap at all.
+  prefixes. Images with a leaf-map entry share no leaf id between train and test (they can
+  still share re-shots under different ids; see D-006).
 - **Decision.**
   1. Keep the official test split unchanged.
   2. Remove the 290 overlapping images from train (0.7% of train); they are listed in
@@ -141,9 +142,18 @@ original plan (v1.0, 18 Nov 2026). Each entry: context → decision → conseque
 ## Notes for the data card (step 2.6)
 
 - **Class imbalance:** from 152 images (Potato healthy) to about 5,500 (Orange Haunglongbing);
-  this is why macro-F1, not accuracy, is the main metric.
+  this is why macro-F1, not accuracy, is the main metric. The smallest class has only 16
+  validation and 32 test images, so its per-class scores are noisy; report them with counts.
 - **"copy" files:** names like `RS_NLB 4044 copy 2.jpg` are near-copies of `RS_NLB 4044.JPG`;
   `leaf_identifier` strips "copy …", so both get the same leaf id and stay in one split.
 - **Background shortcut risk:** backgrounds differ between classes (grey, purple-grey, black on
   segmented-looking images). A model could learn the background instead of the symptoms; this is
   checked later with Grad-CAM and, in part B, with the segmented variant.
+
+## D-007 · Tooling: pinned formatter, self-checking bootstrap
+
+- **Decision.** `ruff` is pinned to one version (0.17.5) in the dev extra and in pre-commit, so
+  CI, pre-commit and local runs format code identically and CI cannot break on a new ruff
+  release. The bootstrap notebook now checks the committed splits too (test split equals the
+  official one; no leaf, group or near-identical pair is shared) and reports the official
+  split's 227 shared leaf ids as information instead of a failed check.

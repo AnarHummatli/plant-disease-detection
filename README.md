@@ -24,7 +24,19 @@ Neural Networks group project, Azerbaijan State Oil and Industry University, Fal
 ### Google Colab (recommended)
 
 Open `notebooks/00_colab_bootstrap.ipynb` in Colab, select a T4 GPU runtime and run all cells.
-It mounts Drive, installs the package and checks access to the dataset.
+It mounts Drive, installs the package, and checks the dataset and the committed splits
+(every line should say `PASS`).
+
+### Reproducing the data step
+
+The splits in `splits/` are committed, so training does not need these steps. To rebuild or audit
+them:
+
+| Step | Where | What it does |
+|---|---|---|
+| `python -m plantdx.data.prepare` | any machine, ~1 min | Rebuilds `splits/*.csv` from the official index files and `splits/duplicate_pairs.csv`; fails if anything leaks. |
+| `notebooks/01_data_audit_eda.ipynb` | Colab, ~10 min | Downloads the images, EDA figures, first (withdrawn) hash audit. |
+| `notebooks/02_duplicates_and_resplit.ipynb` | Colab, ~15 min | Searches all images for near-identical pairs, measures each cut-off, writes `splits/duplicate_pairs.csv`, rebuilds and verifies the splits. |
 
 ### Local
 
@@ -42,8 +54,8 @@ make test    # unit tests
 ```
 configs/          experiment configs (YAML, inherit from base.yaml)
 src/plantdx/      all logic: data/, models/, train, evaluate, explain
-notebooks/        Colab bootstrap, EDA, result plots only
-splits/           train/val/test CSVs with leaf_id (committed)
+notebooks/        00 bootstrap, 01 EDA + first audit, 02 duplicate search; later: result plots
+splits/           train/val/test CSVs with leaf_id and group_id, duplicate pairs (committed)
 tests/            pytest: splits, pipeline, models
 app/gradio/       demo
 docs/             problem statement, data card, decision log, report

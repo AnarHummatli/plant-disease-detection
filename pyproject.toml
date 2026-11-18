@@ -28,7 +28,8 @@ dependencies = [
 [project.optional-dependencies]
 tf = ["tensorflow>=2.19"]
 demo = ["gradio>=5.0"]
-dev = ["pytest>=8.0", "ruff>=0.6", "pre-commit>=3.7", "nbformat>=5.9"]
+# ruff is pinned so CI, pre-commit and local runs format code identically
+dev = ["pytest>=8.0", "ruff==0.17.5", "pre-commit>=3.7", "nbformat>=5.9"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
