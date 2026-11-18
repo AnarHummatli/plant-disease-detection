@@ -28,8 +28,16 @@ def table():
     return pd.concat(frames, ignore_index=True)
 
 
-def test_no_leaf_shared_between_splits(table):
-    assert_no_leakage(table)
+def test_no_leaf_group_or_duplicate_shared_between_splits(table):
+    dup_file = SPLITS_DIR / "duplicate_pairs.csv"
+    pairs = pd.read_csv(dup_file) if dup_file.exists() else None
+    assert_no_leakage(table, pairs)
+
+
+def test_group_column_present(table):
+    assert "group_id" in table.columns
+    # a group is a union of whole leaves
+    assert (table.groupby("leaf_id")["group_id"].nunique() == 1).all()
 
 
 def test_no_image_in_two_splits(table):

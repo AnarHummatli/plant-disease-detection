@@ -55,34 +55,26 @@ original plan (v1.0, 18 Nov 2026). Each entry: context → decision → conseque
      Final sizes: train 37,122 / val 6,184 / test 10,709 images.
   4. Store `leaf_source` (`map` / `fallback`) per row so results can be reported separately for
      the leaf-verified subset.
-  5. Measure residual near-duplicate leakage with a perceptual hash (see "Audit results").
-- **Audit results** (notebook `01_data_audit_eda`, 18 Nov 2026). Every val image was compared
-  with all same-class train images, every test image with all same-class train + val images,
-  using a 256-bit difference hash (dHash; Hamming distance 0 = identical, unrelated images
-  ≈ 128).
-  - **Across the final splits: no near-duplicates.** 0.0% of val and test images have a
-    same-class neighbour within distance 20, for both `map` (12,762 images) and `fallback`
-    (4,131 images). The closest cross-split pair is 30 bits apart.
-  - **Positive control.** The same search on the 290 removed train images against test finds
-    5 near-identical copies (1.7% at distance 0; 2.1% within 20). So the audit does detect
-    duplicates when they exist, and removing these images was necessary. It also shows that
-    the other ~285 "shared" file names are *different photos* (same name, different capture),
-    not copies.
-  - **Weak signal in the tail.** Nearest-neighbour distances are a little smaller for
-    `fallback` than for `map` (1st percentile 47 vs 58, 5th percentile 63 vs 68; medians 87
-    vs 84). This may mean some photos of the same leaf remain across splits among fallback
-    images; it is small and is reported, not hidden.
-  - **Limitation.** A perceptual hash recognises re-saved or slightly resized copies, not a
-    different photo of the same leaf. "0% near-duplicates" therefore means *no duplicate
-    images across splits*, not *no shared leaves*. Results are reported on the full test set
-    and on its leaf-verified (`map`) subset (8,033 of 10,709 images).
-  - Files: `reports/audit_summary.csv`, `reports/audit_distance_quantiles.csv`,
-    `reports/audit_positive_control.csv`, `reports/figures/audit_*.png`. The per-image table
-    (~3 MB) is kept on Drive (`artifacts/reports_step2/`), not in git.
-- **Consequence.** The claim in the report is: "no leaf with a known id appears in two splits,
-  and no duplicate image appears in two splits", with the 24.3% fallback share, the removed
-  overlap, the weak tail signal and the verified-subset metrics stated openly. This replaces
-  the plan's assumption that the official split is fully leaf-grouped.
+  5. Measure residual duplicate leakage; first with a perceptual hash (below), then with the
+     correlation search of D-006, which also changes the splits.
+- **First audit (notebook `01_data_audit_eda`, dHash) — superseded, see D-006.** Every val image
+  was compared with all same-class train images and every test image with all same-class
+  train + val images, using a 256-bit difference hash (Hamming distance 0 = identical,
+  unrelated images ≈ 128).
+  - It reported 0.0% of val/test images with a same-class neighbour within distance 20.
+  - A positive control on the 290 removed train images found 5 byte-identical copies
+    (distance 0), so the code worked; the other ~285 shared file names are different photos.
+  - **But the closest pairs, inspected by eye, were plainly the same photo at distance 30–34**
+    (Tomato Late_blight and Yellow_Leaf_Curl_Virus). On flat grey backgrounds a slight blur or
+    re-compression flips many hash bits, so the ≤ 20 threshold missed real copies. The 0% result
+    is therefore **withdrawn**. Nearest-neighbour distances were also a little smaller for
+    `fallback` than for `map` images (1st percentile 47 vs 58), consistent with such copies.
+  - Files kept as a record: `reports/audit_summary.csv`, `reports/audit_distance_quantiles.csv`,
+    `reports/audit_positive_control.csv`, `reports/figures/audit_*.jpg`.
+- **Consequence.** The plan's assumption that the official split is fully leaf-grouped is
+  replaced by explicit grouping (this entry) plus duplicate grouping (D-006). The report states
+  the 24.3% fallback share, the removed images, the withdrawn first audit and the
+  verified-subset metrics openly.
 
 ## D-005 · Repository size: large derived files stay out of git
 
@@ -90,3 +82,39 @@ original plan (v1.0, 18 Nov 2026). Each entry: context → decision → conseque
   about 0.5 MB). Per-image result tables (`audit_near_duplicates.csv`, ~3 MB) are written to
   Drive and ignored by git; only small summaries are committed. `.gitattributes` forces LF
   line endings so commits from Windows do not create whitespace-only diffs.
+
+## D-006 · Copies of the same photo are found by correlation and grouped before splitting
+
+- **Context.** D-004's dHash audit missed copies of the same photo that differ by blur or
+  re-compression (distance 30–34). A threshold high enough to catch them would also catch many
+  unrelated look-alikes, so a different method is needed.
+- **Decision.**
+  1. Search **all** images (all splits, plus the removed ones), per class, for copies of the
+     same photo: Pearson correlation of greyscale thumbnails, taking the best of the 8
+     rotations/flips (D4). Stage 1 compares every same-class pair at 32×32 (candidates ≥ 0.90);
+     stage 2 re-checks candidates at 96×96. Code: `plantdx.data.duplicates`, tests in
+     `tests/test_duplicates.py`.
+  2. The stage-2 cut-off is chosen by **looking at random example pairs in correlation bands**
+     (notebook `02_duplicates_and_resplit`, section 5), not assumed; it is stored in
+     `splits/duplicates_meta.json`.
+  3. Confirmed pairs that join different leaf ids are saved in `splits/duplicate_pairs.csv`.
+     The split builder joins their leaves into one `group_id` (union-find). Then, as in D-004,
+     train groups that touch test are removed and validation is drawn by `group_id`.
+     The official test split is still unchanged; validation is re-drawn, so some images move
+     between train and val.
+  4. `tests/test_splits.py` fails if any leaf, group or confirmed duplicate pair crosses splits.
+- **Results.** *To be filled in from the notebook 02 run* (number of confirmed copies, how many
+  crossed the old splits, images removed, new split sizes).
+- **Limitation.** This finds copies of one photo (re-saved, blurred, resized, flipped, rotated),
+  not a *different photo of the same leaf*. Test metrics are therefore also reported on the
+  leaf-verified (`map`) test subset.
+
+## Notes for the data card (step 2.6)
+
+- **Class imbalance:** from 152 images (Potato healthy) to about 5,500 (Orange Haunglongbing);
+  this is why macro-F1, not accuracy, is the main metric.
+- **"copy" files:** names like `RS_NLB 4044 copy 2.jpg` are near-copies of `RS_NLB 4044.JPG`;
+  `leaf_identifier` strips "copy …", so both get the same leaf id and stay in one split.
+- **Background shortcut risk:** backgrounds differ between classes (grey, purple-grey, black on
+  segmented-looking images). A model could learn the background instead of the symptoms; this is
+  checked later with Grad-CAM and, in part B, with the segmented variant.

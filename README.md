@@ -6,16 +6,16 @@ Grad-CAM explanations, a "not sure" answer for low-confidence inputs, and a Grad
 
 Neural Networks group project, Azerbaijan State Oil and Industry University, Fall 2026 (topic 06).
 
-> **Status:** stages 1–2 of 8 in progress: project foundation and leakage-checked data splits are
-> done; models, results and the demo link will appear here as the next stages are completed.
+> **Status:** stage 2 of 8 (data) in progress: project foundation is done; leakage-checked splits are
+> being finalised. Models, results and the demo link will appear here in the next stages.
 
 ## Why this project is different
 
-- **Honest evaluation.** PlantVillage often contains several photos of the same physical leaf.
-  A random split puts the same leaf in train and test and inflates the score. Here every image
-  with a known leaf id has its leaf in exactly one split (checked by automated tests), and a
-  perceptual-hash audit confirms that no duplicate image crosses the splits. Known limits are
-  stated openly (see [Data](#data)).
+- **Honest evaluation.** PlantVillage often contains several photos of the same physical leaf,
+  and some photos appear more than once (re-saved, blurred or flipped copies). A random split
+  puts them in train and test and inflates the score. Here every leaf and every group of copies
+  is in exactly one split, checked by automated tests. Known limits are stated openly
+  (see [Data](#data)).
 - **Reliability.** Grad-CAM shows what the model looked at; low-confidence inputs get
   "not sure" instead of a confident wrong answer.
 - **Engineering.** Config-driven experiments, fixed seeds, tests and CI.
@@ -63,15 +63,16 @@ code and are never stored in this repository (`docs/decisions.md`, D-001).
 | val | 6,184 | 2,268 | 76% |
 | test (official, unchanged) | 10,709 | 4,118 | 75% |
 
-What the data checks found (details in `docs/decisions.md`, D-004):
+What the data checks found (details in `docs/decisions.md`, D-004 and D-006):
 
 - 24.3% of the images have no entry in the dataset's leaf map, so their leaf is identified only
   by file name. The official split shares 227 such file-name leaf ids between train and test;
   the 290 train images concerned were removed.
-- Perceptual-hash audit: **0% of val/test images have a near-duplicate in an earlier split**. A
-  positive control on the removed images finds 5 exact copies, so the check works.
-- A hash cannot recognise a *different photo of the same leaf*, so results are also reported on
-  the leaf-verified part of the test set (8,033 images).
+- A first duplicate check with a perceptual hash reported 0%, but inspecting the closest pairs
+  showed copies of the same photo it had missed, so that result was withdrawn. Copies are now
+  found by image correlation (including flips and rotations) and grouped before splitting.
+- Copies are found, but a *different photo of the same leaf* cannot be recognised, so results are
+  also reported on the leaf-verified part of the test set (8,033 images).
 
 ![One example per class](reports/figures/eda_sample_grid.jpg)
 

@@ -21,7 +21,9 @@ from plantdx.data.images import extract_variant, image_path, missing_files
 from plantdx.viz import (
     plot_class_counts,
     plot_closest_pairs,
+    plot_corr_hist,
     plot_fallback_share,
+    plot_pairs,
     sample_grid,
 )
 
@@ -201,3 +203,21 @@ def test_distance_quantiles_columns():
     assert q.loc["fallback", "min"] == 30
     assert q.loc["map", "images"] == 3
     assert list(q.columns) == ["images", "min", "p01", "p05", "median", "max"]
+
+
+def test_plot_pairs_applies_transform_and_hist(tmp_path):
+    img = noise_image(9)
+    save_jpeg(img, tmp_path / "raw" / "color" / "X___y" / "a.jpg")
+    save_jpeg(
+        img.transpose(Image.Transpose.FLIP_LEFT_RIGHT),
+        tmp_path / "raw" / "color" / "X___y" / "b.jpg",
+    )
+    pairs = pd.DataFrame(
+        {"path_a": ["X___y/a.jpg"], "path_b": ["X___y/b.jpg"], "transform": ["hflip"]}
+    )
+    out = plot_pairs(pairs, tmp_path, "color", tmp_path / "p.jpg", labels=["r=0.99"])
+    assert out.stat().st_size > 1000
+    cand = pd.DataFrame(
+        {"corr_hi": [0.91, 0.95, 0.99, 1.0], "same_leaf": [True, False, False, True]}
+    )
+    assert plot_corr_hist(cand, 0.97, tmp_path / "h.png").stat().st_size > 1000

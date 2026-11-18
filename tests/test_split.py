@@ -122,3 +122,61 @@ def test_csv_roundtrip_with_comma_in_class_name(tmp_path):
     df.to_csv(tmp_path / "x.csv", index=False)
     back = pd.read_csv(tmp_path / "x.csv")
     assert back.loc[0, "label"] == "Pepper,_bell___healthy"
+
+
+# --- duplicate groups (D-006) -------------------------------------------------------------
+
+
+def test_duplicate_pair_merges_groups_and_drops_train_copy():
+    train, test, leaf_map = make_data()
+    # a train image of mapped leaf "Src0_3" is a copy of a test image of another leaf
+    a = relative_path(train[3 * 3].path)  # first image of leaf (class 0, k=3)
+    b = relative_path(test[0].path)
+    pairs = pd.DataFrame({"path_a": [a], "path_b": [b]})
+    table, dropped = build_split_table(
+        train, test, leaf_map, val_fraction=0.25, duplicate_pairs=pairs
+    )
+    # the whole leaf group (all 3 images of that leaf) leaves train, the test image stays
+    assert len(dropped) == 3
+    assert a in set(dropped["path"])
+    assert b in set(table.loc[table["split"] == "test", "path"])
+    assert_no_leakage(table, pairs)
+
+
+def test_group_ids_are_deterministic_and_transitive():
+    from plantdx.data.split import merge_duplicate_groups
+
+    frame = pd.DataFrame({"path": ["p1", "p2", "p3", "p4"], "leaf_id": ["c", "b", "a", "d"]})
+    pairs = pd.DataFrame({"path_a": ["p1", "p2", "zz"], "path_b": ["p2", "p3", "p1"]})
+    groups = merge_duplicate_groups(frame, pairs)
+    assert list(groups) == [
+        "a",
+        "a",
+        "a",
+        "d",
+    ]  # chain p1-p2-p3 -> smallest id; unknown path ignored
+    assert list(merge_duplicate_groups(frame, None)) == ["c", "b", "a", "d"]
+
+
+def test_val_and_train_never_split_a_duplicate_group():
+    train, test, leaf_map = make_data(leaves_per_class=10)
+    # chain many leaves of class 1 together: they must land on one side
+    paths = [relative_path(r.path) for r in train if r.label == CLS[1]]
+    pairs = pd.DataFrame({"path_a": paths[0:-3:3], "path_b": paths[3::3]})
+    table, _ = build_split_table(train, test, leaf_map, val_fraction=0.25, duplicate_pairs=pairs)
+    assert table.loc[table["path"].isin(paths), "split"].nunique() == 1
+    assert_no_leakage(table, pairs)
+
+
+def test_assert_no_leakage_reports_duplicate_pair_across_splits():
+    table = pd.DataFrame(
+        {
+            "split": ["train", "test"],
+            "path": ["x", "y"],
+            "leaf_id": ["1", "2"],
+            "group_id": ["1", "2"],
+        }
+    )
+    with pytest.raises(AssertionError, match="duplicate pairs"):
+        assert_no_leakage(table, pd.DataFrame({"path_a": ["x"], "path_b": ["y"]}))
+    assert_no_leakage(table, pd.DataFrame({"path_a": ["x"], "path_b": ["gone"]}))

@@ -9,6 +9,9 @@ runs on any machine with internet access. Outputs, all meant to be committed:
     splits/classes.json                   the 38 class names; index = position in the list
     splits/dropped_train_overlap.csv      train rows removed because their leaf is in test
     splits/summary.json                   counts and the settings that produced the splits
+
+If splits/duplicate_pairs.csv exists (confirmed copies of the same photo, produced by
+notebook 02), those copies are joined into one group before splitting (D-006).
 """
 
 from __future__ import annotations
@@ -16,6 +19,8 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+
+import pandas as pd
 
 from plantdx.data.source import (
     CLASSES,
@@ -41,7 +46,23 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--out", type=Path, default=repo_root() / "splits")
     parser.add_argument("--val-fraction", type=float, default=0.15)
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument(
+        "--duplicates",
+        type=Path,
+        default=None,
+        help="CSV of confirmed duplicate pairs (path_a, path_b); "
+        "default: <out>/duplicate_pairs.csv if it exists",
+    )
+    parser.add_argument("--no-duplicates", action="store_true", help="ignore duplicate pairs")
     args = parser.parse_args(argv)
+
+    dup_path = None if args.no_duplicates else (args.duplicates or args.out / "duplicate_pairs.csv")
+    duplicate_pairs = None
+    if dup_path is not None and dup_path.exists():
+        duplicate_pairs = pd.read_csv(dup_path)
+        print(f"using {len(duplicate_pairs):,} duplicate pairs from {dup_path}")
+    elif args.duplicates is not None:
+        raise SystemExit(f"duplicates file not found: {args.duplicates}")
 
     files = fetch_index_files(args.variant)
     train = read_split_index(files["train"])
@@ -58,8 +79,10 @@ def main(argv: list[str] | None = None) -> None:
     if seen != set(CLASSES):
         raise SystemExit(f"class mismatch: {sorted(seen ^ set(CLASSES))}")
 
-    table, dropped = build_split_table(train, test, leaf_map, args.val_fraction, args.seed)
-    assert_no_leakage(table)
+    table, dropped = build_split_table(
+        train, test, leaf_map, args.val_fraction, args.seed, duplicate_pairs=duplicate_pairs
+    )
+    assert_no_leakage(table, duplicate_pairs)
 
     args.out.mkdir(parents=True, exist_ok=True)
     for split in SPLITS:
@@ -78,11 +101,18 @@ def main(argv: list[str] | None = None) -> None:
         "val_fraction_requested": args.val_fraction,
         "official_train": len(train),
         "official_test": len(test),
+        "duplicate_pairs": 0 if duplicate_pairs is None else len(duplicate_pairs),
     }
+    meta = args.out / "duplicates_meta.json"
+    if duplicate_pairs is not None and meta.exists():
+        summary["settings"]["duplicates_meta"] = json.loads(meta.read_text(encoding="utf-8"))
     (args.out / "summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
 
     print(json.dumps(summary, indent=2))
-    print(f"\nWritten to {args.out}. No leaf id is shared between train, val and test.")
+    print(
+        f"\nWritten to {args.out}. No leaf, duplicate group or duplicate pair is shared "
+        "between train, val and test."
+    )
 
 
 if __name__ == "__main__":

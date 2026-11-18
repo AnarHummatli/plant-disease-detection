@@ -8,6 +8,7 @@ import matplotlib
 
 matplotlib.use("Agg", force=False)
 import matplotlib.pyplot as plt  # noqa: E402
+import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 from PIL import Image  # noqa: E402
 
@@ -39,6 +40,7 @@ def plot_class_counts(table: pd.DataFrame, classes: list[str], out: str | Path) 
     counts.plot.barh(stacked=True, ax=ax, width=0.8)
     ax.set_yticks(range(len(classes)), [_short(c) for c in classes], fontsize=7)
     ax.invert_yaxis()
+    ax.set_ylabel("")
     ax.set_xlabel("images")
     ax.set_title("Images per class and split")
     fig.tight_layout()
@@ -87,6 +89,50 @@ def sample_grid(
     return _save(fig, out, dpi=dpi)
 
 
+def _rgb(root: str | Path, variant: str, rel: str, transform: str | None = None) -> np.ndarray:
+    with Image.open(image_path(root, variant, rel)) as im:
+        arr = np.asarray(im.convert("RGB"))
+    if transform and transform != "identity":
+        from plantdx.data.duplicates import apply_transform
+
+        arr = np.moveaxis(apply_transform(np.moveaxis(arr, -1, 0), transform), 0, -1)
+    return arr
+
+
+def plot_pairs(
+    pairs: pd.DataFrame,
+    root: str | Path,
+    variant: str,
+    out: str | Path,
+    labels: list[str] | None = None,
+    title: str = "",
+) -> Path:
+    """Draw the given pairs (in order): image a above, image b below.
+
+    If `pairs` has a `transform` column, image b is shown after applying it, so both images
+    appear in the same orientation. `labels` are the column titles.
+    """
+    pairs = pairs[pairs["path_b"].notna()]
+    if pairs.empty:
+        raise ValueError("no pairs to plot")
+    cols = len(pairs)
+    fig, axes = plt.subplots(2, cols, figsize=(cols * 2.2, 5.0), squeeze=False)
+    transforms = pairs["transform"] if "transform" in pairs else [None] * cols
+    for j, ((_, row), t) in enumerate(zip(pairs.iterrows(), transforms, strict=True)):
+        axes[0, j].imshow(_rgb(root, variant, row["path_a"]))
+        axes[1, j].imshow(_rgb(root, variant, row["path_b"], t))
+        for k in (0, 1):
+            axes[k, j].set_xticks([])
+            axes[k, j].set_yticks([])
+        if labels:
+            axes[0, j].set_title(labels[j], fontsize=7)
+        axes[1, j].set_xlabel(_short(row["path_a"].split("/", 1)[0]), fontsize=6)
+    if title:
+        fig.suptitle(title, fontsize=9)
+    fig.tight_layout()
+    return _save(fig, out, dpi=110)
+
+
 def plot_closest_pairs(
     pairs: pd.DataFrame,
     root: str | Path,
@@ -95,27 +141,32 @@ def plot_closest_pairs(
     n: int = 6,
     title: str = "",
 ) -> Path:
-    """The `n` pairs with the smallest hash distance: query image above, its match below.
+    """The `n` pairs with the smallest hash distance (columns query_path, match_path, distance).
 
-    `pairs` needs columns query_path, match_path, distance. No distance threshold is applied,
-    so the figure always shows the closest pairs that exist, however far apart they are.
+    No distance threshold is applied, so the figure always shows the closest pairs that exist.
     """
     pick = pairs[pairs["match_path"].notna()].nsmallest(n, "distance")
     if pick.empty:
         raise ValueError("no pairs with a match to plot")
-    cols = len(pick)
-    fig, axes = plt.subplots(2, cols, figsize=(cols * 2.2, 5.0), squeeze=False)
-    for j, (_, row) in enumerate(pick.iterrows()):
-        for k, rel in enumerate((row["query_path"], row["match_path"])):
-            with Image.open(image_path(root, variant, rel)) as im:
-                axes[k, j].imshow(im.convert("RGB"))
-            axes[k, j].set_xticks([])
-            axes[k, j].set_yticks([])
-        axes[0, j].set_title(f"distance {int(row['distance'])}", fontsize=8)
-        axes[1, j].set_xlabel(_short(row["query_path"].split("/", 1)[0]), fontsize=6)
-    axes[0, 0].set_ylabel("query", fontsize=8)
-    axes[1, 0].set_ylabel("nearest match", fontsize=8)
-    if title:
-        fig.suptitle(title, fontsize=9)
+    renamed = pick.rename(columns={"query_path": "path_a", "match_path": "path_b"})
+    labels = [f"distance {int(d)}" for d in pick["distance"]]
+    return plot_pairs(renamed, root, variant, out, labels=labels, title=title)
+
+
+def plot_corr_hist(pairs: pd.DataFrame, threshold: float, out: str | Path) -> Path:
+    """Histogram of stage-2 correlations of candidate pairs, with the chosen cut-off."""
+    fig, ax = plt.subplots(figsize=(7, 3.6))
+    groups = (
+        ("different leaf id", pairs[~pairs["same_leaf"]]),
+        ("same leaf id", pairs[pairs["same_leaf"]]),
+    )
+    bins = np.linspace(pairs["corr_hi"].min() if len(pairs) else 0, 1, 60)
+    for name, g in groups:
+        ax.hist(g["corr_hi"], bins=bins, alpha=0.6, label=f"{name} ({len(g):,})", log=True)
+    ax.axvline(threshold, color="k", ls="--", lw=1, label=f"cut-off {threshold}")
+    ax.set_xlabel("correlation at 96x96 (best D4 transform)")
+    ax.set_ylabel("pairs (log)")
+    ax.legend(fontsize=7)
+    ax.set_title("Candidate pairs from stage 1")
     fig.tight_layout()
-    return _save(fig, out, dpi=120)
+    return _save(fig, out, dpi=130)
