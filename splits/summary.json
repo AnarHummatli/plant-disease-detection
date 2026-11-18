@@ -1,31 +1,32 @@
 {
-  "dropped_train_images": 290,
-  "dropped_leaf_ids": 227,
-  "dropped_groups": 227,
+  "dropped_train_images": 486,
+  "dropped_leaf_ids": 273,
+  "dropped_groups": 247,
   "dropped_by_leaf_source": {
-    "fallback": 290
+    "fallback": 304,
+    "map": 182
   },
-  "merged_groups": 0,
+  "merged_groups": 27,
   "train": {
-    "images": 37122,
-    "leaves": 13629,
-    "groups": 13629,
+    "images": 36963,
+    "leaves": 13586,
+    "groups": 13567,
     "classes": 38,
-    "map_images": 28349,
-    "fallback_images": 8773
+    "map_images": 28221,
+    "fallback_images": 8742
   },
   "val": {
-    "images": 6184,
-    "leaves": 2268,
-    "groups": 2268,
+    "images": 6147,
+    "leaves": 2265,
+    "groups": 2261,
     "classes": 38,
-    "map_images": 4729,
-    "fallback_images": 1455
+    "map_images": 4675,
+    "fallback_images": 1472
   },
   "test": {
     "images": 10709,
     "leaves": 4118,
-    "groups": 4118,
+    "groups": 4112,
     "classes": 38,
     "map_images": 8033,
     "fallback_images": 2676
@@ -37,6 +38,15 @@
     "val_fraction_requested": 0.15,
     "official_train": 43596,
     "official_test": 10709,
-    "duplicate_pairs": 0
+    "duplicate_pairs": 84,
+    "duplicates_meta": {
+      "method": "Pearson correlation of greyscale thumbnails, best of 8 D4 transforms; stage 1 at 32x32, stage 2 at 96x96 (plantdx.data.duplicates)",
+      "stage1_min_corr": 0.9,
+      "dup_threshold": 0.92,
+      "candidate_pairs": 26513,
+      "confirmed_pairs": 176,
+      "pairs_joining_different_leaf_ids": 84,
+      "date": "2026-11-18"
+    }
   }
 }

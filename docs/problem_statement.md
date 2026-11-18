@@ -35,8 +35,9 @@ indicate and when it is worth asking an expert.
    classical baseline (colour/HOG/LBP features + logistic regression / linear SVM) under the same split and protocol.
    Reported: accuracy, macro-F1, per-class F1, top-3 accuracy, confusion matrix, model size and CPU inference time.
 3. **No leakage:** no leaf with a known id appears in more than one of train / validation / test (automated
-   tests), and no copy of the same photo crosses the splits (correlation search, D-006). Because 24.3% of the images have
-   no verified leaf id, test metrics are also reported on the leaf-verified test subset (8,033 images).
+   tests), and no pair of near-identical images found by the correlation search crosses the splits (D-006).
+   Because 24.3% of the images have no verified leaf id, test metrics are also reported on the leaf-verified
+   test subset (8,033 images).
 4. **Understanding failures:** at least 3 (target 6) misclassified examples explained with Grad-CAM.
 5. **Working demo:** an upload interface that shows the top-3 prediction, the Grad-CAM overlay and the "not sure" state.
 6. **Reproducibility:** a clean Colab session reproduces split → training → evaluation → demo from the README.

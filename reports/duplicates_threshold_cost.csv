@@ -1,0 +1,6 @@
+threshold,pairs,cross_split_pairs,train_val_images_to_remove,largest_group,largest_leaf,merged_groups
+0.9,851,388,1743,1024,33,89
+0.91,298,129,687,236,33,69
+0.92,84,43,196,63,33,42
+0.93,28,11,44,41,33,23
+0.95,1,1,1,33,33,1

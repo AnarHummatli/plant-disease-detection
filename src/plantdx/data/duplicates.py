@@ -1,4 +1,8 @@
-"""Find copies of the same photo anywhere in the dataset (replaces the dHash threshold audit).
+"""Find near-identical images anywhere in the dataset (replaces the dHash threshold audit).
+
+"Near-identical" covers copies of one photo (re-saved, blurred, resized, flipped, rotated) and
+re-shots of the same leaf taken moments apart. On PlantVillage the pairs that cross the splits
+turned out to be re-shots (D-006).
 
 Why a new method. The first audit (dHash, Hamming distance <= 20) reported 0% cross-split
 duplicates, but looking at the closest pairs by eye showed identical photos 30-34 bits apart:
@@ -19,8 +23,9 @@ A pair (a, b, t) means: image a looks like transform t applied to image b. The f
 the stage-2 correlation is chosen after looking at example pairs (notebook 02) and recorded in
 splits/duplicates_meta.json.
 
-Limitation: this finds copies of the same photo (re-saved, blurred, resized, flipped, rotated).
-A *different photo of the same leaf* is not a copy and is not found.
+Limitation: correlation does not cleanly separate re-shots of one leaf from different leaves
+that look alike (both reach about 0.92-0.95 on PlantVillage), and photos of the same leaf from a
+clearly different angle are not found. The cut-off is therefore chosen conservatively (D-006).
 """
 
 from __future__ import annotations

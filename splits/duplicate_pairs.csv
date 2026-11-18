@@ -1,0 +1,85 @@
+path_a,path_b,label_index,corr32,corr_hi,transform
+Blueberry___healthy/7912bc74-9ec0-44fc-a972-bd15f99b9f8a___RS_HL 2665.JPG,Blueberry___healthy/bbb431cb-a854-4b23-9bf8-fb2e4232d574___RS_HL 2376.JPG,4,0.9567,0.9206,identity
+Blueberry___healthy/7ba38ea1-9389-44b8-8caa-83ca35c6cfd6___RS_HL 2404.JPG,Blueberry___healthy/ffa088ac-5713-418d-be12-7fdb2efdd7b3___RS_HL 2351.JPG,4,0.9568,0.9247,identity
+Cherry_(including_sour)___Powdery_mildew/3a043be9-9ea9-4017-9ebc-1a10084dbe08___FREC_Pwd.M 0388.JPG,Cherry_(including_sour)___Powdery_mildew/900cf5aa-c000-45d4-8e30-743c195b1ccd___FREC_Pwd.M 0516.JPG,5,0.9426,0.9222,identity
+Cherry_(including_sour)___Powdery_mildew/84ff1c46-5c01-4136-bef5-59cd2d0ed812___FREC_Pwd.M 0572.JPG,Cherry_(including_sour)___Powdery_mildew/d12701d9-e2d8-4647-aad4-e09f34117cc3___FREC_Pwd.M 0364.JPG,5,0.945,0.9227,identity
+Grape___healthy/0c1667a2-61d7-4dee-b4d9-0d141a1ceb20___Mt.N.V_HL 9127.JPG,Grape___healthy/28c615fe-bb32-4003-9178-1f130c84c0a3___Mt.N.V_HL 9129.JPG,14,0.9684,0.9232,identity
+Orange___Haunglongbing_(Citrus_greening)/063cfdb8-661c-46ab-a7ca-c096408a9aba___CREC_HLB 4286.JPG,Orange___Haunglongbing_(Citrus_greening)/52b35fde-1d35-4eaf-b767-1e61b5dfc49b___CREC_HLB 4238.JPG,15,0.9543,0.9348,identity
+Orange___Haunglongbing_(Citrus_greening)/063cfdb8-661c-46ab-a7ca-c096408a9aba___CREC_HLB 4286.JPG,Orange___Haunglongbing_(Citrus_greening)/c20ab218-83e9-4d03-82e2-97bef020882e___CREC_HLB 4366.JPG,15,0.946,0.9277,hflip
+Orange___Haunglongbing_(Citrus_greening)/1489aaa5-53aa-4825-9eb0-3c1a696a37ac___CREC_HLB 6739.JPG,Orange___Haunglongbing_(Citrus_greening)/e9acde86-5f10-42bb-8c40-fa1d6bda232d___CREC_HLB 6537.JPG,15,0.9556,0.9364,hflip
+Orange___Haunglongbing_(Citrus_greening)/1b8bf71e-52a5-4438-9ff9-46c3472fc65b___CREC_HLB 4357.JPG,Orange___Haunglongbing_(Citrus_greening)/d52c37f3-f37b-44f3-9b1e-afbe14470466___CREC_HLB 4365.JPG,15,0.9458,0.927,hflip
+Orange___Haunglongbing_(Citrus_greening)/37eed9ff-13c3-48ac-9bf6-13dbfc4469f4___CREC_HLB 3954.JPG,Orange___Haunglongbing_(Citrus_greening)/4dfbbaf9-b586-4140-8293-c86bf0b2c6a6___CREC_HLB 6679.JPG,15,0.9436,0.921,hflip
+Orange___Haunglongbing_(Citrus_greening)/52b35fde-1d35-4eaf-b767-1e61b5dfc49b___CREC_HLB 4238.JPG,Orange___Haunglongbing_(Citrus_greening)/860503d8-8b35-41da-aca6-188032f88db3___CREC_HLB 4268.JPG,15,0.9412,0.9215,hflip
+Orange___Haunglongbing_(Citrus_greening)/52b35fde-1d35-4eaf-b767-1e61b5dfc49b___CREC_HLB 4238.JPG,Orange___Haunglongbing_(Citrus_greening)/c20ab218-83e9-4d03-82e2-97bef020882e___CREC_HLB 4366.JPG,15,0.9392,0.9219,hflip
+Orange___Haunglongbing_(Citrus_greening)/5956370f-ccad-4659-a5f9-de714f9ac858___CREC_HLB 4360.JPG,Orange___Haunglongbing_(Citrus_greening)/5f11efe7-4977-457c-874d-eee7efb4ca4f___CREC_HLB 4283.JPG,15,0.9401,0.9224,transpose
+Orange___Haunglongbing_(Citrus_greening)/5dec6a18-12b3-46f0-9728-025c3020d25a___CREC_HLB 6454.JPG,Orange___Haunglongbing_(Citrus_greening)/84de774a-883e-4651-b597-707ea45d9137___CREC_HLB 3867.JPG,15,0.9525,0.9314,hflip
+Orange___Haunglongbing_(Citrus_greening)/5dec6a18-12b3-46f0-9728-025c3020d25a___CREC_HLB 6454.JPG,Orange___Haunglongbing_(Citrus_greening)/d52c37f3-f37b-44f3-9b1e-afbe14470466___CREC_HLB 4365.JPG,15,0.9477,0.9254,identity
+Orange___Haunglongbing_(Citrus_greening)/5dec6a18-12b3-46f0-9728-025c3020d25a___CREC_HLB 6454.JPG,Orange___Haunglongbing_(Citrus_greening)/d6bdfaa9-61c1-4bc6-9a02-32e73daa1fcf___CREC_HLB 5564.JPG,15,0.9404,0.9207,hflip
+Orange___Haunglongbing_(Citrus_greening)/5f11efe7-4977-457c-874d-eee7efb4ca4f___CREC_HLB 4283.JPG,Orange___Haunglongbing_(Citrus_greening)/6e0c6b4a-70e5-4335-8591-5f6001fa97f8___CREC_HLB 4235.JPG,15,0.9513,0.9336,identity
+Orange___Haunglongbing_(Citrus_greening)/5f11efe7-4977-457c-874d-eee7efb4ca4f___CREC_HLB 4283.JPG,Orange___Haunglongbing_(Citrus_greening)/860503d8-8b35-41da-aca6-188032f88db3___CREC_HLB 4268.JPG,15,0.9425,0.9254,hflip
+Orange___Haunglongbing_(Citrus_greening)/5f11efe7-4977-457c-874d-eee7efb4ca4f___CREC_HLB 4283.JPG,Orange___Haunglongbing_(Citrus_greening)/b2091397-c5b2-4a44-9713-dd4c34c1219c___CREC_HLB 4267.JPG,15,0.9469,0.9271,hflip
+Orange___Haunglongbing_(Citrus_greening)/725ca6ef-6aa3-4365-8fdd-871d3deb95a9___CREC_HLB 5653.JPG,Orange___Haunglongbing_(Citrus_greening)/e4754ded-d8cb-4081-badd-2dba32bd7c54___CREC_HLB 4430.JPG,15,0.97,0.9462,hflip
+Orange___Haunglongbing_(Citrus_greening)/764b579b-fb83-475b-b941-cbfc8a90eee1___CREC_HLB 6457.JPG,Orange___Haunglongbing_(Citrus_greening)/fdcf6e05-d8af-4762-b869-cc54b59aa0d8___CREC_HLB 6697.JPG,15,0.9455,0.9207,identity
+Orange___Haunglongbing_(Citrus_greening)/84a04337-5d32-457f-a374-99fd46791159___CREC_HLB 4212.JPG,Orange___Haunglongbing_(Citrus_greening)/1ae4d4ab-7d00-45db-8b73-c212cb9080a0___CREC_HLB 4362.JPG,15,0.9444,0.9224,identity
+Orange___Haunglongbing_(Citrus_greening)/84a04337-5d32-457f-a374-99fd46791159___CREC_HLB 4212.JPG,Orange___Haunglongbing_(Citrus_greening)/4dfbbaf9-b586-4140-8293-c86bf0b2c6a6___CREC_HLB 6679.JPG,15,0.951,0.9277,identity
+Orange___Haunglongbing_(Citrus_greening)/a1399e19-7c4e-4efd-b193-4d6f2c0615a0___CREC_HLB 4384.JPG,Orange___Haunglongbing_(Citrus_greening)/f3743812-e479-422f-ba1d-31ba60079bb7___CREC_HLB 4414.JPG,15,0.9457,0.9221,hflip
+Orange___Haunglongbing_(Citrus_greening)/aee9ae38-8518-4279-bddd-0fea453e4dd9___CREC_HLB 5415.JPG,Orange___Haunglongbing_(Citrus_greening)/feed62e9-6b49-4eaf-aee9-61e1d32b3d81___CREC_HLB 5183.JPG,15,0.9399,0.9238,identity
+Orange___Haunglongbing_(Citrus_greening)/b2091397-c5b2-4a44-9713-dd4c34c1219c___CREC_HLB 4267.JPG,Orange___Haunglongbing_(Citrus_greening)/a64bace4-d919-43a5-b285-b18b3a39ba34___CREC_HLB 4069.JPG,15,0.951,0.9304,rot180
+Orange___Haunglongbing_(Citrus_greening)/ba8af517-ae00-474e-b6a7-9b5031419cf4___CREC_HLB 4220.JPG,Orange___Haunglongbing_(Citrus_greening)/e662be4c-5ad3-48c8-a250-310a4726a0b7___CREC_HLB 5581.JPG,15,0.9416,0.9227,identity
+Orange___Haunglongbing_(Citrus_greening)/c20ab218-83e9-4d03-82e2-97bef020882e___CREC_HLB 4366.JPG,Orange___Haunglongbing_(Citrus_greening)/2beef80d-5268-432d-8730-52e8db8da9bf___CREC_HLB 5372.JPG,15,0.9429,0.9225,identity
+Orange___Haunglongbing_(Citrus_greening)/f9661097-aad8-4801-b3fc-b2c5d1b63558___CREC_HLB 5650.JPG,Orange___Haunglongbing_(Citrus_greening)/910d977a-f2fb-4fdb-9d26-78c9941f818f___CREC_HLB 5600.JPG,15,0.9481,0.9202,identity
+Soybean___healthy/068a20a6-3b75-4bb8-8079-51dd9e082faa___RS_HL 4465.JPG,Soybean___healthy/47bbf3ea-5a6f-468e-9412-49c99b41f93b___RS_HL 5571 1.JPG,24,0.9534,0.9228,hflip
+Soybean___healthy/1dc700ed-063d-45fb-a9e7-51e8c37f83e6___RS_HL 6174.JPG,Soybean___healthy/20e1f17f-7bd2-4447-bbf0-df189e10871e___RS_HL 6300.JPG,24,0.9539,0.9298,identity
+Soybean___healthy/1dc700ed-063d-45fb-a9e7-51e8c37f83e6___RS_HL 6174.JPG,Soybean___healthy/b227114e-2b04-4d6f-bb30-6ae75fccbdde___RS_HL 6322.JPG,24,0.961,0.9311,identity
+Soybean___healthy/1dc700ed-063d-45fb-a9e7-51e8c37f83e6___RS_HL 6174.JPG,Soybean___healthy/f575487f-3389-46c3-a79a-bed2cbe42141___RS_HL 6128.JPG,24,0.9622,0.926,identity
+Soybean___healthy/1f1fd324-621f-4cf4-ad27-c5796c3cc23e___RS_HL 4168.JPG,Soybean___healthy/42f9d6af-6ef5-4c21-abfc-9aece98087e2___RS_HL 3843.JPG,24,0.9594,0.9222,identity
+Soybean___healthy/20e1f17f-7bd2-4447-bbf0-df189e10871e___RS_HL 6300.JPG,Soybean___healthy/3da8af0c-b119-48d4-bc72-40059c8b3cf5___RS_HL 6310.JPG,24,0.952,0.9205,identity
+Soybean___healthy/23c94ac7-d14c-4185-8d61-82018a3ed304___RS_HL 4616.JPG,Soybean___healthy/f0dc69f7-3e5a-4d12-a86a-2f4bbf583680___RS_HL 4054.JPG,24,0.9563,0.923,transpose
+Soybean___healthy/64dafadf-8384-4564-bf2d-f495304b4c70___RS_HL 3886.JPG,Soybean___healthy/5c945f78-462f-4610-b416-6aae48ec0b55___RS_HL 3566.JPG,24,0.9603,0.9203,identity
+Soybean___healthy/6c62a238-a4af-4021-82e3-f8fbef919fa6___RS_HL 3230.JPG,Soybean___healthy/99a64850-aa0a-42a1-9848-b8560107f0e9___RS_HL 3357.JPG,24,0.9522,0.9208,identity
+Soybean___healthy/6e4caa3a-dda0-445a-984a-0e31508cacf0___RS_HL 5219.JPG,Soybean___healthy/ecaa6e95-2748-4b58-bd8c-6c33a7639366___RS_HL 4499.JPG,24,0.9566,0.9209,hflip
+Soybean___healthy/8fd25130-c307-4951-8ccb-33cb63c30cfc___RS_HL 6274.JPG,Soybean___healthy/b880ded9-06e4-4e40-a803-e5cfad22397e___RS_HL 6207.JPG,24,0.9605,0.9296,identity
+Soybean___healthy/a19c094b-6696-4bb5-8169-783fdaf3fa8e___RS_HL 4478.JPG,Soybean___healthy/9cbdadf8-57a6-45e9-977e-f6f124260297___RS_HL 4547.JPG,24,0.9589,0.9248,identity
+Soybean___healthy/a43fe976-efd8-40f4-9851-d5f41ce50317___RS_HL 4462.JPG,Soybean___healthy/cf9ea9fa-b6c6-412a-9b65-eac52390b5ce___RS_HL 4612.JPG,24,0.9671,0.9338,hflip
+Soybean___healthy/b227114e-2b04-4d6f-bb30-6ae75fccbdde___RS_HL 6322.JPG,Soybean___healthy/3da8af0c-b119-48d4-bc72-40059c8b3cf5___RS_HL 6310.JPG,24,0.9684,0.9371,identity
+Soybean___healthy/b24f92e5-50b2-4d1b-84f0-b3cd249677b2___RS_HL 3221.JPG,Soybean___healthy/eca16e5e-770a-480c-80a9-215ee7f6b7d6___RS_HL 3212.JPG,24,0.9485,0.9225,identity
+Soybean___healthy/c858b001-5d04-4f38-85c6-0ea292527087___RS_HL 4559.JPG,Soybean___healthy/9aa4cb36-c05d-465b-8607-c224c97d13e1___RS_HL 5375.JPG,24,0.9626,0.9324,identity
+Soybean___healthy/e3857933-e537-4a7d-8bcc-bdcc9bcad188___RS_HL 4564.JPG,Soybean___healthy/056ec80d-2407-4683-87b4-21197c4e493d___RS_HL 4498.JPG,24,0.9639,0.9232,hflip
+Tomato___Bacterial_spot/2cd0bf74-c7ca-4b2f-87e4-1ba003e8b944___GCREC_Bact.Sp 3414.JPG,Tomato___Bacterial_spot/3926a14d-ed26-4c2b-9dcc-a15370eae355___GCREC_Bact.Sp 5647.JPG,28,0.9493,0.9201,hflip
+Tomato___Bacterial_spot/2cd0bf74-c7ca-4b2f-87e4-1ba003e8b944___GCREC_Bact.Sp 3414.JPG,Tomato___Bacterial_spot/669e40d9-4ef8-4f22-82c1-778bf0895ac6___GCREC_Bact.Sp 3166.JPG,28,0.9515,0.9218,hflip
+Tomato___Bacterial_spot/2cd0bf74-c7ca-4b2f-87e4-1ba003e8b944___GCREC_Bact.Sp 3414.JPG,Tomato___Bacterial_spot/a8a3dd0c-7729-46bb-87f9-23c2345e955a___GCREC_Bact.Sp 5703.JPG,28,0.9521,0.9223,hflip
+Tomato___Bacterial_spot/4126165c-f9e0-4a17-9d87-d41bf356afb9___GCREC_Bact.Sp 3517.JPG,Tomato___Bacterial_spot/f92bb674-d3ff-480e-aa28-53d227491d95___GCREC_Bact.Sp 5949.JPG,28,0.949,0.9249,hflip
+Tomato___Bacterial_spot/a7af4903-9aae-45be-990d-adfca4510cfa___GCREC_Bact.Sp 5872.JPG,Tomato___Bacterial_spot/855bbef5-e9fc-4c0c-b3cc-d9321fa9596e___GCREC_Bact.Sp 5947.JPG,28,0.9484,0.9233,identity
+Tomato___Bacterial_spot/a7af4903-9aae-45be-990d-adfca4510cfa___GCREC_Bact.Sp 5872.JPG,Tomato___Bacterial_spot/a8c12fae-22eb-46c8-a7dc-374225d050ba___GCREC_Bact.Sp 3122.JPG,28,0.9563,0.9314,hflip
+Tomato___Bacterial_spot/a7af4903-9aae-45be-990d-adfca4510cfa___GCREC_Bact.Sp 5872.JPG,Tomato___Bacterial_spot/b658ae6e-bdd0-4e49-8709-aa6afcb95c22___GCREC_Bact.Sp 5864.JPG,28,0.9501,0.9213,hflip
+Tomato___Bacterial_spot/b658ae6e-bdd0-4e49-8709-aa6afcb95c22___GCREC_Bact.Sp 5864.JPG,Tomato___Bacterial_spot/d78cf219-53eb-4269-830d-e1822caa8fdd___GCREC_Bact.Sp 5755.JPG,28,0.9464,0.9203,identity
+Tomato___Bacterial_spot/c23fe2f1-4b93-4e4e-b55e-215b4a922e5d___GCREC_Bact.Sp 5779.JPG,Tomato___Bacterial_spot/2b2d8d17-9ce4-467b-986d-adab29aab3e2___GCREC_Bact.Sp 5908.JPG,28,0.9482,0.9217,identity
+Tomato___Bacterial_spot/d78cf219-53eb-4269-830d-e1822caa8fdd___GCREC_Bact.Sp 5755.JPG,Tomato___Bacterial_spot/5c973c59-c8da-4a3a-bd99-a645d0f83936___GCREC_Bact.Sp 6362.JPG,28,0.9513,0.9203,hflip
+Tomato___Bacterial_spot/d7c6cfbf-059c-40b2-b920-8a1815c32374___GCREC_Bact.Sp 6063.JPG,Tomato___Bacterial_spot/eed063ad-2337-413d-95be-3598f7a15942___GCREC_Bact.Sp 5663.JPG,28,0.9563,0.9311,hflip
+Tomato___Late_blight/0db85707-41f9-42df-ba3b-842d14f00a68___GHLB2 Leaf 8909.JPG,Tomato___Late_blight/670337a4-55b1-4312-8644-3545b1fcc06f___GHLB2 Leaf 8902.JPG,30,0.9751,0.9346,identity
+Tomato___Late_blight/16e4a1f9-21c2-4c1a-bdbc-1336da74ba2c___GHLB2 Leaf 145.3.JPG,Tomato___Late_blight/cebd5337-bb61-4454-93da-bba4169f0802___GHLB2 Leaf 145.JPG,30,0.9759,0.9323,identity
+Tomato___Late_blight/de272472-c653-4102-beac-6813da817d21___GHLB2 Leaf 153.2.JPG,Tomato___Late_blight/abc618dc-e185-4866-a09c-6073404cac76___GHLB2 Leaf 153.1.JPG,30,0.9643,0.9244,identity
+Tomato___Tomato_Yellow_Leaf_Curl_Virus/19ead445-c37c-4a22-b3fb-02510e66b553___UF.GRC_YLCV_Lab 01388.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus/b379ab04-3780-4283-b388-2a038b773d79___UF.GRC_YLCV_Lab 01389.JPG,35,0.9786,0.9415,identity
+Tomato___Tomato_Yellow_Leaf_Curl_Virus/40e16b2c-d41e-40f6-99fc-ee38a26e1efa___UF.GRC_YLCV_Lab 01662.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus/eb78022e-bc77-473a-96a1-d1d9dd014e3b___UF.GRC_YLCV_Lab 01661.JPG,35,0.9575,0.9478,identity
+Tomato___Tomato_Yellow_Leaf_Curl_Virus/984b3181-df85-4f00-9ec1-3981a1f24f53___UF.GRC_YLCV_Lab 03199.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus/d4dabe68-7c32-43c7-b880-8410d330c31a___UF.GRC_YLCV_Lab 03034.JPG,35,0.9631,0.9339,identity
+Tomato___Tomato_Yellow_Leaf_Curl_Virus/bcd05e57-4a54-41f0-a586-18abba3c1caa___UF.GRC_YLCV_Lab 03035.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus/d4dabe68-7c32-43c7-b880-8410d330c31a___UF.GRC_YLCV_Lab 03034.JPG,35,0.9507,0.9303,identity
+Tomato___Tomato_Yellow_Leaf_Curl_Virus/ed1d52ff-5971-4c9a-bdde-3de21492f57c___UF.GRC_YLCV_Lab 03230.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus/5cca9ef3-355a-49a5-a472-61fc9f4a2685___UF.GRC_YLCV_Lab 03229.JPG,35,0.9702,0.932,identity
+Tomato___Tomato_Yellow_Leaf_Curl_Virus/f7a6a43c-7808-4350-b539-85d816920f43___UF.GRC_YLCV_Lab 03177.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus/8c5fa2c2-8748-4798-a8b8-bbe0b3409cb9___UF.GRC_YLCV_Lab 03176.JPG,35,0.9532,0.9207,identity
+Tomato___healthy/1479f22a-c0d6-4dac-a752-578f575f276d___GH_HL Leaf 173.5.JPG,Tomato___healthy/2f9e1c60-06fc-41e9-af7d-a91c4a5e9f3d___GH_HL Leaf 504.1.JPG,37,0.9722,0.9314,identity
+Tomato___healthy/16ed4e23-5218-4e8b-85df-86a7069a675d___GH_HL Leaf 519.1.JPG,Tomato___healthy/9ae93bcc-5cfb-4407-a711-de800fb2853a___GH_HL Leaf 519.4.JPG,37,0.9692,0.9367,identity
+Tomato___healthy/3be7ae8c-bacb-4877-b6b5-c2251d22b431___GH_HL Leaf 497.1.JPG,Tomato___healthy/2f9e1c60-06fc-41e9-af7d-a91c4a5e9f3d___GH_HL Leaf 504.1.JPG,37,0.9644,0.9223,identity
+Tomato___healthy/5153c319-4ab2-4ad0-af02-37219b0766d3___GH_HL Leaf 500.3.JPG,Tomato___healthy/2f9e1c60-06fc-41e9-af7d-a91c4a5e9f3d___GH_HL Leaf 504.1.JPG,37,0.9681,0.9296,identity
+Tomato___healthy/5153c319-4ab2-4ad0-af02-37219b0766d3___GH_HL Leaf 500.3.JPG,Tomato___healthy/598606b2-3e32-4d1d-b86e-042a14cd24d0___GH_HL Leaf 504.2.JPG,37,0.9704,0.932,identity
+Tomato___healthy/5153c319-4ab2-4ad0-af02-37219b0766d3___GH_HL Leaf 500.3.JPG,Tomato___healthy/6f6db1db-e3d1-4715-b46e-d0c64524da81___GH_HL Leaf 502.4.JPG,37,0.9699,0.9209,identity
+Tomato___healthy/5153c319-4ab2-4ad0-af02-37219b0766d3___GH_HL Leaf 500.3.JPG,Tomato___healthy/e6fdaad9-b536-46c3-a819-faf414cfbf47___GH_HL Leaf 500.2.JPG,37,0.9717,0.9232,identity
+Tomato___healthy/598606b2-3e32-4d1d-b86e-042a14cd24d0___GH_HL Leaf 504.2.JPG,Tomato___healthy/1479f22a-c0d6-4dac-a752-578f575f276d___GH_HL Leaf 173.5.JPG,37,0.9666,0.9288,identity
+Tomato___healthy/598606b2-3e32-4d1d-b86e-042a14cd24d0___GH_HL Leaf 504.2.JPG,Tomato___healthy/2f9e1c60-06fc-41e9-af7d-a91c4a5e9f3d___GH_HL Leaf 504.1.JPG,37,0.9884,0.9544,identity
+Tomato___healthy/6ce07d35-afb2-4290-9239-ef1dcb92acd8___GH_HL Leaf 492.1.JPG,Tomato___healthy/3e4f86b3-55d1-4efc-bd8a-f13af318b181___GH_HL Leaf 492.JPG,37,0.9681,0.9232,identity
+Tomato___healthy/6f6db1db-e3d1-4715-b46e-d0c64524da81___GH_HL Leaf 502.4.JPG,Tomato___healthy/5d49f9d4-e27e-4220-933a-3bef2f44c437___GH_HL Leaf 502.3.JPG,37,0.9714,0.9443,identity
+Tomato___healthy/7853cc96-2ac8-479e-83f5-353b88a351a2___GH_HL Leaf 514.3.JPG,Tomato___healthy/fb084c48-8c42-43a1-8193-191ba873bd2d___GH_HL Leaf 514.1.JPG,37,0.9728,0.9308,identity
+Tomato___healthy/96d85e53-b980-42f7-8e3d-cd6f7ec9c287___GH_HL Leaf 520.5.JPG,Tomato___healthy/e8d0f3de-312b-4316-aca4-798a51ebd423___GH_HL Leaf 520.1.JPG,37,0.9795,0.9316,identity
+Tomato___healthy/9bda0790-8cb2-4dce-8b8a-debdbd08a67d___GH_HL Leaf 388.JPG,Tomato___healthy/167247af-fd67-4b70-a72e-052dc5ea863b___GH_HL Leaf 388.1.JPG,37,0.9626,0.9266,identity
+Tomato___healthy/a0285527-98c1-40b7-992b-404644387ad8___GH_HL Leaf 509.4.JPG,Tomato___healthy/e7d07408-70bb-421d-9224-df4961a01cb9___GH_HL Leaf 509.1.JPG,37,0.9817,0.9386,identity
+Tomato___healthy/e33cde2d-5103-48aa-bb82-490aa779312c___GH_HL Leaf 515.2.JPG,Tomato___healthy/9ed00c97-7867-4e6f-a274-f2bad77ecfaf___GH_HL Leaf 515.1.JPG,37,0.9868,0.9407,identity
+Tomato___healthy/f48aed97-8db4-40a5-aa39-e2c3c70fe8be___GH_HL Leaf 524.1.JPG,Tomato___healthy/1479f22a-c0d6-4dac-a752-578f575f276d___GH_HL Leaf 173.5.JPG,37,0.9722,0.9297,identity
+Tomato___healthy/f48aed97-8db4-40a5-aa39-e2c3c70fe8be___GH_HL Leaf 524.1.JPG,Tomato___healthy/2f9e1c60-06fc-41e9-af7d-a91c4a5e9f3d___GH_HL Leaf 504.1.JPG,37,0.9615,0.9252,identity

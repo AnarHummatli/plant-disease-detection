@@ -1,0 +1,9 @@
+{
+  "method": "Pearson correlation of greyscale thumbnails, best of 8 D4 transforms; stage 1 at 32x32, stage 2 at 96x96 (plantdx.data.duplicates)",
+  "stage1_min_corr": 0.9,
+  "dup_threshold": 0.92,
+  "candidate_pairs": 26513,
+  "confirmed_pairs": 176,
+  "pairs_joining_different_leaf_ids": 84,
+  "date": "2026-11-18"
+}

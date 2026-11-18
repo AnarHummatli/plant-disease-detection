@@ -51,12 +51,11 @@ original plan (v1.0, 18 Nov 2026). Each entry: context → decision → conseque
   2. Remove the 290 overlapping images from train (0.7% of train); they are listed in
      `splits/dropped_train_overlap.csv`.
   3. Carve validation out of the rest with `StratifiedGroupKFold` (7 folds, one used for
-     validation: 6,184 images, 14.3% of the remaining train), grouped by leaf id, seed 42.
-     Final sizes: train 37,122 / val 6,184 / test 10,709 images.
+     validation, about 14.3% of the remaining train), grouped by leaf id, seed 42.
   4. Store `leaf_source` (`map` / `fallback`) per row so results can be reported separately for
      the leaf-verified subset.
   5. Measure residual duplicate leakage; first with a perceptual hash (below), then with the
-     correlation search of D-006, which also changes the splits.
+     correlation search of D-006, which also changes the splits (final sizes are in D-006).
 - **First audit (notebook `01_data_audit_eda`, dHash) — superseded, see D-006.** Every val image
   was compared with all same-class train images and every test image with all same-class
   train + val images, using a 256-bit difference hash (Hamming distance 0 = identical,
@@ -64,8 +63,8 @@ original plan (v1.0, 18 Nov 2026). Each entry: context → decision → conseque
   - It reported 0.0% of val/test images with a same-class neighbour within distance 20.
   - A positive control on the 290 removed train images found 5 byte-identical copies
     (distance 0), so the code worked; the other ~285 shared file names are different photos.
-  - **But the closest pairs, inspected by eye, were plainly the same photo at distance 30–34**
-    (Tomato Late_blight and Yellow_Leaf_Curl_Virus). On flat grey backgrounds a slight blur or
+  - **But the closest pairs, inspected by eye, looked like the same leaf at distance 30–34**
+    (Tomato Late_blight and Yellow_Leaf_Curl_Virus; D-006 later showed these are re-shots). On flat grey backgrounds a slight blur or
     re-compression flips many hash bits, so the ≤ 20 threshold missed real copies. The 0% result
     is therefore **withdrawn**. Nearest-neighbour distances were also a little smaller for
     `fallback` than for `map` images (1st percentile 47 vs 58), consistent with such copies.
@@ -83,31 +82,61 @@ original plan (v1.0, 18 Nov 2026). Each entry: context → decision → conseque
   Drive and ignored by git; only small summaries are committed. `.gitattributes` forces LF
   line endings so commits from Windows do not create whitespace-only diffs.
 
-## D-006 · Copies of the same photo are found by correlation and grouped before splitting
+## D-006 · Near-identical images are found by correlation and grouped before splitting
 
-- **Context.** D-004's dHash audit missed copies of the same photo that differ by blur or
-  re-compression (distance 30–34). A threshold high enough to catch them would also catch many
-  unrelated look-alikes, so a different method is needed.
-- **Decision.**
-  1. Search **all** images (all splits, plus the removed ones), per class, for copies of the
-     same photo: Pearson correlation of greyscale thumbnails, taking the best of the 8
-     rotations/flips (D4). Stage 1 compares every same-class pair at 32×32 (candidates ≥ 0.90);
-     stage 2 re-checks candidates at 96×96. Code: `plantdx.data.duplicates`, tests in
-     `tests/test_duplicates.py`.
-  2. The stage-2 cut-off is chosen by **looking at random example pairs in correlation bands**
-     (notebook `02_duplicates_and_resplit`, section 5), not assumed; it is stored in
-     `splits/duplicates_meta.json`.
-  3. Confirmed pairs that join different leaf ids are saved in `splits/duplicate_pairs.csv`.
-     The split builder joins their leaves into one `group_id` (union-find). Then, as in D-004,
-     train groups that touch test are removed and validation is drawn by `group_id`.
-     The official test split is still unchanged; validation is re-drawn, so some images move
-     between train and val.
-  4. `tests/test_splits.py` fails if any leaf, group or confirmed duplicate pair crosses splits.
-- **Results.** *To be filled in from the notebook 02 run* (number of confirmed copies, how many
-  crossed the old splits, images removed, new split sizes).
-- **Limitation.** This finds copies of one photo (re-saved, blurred, resized, flipped, rotated),
-  not a *different photo of the same leaf*. Test metrics are therefore also reported on the
-  leaf-verified (`map`) test subset.
+- **Context.** D-004's dHash audit missed near-identical images (distance 30–34). A threshold high
+  enough to catch them would also catch many unrelated look-alikes, so a different method is
+  needed.
+- **Method** (notebook `02_duplicates_and_resplit`, code `plantdx.data.duplicates`, tests in
+  `tests/test_duplicates.py`). All 54,305 images (every split plus the removed ones) are searched
+  per class: Pearson correlation of greyscale thumbnails, best of the 8 rotations/flips (D4).
+  Stage 1 compares every same-class pair at 32×32 (candidates ≥ 0.90); stage 2 re-checks the
+  candidates at 96×96. 26,513 candidate pairs.
+- **What inspection showed** (all 28 pairs ≥ 0.93 and the 12 highest below were checked by eye).
+  - No pair with different leaf ids reaches 0.97 (maximum 0.954): there are **no plain copies**
+    of one photo under different leaf ids. Exact copies (r ≈ 1.0) exist only *within* a leaf id,
+    e.g. the "copy" files.
+  - What does cross the splits are **re-shots of the same leaf** (same pose, slightly different
+    light or position): about 16 of the 28 pairs ≥ 0.93, mostly Tomato healthy,
+    Yellow_Leaf_Curl_Virus and Late_blight, and some just below 0.93.
+  - Different leaves that merely look alike reach up to 0.954 (Orange, Soybean,
+    Bacterial_spot). **No cut-off separates the two cleanly.**
+  - Some re-shots are in Soybean healthy, a class whose leaf ids all come from the official leaf
+    map: the official leaf map is not perfect either.
+- **Choosing the cut-off.** Merging two different leaves by mistake is harmless (they end up on
+  the same side); missing a re-shot is leakage. So the cut-off is the **lowest one before
+  look-alikes chain together** through union-find (`reports/duplicates_threshold_cost.csv`):
+
+  | cut-off | pairs (different leaf ids) | across splits | train/val images to remove | largest group |
+  |---:|---:|---:|---:|---:|
+  | 0.90 | 851 | 388 | 1,743 | 1,024 |
+  | 0.91 | 298 | 129 | 687 | 236 |
+  | **0.92** | **84** | **43** | **196** | **63** |
+  | 0.93 | 28 | 11 | 44 | 41 |
+
+  At 0.91 and below, look-alike Orange and Soybean leaves chain into groups of hundreds of
+  images. **0.92** keeps the largest group within about twice the largest single leaf (33
+  images) and removes 0.45% of train/val. Stored in `splits/duplicates_meta.json`.
+- **Decision.** The 84 pairs ≥ 0.92 that join different leaf ids are saved in
+  `splits/duplicate_pairs.csv`; the split builder joins their leaves into one `group_id`
+  (27 merged groups). As in D-004, train groups that touch test are removed and validation is
+  drawn by `group_id`. `tests/test_splits.py` fails if any leaf, group or saved pair crosses
+  splits; the notebook also checks all 176 confirmed pairs (including same-leaf ones).
+- **Results.**
+  - Before the fix, confirmed pairs crossed the splits 43 times: train/test 29, val/test 2,
+    train/val 12 (plus 7 pairs between the already-removed images and test). After: **0**.
+  - Removed from train in total: 486 images (the earlier 290 + 196), 304 fallback and 182 map.
+  - Final sizes: **train 36,963 / val 6,147 / test 10,709** (test unchanged, image for image).
+  - Validation is one fold of `StratifiedGroupKFold`, so changing the groups re-draws it:
+    10,574 images swapped between train and val. No model had been trained yet, so nothing
+    is affected.
+- **Limitation.** Re-shots below 0.92 and different photos of the same leaf taken from another
+  angle are not found. Test metrics are therefore also reported on the leaf-verified (`map`)
+  test subset (8,033 images), and the report states that a small residual leakage may remain.
+- **Figures.** `reports/figures/dup_corr_hist.png` (all candidates and the cut-off),
+  `reports/figures/dup_boundary_pairs.jpg` (pairs at the cut-off: mostly look-alikes, merged on
+  purpose). A figure of the clearest leaks (`dup_leak_examples.jpg`) is produced when the
+  notebook is run again.
 
 ## Notes for the data card (step 2.6)
 
