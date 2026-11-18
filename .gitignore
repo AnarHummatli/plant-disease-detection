@@ -11,6 +11,9 @@ checkpoints/
 logs/
 runs/
 
+# Large per-image result tables live on Drive (artifacts/reports_step2), not in git
+reports/audit_near_duplicates.csv
+
 # Python
 __pycache__/
 *.py[cod]

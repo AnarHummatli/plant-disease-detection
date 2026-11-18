@@ -51,11 +51,42 @@ original plan (v1.0, 18 Nov 2026). Each entry: context → decision → conseque
   2. Remove the 290 overlapping images from train (0.7% of train); they are listed in
      `splits/dropped_train_overlap.csv`.
   3. Carve validation out of the rest with `StratifiedGroupKFold` (7 folds, one used for
-     validation, about 14.3%), grouped by leaf id, seed 42.
+     validation: 6,184 images, 14.3% of the remaining train), grouped by leaf id, seed 42.
+     Final sizes: train 37,122 / val 6,184 / test 10,709 images.
   4. Store `leaf_source` (`map` / `fallback`) per row so results can be reported separately for
      the leaf-verified subset.
-  5. Planned in the EDA step: perceptual-hash check of fallback images across splits, to measure
-     residual near-duplicate leakage instead of assuming it is zero.
-- **Consequence.** The claim in the report is "leakage-free with respect to known leaf ids",
-  with the 24.3% fallback share, the removed overlap and the verified-subset metrics stated
-  openly. This replaces the plan's assumption that the official split is fully leaf-grouped.
+  5. Measure residual near-duplicate leakage with a perceptual hash (see "Audit results").
+- **Audit results** (notebook `01_data_audit_eda`, 18 Nov 2026). Every val image was compared
+  with all same-class train images, every test image with all same-class train + val images,
+  using a 256-bit difference hash (dHash; Hamming distance 0 = identical, unrelated images
+  ≈ 128).
+  - **Across the final splits: no near-duplicates.** 0.0% of val and test images have a
+    same-class neighbour within distance 20, for both `map` (12,762 images) and `fallback`
+    (4,131 images). The closest cross-split pair is 30 bits apart.
+  - **Positive control.** The same search on the 290 removed train images against test finds
+    5 near-identical copies (1.7% at distance 0; 2.1% within 20). So the audit does detect
+    duplicates when they exist, and removing these images was necessary. It also shows that
+    the other ~285 "shared" file names are *different photos* (same name, different capture),
+    not copies.
+  - **Weak signal in the tail.** Nearest-neighbour distances are a little smaller for
+    `fallback` than for `map` (1st percentile 47 vs 58, 5th percentile 63 vs 68; medians 87
+    vs 84). This may mean some photos of the same leaf remain across splits among fallback
+    images; it is small and is reported, not hidden.
+  - **Limitation.** A perceptual hash recognises re-saved or slightly resized copies, not a
+    different photo of the same leaf. "0% near-duplicates" therefore means *no duplicate
+    images across splits*, not *no shared leaves*. Results are reported on the full test set
+    and on its leaf-verified (`map`) subset (8,033 of 10,709 images).
+  - Files: `reports/audit_summary.csv`, `reports/audit_distance_quantiles.csv`,
+    `reports/audit_positive_control.csv`, `reports/figures/audit_*.png`. The per-image table
+    (~3 MB) is kept on Drive (`artifacts/reports_step2/`), not in git.
+- **Consequence.** The claim in the report is: "no leaf with a known id appears in two splits,
+  and no duplicate image appears in two splits", with the 24.3% fallback share, the removed
+  overlap, the weak tail signal and the verified-subset metrics stated openly. This replaces
+  the plan's assumption that the official split is fully leaf-grouped.
+
+## D-005 · Repository size: large derived files stay out of git
+
+- **Decision.** Photo grids are saved as JPEG (the 38-image sample grid went from 4.2 MB PNG to
+  about 0.5 MB). Per-image result tables (`audit_near_duplicates.csv`, ~3 MB) are written to
+  Drive and ignored by git; only small summaries are committed. `.gitattributes` forces LF
+  line endings so commits from Windows do not create whitespace-only diffs.

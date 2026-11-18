@@ -2,7 +2,7 @@
 
 **Project:** Plant Disease Detection Using Neural Networks (topic 06)
 **Team:** Yarpaq Həkimləri · Neural Networks group project · ASOIU, Fall 2026
-**Version:** 1.0 · 18 November 2026
+**Version:** 1.1 · 18 November 2026
 
 ## 1. Problem
 
@@ -34,7 +34,9 @@ indicate and when it is worth asking an expert.
 2. **Honest comparison:** the neural networks (CNN from scratch, MobileNetV2 transfer learning) are compared with a
    classical baseline (colour/HOG/LBP features + logistic regression / linear SVM) under the same split and protocol.
    Reported: accuracy, macro-F1, per-class F1, top-3 accuracy, confusion matrix, model size and CPU inference time.
-3. **No leakage:** no physical leaf appears in more than one of train / validation / test; checked by automated tests.
+3. **No leakage:** no leaf with a known id appears in more than one of train / validation / test (automated
+   tests), and no duplicate image crosses the splits (perceptual-hash audit). Because 24.3% of the images have
+   no verified leaf id, test metrics are also reported on the leaf-verified test subset (8,033 images).
 4. **Understanding failures:** at least 3 (target 6) misclassified examples explained with Grad-CAM.
 5. **Working demo:** an upload interface that shows the top-3 prediction, the Grad-CAM overlay and the "not sure" state.
 6. **Reproducibility:** a clean Colab session reproduces split → training → evaluation → demo from the README.

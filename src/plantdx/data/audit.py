@@ -9,6 +9,10 @@ A small Hamming distance means "almost the same picture". The same statistic com
 images with verified leaf ids ("map") is the control: leaf-grouped splits cannot contain
 the same leaf on both sides, so that rate is the baseline of look-alikes that are *not*
 the same leaf. Compare the two before drawing conclusions.
+
+Limitation: a perceptual hash finds near-identical copies (re-saved, slightly resized or
+re-compressed images). It does not recognise a *different photo of the same leaf*, so a 0%
+result means "no duplicate images across splits", not "no shared leaves". See D-004.
 """
 
 from __future__ import annotations
@@ -114,3 +118,57 @@ def summarize_matches(matches: pd.DataFrame, thresholds=THRESHOLDS) -> pd.DataFr
             row[f"<= {t}"] = round(float((g["distance"] <= t).mean()) * 100, 2)
         out.append(row)
     return pd.DataFrame(out)
+
+
+def positive_control(
+    dropped: pd.DataFrame,
+    dropped_hashes: np.ndarray,
+    table: pd.DataFrame,
+    hashes: np.ndarray,
+    against: str = "test",
+) -> pd.DataFrame:
+    """Nearest same-class `against` image for every train image removed by the split builder.
+
+    These removed images share a (fallback) leaf id with a test image, so if any image pairs
+    in the dataset are near-identical, these are the most likely ones. Running the same
+    search on them shows what the audit reports when duplicates *do* exist, which is
+    what gives meaning to a 0% result on the real splits. `dropped` rows must be aligned
+    with `dropped_hashes` and `table` rows with `hashes`.
+    """
+    rows = []
+    dropped = dropped.reset_index(drop=True)
+    for label, group in dropped.groupby("label_index"):
+        pool = table[(table["split"] == against) & (table["label_index"] == label)]
+        d, idx = hamming_nearest(
+            dropped_hashes[group.index.to_numpy()], hashes[pool.index.to_numpy()]
+        )
+        match_paths = pool["path"].to_numpy()[idx] if len(pool) else [None] * len(group)
+        rows.append(
+            pd.DataFrame(
+                {
+                    "query_split": "dropped_train",
+                    "query_path": group["path"].to_numpy(),
+                    "leaf_source": group["leaf_source"].to_numpy(),
+                    "label_index": label,
+                    "distance": d,
+                    "match_path": match_paths,
+                }
+            )
+        )
+    return pd.concat(rows, ignore_index=True)
+
+
+def distance_quantiles(matches: pd.DataFrame, by: str = "leaf_source") -> pd.DataFrame:
+    """Min and low quantiles of the nearest-neighbour distance per group (rounded)."""
+    q = matches.groupby(by)["distance"]
+    out = pd.DataFrame(
+        {
+            "images": q.size(),
+            "min": q.min(),
+            "p01": q.quantile(0.01),
+            "p05": q.quantile(0.05),
+            "median": q.median(),
+            "max": q.max(),
+        }
+    )
+    return out.round(1).reset_index()

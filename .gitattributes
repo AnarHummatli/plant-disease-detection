@@ -1,0 +1,10 @@
+# Normalise line endings: LF in the repository, whatever the OS of the committer.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.zip binary
+*.keras binary
+*.h5 binary
+*.tflite binary

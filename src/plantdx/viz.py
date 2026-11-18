@@ -14,6 +14,17 @@ from PIL import Image  # noqa: E402
 from plantdx.data.images import image_path  # noqa: E402
 
 
+def _save(fig, out: str | Path, dpi: int) -> Path:
+    """Save a figure; .jpg/.jpeg outputs are written as JPEG (much smaller for photo grids)."""
+    out = Path(out)
+    kwargs = {}
+    if out.suffix.lower() in (".jpg", ".jpeg"):
+        kwargs["pil_kwargs"] = {"quality": 85, "optimize": True}
+    fig.savefig(out, dpi=dpi, **kwargs)
+    plt.close(fig)
+    return out
+
+
 def _short(name: str) -> str:
     crop, _, disease = name.partition("___")
     return f"{crop.split('_(')[0]} · {disease}"
@@ -31,9 +42,7 @@ def plot_class_counts(table: pd.DataFrame, classes: list[str], out: str | Path) 
     ax.set_xlabel("images")
     ax.set_title("Images per class and split")
     fig.tight_layout()
-    fig.savefig(out, dpi=150)
-    plt.close(fig)
-    return Path(out)
+    return _save(fig, out, dpi=150)
 
 
 def plot_fallback_share(table: pd.DataFrame, classes: list[str], out: str | Path) -> Path:
@@ -47,9 +56,7 @@ def plot_fallback_share(table: pd.DataFrame, classes: list[str], out: str | Path
     ax.set_xlim(0, 100)
     ax.set_title("Where leaf grouping is unverified")
     fig.tight_layout()
-    fig.savefig(out, dpi=150)
-    plt.close(fig)
-    return Path(out)
+    return _save(fig, out, dpi=150)
 
 
 def sample_grid(
@@ -60,7 +67,9 @@ def sample_grid(
     out: str | Path,
     cols: int = 8,
     seed: int = 42,
+    dpi: int = 110,
 ) -> Path:
+    """One random image per class. Save as .jpg: a PNG of 38 photos is several MB."""
     rows = (len(classes) + cols - 1) // cols
     fig, axes = plt.subplots(rows, cols, figsize=(cols * 2, rows * 2.3))
     for i, ax in enumerate(axes.ravel()):
@@ -75,32 +84,38 @@ def sample_grid(
             ax.imshow(im.convert("RGB"))
         ax.set_title(_short(classes[i]), fontsize=6)
     fig.tight_layout()
-    fig.savefig(out, dpi=130)
-    plt.close(fig)
-    return Path(out)
+    return _save(fig, out, dpi=dpi)
 
 
-def plot_audit_pairs(
-    matches: pd.DataFrame, root: str | Path, variant: str, out: str | Path, n: int = 6
+def plot_closest_pairs(
+    pairs: pd.DataFrame,
+    root: str | Path,
+    variant: str,
+    out: str | Path,
+    n: int = 6,
+    title: str = "",
 ) -> Path:
-    """Closest fallback test/val images next to their matches, for visual inspection."""
-    pick = (
-        matches[(matches["leaf_source"] == "fallback") & matches["match_path"].notna()]
-        .sort_values("distance")
-        .iloc[:: max(1, len(matches) // (n * 200))]
-        .head(n)
-    )
-    fig, axes = plt.subplots(2, max(1, len(pick)), figsize=(max(1, len(pick)) * 2.4, 5.2))
-    axes = axes.reshape(2, -1)
+    """The `n` pairs with the smallest hash distance: query image above, its match below.
+
+    `pairs` needs columns query_path, match_path, distance. No distance threshold is applied,
+    so the figure always shows the closest pairs that exist, however far apart they are.
+    """
+    pick = pairs[pairs["match_path"].notna()].nsmallest(n, "distance")
+    if pick.empty:
+        raise ValueError("no pairs with a match to plot")
+    cols = len(pick)
+    fig, axes = plt.subplots(2, cols, figsize=(cols * 2.2, 5.0), squeeze=False)
     for j, (_, row) in enumerate(pick.iterrows()):
-        for k, (rel, tag) in enumerate(
-            ((row["query_path"], "query"), (row["match_path"], "match"))
-        ):
+        for k, rel in enumerate((row["query_path"], row["match_path"])):
             with Image.open(image_path(root, variant, rel)) as im:
                 axes[k, j].imshow(im.convert("RGB"))
-            axes[k, j].axis("off")
-            axes[k, j].set_title(f"{tag} d={row['distance']}" if k == 0 else tag, fontsize=7)
+            axes[k, j].set_xticks([])
+            axes[k, j].set_yticks([])
+        axes[0, j].set_title(f"distance {int(row['distance'])}", fontsize=8)
+        axes[1, j].set_xlabel(_short(row["query_path"].split("/", 1)[0]), fontsize=6)
+    axes[0, 0].set_ylabel("query", fontsize=8)
+    axes[1, 0].set_ylabel("nearest match", fontsize=8)
+    if title:
+        fig.suptitle(title, fontsize=9)
     fig.tight_layout()
-    fig.savefig(out, dpi=130)
-    plt.close(fig)
-    return Path(out)
+    return _save(fig, out, dpi=120)

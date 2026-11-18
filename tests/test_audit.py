@@ -11,12 +11,19 @@ from PIL import Image
 from plantdx.data.audit import (
     HASH_BITS,
     dhash,
+    distance_quantiles,
     hamming_nearest,
     nearest_cross_split,
+    positive_control,
     summarize_matches,
 )
 from plantdx.data.images import extract_variant, image_path, missing_files
-from plantdx.viz import plot_class_counts, plot_fallback_share, sample_grid
+from plantdx.viz import (
+    plot_class_counts,
+    plot_closest_pairs,
+    plot_fallback_share,
+    sample_grid,
+)
 
 
 def noise_image(seed, size=96):
@@ -136,6 +143,61 @@ def test_viz_functions_write_pngs(tmp_path):
     for fn, args in (
         (plot_class_counts, (table, classes, tmp_path / "a.png")),
         (plot_fallback_share, (table, classes, tmp_path / "b.png")),
-        (sample_grid, (table, classes, tmp_path, "color", tmp_path / "c.png")),
+        (sample_grid, (table, classes, tmp_path, "color", tmp_path / "c.jpg")),
     ):
         assert fn(*args).stat().st_size > 1000
+    with Image.open(tmp_path / "c.jpg") as im:
+        assert im.format == "JPEG"
+
+
+def test_plot_closest_pairs_without_threshold(tmp_path):
+    for name in ("a", "b", "c", "d"):
+        save_jpeg(noise_image(ord(name)), tmp_path / "raw" / "color" / "X___y" / f"{name}.jpg")
+    pairs = pd.DataFrame(
+        {
+            "query_path": ["X___y/a.jpg", "X___y/b.jpg", "X___y/c.jpg"],
+            "match_path": ["X___y/d.jpg", "X___y/d.jpg", None],
+            "distance": [90, 70, 5],
+        }
+    )
+    out = plot_closest_pairs(pairs, tmp_path, "color", tmp_path / "p.png", n=6)
+    assert out.stat().st_size > 1000  # far pairs (70, 90) are still drawn
+    with pytest.raises(ValueError):
+        plot_closest_pairs(pairs.iloc[2:], tmp_path, "color", tmp_path / "q.png")
+
+
+def test_positive_control_finds_planted_duplicate():
+    rng = np.random.default_rng(5)
+    dup = rng.integers(0, 2**63, 4, dtype=np.uint64)
+    table = pd.DataFrame(
+        {
+            "path": ["c0/t1.jpg", "c0/t2.jpg", "c1/t3.jpg"],
+            "label_index": [0, 0, 1],
+            "split": ["test", "test", "test"],
+            "leaf_source": ["fallback"] * 3,
+        }
+    )
+    hashes = np.stack([rng.integers(0, 2**63, 4, dtype=np.uint64), dup, dup])
+    dropped = pd.DataFrame(
+        {
+            "path": ["c0/d1.jpg", "c1/d2.jpg"],
+            "label_index": [0, 1],
+            "leaf_source": ["fallback", "fallback"],
+        },
+        index=[10, 11],  # misaligned index on purpose: must be reset internally
+    )
+    dropped_hashes = np.stack([dup, rng.integers(0, 2**63, 4, dtype=np.uint64)])
+    res = positive_control(dropped, dropped_hashes, table, hashes).set_index("query_path")
+    assert res.loc["c0/d1.jpg", "distance"] == 0
+    assert res.loc["c0/d1.jpg", "match_path"] == "c0/t2.jpg"
+    assert res.loc["c1/d2.jpg", "distance"] > 0  # c1's only test image is unrelated
+
+
+def test_distance_quantiles_columns():
+    m = pd.DataFrame(
+        {"leaf_source": ["map"] * 3 + ["fallback"] * 2, "distance": [40, 80, 90, 30, 60]}
+    )
+    q = distance_quantiles(m).set_index("leaf_source")
+    assert q.loc["fallback", "min"] == 30
+    assert q.loc["map", "images"] == 3
+    assert list(q.columns) == ["images", "min", "p01", "p05", "median", "max"]
