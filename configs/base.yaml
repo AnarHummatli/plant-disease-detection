@@ -6,9 +6,18 @@ seed: 42
 data:
   hf_repo: mohanty/PlantVillage
   variant: color            # color | grayscale | segmented (segmented = B part, E6)
-  val_fraction: 0.15        # carved out of the official train split, grouped by leaf_id
+  val_fraction: 0.15        # carved out of the official train split, grouped by group_id
   image_size: 224
   num_classes: 38
+  cache_eval: memory        # val/test decoded once, kept as uint8 (~2.5 GB in RAM)
+  cache_train: null         # null = no cache; or a file prefix on local disk, e.g. /content/cache/train
+
+augment:                    # training only (plantdx.data.pipeline.AugmentConfig)
+  flip: horizontal_and_vertical
+  rotation_deg: 20
+  zoom: 0.15
+  brightness: 0.15
+  contrast: 0.15
 
 train:
   batch_size: 64

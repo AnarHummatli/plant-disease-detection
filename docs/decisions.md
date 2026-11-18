@@ -141,14 +141,8 @@ original plan (v1.0, 18 Nov 2026). Each entry: context → decision → conseque
 
 ## Notes for the data card (step 2.6)
 
-- **Class imbalance:** from 152 images (Potato healthy) to about 5,500 (Orange Haunglongbing);
-  this is why macro-F1, not accuracy, is the main metric. The smallest class has only 16
-  validation and 32 test images, so its per-class scores are noisy; report them with counts.
-- **"copy" files:** names like `RS_NLB 4044 copy 2.jpg` are near-copies of `RS_NLB 4044.JPG`;
-  `leaf_identifier` strips "copy …", so both get the same leaf id and stay in one split.
-- **Background shortcut risk:** backgrounds differ between classes (grey, purple-grey, black on
-  segmented-looking images). A model could learn the background instead of the symptoms; this is
-  checked later with Grad-CAM and, in part B, with the segmented variant.
+Moved into `docs/data_card.md` (class balance, "copy" files, background shortcut risk, smallest
+classes), where they are kept next to a class table generated from the splits.
 
 ## D-007 · Tooling: pinned formatter, self-checking bootstrap
 
@@ -157,3 +151,24 @@ original plan (v1.0, 18 Nov 2026). Each entry: context → decision → conseque
   release. The bootstrap notebook now checks the committed splits too (test split equals the
   official one; no leaf, group or near-identical pair is shared) and reports the official
   split's 227 shared leaf ids as information instead of a failed check.
+
+## D-008 · Input pipeline: raw pixels out, augmentation on batches, uint8 cache
+
+- **Decision** (`plantdx.data.pipeline`, settings in `configs/base.yaml`).
+  1. Images leave the pipeline as float32 in **0–255**; each model scales its own input inside the
+     model. The demo and exported models can then take raw pixels, and a preprocessing mismatch
+     between training and serving is impossible.
+  2. Labels are **one-hot** (CategoricalCrossentropy; label smoothing possible later).
+  3. **Augmentation only for training**, applied to whole batches with seeded Keras layers: flips
+     (horizontal and vertical: leaf photos have no natural "up"), rotation ±20°, zoom ±15%,
+     brightness and contrast ±15%. Rotation and zoom fill corners by reflection. Colour hue is not
+     changed, because yellowing and colour of lesions carry the diagnosis.
+  4. Decoded images are **cached as uint8**: val + test take about 2.5 GB of RAM (float32 would be
+     about 10 GB). The training set (about 5.5 GB) is not cached by default; it can be cached to a
+     local file (`data.cache_train`).
+  5. File names are shuffled every epoch over the whole training split; evaluation keeps the CSV
+     order, so predictions line up with `splits/*.csv`.
+- **Checks.** `tests/test_pipeline.py` (15 tests: shapes, value range, one-hot, order, reshuffling,
+  augmentation only in training, grayscale/PNG decoding, caches, config). CI now installs
+  CPU-only TensorFlow (`.[dev,cpu]`) so these tests run there. Notebook `03_pipeline_check` checks
+  the real data, saves augmentation examples and measures speed and memory.

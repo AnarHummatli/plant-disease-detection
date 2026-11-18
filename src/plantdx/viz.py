@@ -170,3 +170,45 @@ def plot_corr_hist(pairs: pd.DataFrame, threshold: float, out: str | Path) -> Pa
     ax.set_title("Candidate pairs from stage 1")
     fig.tight_layout()
     return _save(fig, out, dpi=130)
+
+
+def plot_augmentations(
+    frame: pd.DataFrame,
+    root: str | Path,
+    variant: str,
+    out: str | Path,
+    augment=None,
+    image_size: int = 224,
+    n_images: int = 4,
+    n_aug: int = 5,
+    seed: int = 42,
+) -> Path:
+    """Each row: one image as the model sees it at evaluation, then `n_aug` training versions."""
+    import tensorflow as tf
+
+    from plantdx.data.pipeline import build_augmentation
+
+    aug = build_augmentation(augment, seed=seed)
+    pick = frame.sample(min(n_images, len(frame)), random_state=seed)
+    fig, axes = plt.subplots(
+        len(pick), n_aug + 1, figsize=((n_aug + 1) * 1.9, len(pick) * 2.0), squeeze=False
+    )
+    for r, rel in enumerate(pick["path"]):
+        with Image.open(image_path(root, variant, rel)) as im:
+            base = im.convert("RGB").resize((image_size, image_size), Image.Resampling.BILINEAR)
+        x = tf.repeat(tf.constant(np.asarray(base, np.float32))[None], n_aug, axis=0)
+        versions = [np.asarray(base)] + [
+            np.clip(v, 0, 255).astype(np.uint8)
+            for v in (aug(x, training=True).numpy() if aug.layers else x.numpy())
+        ]
+        for c, img in enumerate(versions):
+            ax = axes[r, c]
+            ax.imshow(img)
+            ax.set_xticks([])
+            ax.set_yticks([])
+            if r == 0:
+                ax.set_title("original" if c == 0 else f"train #{c}", fontsize=8)
+        axes[r, 0].set_ylabel(_short(rel.split("/", 1)[0]), fontsize=6)
+    fig.suptitle("Training augmentation (flip, rotation, zoom, brightness, contrast)", fontsize=9)
+    fig.tight_layout()
+    return _save(fig, out, dpi=100)

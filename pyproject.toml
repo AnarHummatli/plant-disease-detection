@@ -27,6 +27,8 @@ dependencies = [
 
 [project.optional-dependencies]
 tf = ["tensorflow>=2.19"]
+# CPU-only TensorFlow for CI: runs the pipeline tests without CUDA libraries
+cpu = ["tensorflow-cpu>=2.19"]
 demo = ["gradio>=5.0"]
 # ruff is pinned so CI, pre-commit and local runs format code identically
 dev = ["pytest>=8.0", "ruff==0.17.5", "pre-commit>=3.7", "nbformat>=5.9"]
@@ -37,6 +39,10 @@ where = ["src"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+filterwarnings = [
+    # TensorFlow's autograph (via gast) triggers Python 3.13+ AST deprecation notices
+    "ignore::DeprecationWarning:gast.*",
+]
 
 [tool.ruff]
 line-length = 100

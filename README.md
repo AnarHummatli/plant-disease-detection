@@ -6,8 +6,8 @@ Grad-CAM explanations, a "not sure" answer for low-confidence inputs, and a Grad
 
 Neural Networks group project, Azerbaijan State Oil and Industry University, Fall 2026 (topic 06).
 
-> **Status:** stage 2 of 8 (data) in progress: project foundation and the leakage-checked splits are
-> done. Models, results and the demo link will appear here in the next stages.
+> **Status:** stages 1–2 of 8 done (foundation; leakage-checked data, input pipeline, data card).
+> Models, results and the demo link will appear here in the next stages.
 
 ## Why this project is different
 
@@ -37,6 +37,8 @@ them:
 | `python -m plantdx.data.prepare` | any machine, ~1 min | Rebuilds `splits/*.csv` from the official index files and `splits/duplicate_pairs.csv`; fails if anything leaks. |
 | `notebooks/01_data_audit_eda.ipynb` | Colab, ~10 min | Downloads the images, EDA figures, first (withdrawn) hash audit. |
 | `notebooks/02_duplicates_and_resplit.ipynb` | Colab, ~15 min | Searches all images for near-identical pairs, measures each cut-off, writes `splits/duplicate_pairs.csv`, rebuilds and verifies the splits. |
+| `notebooks/03_pipeline_check.ipynb` | Colab (T4), ~10 min | Checks the `tf.data` pipeline on the real images, saves augmentation examples, measures speed and memory. |
+| `python -m plantdx.data.card` | any machine | Regenerates the class table in `docs/data_card.md` from `splits/`. |
 
 ### Local
 
@@ -53,20 +55,21 @@ make test    # unit tests
 
 ```
 configs/          experiment configs (YAML, inherit from base.yaml)
-src/plantdx/      all logic: data/, models/, train, evaluate, explain
-notebooks/        00 bootstrap, 01 EDA + first audit, 02 duplicate search; later: result plots
+src/plantdx/      all logic: data/ (source, splits, duplicates, pipeline, card), models/, viz
+notebooks/        00 bootstrap, 01 EDA + first audit, 02 duplicate search, 03 pipeline check
 splits/           train/val/test CSVs with leaf_id and group_id, duplicate pairs (committed)
 tests/            pytest: splits, pipeline, models
 app/gradio/       demo
-docs/             problem statement, data card, decision log, report
+docs/             problem statement, data card, decision log (later: report)
 reports/figures/  every figure used in the report and this README
 ```
 
 ## Data
 
-[PlantVillage](https://huggingface.co/datasets/mohanty/PlantVillage) (Mohanty, Hughes & Salathé,
-2016), colour variant, 54,305 images, 38 classes, licence CC BY-SA 3.0. Images are downloaded by
-code and are never stored in this repository (`docs/decisions.md`, D-001).
+[PlantVillage](https://huggingface.co/datasets/mohanty/PlantVillage) (Hughes & Salathé, 2015;
+Mohanty, Hughes & Salathé, 2016), colour variant, 54,305 images, 38 classes, licence CC BY-SA 3.0.
+Images are downloaded by code and are never stored in this repository (`docs/decisions.md`, D-001).
+Full description, per-class table and limitations: **[`docs/data_card.md`](docs/data_card.md)**.
 
 | Split | Images | Leaves | Leaf id verified |
 |---|---:|---:|---:|
