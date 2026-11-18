@@ -181,8 +181,31 @@ classes), where they are kept next to a class table generated from the splits.
      class-sorted stream with a small buffer, which would have produced batches of one or two
      classes; caught while reviewing the speed fix, now covered by a regression test.)
      Evaluation keeps the CSV order, so predictions line up with `splits/*.csv`.
+- **Measured after the change** (Colab T4, 2 CPU cores, `reports/pipeline_check.json`):
+
+  | | before | after |
+  |---|--:|--:|
+  | training input, images/s | 67.5 | 935.8 (from disk cache) |
+  | augmentation, images/s | (on CPU, inside the 67.5) | 4,744 (on GPU) |
+  | input time per training epoch | ≈ 548 s | **≈ 39.5 s** (about 14× faster) |
+  | first epoch on a fresh VM (decode + write cache) | – | 140 s |
+  | val pass (6,147 images) | 22.9 s | 0.9 s from memory cache |
+
+  Disk cache 5.6 GB (112 GB free), val cache 0.9 GB of 13.6 GB RAM. The input pipeline now
+  delivers about 940 images/s, more than a T4 is expected to train MobileNetV2 at 224 × 224, so the
+  GPU, not the data, should set the training speed.
 - **Checks.** `tests/test_pipeline.py` (18 tests: shapes, value range, one-hot, order,
   reshuffling, class mixing with a cache, augmentation only in training or only in the model,
   grayscale/PNG decoding, memory and disk caches, cache naming, config). CI installs CPU-only
   TensorFlow (`.[dev,cpu]`) so they run there. Notebook `03_pipeline_check` checks the real data,
   saves augmentation examples and measures speed (results: `reports/pipeline_check.json`).
+
+## D-009 · Colab notebooks force-sync the repository
+
+- **Context.** After a push, notebook 03 kept importing old code: an earlier run had written
+  `reports/figures/aug_examples.jpg` into the Colab copy of the repo, the new commit added the
+  same file, and `git pull` refused to overwrite it. The error was easy to miss.
+- **Decision.** Every notebook's setup cell now runs `git fetch` + `git reset --hard origin/main`
+  (the Colab copy is disposable; results are downloaded or written to Drive) and stops with an
+  error if the checked-out commit is not the latest one. After pushing new code to an open Colab
+  session, use *Runtime → Restart session* so Python re-imports the package.
