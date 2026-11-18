@@ -38,6 +38,7 @@ them:
 | `notebooks/01_data_audit_eda.ipynb` | Colab, ~10 min | Downloads the images, EDA figures, first (withdrawn) hash audit. |
 | `notebooks/02_duplicates_and_resplit.ipynb` | Colab, ~15 min | Searches all images for near-identical pairs, measures each cut-off, writes `splits/duplicate_pairs.csv`, rebuilds and verifies the splits. |
 | `notebooks/03_pipeline_check.ipynb` | Colab (T4), ~10 min | Checks the `tf.data` pipeline on the real images, saves augmentation examples, measures speed and memory. |
+| `notebooks/04_sameleaf_groups.ipynb` | Colab (T4), ~25 min | Recovers the leaf groups of images without a verified leaf id with CNN embeddings calibrated on verified leaves; writes `splits/sameleaf_pairs.csv` and rebuilds the splits (D-010). |
 | `python -m plantdx.data.card` | any machine | Regenerates the class table in `docs/data_card.md` from `splits/`. |
 
 ### Local
@@ -55,8 +56,8 @@ make test    # unit tests
 
 ```
 configs/          experiment configs (YAML, inherit from base.yaml)
-src/plantdx/      all logic: data/ (source, splits, duplicates, pipeline, card), models/, viz
-notebooks/        00 bootstrap, 01 EDA + first audit, 02 duplicate search, 03 pipeline check
+src/plantdx/      all logic: data/ (source, splits, duplicates, sameleaf, pipeline, card), models/, viz
+notebooks/        00 bootstrap, 01 EDA + first audit, 02 duplicate search, 03 pipeline check, 04 leaf groups
 splits/           train/val/test CSVs with leaf_id and group_id, duplicate pairs (committed)
 tests/            pytest: splits, pipeline, models
 app/gradio/       demo

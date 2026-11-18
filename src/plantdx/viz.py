@@ -212,3 +212,24 @@ def plot_augmentations(
     fig.suptitle("Training augmentation (flip, rotation, zoom, brightness, contrast)", fontsize=9)
     fig.tight_layout()
     return _save(fig, out, dpi=100)
+
+
+def plot_images_per_leaf(table: pd.DataFrame, out: str | Path) -> Path:
+    """How many images each leaf id has, verified (map) vs file-name (fallback) ids."""
+    fig, ax = plt.subplots(figsize=(8, 3.8))
+    sizes = {
+        s: table[table["leaf_source"] == s].groupby("leaf_id").size() for s in ("map", "fallback")
+    }
+    top = int(max(v.max() for v in sizes.values() if len(v)))
+    bins = np.arange(1, top + 2) - 0.5
+    for name, color in (("map", "#2E7D32"), ("fallback", "#c0504d")):
+        v = sizes[name]
+        kind = "verified" if name == "map" else "file-name"
+        label = f"{kind} leaf ids ({len(v):,}; median {v.median():g})"
+        ax.hist(v, bins=bins, alpha=0.65, color=color, label=label, log=True)
+    ax.set_xlabel("images per leaf id")
+    ax.set_ylabel("leaf ids (log)")
+    ax.set_title("Images per leaf: verified leaves have ~4 photos, file-name ids almost always 1")
+    ax.legend(fontsize=8)
+    fig.tight_layout()
+    return _save(fig, out, dpi=130)

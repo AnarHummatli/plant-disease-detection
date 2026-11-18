@@ -209,3 +209,31 @@ classes), where they are kept next to a class table generated from the splits.
   (the Colab copy is disposable; results are downloaded or written to Drive) and stops with an
   error if the checked-out commit is not the latest one. After pushing new code to an open Colab
   session, use *Runtime → Restart session* so Python re-imports the package.
+
+## D-010 · Recovering the leaf groups of images without a verified leaf id
+
+- **Context.** Verified leaves have a median of 4 photos (mean 5.4); 96.9% of file-name
+  ("fallback") leaf ids contain a single image (`docs/data_card.md`, images per leaf). So for
+  12,890 images (24%, including 8 whole classes) the other photos of the same leaf are not
+  grouped and can sit in train and test. D-006 does not catch them: photos of one leaf are
+  usually different poses, not near-copies (only about 1,300 same-leaf pairs among all verified
+  leaves reached the D-006 candidate level). This also means the "verified" test subset alone
+  cannot serve as the only clean benchmark: it lacks the 8 fallback-only classes.
+- **Method** (`plantdx.data.sameleaf`, notebook `04_sameleaf_groups`, tests in
+  `tests/test_sameleaf.py`).
+  1. Embed all 54,305 images with ImageNet-pretrained MobileNetV2 (global average pooling),
+     plain and averaged over the 8 rotations/flips (D4), so that the pose matters less.
+  2. Take the 10 nearest neighbours of every image inside its class (cosine similarity),
+     optionally keeping only mutual neighbours.
+  3. **Calibrate on verified leaves**, where the answer is known: precision and recall of
+     "similarity ≥ t" on pairs of two verified images. The suggested cut-off is the lowest one
+     at which precision stays ≥ 0.95 for every higher cut-off.
+  4. Look at pairs with a fallback image around the cut-off, and measure what each cut-off does
+     to the splits (pairs, train images removed, largest group, fallback group sizes).
+  5. Pairs above the chosen cut-off that involve a fallback image go to
+     `splits/sameleaf_pairs.csv`; the split builder joins them like D-006 pairs
+     (`load_group_pairs` reads both files; `tests/test_splits.py` checks both).
+- **Results.** *To be filled in from the notebook 04 run.*
+- **If the calibration is poor** (no cut-off reaches the precision bar with useful recall), the
+  splits stay as they are and the report states the limitation; the main test metric is then
+  discussed per class, with fallback-only classes flagged.

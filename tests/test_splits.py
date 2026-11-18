@@ -11,7 +11,7 @@ import pandas as pd
 import pytest
 
 from plantdx.data.source import CLASSES, EXPECTED_SIZES
-from plantdx.data.split import assert_no_leakage
+from plantdx.data.split import assert_no_leakage, load_group_pairs
 
 SPLITS_DIR = Path(__file__).resolve().parents[1] / "splits"
 FILES = {s: SPLITS_DIR / f"{s}.csv" for s in ("train", "val", "test")}
@@ -29,9 +29,7 @@ def table():
 
 
 def test_no_leaf_group_or_duplicate_shared_between_splits(table):
-    dup_file = SPLITS_DIR / "duplicate_pairs.csv"
-    pairs = pd.read_csv(dup_file) if dup_file.exists() else None
-    assert_no_leakage(table, pairs)
+    assert_no_leakage(table, load_group_pairs(SPLITS_DIR))
 
 
 def test_group_column_present(table):

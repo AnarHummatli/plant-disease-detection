@@ -19,6 +19,8 @@ from plantdx.paths import repo_root
 
 START = "<!-- generated:class-table:start -->"
 END = "<!-- generated:class-table:end -->"
+LEAF_START = "<!-- generated:leaf-stats:start -->"
+LEAF_END = "<!-- generated:leaf-stats:end -->"
 SPLITS = ("train", "val", "test")
 
 
@@ -80,11 +82,51 @@ def render(ct: pd.DataFrame) -> str:
     return "\n".join(lines)
 
 
-def replace_block(text: str, block: str) -> str:
-    if START not in text or END not in text:
-        raise ValueError("data card has no generated class-table block")
-    head, rest = text.split(START, 1)
-    _, tail = rest.split(END, 1)
+def leaf_stats(table: pd.DataFrame) -> pd.DataFrame:
+    """Images per leaf id and per group, for verified (map) and file-name (fallback) ids."""
+    rows = []
+    for source in ("map", "fallback"):
+        sub = table[table["leaf_source"] == source]
+        for key in ("leaf_id", "group_id"):
+            sizes = sub.groupby(key).size()
+            rows.append(
+                {
+                    "source": source,
+                    "unit": "leaf id" if key == "leaf_id" else "group",
+                    "count": len(sizes),
+                    "images": int(sizes.sum()),
+                    "mean": round(float(sizes.mean()), 2),
+                    "median": float(sizes.median()),
+                    "max": int(sizes.max()),
+                    "single": round(float((sizes == 1).mean()) * 100, 1),
+                }
+            )
+    return pd.DataFrame(rows)
+
+
+def render_leaf_stats(ls: pd.DataFrame) -> str:
+    lines = [
+        LEAF_START,
+        "<!-- Do not edit by hand: `python -m plantdx.data.card` rewrites this block. -->",
+        "",
+        "| Leaf ids | Unit | Count | Images | Mean | Median | Max | With 1 image |",
+        "|---|---|--:|--:|--:|--:|--:|--:|",
+    ]
+    names = {"map": "verified (leaf map)", "fallback": "file name only"}
+    for r in ls.itertuples():
+        lines.append(
+            f"| {names[r.source]} | {r.unit} | {r.count:,} | {r.images:,} | {r.mean:.2f} "
+            f"| {r.median:g} | {r.max} | {r.single}% |"
+        )
+    lines += ["", LEAF_END]
+    return "\n".join(lines)
+
+
+def replace_block(text: str, block: str, start: str = START, end: str = END) -> str:
+    if start not in text or end not in text:
+        raise ValueError(f"data card has no generated block {start}")
+    head, rest = text.split(start, 1)
+    _, tail = rest.split(end, 1)
     return head + block + tail
 
 
@@ -95,9 +137,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--check", action="store_true", help="only check, do not write")
     args = parser.parse_args(argv)
 
-    block = render(class_table(*load_tables(args.splits)))
+    table, dropped = load_tables(args.splits)
     text = args.card.read_text(encoding="utf-8")
-    new = replace_block(text, block)
+    new = replace_block(text, render(class_table(table, dropped)))
+    new = replace_block(new, render_leaf_stats(leaf_stats(table)), LEAF_START, LEAF_END)
     if args.check:
         if new != text:
             print("docs/data_card.md is out of date: run python -m plantdx.data.card")

@@ -102,6 +102,24 @@ train images taken out by the grouping rules of section 5; **Corn healthy** is h
 
 <!-- generated:class-table:end -->
 
+### Images per leaf
+
+PlantVillage photographed most leaves several times. Verified leaves have a median of **4 images**;
+file-name ids almost always contain **one** image, i.e. for those images the other photos of the
+same leaf are not grouped by the id. This is what D-010 addresses (`reports/figures/eda_images_per_leaf.png`).
+
+<!-- generated:leaf-stats:start -->
+<!-- Do not edit by hand: `python -m plantdx.data.card` rewrites this block. -->
+
+| Leaf ids | Unit | Count | Images | Mean | Median | Max | With 1 image |
+|---|---|--:|--:|--:|--:|--:|--:|
+| verified (leaf map) | leaf id | 7,561 | 40,929 | 5.41 | 4 | 33 | 0.2% |
+| verified (leaf map) | group | 7,543 | 40,929 | 5.43 | 4 | 44 | 0.2% |
+| file name only | leaf id | 12,408 | 12,890 | 1.04 | 1 | 5 | 96.9% |
+| file name only | group | 12,397 | 12,890 | 1.04 | 1 | 5 | 96.8% |
+
+<!-- generated:leaf-stats:end -->
+
 ## 5. Splits
 
 | Split | Images | Leaves | Groups | Leaf id verified | How it is made |

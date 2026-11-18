@@ -56,3 +56,21 @@ def test_render_and_replace_block():
     assert new.startswith("intro\n") and new.endswith("\noutro") and "old" not in new
     with pytest.raises(ValueError):
         replace_block("no markers", block)
+
+
+def test_leaf_stats_block():
+    from plantdx.data.card import LEAF_END, LEAF_START, leaf_stats, render_leaf_stats
+
+    table = pd.DataFrame(
+        {
+            "leaf_id": ["A", "A", "A", "A", "fallback_1", "fallback_2"],
+            "group_id": ["A", "A", "A", "A", "fallback_1", "fallback_1"],
+            "leaf_source": ["map"] * 4 + ["fallback"] * 2,
+        }
+    )
+    ls = leaf_stats(table).set_index(["source", "unit"])
+    assert ls.loc[("map", "leaf id"), "median"] == 4
+    assert ls.loc[("fallback", "leaf id"), "single"] == 100.0
+    assert ls.loc[("fallback", "group"), "single"] == 0.0  # the two fallback images are grouped
+    block = render_leaf_stats(leaf_stats(table))
+    assert block.startswith(LEAF_START) and block.endswith(LEAF_END)

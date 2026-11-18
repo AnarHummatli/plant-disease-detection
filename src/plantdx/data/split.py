@@ -185,3 +185,19 @@ def summarize(table: pd.DataFrame, dropped: pd.DataFrame) -> dict:
             "fallback_images": int((sub["leaf_source"] == "fallback").sum()),
         }
     return out
+
+
+# Pair files that join images into one group before splitting, in splits/ (D-006, D-010).
+PAIR_FILES = ("duplicate_pairs.csv", "sameleaf_pairs.csv")
+
+
+def load_group_pairs(splits_dir, names=PAIR_FILES) -> pd.DataFrame | None:
+    """All grouping pairs in `splits_dir` (path_a, path_b, source), or None if there are none."""
+    from pathlib import Path
+
+    frames = []
+    for name in names:
+        f = Path(splits_dir) / name
+        if f.exists():
+            frames.append(pd.read_csv(f)[["path_a", "path_b"]].assign(source=f.stem))
+    return pd.concat(frames, ignore_index=True) if frames else None
