@@ -1,6 +1,6 @@
 # Data card · PlantVillage (colour) as used in this project
 
-**Version:** 1.3 · 20 November 2026 · splits frozen after D-010 (1.2–1.3: text only)
+**Version:** 1.4 · 20 November 2026 · splits frozen after D-010 (1.2–1.4: text and results only)
 **Owner:** Yarpaq Həkimləri (ASOIU Neural Networks project, topic 06)
 
 ## 1. Summary
@@ -38,8 +38,9 @@ and most leaves were photographed several times. Consequences for this project:
   backgrounds, several leaves, other lighting). Field performance is out of scope and is left as
   future work (e.g. on PlantDoc; section 7).
 - Background colour differs between groups of classes (grey, purple-grey, pink-brown; some images
-  look pre-segmented on black). A model could learn the background instead of the symptoms; this is
-  checked with Grad-CAM in the evaluation; a test on the segmented variant is future work.
+  look pre-segmented on black). A model could learn the background instead of the symptoms. This was
+  measured with Grad-CAM and the leaf masks of the segmented variant (D-020): the final model puts a
+  median 69% of its heat map on the leaf, which covers 47% of the image (section 7).
 - Several photos of one leaf must never be split across train and test (section 5).
 
 ## 4. Composition
@@ -174,7 +175,7 @@ Files: `splits/{train,val,test}.csv` (`path, label, label_index, leaf_id, group_
 | Near-identical re-shots below r = 0.92 and same-leaf pairs below cosine 0.94 are not grouped | Same as above | Conservative cut-offs chosen to avoid wrong merges; stated in the report |
 | Strong class imbalance (36 : 1) | Accuracy hides weak classes | Macro-F1 for selection; per-class scores with counts |
 | Only 14 crops, 26 diseases | Other crops or diseases are misclassified, not rejected | "Not sure" below 0.947, chosen on val (D-019): on test 96.8% answered, 99.5% of them correct; OOD detection is future work |
-| Labels from the dataset authors | Label noise unknown | Failure cases are inspected by eye (evaluation) |
+| Labels from the dataset authors | Label noise unknown | Six failure cases inspected with Grad-CAM (`docs/error_analysis.md`); one (apple scab predicted healthy) shows no visible symptoms and may be an early infection or a doubtful label |
 
 ## 8. Intended use
 

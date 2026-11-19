@@ -2,7 +2,7 @@
 
 **Project:** Plant Disease Detection Using Neural Networks (topic 06)
 **Team:** Yarpaq Həkimləri · Neural Networks group project · ASOIU, Fall 2026
-**Version:** 1.3 · 20 November 2026
+**Version:** 1.4 · 20 November 2026
 
 ## 1. Problem
 

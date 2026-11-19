@@ -1,5 +1,5 @@
 # Shared settings. Every experiment config (cnn.yaml, mobilenetv2_head.yaml, ...)
-# starts from these values and overrides only what differs (plan 9.1).
+# starts from these values and overrides only what differs.
 
 seed: 42
 

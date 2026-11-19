@@ -118,8 +118,9 @@ make test    # unit tests
 
 Every experiment is a YAML config that extends `configs/base.yaml`. On Colab, use
 `notebooks/05_baselines.ipynb` (CPU is enough), `notebooks/06_train.ipynb` (T4 GPU, one or more
-configs in a row) and, once all training is done, `notebooks/07_evaluate.ipynb` (final model and
-the one-time test evaluation; no GPU needed). They write runs to Drive and export the results for
+configs in a row), once all training is done `notebooks/07_evaluate.ipynb` (final model and the
+one-time test evaluation; no GPU needed) and then `notebooks/08_analysis.ipynb` (error analysis,
+Grad-CAM, "not sure" threshold; no GPU needed). They write runs to Drive and export the results for
 the repository. From a shell, with the images extracted to `DATA` (the folder that contains
 `raw/color/`):
 

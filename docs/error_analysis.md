@@ -38,8 +38,8 @@ tomato target spot 0.935 (precision 0.883: it absorbs early-blight images), pota
 (32 test images, 2 errors), corn northern leaf blight 0.954.
 
 **Tomato early blight** is the clear weak point: one in five of its images goes elsewhere, half of
-them to target spot. Both diseases make brown spots with concentric rings on tomato leaves, and
-agronomists also tell them apart mainly by lesion size and pattern rather than a single feature.
+them to target spot. Both diseases make brown spots with concentric rings on tomato leaves, so in a
+single photo they differ mainly in the size and pattern of the spots.
 The two corn diseases are confused in both directions: both make elongated tan lesions between
 the leaf veins, and many corn photos are close-ups of one part of a leaf, which hides the lesion
 length that separates them.
