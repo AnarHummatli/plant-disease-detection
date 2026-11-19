@@ -386,3 +386,9 @@ classes), where they are kept next to a class table generated from the splits.
   reported as a finding.
 - **Tuning budget, stated for a fair comparison:** CNN from scratch 1 configuration;
   MobileNetV2 5 (head, 3 fine-tuning learning rates / epoch limits, whole backbone).
+- **Outcome** (validation, 19 Nov 2026). Both explanations hold: A (Adam 1e-4) reached val
+  macro-F1 0.97722 (best epoch 12, stopped at 17), B (whole backbone) 0.97738 (best epoch 14,
+  stopped at 18), both above the CNN from scratch (0.97321). A and B are tied within noise
+  (difference 0.00016; A has the higher accuracy, 0.9863 vs 0.9858). The selection rule fixed
+  before training, highest val macro-F1, picks **B, `mobilenetv2_ft_all`, as the final model**;
+  it is not changed after seeing the numbers. Both have the same architecture and inference cost.

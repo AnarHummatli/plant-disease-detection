@@ -7,9 +7,8 @@ Grad-CAM explanations, a "not sure" answer for low-confidence inputs, and a Grad
 Neural Networks group project, Azerbaijan State Oil and Industry University, Fall 2026 (topic 06).
 
 > **Status:** stages 1–3 of 8 done (foundation; leakage-checked data and input pipeline;
-> classical baselines and a CNN from scratch); stage 4 (MobileNetV2 transfer learning) in
-> progress: the plan's settings under-trained the model, two more variants follow (D-017), then
-> the final selection, the one-time test evaluation, Grad-CAM and the demo.
+> classical baselines and a CNN from scratch); stage 4: MobileNetV2 trained and selected on
+> validation (D-017); next the one-time test evaluation, then Grad-CAM and the demo.
 
 ## Results so far (validation split)
 
@@ -24,9 +23,13 @@ be evaluated once, on the final models.
 | MobileNetV2, frozen backbone + new head | 0.916 | 0.934 | 0.988 | 15 min (T4, 10 epochs) |
 | MobileNetV2, fine-tuned last 38 layers, Adam 1e-5 | 0.946 | 0.958 | 0.997 | 15 min (T4, 10 epochs) |
 | MobileNetV2, fine-tuned last 38 layers, Adam 3e-5 | 0.955 | 0.968 | 0.999 | 14 min (T4, 10 epochs) |
+| MobileNetV2, fine-tuned last 38 layers, Adam 1e-4 | 0.977 | **0.986** | **1.000** | 24 min (T4, 17 epochs) |
+| **MobileNetV2, whole backbone fine-tuned, Adam 3e-5** | **0.977** | **0.986** | 0.999 | 39 min (T4, 18 epochs) |
 
-Both fine-tuning runs peaked at their last epoch, so they were stopped too early; two more
-variants with up to 30 epochs follow (D-017). Per-run details: `reports/results.csv`,
+The plan's 10-epoch fine-tuning runs peaked at their last epoch: they were under-trained. With up
+to 30 epochs and a higher learning rate or the whole backbone trainable, MobileNetV2 overtakes
+the CNN (D-017). The last two runs are tied within noise (val macro-F1 0.97738 vs 0.97722); by
+the rule fixed before training (highest val macro-F1) the whole-backbone run is the final model. Per-run details: `reports/results.csv`,
 `reports/runs/`; learning curves: `reports/figures/curves_*.png`.
 
 ## Why this project is different
