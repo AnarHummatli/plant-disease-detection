@@ -1,7 +1,9 @@
 # Decision log
 
 Short records of technical decisions that differ from the obvious default or from the
-original plan (v1.0, 18 Nov 2026). Each entry: context → decision → consequence.
+original plan (v1.0, 18 Nov 2026). Each entry: context → decision → consequence. References such
+as "plan 4.2" or "step 7.2" point to that plan's stages: 1 foundation, 2 data, 3 baselines and CNN,
+4 transfer learning and test, 5 error analysis, 6 demo, 7 reproducibility, 8 report.
 
 ## D-001 · Read PlantVillage files directly instead of `datasets.load_dataset`
 
@@ -18,7 +20,7 @@ original plan (v1.0, 18 Nov 2026). Each entry: context → decision → conseque
   full control over how leaf ids are derived. The share of images without a known leaf id
   ("fallback") is measured and reported in EDA.
 
-## D-002 · Python 3.12 and the TensorFlow that Colab provides
+## D-002 · Python 3.12–3.13 and the TensorFlow that Colab provides
 
 - **Context.** Plan v1.0 said Python 3.11 and TensorFlow 2.21. Colab's default runtime moved to
   Python 3.12 in 2025 and to 3.13 by November 2026 (the stage 3 runs recorded 3.13.16 and
@@ -138,10 +140,10 @@ original plan (v1.0, 18 Nov 2026). Each entry: context → decision → conseque
   test subset (8,033 images), and the report states that a small residual leakage may remain.
 - **Figures.** `reports/figures/dup_corr_hist.png` (all candidates and the cut-off),
   `reports/figures/dup_boundary_pairs.jpg` (pairs at the cut-off: mostly look-alikes, merged on
-  purpose). A figure of the clearest leaks (`dup_leak_examples.jpg`) is produced when the
-  notebook is run again.
+  purpose). A figure of the clearest leaks (`dup_leak_examples.jpg`) needs the images and is
+  produced in the error-analysis notebook (stage 5).
 
-## Notes for the data card (step 2.6)
+## Notes for the data card
 
 Moved into `docs/data_card.md` (class balance, "copy" files, background shortcut risk, smallest
 classes), where they are kept next to a class table generated from the splits.
@@ -404,3 +406,17 @@ classes), where they are kept next to a class table generated from the splits.
   (difference 0.00016; A has the higher accuracy, 0.9863 vs 0.9858). The selection rule fixed
   before training, highest val macro-F1, picks **B, `mobilenetv2_ft_all`, as the final model**;
   it is not changed after seeing the numbers. Both have the same architecture and inference cost.
+
+## D-018 · Reproducibility on the GPU
+
+- **Context.** Seeds are fixed (`seed: 42` for Python, NumPy, TensorFlow and the data order), but
+  cuDNN kernels on the GPU add floating-point numbers in a varying order, so two runs of the same
+  config differ slightly. `tf.config.experimental.enable_op_determinism()` would remove this, at a
+  large speed cost on the T4 and with some operations unsupported.
+- **Decision.** Not enabled. Every run records its config, environment and commit
+  (`reports/runs/<run_id>/`), and the trained models are published (release v1.0), so the
+  reported numbers can be checked against the exact model rather than by retraining.
+- **Consequence.** A re-run of a config can differ from the reported validation scores by a
+  fraction of a point; the comparisons in this project (e.g. MobileNetV2 vs CNN: 0.982 vs 0.967
+  test macro-F1) are far larger than that. The two final candidates (val macro-F1 0.97738 vs
+  0.97722) are within this noise, which is why they are reported as tied (D-017).

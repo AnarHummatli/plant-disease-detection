@@ -19,10 +19,10 @@ known (8,033 images, 30 classes), where same-leaf leakage is impossible by const
 
 | Model | Test macro-F1 | Test accuracy | Verified macro-F1 | Test top-3 | Size |
 |---|---|---|---|---|---|
-| **MobileNetV2, fine-tuned (final)** | **0.982** | **0.986** | **0.985** | **1.000** | 9.8 MB |
-| CNN from scratch | 0.967 | 0.977 | 0.971 | 0.999 | 4.9 MB |
-| Colour/HOG/LBP + logistic regression | 0.884 | 0.906 | 0.881 | 0.982 | 2.0 MB |
-| Colour/HOG/LBP + linear SVM | 0.873 | 0.901 | 0.869 | 0.977 | 2.0 MB |
+| **MobileNetV2, fine-tuned (final)** | **0.982** | **0.986** | **0.985** | **0.9996** | 9.8 MB |
+| CNN from scratch | 0.967 | 0.977 | 0.971 | 0.9989 | 4.9 MB |
+| Colour/HOG/LBP + logistic regression | 0.884 | 0.906 | 0.881 | 0.9822 | 2.0 MB |
+| Colour/HOG/LBP + linear SVM | 0.873 | 0.901 | 0.869 | 0.9770 | 2.0 MB |
 
 The neural models do not score lower on the verified part, so there is no sign that residual
 leakage inflates the full-test numbers (the verified part lacks 8 classes, two of them among the
@@ -38,18 +38,19 @@ All choices were made on the validation split only.
 |---|---|---|---|---|
 | Colour/HOG/LBP + logistic regression (C = 0.1) | 0.874 | 0.900 | 0.982 | 46 s (CPU) |
 | Colour/HOG/LBP + linear SVM (C = 0.1) | 0.873 | 0.904 | 0.975 | 116 s (CPU) |
-| CNN from scratch (1.18 M parameters) | **0.973** | **0.980** | **0.998** | 107 min (T4, 26 epochs) |
+| CNN from scratch (1.18 M parameters) | 0.973 | 0.980 | 0.998 | 107 min (T4, 26 epochs) |
 | MobileNetV2, frozen backbone + new head | 0.916 | 0.934 | 0.988 | 15 min (T4, 10 epochs) |
 | MobileNetV2, fine-tuned last 38 layers, Adam 1e-5 | 0.946 | 0.958 | 0.997 | 15 min (T4, 10 epochs) |
 | MobileNetV2, fine-tuned last 38 layers, Adam 3e-5 | 0.955 | 0.968 | 0.999 | 14 min (T4, 10 epochs) |
-| MobileNetV2, fine-tuned last 38 layers, Adam 1e-4 | 0.977 | **0.986** | **1.000** | 24 min (T4, 17 epochs) |
-| **MobileNetV2, whole backbone fine-tuned, Adam 3e-5** | **0.977** | **0.986** | 0.999 | 39 min (T4, 18 epochs) |
+| MobileNetV2, fine-tuned last 38 layers, Adam 1e-4 | 0.9772 | **0.9863** | **0.9995** | 24 min (T4, 17 epochs) |
+| **MobileNetV2, whole backbone fine-tuned, Adam 3e-5 (final)** | **0.9774** | 0.9858 | 0.9985 | 39 min (T4, 18 epochs) |
 
 The plan's 10-epoch fine-tuning runs peaked at their last epoch: they were under-trained. With up
 to 30 epochs and a higher learning rate or the whole backbone trainable, MobileNetV2 overtakes
 the CNN (D-017). The last two runs are tied within noise (val macro-F1 0.97738 vs 0.97722); by
-the rule fixed before training (highest val macro-F1) the whole-backbone run is the final model. Per-run details: `reports/results.csv`,
-`reports/runs/`; learning curves: `reports/figures/curves_*.png`.
+the rule fixed before training (highest val macro-F1) the whole-backbone run is the final model.
+Tuning budget: one configuration for the CNN, five for MobileNetV2. Per-run details:
+`reports/results.csv`, `reports/runs/`; learning curves: `reports/figures/curves_*.png`.
 
 ## Why this project is different
 
@@ -59,7 +60,8 @@ the rule fixed before training (highest val macro-F1) the whole-backbone run is 
   checked by automated tests. Known limits are stated openly (see [Data](#data)).
 - **Reliability.** Grad-CAM shows what the model looked at; low-confidence inputs get
   "not sure" instead of a confident wrong answer.
-- **Engineering.** Config-driven experiments, fixed seeds, tests and CI.
+- **Engineering.** Config-driven experiments, fixed seeds, tests and CI. GPU training is not
+  bit-for-bit deterministic, so a re-run can differ slightly (D-018).
 
 ## Quick start
 
@@ -98,9 +100,10 @@ make test    # unit tests
 
 Every experiment is a YAML config that extends `configs/base.yaml`. On Colab, use
 `notebooks/05_baselines.ipynb` (CPU is enough), `notebooks/06_train.ipynb` (T4 GPU, one or more
-configs in a row) and, once all training is done, `notebooks/07_evaluate.ipynb` (final model and the
-one-time test evaluation). They write runs to Drive and export the results for the repository. From a shell, with the images extracted to
-`DATA` (the folder that contains `raw/color/`):
+configs in a row) and, once all training is done, `notebooks/07_evaluate.ipynb` (final model and
+the one-time test evaluation; no GPU needed). They write runs to Drive and export the results for
+the repository. From a shell, with the images extracted to `DATA` (the folder that contains
+`raw/color/`):
 
 ```bash
 make baselines DATA=/content/data                          # colour/HOG/LBP + LogReg / linear SVM
@@ -116,9 +119,9 @@ make eval DATA=/content/data                               # select on val, then
 Model selection uses validation macro-F1 only: the best run of every neural family, and the final
 model is the best of those. `plantdx.evaluate` then scores every family winner and the classical
 baselines on the test split, once (it refuses a second run), on the full split and on its
-leaf-verified part (D-015). Every run writes `config.yaml`, `history.csv`, `best.keras` (training checkpoint),
-`inference.keras` (float32, for evaluation and the demo) and `metrics_val.json` to
-`<artifacts>/runs/<run_id>/` and one row to the shared results table.
+leaf-verified part (D-015). Every run writes `config.yaml`, `history.csv`, `best.keras`
+(training checkpoint), `inference.keras` (float32, for evaluation and the demo) and
+`metrics_val.json` to `<artifacts>/runs/<run_id>/` and one row to the shared results table.
 
 ## Project layout
 

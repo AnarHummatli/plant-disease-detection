@@ -2,7 +2,7 @@
 
 **Project:** Plant Disease Detection Using Neural Networks (topic 06)
 **Team:** Yarpaq Həkimləri · Neural Networks group project · ASOIU, Fall 2026
-**Version:** 1.2 · 19 November 2026
+**Version:** 1.3 · 20 November 2026
 
 ## 1. Problem
 
@@ -19,7 +19,7 @@ indicate and when it is worth asking an expert.
 | **Input** | One RGB photograph of a single leaf (JPG or PNG), resized to 224 × 224 inside the model. |
 | **Output** | One of 38 classes (14 crop species; each class is a crop + disease or crop + healthy), shown as the top-3 classes with probabilities. If the top probability is below a threshold chosen on the validation set, the system answers *"not sure — please take a clearer photo"* instead of a diagnosis. |
 | **Task type** | Single-label, multi-class image classification. |
-| **Data** | PlantVillage (color variant), official leaf-grouped train/test split; see `docs/data_card.md` (step 2.6). |
+| **Data** | PlantVillage (color variant). The official test split is kept unchanged; train is cleaned of every leaf and near-identical group that also appears in test, because the official split is not fully leaf-grouped (D-004). See `docs/data_card.md`. |
 
 ## 3. Target users
 
@@ -41,6 +41,11 @@ indicate and when it is worth asking an expert.
 4. **Understanding failures:** at least 3 (target 6) misclassified examples explained with Grad-CAM.
 5. **Working demo:** an upload interface that shows the top-3 prediction, the Grad-CAM overlay and the "not sure" state.
 6. **Reproducibility:** a clean Colab session reproduces split → training → evaluation → demo from the README.
+
+**Status on 20 November 2026** (after the one-time test evaluation): criterion 1 met (final MobileNetV2:
+test macro-F1 0.982, leaf-verified subset 0.985); criterion 2 met for accuracy, macro-F1, per-class F1, top-3,
+model size and CPU time (confusion matrix: error analysis); criterion 3 met (automated tests; 0 cross-split
+pairs); criteria 4–6 follow in the error analysis, the demo and the final reproducibility check.
 
 ## 5. Out of scope
 

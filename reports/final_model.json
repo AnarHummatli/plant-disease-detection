@@ -25,7 +25,7 @@
       "model": "cnn_scratch",
       "macro_f1": 0.9732075343635556,
       "accuracy": 0.9800686162391766,
-      "size_mb": 23.84
+      "size_mb": 4.86
     },
     {
       "run_id": "mobilenetv2_ft_lr3e-5",
@@ -48,5 +48,6 @@
       "accuracy": 0.9336709687959484,
       "size_mb": 9.81
     }
-  ]
+  ],
+  "note": "size_mb as measured on the inference models in the final evaluation (D-014); at selection time cnn_scratch was listed with its 23.84 MB checkpoint size, which did not affect the choice"
 }
