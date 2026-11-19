@@ -487,25 +487,32 @@ classes), where they are kept next to a class table generated from the splits.
   and chose the examples; it is not a second test evaluation (D-015).
 - **Compiled model.** The forward pass and Grad-CAM run as `tf.function`s traced once
   (`Predictor`, `gradcam.gradcam_fn`; same maths as the stage-5 Grad-CAM, checked in a test).
-  Median CPU time per photo (batch 1, 2-vCPU Xeon 2.3 GHz cloud VM, `python -m plantdx.predict
-  --benchmark`):
+  Median CPU time per photo (batch 1, `python -m plantdx.predict --benchmark`), on the Colab CPU
+  runtime that measured the 239 ms of the test evaluation (notebook 09) and on a 2-vCPU Xeon
+  2.3 GHz cloud VM:
 
-  | Path | ms |
-  |---|---:|
-  | Eager Keras call (protocol of the test evaluation) | 96–110 |
-  | Compiled model | 13–15 |
-  | Compiled model + Grad-CAM | 13–15 |
-  | Whole demo path for a 256 px JPEG (decode, resize, model, Grad-CAM) | 16–20 |
-  | Whole demo path for a 12-megapixel phone photo | 140 |
+  | Path | Colab CPU, ms | VM, ms |
+  |---|---:|---:|
+  | Eager Keras call (protocol of the test evaluation) | 259 | 96–110 |
+  | Compiled model | 39 | 13–15 |
+  | Compiled model + Grad-CAM | 36 | 13–15 |
+  | Whole demo path for a 256 px JPEG (decode, resize, model, Grad-CAM) | 42 | 16–20 |
 
-  The 239 ms in `results.csv` (Colab CPU, eager) is kept as measured under the protocol fixed for
-  the test evaluation; most of it is Python overhead per layer, not the network. Grad-CAM adds
+  On the same machine the compiled model is 6.6 times faster than the eager call. The 239 ms in
+  `results.csv` is kept as measured under the protocol fixed for the test evaluation; most of it
+  is Python overhead per layer, not the network.
+- **Large phone photos.** The first phone test on Colab (a ~50-megapixel photo) took 2.4 s, almost
+  all of it decoding and resizing millions of pixels. A large JPEG is now decoded at 1/2, 1/4 or
+  1/8 size (a JPEG decoder can skip the fine detail directly) while its short side stays
+  ≥ 448 px, twice the model input: on the VM a 50-megapixel photo went from 495 to 57 ms and a
+  12-megapixel one from 117 to 32 ms, with the model input changing by about 1.5 of 255 grey
+  levels on average and the prediction unchanged. Dataset photos (256 px) are never scaled. Grad-CAM adds
   almost nothing because its gradient only flows through the small head. TFLite was not used:
   the demo needs gradients for Grad-CAM, and the compiled Keras model is already fast enough.
 - **"Not sure".** Below 0.947 (D-019) the demo gives no diagnosis; it shows the best guess, the
   top-3 and the heat map, and asks for a clearer photo of one whole leaf.
-- **Examples.** Seven test-split photos (110 KB in total, byte-for-byte copies, licence
-  CC BY-SA 3.0) are stored in `app/gradio/examples/` with their original paths and attribution,
+- **Examples.** Seven test-split photos (150 KB in total, pixel-identical copies with an added
+  C2PA metadata block, licence CC BY-SA 3.0) are stored in `app/gradio/examples/` with their original paths and attribution,
   so the demo works without the 2.2 GB dataset. This is the only exception to D-001. Six are
   answered correctly with ≥ 99.8% confidence; one, showing only a corner of a tomato leaf, comes
   out "not sure" (early blight 50.3% vs late blight ≈ 50%).
@@ -515,6 +522,10 @@ classes), where they are kept next to a class table generated from the splits.
   `keras>=3.13`, and `Predictor` explains the problem instead of failing inside Keras. A test
   downloads the release model and checks the seven example answers (`tests/test_release_model.py`),
   so CI fails if a dependency change ever breaks loading the real model.
+- **First field test.** A phone photo of a potted plant outside the 14 crops (several leaves,
+  glare on one of them) came out "not sure" (best guess grape black rot, 86%); Grad-CAM shows the
+  model reading the glare as a lesion. This is the intended behaviour, but a confidence of 86% on
+  an unknown plant also shows why "not sure" is not an out-of-distribution detector.
 - **Consequence.** The demo answers exactly as the evaluated model would on a dataset photo.
   Photos outside the 38 classes still get the closest class, often confidently; the demo says so
   under "About the model and its limits".

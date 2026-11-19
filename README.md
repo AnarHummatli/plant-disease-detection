@@ -24,8 +24,8 @@ Grad-CAM heat map of the region that drove the answer.
 The final model (`inference.keras`, 9.8 MB) is downloaded once from release
 [v1.0](https://github.com/AnarHummatli/plant-disease-detection/releases/tag/v1.0) and checked
 against its SHA-256. A photo is prepared exactly like the training images, so on a dataset photo
-the demo answers as the evaluated model did. On a 2-vCPU machine one photo takes 16–20 ms
-including Grad-CAM (D-021). Seven test photos are included as examples; one of them, a corner of
+the demo answers as the evaluated model did. One photo takes about 40 ms on Colab's CPU
+including Grad-CAM, 6.6 times faster than calling the model eagerly (D-021). Seven test photos are included as examples; one of them, a corner of
 a tomato leaf, shows the "not sure" answer ([screenshot](reports/figures/demo_not_sure.jpg)).
 
 ![The demo diagnosing a grape leaf](reports/figures/demo_diagnosis.jpg)

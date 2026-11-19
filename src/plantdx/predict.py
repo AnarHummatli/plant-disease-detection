@@ -117,23 +117,38 @@ _ORIENT = {
 }
 
 
-def _orientation(data: bytes) -> int:
+def _header(data: bytes) -> tuple[int, int, int, str | None]:
+    """(EXIF orientation, width, height, format) from the file header; pixels are not decoded."""
     from PIL import Image, UnidentifiedImageError
 
     try:
         with Image.open(io.BytesIO(data)) as im:
-            return int(im.getexif().get(0x0112, 1))  # read from the header, pixels not decoded
+            return int(im.getexif().get(0x0112, 1)), im.width, im.height, im.format
     except (UnidentifiedImageError, OSError, ValueError):
+        return 1, 0, 0, None
+
+
+def jpeg_ratio(width: int, height: int, min_side: int | None) -> int:
+    """Largest JPEG decode downscale (8, 4, 2) that keeps the short side >= `min_side`."""
+    if not min_side:
         return 1
+    for ratio in (8, 4, 2):
+        if min(width, height) // ratio >= min_side:
+            return ratio
+    return 1
 
 
-def load_rgb(image) -> np.ndarray:
+def load_rgb(image, min_side: int | None = None) -> np.ndarray:
     """uint8 RGB [H, W, 3] from a path, bytes, a PIL image or an array.
 
     Files and bytes are decoded by TensorFlow like the training images (`pipeline._decode`):
     PIL's JPEG decoder gives slightly different pixels (up to 4 of 255 on PlantVillage), and the
     demo should see exactly what the model saw in training. The EXIF rotation of phone photos is
     applied afterwards; formats TensorFlow cannot read (e.g. WebP) fall back to PIL.
+
+    `min_side`: a large JPEG may be decoded at 1/2, 1/4 or 1/8 size (the JPEG format allows this
+    without decoding every pixel) as long as its short side stays >= `min_side`. A 50-megapixel
+    phone photo then decodes in a fraction of the time; a 256 px dataset photo is never scaled.
     """
     from PIL import Image, ImageOps
 
@@ -152,11 +167,16 @@ def load_rgb(image) -> np.ndarray:
     try:
         import tensorflow as tf
 
-        rgb = tf.io.decode_image(data, channels=3, expand_animations=False).numpy()
+        orientation, width, height, fmt = _header(data)
+        ratio = jpeg_ratio(width, height, min_side) if fmt == "JPEG" else 1
+        if ratio > 1:
+            rgb = tf.io.decode_jpeg(data, channels=3, ratio=ratio).numpy()
+        else:
+            rgb = tf.io.decode_image(data, channels=3, expand_animations=False).numpy()
     except Exception:  # not a BMP/GIF/JPEG/PNG: let PIL try (it raises if it cannot either)
         with Image.open(io.BytesIO(data)) as im:
             return np.asarray(ImageOps.exif_transpose(im).convert("RGB"))
-    fix = _ORIENT.get(_orientation(data))
+    fix = _ORIENT.get(orientation)
     return np.ascontiguousarray(fix(rgb)) if fix else rgb
 
 
@@ -176,7 +196,7 @@ def prepare_image(image, size: int = IMAGE_SIZE) -> np.ndarray:
     """
     import tensorflow as tf
 
-    rgb = center_square(load_rgb(image))
+    rgb = center_square(load_rgb(image, min_side=2 * size))
     img = tf.image.resize(rgb, (size, size), method="bilinear", antialias=True)
     return tf.cast(tf.round(tf.clip_by_value(img, 0.0, 255.0)), tf.uint8).numpy()
 

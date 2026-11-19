@@ -64,6 +64,14 @@ def test_prediction_answers_or_abstains():
     assert not edge.not_sure
 
 
+def test_large_jpegs_are_decoded_at_reduced_size():
+    assert P.jpeg_ratio(256, 256, 448) == 1  # dataset photos: never scaled
+    assert P.jpeg_ratio(4000, 3000, 448) == 4  # 12 MP: 1000 x 750
+    assert P.jpeg_ratio(8160, 6120, 448) == 8  # 50 MP: 1020 x 765
+    assert P.jpeg_ratio(1000, 900, 448) == 2
+    assert P.jpeg_ratio(4000, 3000, None) == 1
+
+
 def test_center_square():
     a = np.arange(4 * 6 * 3).reshape(4, 6, 3)
     assert np.array_equal(P.center_square(a), a[:, 1:5])
@@ -186,6 +194,20 @@ def test_prepared_photo_equals_the_training_input(tmp_path):
     assert np.array_equal(P.load_rgb(webp.getvalue()), rgb)
     with pytest.raises(Exception):  # noqa: B017 - any decoder error is fine
         P.load_rgb(b"not an image")
+
+
+def test_large_photo_fast_path_stays_close_to_a_full_decode(tmp_path):
+    tf = needs_tf()
+    yy, xx = np.mgrid[0:1600, 0:2000]
+    rgb = np.stack([xx % 256, yy % 256, (xx + yy) % 256], -1).astype(np.uint8)
+    path = tmp_path / "big.jpg"
+    Image.fromarray(rgb).save(path, quality=92)
+    fast = P.prepare_image(path)
+    full = P.center_square(tf.io.decode_jpeg(path.read_bytes(), channels=3).numpy())
+    full = tf.image.resize(full, (224, 224), method="bilinear", antialias=True)
+    full = tf.cast(tf.round(tf.clip_by_value(full, 0.0, 255.0)), tf.uint8).numpy()
+    assert fast.shape == full.shape == (224, 224, 3)
+    assert np.abs(fast.astype(int) - full).mean() < 3
 
 
 def small_model():

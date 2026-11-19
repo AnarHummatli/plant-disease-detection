@@ -3,7 +3,9 @@
 Seven photos from the **test split** of PlantVillage (colour variant): the final model never saw
 them, or any other photo of the same leaf, in training. They are stored here so that the demo
 works without downloading the dataset; this is the only exception to D-001 (no dataset images
-in git), see D-021. The files are byte-for-byte copies of the originals, renamed.
+in git), see D-021. The images are pixel-for-pixel identical to the originals (renamed); the files
+also carry a content-credentials (C2PA) metadata block that was added when they were transferred
+to the repository, which does not change the image data.
 
 Source: PlantVillage, Hughes & Salathé (2015), <https://github.com/spMohanty/PlantVillage-Dataset>
 (`raw/color/`), licence [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
