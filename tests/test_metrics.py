@@ -124,3 +124,43 @@ def test_plot_learning_curves(tmp_path):
     hist.to_csv(tmp_path / "history.csv", index=False)
     out = plot_learning_curves(tmp_path / "history.csv", tmp_path / "c.png", title="t")
     assert out.is_file() and out.stat().st_size > 1000
+
+
+def test_select_final_by_val_macro_f1_ties_to_smaller_model():
+    from plantdx.results import select_final
+
+    m = {"n": 1, "classes": 1, "accuracy": 0.9, "weighted_f1": 0.9, "top3": 1.0}
+    table = pd.DataFrame(
+        [
+            make_row("head", "m", "val", dict(m, macro_f1=0.95), commit="x", size_mb=9.8),
+            make_row("ft", "m", "val", dict(m, macro_f1=0.98), commit="x", size_mb=9.8),
+            make_row("ft_small", "m", "val", dict(m, macro_f1=0.98), commit="x", size_mb=5.0),
+            make_row("other", "m", "val", dict(m, macro_f1=0.99), commit="x", size_mb=1.0),
+            make_row("ft", "m", "test", dict(m, macro_f1=1.0), commit="x", size_mb=9.8),
+        ]
+    )
+    best, ranked = select_final(table, ["head", "ft", "ft_small"])
+    assert best == "ft_small"  # "other" is not a candidate; test rows are ignored
+    assert ranked["run_id"].tolist() == ["ft_small", "ft", "head"]
+    with pytest.raises(ValueError):
+        select_final(table, ["missing"])
+
+
+def test_update_run_fields(tmp_path):
+    from plantdx.results import update_run_fields
+
+    path = tmp_path / "r.csv"
+    m = {"n": 1, "classes": 1, "accuracy": 1, "macro_f1": 1, "weighted_f1": 1, "top3": 1}
+    upsert_rows(
+        [
+            make_row("a", "cnn", "val", m, commit="x", size_mb=23.8),
+            make_row("b", "cnn", "val", m, commit="x", size_mb=1.0),
+        ],
+        path,
+    )
+    table = update_run_fields(path, "a", size_mb=4.86, cpu_ms=12.5)
+    a = table.set_index("run_id").loc["a"]
+    assert a["size_mb"] == 4.86 and a["cpu_ms"] == 12.5
+    assert table.set_index("run_id").loc["b", "size_mb"] == 1.0
+    with pytest.raises(KeyError):
+        update_run_fields(path, "a", nonsense=1)

@@ -8,8 +8,9 @@ want the plain network:
 * **without augmentation** (it is a no-op at inference anyway);
 * **without optimizer state** (an uncompiled model is saved without it).
 
-Weights are copied layer by layer by name, so the same code works for any model in
-plantdx.models. The result, inference.keras, is what `size_mb` in the results table measures.
+Weights are copied by their path ("<layer>/<variable>"), so the same code works for any model in
+plantdx.models, including nested backbones with frozen layers. The result, inference.keras,
+is what `size_mb` in the results table measures.
 
     python -m plantdx.export --run-id cnn_scratch      # for runs trained before D-014
 """
@@ -17,6 +18,7 @@ plantdx.models. The result, inference.keras, is what `size_mb` in the results ta
 from __future__ import annotations
 
 import argparse
+import copy
 from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
@@ -27,22 +29,23 @@ INFERENCE_FILE = "inference.keras"
 
 
 def copy_weights_by_name(source, target) -> int:
-    """Copy weights from `source` layers into `target` layers with the same name.
+    """Copy every weight of `target` from the `source` weight with the same path.
 
-    Every target layer that has weights must find a source layer with the same name and the same
-    weight shapes; returns the number of layers copied.
+    Paths are "<layer name>/<variable name>" (e.g. "block_13_expand/kernel"), unique within a
+    model and independent of which layers are frozen, so the copy cannot silently shuffle
+    weights between layers. Every target weight must exist in `source` with the same shape;
+    source weights without a counterpart (e.g. augmentation state) are ignored. Returns the
+    number of weights copied.
     """
-    by_name = {layer.name: layer for layer in source.layers}
+    by_path = {w.path: w for w in source.weights}
     copied = 0
-    for layer in target.layers:
-        if not layer.weights:
-            continue
-        if layer.name not in by_name:
-            raise ValueError(f"layer {layer.name!r} not found in the trained model")
-        weights = by_name[layer.name].get_weights()
-        if [w.shape for w in weights] != [tuple(v.shape) for v in layer.weights]:
-            raise ValueError(f"weight shapes differ for layer {layer.name!r}")
-        layer.set_weights(weights)
+    for w in target.weights:
+        if w.path not in by_path:
+            raise ValueError(f"weight {w.path!r} not found in the trained model")
+        src = by_path[w.path]
+        if tuple(src.shape) != tuple(w.shape):
+            raise ValueError(f"shape differs for {w.path!r}: {src.shape} vs {w.shape}")
+        w.assign(src.numpy().astype(w.dtype))
         copied += 1
     return copied
 
@@ -53,6 +56,8 @@ def build_inference_model(cfg: Mapping[str, Any], trained):
 
     from plantdx.models import build_model
 
+    cfg = copy.deepcopy(dict(cfg))
+    cfg.setdefault("model", {})["weights"] = None  # no ImageNet download: weights are copied
     policy = keras.mixed_precision.global_policy()
     keras.mixed_precision.set_global_policy("float32")
     try:

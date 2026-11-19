@@ -7,7 +7,8 @@ load_config -> set_seed -> datasets_from_config -> build_model(model.name) -> co
 * ModelCheckpoint keeps the epoch with the best **val macro-F1** (the selection metric);
 * EarlyStopping and ReduceLROnPlateau watch **val loss**, which is much smoother than macro-F1
   on a validation set whose smallest class has 12 images;
-* CSVLogger writes history.csv (the learning curves).
+* CSVLogger writes history.csv (the learning curves);
+* `train.init_from: <run_id>` starts from that run's best checkpoint (fine-tuning, plan 4.2).
 
 After training, the best checkpoint is scored on val with scikit-learn (exact macro-F1, per-class
 scores) and one row goes into the shared results table. Everything for one run lands in
@@ -40,7 +41,7 @@ from plantdx.data.pipeline import (
 )
 from plantdx.data.source import CLASSES
 from plantdx.env import report as env_report
-from plantdx.export import export_inference
+from plantdx.export import copy_weights_by_name, export_inference
 from plantdx.metrics import per_class_metrics, summary_metrics
 from plantdx.models import build_model
 from plantdx.paths import run_dir
@@ -103,6 +104,22 @@ def make_callbacks(out: Path, train_cfg: Mapping[str, Any]) -> list:
     ]
 
 
+def trainable_params(model) -> int:
+    return int(sum(int(np.prod(w.shape)) for w in model.trainable_weights))
+
+
+def load_initial_weights(model, run_id: str) -> int:
+    """Start from the best checkpoint of an earlier run (fine-tuning after the head, plan 4.2)."""
+    import keras
+
+    path = run_dir(run_id, create=False) / "best.keras"
+    if not path.is_file():
+        raise FileNotFoundError(f"{path} not found: train {run_id!r} first")
+    copied = copy_weights_by_name(keras.models.load_model(path), model)
+    print(f"initial weights: {copied} tensors from {run_id}/best.keras")
+    return copied
+
+
 def predict_scores(model, dataset, steps: int | None = None) -> np.ndarray:
     return np.asarray(model.predict(dataset, steps=steps, verbose=0), dtype=np.float32)
 
@@ -134,7 +151,12 @@ def train(
     (out / "env.json").write_text(json.dumps(env_report(), indent=2, default=str) + "\n")
 
     ds = datasets_from_config(cfg, data_root, splits_dir)
-    model = compile_model(build_model(cfg, augmentation_from_config(cfg)), cfg)
+    model = build_model(cfg, augmentation_from_config(cfg))
+    init_from = t.get("init_from")
+    if init_from:
+        load_initial_weights(model, init_from)
+    model = compile_model(model, cfg)
+    trainable = trainable_params(model)
     if verbose:
         model.summary(line_length=100)
 
@@ -175,6 +197,8 @@ def train(
         "augment_on": t.get("augment_on", "model"),
         "augment": cfg.get("augment", {}),
         "image_size": cfg.get("data", {}).get("image_size", 224),
+        "init_from": init_from,
+        "trainable_params": trainable,
         "mixed_precision": bool(t.get("mixed_precision")),
     }
     report = {
@@ -183,6 +207,7 @@ def train(
         "split": "val",
         "metrics": metrics,
         "params": int(best.count_params()),
+        "trainable_params": trainable,
         "size_mb": round(size_mb, 2),
         "epochs_trained": len(hist.get("loss", [])),
         "best_epoch": best_epoch,

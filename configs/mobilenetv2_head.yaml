@@ -1,0 +1,22 @@
+# MobileNetV2 (ImageNet), frozen backbone, new head (plan step 4.1, D-016).
+#   make train CONFIG=configs/mobilenetv2_head.yaml DATA=/content/data
+extends: base.yaml
+run_id: mobilenetv2_head
+
+model:
+  name: mobilenetv2
+  weights: imagenet
+  fine_tune_from: null        # whole backbone frozen: 48,678 trainable parameters
+  dropout: 0.2
+
+train:
+  epochs: 10
+  optimizer: adam
+  learning_rate: 1.0e-3
+  label_smoothing: 0.0
+  class_weight: false
+  early_stopping_patience: 5  # on val_loss
+  reduce_lr_patience: 2       # on val_loss, x0.5, down to min_lr
+  reduce_lr_factor: 0.5
+  min_lr: 1.0e-6
+  mixed_precision: true

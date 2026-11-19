@@ -70,6 +70,7 @@ def run(
             "C_grid": list(Cs),
             "features": f"HSV 3x32 + HOG 9x16px + LBP u8,1 @ {size}px (v{FEATURE_VERSION})",
             "feature_dim": feature_dim(size),
+            "feature_size": size,
             "hog_pca": pca,
             "class_weight": "balanced",
         }

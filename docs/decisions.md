@@ -325,3 +325,43 @@ classes), where they are kept next to a class table generated from the splits.
 - **Earlier run.** `cnn_scratch` was trained before this change; `python -m plantdx.export
   --run-id cnn_scratch` creates its inference model (about 4.9 MB for 1.18 M float32 parameters),
   and its size in the results table is corrected in the final evaluation (step 4.4).
+
+## D-015 · Test protocol: select on validation, then score every family once
+
+- **Rule.** The test split is not used for any choice. The final model is chosen among the
+  MobileNetV2 runs by validation macro-F1 (ties go to the smaller model), and the model in every
+  other family was already chosen on validation in stage 3 (C for the linear models, the best
+  epoch for the CNN). After that, `plantdx.evaluate` scores the final model **and** those other
+  family winners on test, each exactly once; the comparison table in the report needs test
+  numbers for all of them, and no decision depends on them. A second evaluation of the same run is
+  refused (`metrics_test.json` exists) unless `--force` is passed to repeat a run that failed
+  midway.
+- **Two test reports.** Full test split (10,709 images, 38 classes) and its leaf-verified part
+  (`leaf_source == "map"`: 8,033 images, 30 classes), where leaf grouping rules out same-leaf
+  leakage by construction (D-004). Macro-F1 on the verified part averages over its 30 classes. A
+  clearly lower score on the verified part would point to residual leakage in the rest.
+- **Also measured once per run:** model size (inference model or the joblib file) and CPU time
+  per image at batch size 1 (median of 50 after 5 warm-up calls; for the classical models this
+  includes feature extraction from a decoded image). Both are written to every row of the run in
+  the results table, which also corrects the size of `cnn_scratch` (D-014).
+
+## D-016 · MobileNetV2 transfer learning
+
+- **Model** (`plantdx.models.mobilenet`). Input 0–255 → augmentation (training only) →
+  `Rescaling(1/127.5, offset=-1)` (identical to `mobilenet_v2.preprocess_input`, saved with the
+  model) → MobileNetV2 (ImageNet, `include_top=False`, named `backbone`), always called with
+  `training=False` → GAP → Dropout 0.2 → Dense(38, softmax, float32). 2,306,662 parameters.
+- **Head** (`mobilenetv2_head.yaml`, plan 4.1): backbone frozen, 48,678 trainable parameters,
+  Adam 1e-3, at most 10 epochs, mixed precision.
+- **Fine-tuning** (`mobilenetv2_ft.yaml`, plan 4.2): starts from the best head checkpoint
+  (`train.init_from`); layers from `block_13_expand` on are trainable. That is the plan's "last
+  ~30 layers": 38 layers, of which 26 have weights, but because MobileNetV2 keeps most of its
+  parameters in the last blocks it is 1.66 M of the backbone's 2.26 M parameters (1,712,038
+  trainable with the head). BatchNorm layers stay frozen and in inference mode, so small batches
+  do not overwrite the ImageNet statistics. Adam 1e-5 (min 1e-7), at most 10 epochs. Variant
+  `mobilenetv2_ft_lr3e-5.yaml`: same layers, Adam 3e-5. Both variants are trained; the choice
+  between head, fine-tune and variant is made on validation (D-015).
+- **Weight transfer.** Checkpoint weights are copied by variable path (`block_13_expand/kernel`),
+  not by position: paths are unique and do not depend on which layers are frozen, so a copy
+  cannot silently shuffle weights between layers. Tests check head → fine-tune and the float32
+  export.

@@ -34,6 +34,7 @@ COLUMNS = [
     "top3",
     "params",
     "size_mb",
+    "cpu_ms",
     "train_seconds",
     "epochs",
     "hyperparams",
@@ -108,7 +109,14 @@ def upsert_rows(rows: list[Mapping[str, Any]], path: str | Path) -> pd.DataFrame
 
 
 # Small per-run files worth committing (models and score arrays stay on Drive, D-005).
-EXPORT_FILES = ("metrics_val.json", "history.csv", "grid.csv", "config.yaml", "env.json")
+EXPORT_FILES = (
+    "metrics_val.json",
+    "metrics_test.json",
+    "history.csv",
+    "grid.csv",
+    "config.yaml",
+    "env.json",
+)
 
 
 def export_for_repo(
@@ -116,11 +124,12 @@ def export_for_repo(
     dest_zip: str | Path,
     cfg: Mapping[str, Any] | None = None,
     figures: list[str | Path] | None = None,
+    extra_reports: list[str | Path] | None = None,
 ) -> Path:
     """Zip results.csv, the small files of `run_ids` and `figures` with repository paths.
 
     Unzipping the archive at the repository root puts them under reports/, ready to commit:
-    reports/results.csv, reports/runs/<run_id>/..., reports/figures/<name>.
+    reports/results.csv, reports/runs/<run_id>/..., reports/figures/<name>, reports/<extra>.
     """
     import zipfile
 
@@ -140,4 +149,37 @@ def export_for_repo(
         for fig in figures or []:
             fig = Path(fig)
             zf.write(fig, f"reports/figures/{fig.name}")
+        for extra in extra_reports or []:
+            extra = Path(extra)
+            if extra.is_file():
+                zf.write(extra, f"reports/{extra.name}")
     return dest_zip
+
+
+def update_run_fields(path: str | Path, run_id: str, **fields: Any) -> pd.DataFrame:
+    """Set `fields` on every row of `run_id` (e.g. the measured model size and CPU time)."""
+    path = Path(path)
+    table = pd.read_csv(path).reindex(columns=COLUMNS)
+    mask = table["run_id"] == run_id
+    for key, value in fields.items():
+        if key not in COLUMNS:
+            raise KeyError(key)
+        table[key] = table[key].astype(object)
+        table.loc[mask, key] = value
+    table.to_csv(path, index=False)
+    return table
+
+
+def select_final(
+    table: pd.DataFrame, candidates: list[str], metric: str = "macro_f1"
+) -> tuple[str, pd.DataFrame]:
+    """Best candidate by validation `metric`; ties go to the smaller model (plan step 4.3).
+
+    Returns the chosen run id and the ranked validation rows of the candidates.
+    """
+    val = table[(table["split"] == "val") & table["run_id"].isin(candidates)].copy()
+    if val.empty:
+        raise ValueError(f"no validation rows for {candidates}")
+    val["_size"] = pd.to_numeric(val["size_mb"], errors="coerce").fillna(float("inf"))
+    ranked = val.sort_values([metric, "_size"], ascending=[False, True]).drop(columns="_size")
+    return str(ranked.iloc[0]["run_id"]), ranked.reset_index(drop=True)

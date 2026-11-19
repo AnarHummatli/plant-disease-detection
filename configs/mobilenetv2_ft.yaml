@@ -1,0 +1,14 @@
+# MobileNetV2 fine-tuning from the best head checkpoint (plan step 4.2, D-016).
+# Last 38 backbone layers trainable (from block_13_expand); BatchNorm stays frozen.
+#   make train CONFIG=configs/mobilenetv2_ft.yaml DATA=/content/data   (after mobilenetv2_head)
+extends: mobilenetv2_head.yaml
+run_id: mobilenetv2_ft
+
+model:
+  fine_tune_from: block_13_expand   # 1,712,038 trainable parameters
+
+train:
+  init_from: mobilenetv2_head
+  epochs: 10
+  learning_rate: 1.0e-5
+  min_lr: 1.0e-7

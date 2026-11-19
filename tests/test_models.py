@@ -161,3 +161,97 @@ def test_copy_weights_by_name_rejects_mismatch():
     b = build_cnn(image_size=16, num_classes=3, filters=(8,), convs_per_block=1)
     with pytest.raises(ValueError):
         copy_weights_by_name(a, b)
+
+
+# ---------------------------------------------------------------- MobileNetV2 (stage 4)
+def test_mobilenetv2_head_and_fine_tune_trainable_parts():
+    from plantdx.models.mobilenet import BACKBONE, build_mobilenetv2
+
+    def n_trainable(m):
+        return sum(int(np.prod(w.shape)) for w in m.trainable_weights)
+
+    head = build_mobilenetv2(weights=None)
+    assert head.output_shape == (None, 38) and head.count_params() == 2_306_662
+    assert n_trainable(head) == 48_678  # GAP -> Dense(38) only
+
+    ft = build_mobilenetv2(weights=None, fine_tune_from="block_13_expand")
+    assert n_trainable(ft) == 1_712_038
+    backbone = ft.get_layer(BACKBONE)
+    names = [layer.name for layer in backbone.layers]
+    start = names.index("block_13_expand")
+    for i, layer in enumerate(backbone.layers):
+        if isinstance(layer, keras.layers.BatchNormalization) or i < start:
+            assert not layer.trainable, layer.name
+
+
+def test_mobilenetv2_preprocessing_matches_keras():
+    from plantdx.models.mobilenet import build_mobilenetv2
+
+    model = build_mobilenetv2(image_size=32, num_classes=3, weights=None)
+    x = np.array([[[[0.0, 127.5, 255.0]]]], np.float32)
+    ours = model.get_layer("preprocess")(x).numpy()
+    ref = keras.applications.mobilenet_v2.preprocess_input(x.copy())
+    np.testing.assert_allclose(ours, ref, atol=1e-6)
+
+
+def test_mobilenetv2_unknown_fine_tune_layer():
+    from plantdx.models.mobilenet import build_mobilenetv2
+
+    with pytest.raises(ValueError):
+        build_mobilenetv2(image_size=32, weights=None, fine_tune_from="block_99")
+
+
+def test_stage4_configs_chain():
+    head = load_config(CONFIGS / "mobilenetv2_head.yaml")
+    ft = load_config(CONFIGS / "mobilenetv2_ft.yaml")
+    ft3 = load_config(CONFIGS / "mobilenetv2_ft_lr3e-5.yaml")
+    assert head["model"]["fine_tune_from"] is None and head["train"]["learning_rate"] == 1e-3
+    assert ft["model"]["fine_tune_from"] == "block_13_expand"
+    assert ft["train"]["init_from"] == head["run_id"] == "mobilenetv2_head"
+    assert ft["train"]["learning_rate"] == 1e-5 and ft3["train"]["learning_rate"] == 3e-5
+    assert len({head["run_id"], ft["run_id"], ft3["run_id"]}) == 3
+
+
+def test_fine_tune_starts_from_head_checkpoint(tmp_path, monkeypatch):
+    from plantdx.models.mobilenet import build_mobilenetv2
+    from plantdx.train import load_initial_weights
+
+    monkeypatch.setenv("PLANTDX_ARTIFACTS", str(tmp_path))
+    head = build_mobilenetv2(image_size=32, num_classes=4, weights=None)
+    for w in head.weights:
+        w.assign(np.random.default_rng(1).normal(size=w.shape).astype(w.dtype))
+    (tmp_path / "runs" / "head").mkdir(parents=True)
+    head.save(tmp_path / "runs" / "head" / "best.keras")
+
+    ft = build_mobilenetv2(
+        image_size=32, num_classes=4, weights=None, fine_tune_from="block_13_expand"
+    )
+    assert load_initial_weights(ft, "head") == len(ft.weights)
+    for a, b in zip(head.weights, ft.weights, strict=True):
+        assert a.path == b.path
+        np.testing.assert_array_equal(a.numpy(), b.numpy())
+
+
+# ------------------------------------------------------------- selection + test (4.3-4.4)
+def test_evaluate_scores_test_once_and_updates_size(tmp_path, monkeypatch):
+    from plantdx.evaluate import evaluate_run
+    from plantdx.train import train
+
+    monkeypatch.setenv("PLANTDX_ARTIFACTS", str(tmp_path / "artifacts"))
+    cfg, data, splits = make_fake_project(tmp_path)
+    train(cfg, data, splits_dir=splits, verbose=0)
+    run = tmp_path / "artifacts" / "runs" / "smoke"
+    (run / "inference.keras").unlink()  # like a run trained before D-014
+
+    report = evaluate_run("smoke", data, splits_dir=splits)
+    assert (run / "inference.keras").is_file() and (run / "metrics_test.json").is_file()
+    assert report["test"]["n"] == 8 and report["cpu_ms"] > 0
+    # the fake test split is all "map": the verified part equals the full split
+    assert report["test_verified"]["n"] == 8
+
+    table = pd.read_csv(tmp_path / "artifacts" / "reports" / "results.csv")
+    assert sorted(table["split"]) == ["test", "test_verified", "val"]
+    assert table["size_mb"].nunique() == 1 and table["cpu_ms"].notna().all()
+
+    with pytest.raises(RuntimeError, match="used once"):
+        evaluate_run("smoke", data, splits_dir=splits)

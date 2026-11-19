@@ -1,0 +1,6 @@
+# Fine-tuning variant: same layers, learning rate 3e-5 (plan step 4.2, D-016).
+extends: mobilenetv2_ft.yaml
+run_id: mobilenetv2_ft_lr3e-5
+
+train:
+  learning_rate: 3.0e-5

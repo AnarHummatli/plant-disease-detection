@@ -4,6 +4,9 @@ PY ?= python
 CONFIG ?= configs/cnn.yaml
 # folder that contains raw/<variant>/ (Colab: notebooks extract the images to /content/data)
 DATA ?= /content/data
+# final-model candidates (selected on val) and the other families' runs, all scored on test once
+CANDIDATES ?= mobilenetv2_head mobilenetv2_ft mobilenetv2_ft_lr3e-5
+RUNS ?= baseline_logreg baseline_linsvm cnn_scratch
 
 .PHONY: help install install-local env data card baselines train eval demo test lint format
 
@@ -15,7 +18,7 @@ help:
 	@echo "card           refresh the class table in docs/data_card.md"
 	@echo "baselines      colour/HOG/LBP features + LogReg / linear SVM            (step 3.2)"
 	@echo "train          train a model: make train CONFIG=configs/<name>.yaml  (steps 3-4)"
-	@echo "eval           evaluate a trained run                                 (step 5)"
+	@echo "eval           select the final model, score it and RUNS on test ONCE (steps 4.3-4.4)"
 	@echo "demo           launch the Gradio demo                                 (step 6)"
 	@echo "test / lint    pytest / ruff"
 
@@ -41,7 +44,7 @@ train:
 	$(PY) -m plantdx.train --config $(CONFIG) --data-root $(DATA)
 
 eval:
-	@echo "Not implemented yet: plan step 5 (plantdx.evaluate)"
+	$(PY) -m plantdx.evaluate --data-root $(DATA) --select $(CANDIDATES) --also $(RUNS)
 
 demo:
 	@echo "Not implemented yet: plan step 6.1 (app/gradio/app.py)"

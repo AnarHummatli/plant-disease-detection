@@ -7,8 +7,9 @@ Grad-CAM explanations, a "not sure" answer for low-confidence inputs, and a Grad
 Neural Networks group project, Azerbaijan State Oil and Industry University, Fall 2026 (topic 06).
 
 > **Status:** stages 1–3 of 8 done (foundation; leakage-checked data and input pipeline;
-> classical baselines and a CNN from scratch). Next: MobileNetV2 transfer learning, then the
-> final test evaluation, Grad-CAM and the demo.
+> classical baselines and a CNN from scratch). Stage 4 code is in (MobileNetV2 head and
+> fine-tuning, final selection, one-time test evaluation); its results follow, then Grad-CAM and
+> the demo.
 
 ## Results so far (validation split)
 
@@ -70,17 +71,23 @@ make test    # unit tests
 ### Training and baselines
 
 Every experiment is a YAML config that extends `configs/base.yaml`. On Colab, use
-`notebooks/05_baselines.ipynb` (CPU is enough) and `notebooks/06_train.ipynb` (T4 GPU); both write
-runs to Drive and export the results for the repository. From a shell, with the images extracted to
+`notebooks/05_baselines.ipynb` (CPU is enough), `notebooks/06_train.ipynb` (T4 GPU, one or more
+configs in a row) and, once all training is done, `notebooks/07_evaluate.ipynb` (final model and the
+one-time test evaluation). They write runs to Drive and export the results for the repository. From a shell, with the images extracted to
 `DATA` (the folder that contains `raw/color/`):
 
 ```bash
 make baselines DATA=/content/data                          # colour/HOG/LBP + LogReg / linear SVM
 make train CONFIG=configs/cnn.yaml DATA=/content/data      # CNN from scratch
+make train CONFIG=configs/mobilenetv2_head.yaml DATA=...   # MobileNetV2: frozen backbone, new head
+make train CONFIG=configs/mobilenetv2_ft.yaml DATA=...     # then fine-tune from the head (LR 1e-5)
+make train CONFIG=configs/mobilenetv2_ft_lr3e-5.yaml DATA=...   # fine-tuning variant (LR 3e-5)
+make eval DATA=/content/data                               # select on val, then test ONCE
 ```
 
-Model selection uses validation macro-F1 only; the test split is evaluated once, on the final
-models. Every run writes `config.yaml`, `history.csv`, `best.keras` (training checkpoint),
+Model selection uses validation macro-F1 only. `plantdx.evaluate` then scores the selected
+model and the model chosen in every other family on the test split, once (it refuses a second
+run), on the full split and on its leaf-verified part (D-015). Every run writes `config.yaml`, `history.csv`, `best.keras` (training checkpoint),
 `inference.keras` (float32, for evaluation and the demo) and `metrics_val.json` to
 `<artifacts>/runs/<run_id>/` and one row to the shared results table.
 
@@ -89,11 +96,11 @@ models. Every run writes `config.yaml`, `history.csv`, `best.keras` (training ch
 ```
 configs/          experiment configs (YAML, inherit from base.yaml)
 src/plantdx/      all logic: data/ (source, splits, duplicates, sameleaf, pipeline, card), baselines/,
-                  models/, train, export, metrics, results, viz
+                  models/ (cnn, mobilenet), train, export, evaluate, metrics, results, viz
 notebooks/        00 bootstrap, 01 EDA + first audit, 02 duplicate search, 03 pipeline check, 04 leaf groups,
-                  05 classical baselines, 06 train a neural network
+                  05 classical baselines, 06 train neural networks, 07 final model + test evaluation
 splits/           train/val/test CSVs with leaf_id and group_id, grouping pairs (committed)
-tests/            pytest: splits, pipeline, baselines, models, trainer, metrics
+tests/            pytest: splits, pipeline, baselines, models, trainer, evaluation, metrics
 app/gradio/       demo
 docs/             problem statement, data card, decision log (later: report)
 reports/figures/  every figure used in the report and this README
