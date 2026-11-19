@@ -209,7 +209,24 @@ def test_stage4_configs_chain():
     assert ft["model"]["fine_tune_from"] == "block_13_expand"
     assert ft["train"]["init_from"] == head["run_id"] == "mobilenetv2_head"
     assert ft["train"]["learning_rate"] == 1e-5 and ft3["train"]["learning_rate"] == 3e-5
-    assert len({head["run_id"], ft["run_id"], ft3["run_id"]}) == 3
+    a = load_config(CONFIGS / "mobilenetv2_ft_lr1e-4.yaml")
+    b = load_config(CONFIGS / "mobilenetv2_ft_all.yaml")
+    assert a["model"]["fine_tune_from"] == "block_13_expand" and a["train"]["learning_rate"] == 1e-4
+    assert b["model"]["fine_tune_from"] == "Conv1" and b["train"]["learning_rate"] == 3e-5
+    for cfg in (a, b):
+        assert cfg["train"]["init_from"] == "mobilenetv2_head" and cfg["train"]["epochs"] == 30
+    ids = {c["run_id"] for c in (head, ft, ft3, a, b)}
+    assert len(ids) == 5
+
+
+def test_whole_backbone_fine_tune_keeps_batchnorm_frozen():
+    from plantdx.models.mobilenet import BACKBONE, build_mobilenetv2
+
+    model = build_mobilenetv2(weights=None, fine_tune_from="Conv1")
+    assert sum(int(np.prod(w.shape)) for w in model.trainable_weights) == 2_238_438
+    for layer in model.get_layer(BACKBONE).layers:
+        if isinstance(layer, keras.layers.BatchNormalization):
+            assert not layer.trainable
 
 
 def test_fine_tune_starts_from_head_checkpoint(tmp_path, monkeypatch):

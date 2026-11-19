@@ -1,0 +1,40 @@
+seed: 42
+data:
+  hf_repo: mohanty/PlantVillage
+  variant: color
+  val_fraction: 0.15
+  image_size: 224
+  num_classes: 38
+  cache_eval: memory
+  cache_train: disk
+augment:
+  flip: horizontal_and_vertical
+  rotation_deg: 20
+  zoom: 0.15
+  brightness: 0.15
+  contrast: 0.15
+train:
+  batch_size: 64
+  augment_on: model
+  mixed_precision: true
+  epochs: 10
+  optimizer: adam
+  learning_rate: 3.0e-05
+  label_smoothing: 0.0
+  class_weight: false
+  early_stopping_patience: 5
+  reduce_lr_patience: 2
+  reduce_lr_factor: 0.5
+  min_lr: 1.0e-07
+  init_from: mobilenetv2_head
+paths:
+  artifacts: artifacts
+  splits: splits
+  figures: reports/figures
+  results_csv: reports/results.csv
+run_id: mobilenetv2_ft_lr3e-5
+model:
+  name: mobilenetv2
+  weights: imagenet
+  fine_tune_from: block_13_expand
+  dropout: 0.2

@@ -1,0 +1,12 @@
+# Fine-tuning variant B (D-017): whole backbone trainable from Conv1, Adam 3e-5, up to 30 epochs.
+# BatchNorm stays frozen and in inference mode. Tests whether the lower layers must adapt too.
+extends: mobilenetv2_ft.yaml
+run_id: mobilenetv2_ft_all
+
+model:
+  fine_tune_from: Conv1       # 2,238,438 trainable parameters (all but BatchNorm)
+
+train:
+  epochs: 30
+  learning_rate: 3.0e-5
+  min_lr: 1.0e-7

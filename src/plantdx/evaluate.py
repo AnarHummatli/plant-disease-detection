@@ -1,13 +1,16 @@
 """Final model selection and the one-time test evaluation (plan steps 4.3-4.4, D-015).
 
     python -m plantdx.evaluate --data-root /content/data \\
-        --select mobilenetv2_head mobilenetv2_ft mobilenetv2_ft_lr3e-5 \\
-        --also baseline_logreg baseline_linsvm cnn_scratch
+        --select cnn_scratch mobilenetv2_head mobilenetv2_ft mobilenetv2_ft_lr3e-5 \\
+                 mobilenetv2_ft_lr1e-4 mobilenetv2_ft_all \\
+        --also baseline_logreg baseline_linsvm
 
-1. **Selection (4.3)** among the `--select` runs, on validation only: best val macro-F1, ties to
-   the smaller model. Written to <artifacts>/reports/final_model.json.
-2. **Test (4.4)** for the selected model and for the `--also` runs (the model already chosen in
-   every other family, for the comparison table). Every run is scored on
+1. **Selection (4.3)** on validation only, best val macro-F1 with ties to the smaller model:
+   the winner of every model family among the `--select` runs (family = the `model` column of
+   the results table, e.g. cnn_scratch, mobilenetv2), and the final model = the best of those
+   winners (D-015). Written to <artifacts>/reports/final_model.json.
+2. **Test (4.4)** for every family winner and for the `--also` runs (models chosen earlier, e.g.
+   the classical baselines), each once, for the comparison table. Every run is scored on
    * the full test split (10,709 images, 38 classes) and
    * its leaf-verified part (leaf_source == "map": 8,033 images, 30 classes), where leaf
      grouping rules out same-leaf leakage by construction (D-004);
@@ -184,6 +187,15 @@ def evaluate_run(
     return report
 
 
+def family_winners(table: pd.DataFrame, candidates: list[str]) -> dict[str, str]:
+    """Best validation run of every model family (the `model` column) among `candidates`."""
+    val = table[(table["split"] == "val") & table["run_id"].isin(candidates)]
+    return {
+        str(family): select_final(table, group["run_id"].tolist())[0]
+        for family, group in val.groupby("model", sort=True)
+    }
+
+
 def select_and_evaluate(
     data_root,
     select: list[str],
@@ -197,23 +209,31 @@ def select_and_evaluate(
     if missing:
         print(f"not trained, skipped from selection: {missing}")
     final, ranked = select_final(table, present)
+    winners = family_winners(table, present)
     print("selection on validation (macro-F1, ties -> smaller model):")
-    print(ranked[["run_id", "macro_f1", "accuracy", "top3", "size_mb"]].to_string(index=False))
+    print(
+        ranked[["run_id", "model", "macro_f1", "accuracy", "top3", "size_mb"]].to_string(
+            index=False
+        )
+    )
+    print(f"family winners: {winners}")
     print(f"-> final model: {final}\n")
     (results_path().parent / "final_model.json").write_text(
         json.dumps(
             {
                 "run_id": final,
-                "rule": "highest val macro-F1; ties -> smaller model (plan 4.3)",
-                "candidates": ranked[["run_id", "macro_f1", "accuracy", "size_mb"]].to_dict(
-                    "records"
-                ),
+                "rule": "highest val macro-F1; ties -> smaller model (plan 4.3, D-015)",
+                "family_winners": winners,
+                "candidates": ranked[
+                    ["run_id", "model", "macro_f1", "accuracy", "size_mb"]
+                ].to_dict("records"),
             },
             indent=2,
         )
         + "\n"
     )
-    for run_id in [final, *(also or [])]:
+    to_test = list(dict.fromkeys([final, *winners.values(), *(also or [])]))  # unique, ordered
+    for run_id in to_test:
         evaluate_run(run_id, data_root, splits_dir, force=force)
     return final, pd.read_csv(results_path())
 
@@ -221,7 +241,9 @@ def select_and_evaluate(
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--data-root", required=True)
-    parser.add_argument("--select", nargs="+", required=True, help="final-model candidates")
+    parser.add_argument(
+        "--select", nargs="+", required=True, help="final-model candidates (all families)"
+    )
     parser.add_argument("--also", nargs="*", default=[], help="other runs to score on test")
     parser.add_argument("--splits-dir", default=None)
     parser.add_argument("--force", action="store_true")

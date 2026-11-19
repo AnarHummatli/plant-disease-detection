@@ -7,9 +7,9 @@ Grad-CAM explanations, a "not sure" answer for low-confidence inputs, and a Grad
 Neural Networks group project, Azerbaijan State Oil and Industry University, Fall 2026 (topic 06).
 
 > **Status:** stages 1–3 of 8 done (foundation; leakage-checked data and input pipeline;
-> classical baselines and a CNN from scratch). Stage 4 code is in (MobileNetV2 head and
-> fine-tuning, final selection, one-time test evaluation); its results follow, then Grad-CAM and
-> the demo.
+> classical baselines and a CNN from scratch); stage 4 (MobileNetV2 transfer learning) in
+> progress: the plan's settings under-trained the model, two more variants follow (D-017), then
+> the final selection, the one-time test evaluation, Grad-CAM and the demo.
 
 ## Results so far (validation split)
 
@@ -21,9 +21,13 @@ be evaluated once, on the final models.
 | Colour/HOG/LBP + logistic regression (C = 0.1) | 0.874 | 0.900 | 0.982 | 46 s (CPU) |
 | Colour/HOG/LBP + linear SVM (C = 0.1) | 0.873 | 0.904 | 0.975 | 116 s (CPU) |
 | CNN from scratch (1.18 M parameters) | **0.973** | **0.980** | **0.998** | 107 min (T4, 26 epochs) |
+| MobileNetV2, frozen backbone + new head | 0.916 | 0.934 | 0.988 | 15 min (T4, 10 epochs) |
+| MobileNetV2, fine-tuned last 38 layers, Adam 1e-5 | 0.946 | 0.958 | 0.997 | 15 min (T4, 10 epochs) |
+| MobileNetV2, fine-tuned last 38 layers, Adam 3e-5 | 0.955 | 0.968 | 0.999 | 14 min (T4, 10 epochs) |
 
-Per-run details: `reports/results.csv`, `reports/runs/`; learning curves:
-`reports/figures/curves_cnn_scratch.png`.
+Both fine-tuning runs peaked at their last epoch, so they were stopped too early; two more
+variants with up to 30 epochs follow (D-017). Per-run details: `reports/results.csv`,
+`reports/runs/`; learning curves: `reports/figures/curves_*.png`.
 
 ## Why this project is different
 
@@ -82,12 +86,15 @@ make train CONFIG=configs/cnn.yaml DATA=/content/data      # CNN from scratch
 make train CONFIG=configs/mobilenetv2_head.yaml DATA=...   # MobileNetV2: frozen backbone, new head
 make train CONFIG=configs/mobilenetv2_ft.yaml DATA=...     # then fine-tune from the head (LR 1e-5)
 make train CONFIG=configs/mobilenetv2_ft_lr3e-5.yaml DATA=...   # fine-tuning variant (LR 3e-5)
+make train CONFIG=configs/mobilenetv2_ft_lr1e-4.yaml DATA=...   # D-017 A: LR 1e-4, up to 30 epochs
+make train CONFIG=configs/mobilenetv2_ft_all.yaml DATA=...      # D-017 B: whole backbone, 3e-5
 make eval DATA=/content/data                               # select on val, then test ONCE
 ```
 
-Model selection uses validation macro-F1 only. `plantdx.evaluate` then scores the selected
-model and the model chosen in every other family on the test split, once (it refuses a second
-run), on the full split and on its leaf-verified part (D-015). Every run writes `config.yaml`, `history.csv`, `best.keras` (training checkpoint),
+Model selection uses validation macro-F1 only: the best run of every neural family, and the final
+model is the best of those. `plantdx.evaluate` then scores every family winner and the classical
+baselines on the test split, once (it refuses a second run), on the full split and on its
+leaf-verified part (D-015). Every run writes `config.yaml`, `history.csv`, `best.keras` (training checkpoint),
 `inference.keras` (float32, for evaluation and the demo) and `metrics_val.json` to
 `<artifacts>/runs/<run_id>/` and one row to the shared results table.
 

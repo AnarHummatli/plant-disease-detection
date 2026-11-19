@@ -328,11 +328,12 @@ classes), where they are kept next to a class table generated from the splits.
 
 ## D-015 · Test protocol: select on validation, then score every family once
 
-- **Rule.** The test split is not used for any choice. The final model is chosen among the
-  MobileNetV2 runs by validation macro-F1 (ties go to the smaller model), and the model in every
-  other family was already chosen on validation in stage 3 (C for the linear models, the best
-  epoch for the CNN). After that, `plantdx.evaluate` scores the final model **and** those other
-  family winners on test, each exactly once; the comparison table in the report needs test
+- **Rule.** The test split is not used for any choice. On validation macro-F1 (ties go to the
+  smaller model) `plantdx.evaluate` picks the best run of every neural family (CNN from scratch,
+  MobileNetV2) and the **final model = the best of those winners**, whichever family it comes
+  from (changed on 19 Nov 2026 from "MobileNetV2 runs only", see D-017). The classical models
+  were already chosen on validation in stage 3 (C). Every family winner and the classical models
+  are then scored on test, each exactly once; the comparison table in the report needs test
   numbers for all of them, and no decision depends on them. A second evaluation of the same run is
   refused (`metrics_test.json` exists) unless `--force` is passed to repeat a run that failed
   midway.
@@ -365,3 +366,23 @@ classes), where they are kept next to a class table generated from the splits.
   not by position: paths are unique and do not depend on which layers are frozen, so a copy
   cannot silently shuffle weights between layers. Tests check head → fine-tune and the float32
   export.
+
+## D-017 · MobileNetV2 under-trained by the plan's settings: two more variants
+
+- **Observation** (validation, 19 Nov 2026). The plan's MobileNetV2 settings ended below the CNN
+  from scratch (val macro-F1 0.9732): head 0.9158 (best epoch 8/10), fine-tuning with Adam 1e-5
+  0.9456 and with 3e-5 0.9551, both with their **best epoch at the last of 10** and val
+  macro-F1 still rising. Raising the learning rate from 1e-5 to 3e-5 added about one point. The
+  CNN used the same pipeline and reached 0.973, so a data or preprocessing fault is unlikely
+  (a test also checks the preprocessing against Keras' `preprocess_input`). The reading:
+  under-training, not a weak method.
+- **Decision.** Two more variants, each testing one explanation, both starting from the same
+  head checkpoint and allowed up to 30 epochs (early stopping on val loss, patience 5):
+  **A** `mobilenetv2_ft_lr1e-4` (same 38 layers, Adam 1e-4: too little training) and
+  **B** `mobilenetv2_ft_all` (whole backbone from `Conv1`, BatchNorm still frozen, 2,238,438
+  trainable parameters, Adam 3e-5: the lower layers must adapt to leaf textures too).
+- **Selection** stays on validation only, and the final model is now chosen across neural
+  families (D-015): if the CNN from scratch stays ahead, it is the final model and that is
+  reported as a finding.
+- **Tuning budget, stated for a fair comparison:** CNN from scratch 1 configuration;
+  MobileNetV2 5 (head, 3 fine-tuning learning rates / epoch limits, whole backbone).

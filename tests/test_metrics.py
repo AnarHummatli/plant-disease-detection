@@ -164,3 +164,28 @@ def test_update_run_fields(tmp_path):
     assert table.set_index("run_id").loc["b", "size_mb"] == 1.0
     with pytest.raises(KeyError):
         update_run_fields(path, "a", nonsense=1)
+
+
+def test_family_winners_and_final_across_families():
+    from plantdx.evaluate import family_winners
+    from plantdx.results import select_final
+
+    m = {"n": 1, "classes": 1, "accuracy": 0.9, "weighted_f1": 0.9, "top3": 1.0}
+    table = pd.DataFrame(
+        [
+            make_row("cnn", "cnn_scratch", "val", dict(m, macro_f1=0.973), commit="x", size_mb=4.9),
+            make_row(
+                "mb_a", "mobilenetv2", "val", dict(m, macro_f1=0.955), commit="x", size_mb=9.8
+            ),
+            make_row(
+                "mb_b", "mobilenetv2", "val", dict(m, macro_f1=0.981), commit="x", size_mb=9.8
+            ),
+            make_row("lr", "logreg", "val", dict(m, macro_f1=0.874), commit="x", size_mb=2.0),
+        ]
+    )
+    candidates = ["cnn", "mb_a", "mb_b"]
+    assert family_winners(table, candidates) == {"cnn_scratch": "cnn", "mobilenetv2": "mb_b"}
+    assert select_final(table, candidates)[0] == "mb_b"
+    # the CNN wins when it is better: the final model is chosen across families
+    table.loc[table.run_id == "mb_b", "macro_f1"] = 0.96
+    assert select_final(table, candidates)[0] == "cnn"

@@ -1,0 +1,9 @@
+# Fine-tuning variant A (D-017): same 38 layers, Adam 1e-4, up to 30 epochs.
+# Tests the "under-trained" reading of stage 4: both 10-epoch runs peaked at their last epoch.
+extends: mobilenetv2_ft.yaml
+run_id: mobilenetv2_ft_lr1e-4
+
+train:
+  epochs: 30                  # early stopping (val_loss, patience 5) usually ends sooner
+  learning_rate: 1.0e-4
+  min_lr: 1.0e-6
