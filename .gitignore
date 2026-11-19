@@ -10,6 +10,8 @@ checkpoints/
 *.npz
 logs/
 runs/
+# small per-run reports (metrics, history, config) are committed; models stay on Drive
+!reports/runs/
 
 # Large per-image result tables live on Drive (artifacts/reports_step2), not in git
 reports/audit_near_duplicates.csv
