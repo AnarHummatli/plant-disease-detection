@@ -60,3 +60,10 @@ def test_cache_dir_env_and_fallback(tmp_path, monkeypatch):
     monkeypatch.setenv(ENV_ARTIFACTS, str(tmp_path / "art"))
     expected = Path("/content/cache") if Path("/content").is_dir() else tmp_path / "art" / "cache"
     assert cache_dir(create=False) == expected
+
+
+def test_package_version_matches_pyproject():
+    import re
+
+    text = (CONFIGS.parent / "pyproject.toml").read_text(encoding="utf-8")
+    assert re.search(r'^version = "([^"]+)"', text, re.M).group(1) == plantdx.__version__

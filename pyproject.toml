@@ -4,12 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "plantdx"
-version = "0.1.0"
+version = "1.1.0"
 description = "Plant disease detection from leaf images: leakage-free evaluation, MobileNet transfer learning, Grad-CAM, Gradio demo."
 readme = "README.md"
 license = { text = "MIT" }
 authors = [{ name = "Anar Hummatli" }]
-requires-python = ">=3.10"
+# 3.11+: the released model needs Keras >= 3.13, which needs Python >= 3.11 (D-021)
+requires-python = ">=3.11"
 # TensorFlow is NOT a core dependency on purpose: Colab and Kaggle ship a
 # CUDA-matched TensorFlow, and reinstalling it there can break the GPU setup.
 # Install it locally with:  pip install -e ".[tf]"
@@ -26,10 +27,11 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-tf = ["tensorflow>=2.19"]
+tf = ["tensorflow>=2.19", "keras>=3.13"]
 # CPU-only TensorFlow for CI: runs the pipeline tests without CUDA libraries
-cpu = ["tensorflow-cpu>=2.19"]
-demo = ["gradio>=5.0"]
+cpu = ["tensorflow-cpu>=2.19", "keras>=3.13"]
+# the demo uses the Gradio 6 API (theme and css passed to launch)
+demo = ["gradio>=6.0", "keras>=3.13"]
 # ruff is pinned so CI, pre-commit and local runs format code identically
 dev = ["pytest>=8.0", "ruff==0.17.5", "pre-commit>=3.7", "nbformat>=5.9"]
 
@@ -46,7 +48,7 @@ filterwarnings = [
 
 [tool.ruff]
 line-length = 100
-target-version = "py310"
+target-version = "py311"
 extend-exclude = ["notebooks"]
 
 [tool.ruff.lint]

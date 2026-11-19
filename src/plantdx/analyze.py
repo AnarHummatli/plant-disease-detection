@@ -25,7 +25,7 @@ import pandas as pd
 
 from plantdx import analysis as A
 from plantdx.data.pipeline import load_split
-from plantdx.data.source import CLASSES
+from plantdx.data.source import CLASSES, display_name
 from plantdx.metrics import summary_metrics
 from plantdx.paths import artifacts_dir, repo_root, run_dir
 from plantdx.results import results_path
@@ -34,9 +34,7 @@ CAM_PER_CLASS = 15  # test images per class for the Grad-CAM-on-leaf check (D-02
 SEED = 42
 
 
-def short(name: str) -> str:
-    crop, _, disease = name.partition("___")
-    return f"{crop.split('_(')[0].replace('_', ' ')} · {disease.replace('_', ' ')}"
+short = display_name  # readable class names in tables and captions
 
 
 # ------------------------------------------------------------------------------ images

@@ -6,9 +6,29 @@ Grad-CAM explanations, a "not sure" answer for low-confidence inputs, and a Grad
 
 Neural Networks group project, Azerbaijan State Oil and Industry University, Fall 2026 (topic 06).
 
-> **Status:** stages 1–5 of 8 done (leakage-checked data and pipeline; baselines and a CNN from
+> **Status:** stages 1–6 of 8 done (leakage-checked data and pipeline; baselines and a CNN from
 > scratch; MobileNetV2 transfer learning scored on test once; error analysis with Grad-CAM and a
-> "not sure" threshold). Next: the Gradio demo, a reproducibility check and the report.
+> "not sure" threshold; Gradio demo). Next: a reproducibility check and the report.
+
+## Demo
+
+Upload a photo of one leaf: the demo gives the diagnosis (or "not sure"), the top-3 classes and a
+Grad-CAM heat map of the region that drove the answer.
+
+- **Colab, public link:** open `notebooks/09_demo.ipynb`, run all cells (CPU is enough) and open
+  the `*.gradio.live` link it prints.
+- **Local** (Python ≥ 3.11): `pip install -e ".[tf,demo]"`, then `make demo` (or
+  `python app/gradio/app.py`) and open <http://127.0.0.1:7860>.
+- **Command line:** `python -m plantdx.predict leaf.jpg` prints the verdict and the top-3.
+
+The final model (`inference.keras`, 9.8 MB) is downloaded once from release
+[v1.0](https://github.com/AnarHummatli/plant-disease-detection/releases/tag/v1.0) and checked
+against its SHA-256. A photo is prepared exactly like the training images, so on a dataset photo
+the demo answers as the evaluated model did. On a 2-vCPU machine one photo takes 16–20 ms
+including Grad-CAM (D-021). Seven test photos are included as examples; one of them, a corner of
+a tomato leaf, shows the "not sure" answer ([screenshot](reports/figures/demo_not_sure.jpg)).
+
+![The demo diagnosing a grape leaf](reports/figures/demo_diagnosis.jpg)
 
 ## Final results (test split, evaluated once)
 
@@ -113,6 +133,7 @@ python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\act
 pip install -e ".[tf,demo,dev]"
 make env     # environment report
 make test    # unit tests
+make demo    # Gradio demo on http://127.0.0.1:7860
 ```
 
 ### Training and baselines
@@ -150,13 +171,14 @@ leaf-verified part (D-015). Every run writes `config.yaml`, `history.csv`, `best
 configs/          experiment configs (YAML, inherit from base.yaml)
 src/plantdx/      all logic: data/ (source, splits, duplicates, sameleaf, pipeline, card), baselines/,
                   models/ (cnn, mobilenet), train, export, evaluate, metrics, results,
-                  analysis + analyze (error analysis), gradcam, viz
+                  analysis + analyze (error analysis), gradcam, viz, predict (demo core)
 notebooks/        00 bootstrap, 01 EDA + first audit, 02 duplicate search, 03 pipeline check, 04 leaf groups,
                   05 classical baselines, 06 train neural networks, 07 final model + test evaluation,
-                  08 error analysis, Grad-CAM and the "not sure" threshold
+                  08 error analysis, Grad-CAM and the "not sure" threshold, 09 demo (public link)
 splits/           train/val/test CSVs with leaf_id and group_id, grouping pairs (committed)
-tests/            pytest: splits, pipeline, baselines, models, trainer, evaluation, analysis, Grad-CAM
-app/gradio/       demo
+tests/            pytest: splits, pipeline, baselines, models, trainer, evaluation, analysis, Grad-CAM,
+                  demo
+app/gradio/       Gradio demo (app.py) and seven example test photos with attribution
 docs/             problem statement, data card, decision log, error analysis (later: report)
 reports/figures/  every figure used in the report and this README
 ```
@@ -165,7 +187,8 @@ reports/figures/  every figure used in the report and this README
 
 [PlantVillage](https://huggingface.co/datasets/mohanty/PlantVillage) (Hughes & Salathé, 2015;
 Mohanty, Hughes & Salathé, 2016), colour variant, 54,305 images, 38 classes, licence CC BY-SA 3.0.
-Images are downloaded by code and are never stored in this repository (`docs/decisions.md`, D-001).
+Images are downloaded by code and are not stored in this repository (`docs/decisions.md`, D-001),
+apart from the seven demo examples in `app/gradio/examples/` (D-021).
 Full description, per-class table and limitations: **[`docs/data_card.md`](docs/data_card.md)**.
 
 | Split | Images | Leaves | Leaf id verified |

@@ -1,6 +1,6 @@
 # Data card · PlantVillage (colour) as used in this project
 
-**Version:** 1.4 · 20 November 2026 · splits frozen after D-010 (1.2–1.4: text and results only)
+**Version:** 1.5 · 20 November 2026 · splits frozen after D-010 (1.2–1.5: text and results only)
 **Owner:** Yarpaq Həkimləri (ASOIU Neural Networks project, topic 06)
 
 ## 1. Summary
@@ -13,7 +13,7 @@
 | Images | 54,305 in the release; 53,609 used (train 36,779 · val 6,121 · test 10,709), 696 removed from train (290 + 196 + 210, section 5) |
 | Image format | All 256 × 256: 54,304 RGB JPEG and 1 RGBA PNG (`reports/image_sizes.json`); decoded as 3-channel RGB and resized to 224 × 224 |
 | Licence | CC BY-SA 3.0 |
-| Where the images are | Downloaded by code from the Hugging Face Hub; never stored in this repository |
+| Where the images are | Downloaded by code from the Hugging Face Hub; not stored in this repository, except seven test photos as demo examples (`app/gradio/examples/`, D-021) |
 
 ## 2. Source and citation
 

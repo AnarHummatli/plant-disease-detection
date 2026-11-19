@@ -1,4 +1,5 @@
-# Data and model artifacts never go into git: only the code that downloads them (D-001, D-005)
+# Data and model artifacts never go into git: only the code that downloads them (D-001, D-005);
+# the only images are the seven demo examples in app/gradio/examples/ (D-021)
 /data/
 artifacts/
 checkpoints/

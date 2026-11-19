@@ -2,7 +2,7 @@
 
 **Project:** Plant Disease Detection Using Neural Networks (topic 06)
 **Team:** Yarpaq Həkimləri · Neural Networks group project · ASOIU, Fall 2026
-**Version:** 1.4 · 20 November 2026
+**Version:** 1.5 · 20 November 2026
 
 ## 1. Problem
 
@@ -46,8 +46,9 @@ indicate and when it is worth asking an expert.
 test macro-F1 0.982, leaf-verified subset 0.985); criterion 2 met for accuracy, macro-F1, per-class F1, top-3,
 model size and CPU time; criterion 3 met (automated tests; 0 cross-split pairs). Error analysis
 (`docs/error_analysis.md`): criterion 2 completed with the confusion matrix; criterion 4 met (6 failure cases
-explained with Grad-CAM, plus a measured Grad-CAM check on 555 images). Criteria 5–6 follow with the demo and the
-final reproducibility check.
+explained with Grad-CAM, plus a measured Grad-CAM check on 555 images). Demo (`app/gradio/app.py`, notebook 09,
+D-021): criterion 5 met (top-3, Grad-CAM overlay, "not sure" below 0.947). Criterion 6 follows with the final
+reproducibility check.
 
 ## 5. Out of scope
 
@@ -62,5 +63,5 @@ final reproducibility check.
 
 The system is an educational, preliminary information tool. It does not replace an agronomist's diagnosis, and this is
 stated in the demo and in the report. All data is openly licensed (PlantVillage: CC BY-SA 3.0); images are downloaded
-by code and never committed to the repository. Any photos taken by the team contain no faces or personal items and are
-taken only with the owner's permission.
+by code and not committed to the repository, except seven test photos used as demo examples (D-021). Any photos
+taken by the team contain no faces or personal items and are taken only with the owner's permission.

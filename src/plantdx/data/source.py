@@ -75,6 +75,24 @@ CLASSES: tuple[str, ...] = (
 CLASS_TO_INDEX = {name: i for i, name in enumerate(CLASSES)}
 
 
+def crop_name(name: str) -> str:
+    """Readable crop of a class: 'Pepper,_bell___healthy' -> 'Pepper, bell'."""
+    return name.partition("___")[0].split("_(")[0].replace("_", " ")
+
+
+def display_name(name: str) -> str:
+    """Readable class name: 'Corn_(maize)___Common_rust_' -> 'Corn · Common rust'."""
+    condition = name.partition("___")[2].replace("_", " ").strip()
+    return f"{crop_name(name)} · {condition}"
+
+
+def is_healthy(name: str) -> bool:
+    return name.endswith("___healthy")
+
+
+CROPS: tuple[str, ...] = tuple(dict.fromkeys(crop_name(c) for c in CLASSES))
+
+
 @dataclass(frozen=True)
 class Record:
     """One image entry from an official split file."""

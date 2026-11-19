@@ -12,4 +12,4 @@ tqdm>=4.66
 
 # Local machine only. Colab/Kaggle already provide a GPU-ready TensorFlow.
 # tensorflow>=2.19
-# gradio>=5.0
+# gradio>=6.0

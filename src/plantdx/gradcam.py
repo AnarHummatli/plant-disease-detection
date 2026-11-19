@@ -1,4 +1,4 @@
-"""Grad-CAM: where the model looks (plan step 5.5, D-013, D-020).
+"""Grad-CAM: where the model looks (plan step 5.5, D-013, D-020; demo: D-021).
 
 Grad-CAM (Selvaraju et al., 2017) weights the feature maps of a late convolutional layer by the
 gradient of the class score and keeps the positive part: a coarse heat map of the image regions
@@ -86,15 +86,44 @@ def gradcam(
                 else tf.constant(class_index[s : s + batch_size])
             )
             score = tf.gather(p, idx, axis=1, batch_dims=1)
-        grads = tape.gradient(score, f)
-        weights = tf.reduce_mean(grads, axis=(1, 2), keepdims=True)
-        cam = tf.nn.relu(tf.reduce_sum(weights * f, axis=-1))[..., None]
-        cam = tf.image.resize(cam, (h, w), method="bilinear")[..., 0]
-        # scale each map to max 1; a map with no positive evidence stays all zero
-        cam = tf.math.divide_no_nan(cam, tf.reduce_max(cam, axis=(1, 2), keepdims=True))
+        cam = _cam_from(f, tape.gradient(score, f), h, w)
         cams.append(cam.numpy())
         probs.append(p.numpy())
     return np.concatenate(cams), np.concatenate(probs)
+
+
+def _cam_from(f, grads, h: int, w: int):
+    """Grad-CAM maps [n, h, w] in [0, 1] from feature maps and the class-score gradients."""
+    import tensorflow as tf
+
+    weights = tf.reduce_mean(grads, axis=(1, 2), keepdims=True)
+    cam = tf.nn.relu(tf.reduce_sum(weights * f, axis=-1))[..., None]
+    cam = tf.image.resize(cam, (h, w), method="bilinear")[..., 0]
+    # scale each map to max 1; a map with no positive evidence stays all zero
+    return tf.math.divide_no_nan(cam, tf.reduce_max(cam, axis=(1, 2), keepdims=True))
+
+
+def gradcam_fn(model, layer: str | None = None):
+    """Compiled `x -> (cams, probs)` for the predicted class (the demo's fast path, D-021).
+
+    Same maths as `gradcam`, traced once with `tf.function`, so a single photo costs one
+    forward and one backward pass instead of a Python loop over the layers.
+    """
+    import tensorflow as tf
+
+    features, head = split_model(model, layer or default_layer(model))
+    h, w = model.input_shape[1:3]
+
+    @tf.function(input_signature=[tf.TensorSpec([None, h, w, 3], tf.float32)])
+    def run(x):
+        with tf.GradientTape() as tape:
+            f = features(x)
+            tape.watch(f)
+            p = head(f)
+            score = tf.gather(p, tf.argmax(p, axis=1), axis=1, batch_dims=1)
+        return _cam_from(f, tape.gradient(score, f), h, w), p
+
+    return run
 
 
 def overlay(rgb: np.ndarray, cam: np.ndarray, alpha: float = 0.45) -> np.ndarray:

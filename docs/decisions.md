@@ -32,6 +32,9 @@ as "plan 4.2" or "step 7.2" point to that plan's stages: 1 foundation, 2 data, 3
   and frozen into `requirements.lock` after the first full run (step 7.2).
 - **Consequence.** No CUDA/TensorFlow mismatch on Colab; versions used for every reported result
   are still documented.
+- **Update (stage 6, D-021).** The minimum is now Python 3.11: the released model was saved by
+  Keras 3.13+ and cannot be loaded by Keras 3.12, the last version for Python 3.10 (which reached
+  its end of life in October 2026).
 
 ## D-003 · Repository language
 
@@ -459,3 +462,59 @@ classes), where they are kept next to a class table generated from the splits.
   predictions: 0.69 and 0.62; healthy and disease classes: both 0.69. Lowest class medians:
   peach healthy 0.42, tomato mosaic virus 0.54. The model relies on the leaf, not on the
   background; for healthy leaves part of the evidence is the leaf outline.
+
+## D-021 · The demo: same input as in training, compiled model, examples in the repository
+
+- **Context.** The demo (plan 6.1) must give the same answer as the evaluated model, show the
+  "not sure" state and Grad-CAM, and run on a CPU. Three details were not settled by the plan:
+  how a user's photo is turned into the model input, how the model is run, and where the example
+  photos come from.
+- **Model file.** `plantdx.predict` downloads `inference.keras` from release v1.0 once, checks its
+  SHA-256 (`aad4ba57…92afcad`) and caches it under `<artifacts>/models/v1.0/`; a damaged cache is
+  downloaded again. `PLANTDX_MODEL=<path>` or `--model` uses a local file instead.
+- **Input = training input.** The photo is decoded by TensorFlow, like the training images. A
+  first version decoded with PIL: on 456 test photos (12 per class, from the dataset authors'
+  GitHub copy) every image then differed from the training pipeline by up to 4 of 255 grey
+  levels. With TensorFlow decoding all 456 are pixel-identical to `pipeline._decode`. The EXIF
+  rotation of phone photos is applied afterwards (checked against PIL for all 8 orientations);
+  formats TensorFlow cannot read (e.g. WebP) fall back to PIL. A non-square photo is cut to its
+  centred square before resizing: all 54,305 training images are 256 × 256, so squeezing a 4:3
+  photo would stretch the leaf, while the crop leaves every dataset image unchanged. The
+  Grad-CAM panel shows exactly this square, so the user sees what the model saw.
+- **Check against the stored results.** The six failure cases of the error analysis
+  (`reports/analysis/failures.csv`, computed on a Colab GPU) get the same wrong class on a CPU,
+  with confidences within 2·10⁻⁴ of the stored values. This sample only verifies the demo path
+  and chose the examples; it is not a second test evaluation (D-015).
+- **Compiled model.** The forward pass and Grad-CAM run as `tf.function`s traced once
+  (`Predictor`, `gradcam.gradcam_fn`; same maths as the stage-5 Grad-CAM, checked in a test).
+  Median CPU time per photo (batch 1, 2-vCPU Xeon 2.3 GHz cloud VM, `python -m plantdx.predict
+  --benchmark`):
+
+  | Path | ms |
+  |---|---:|
+  | Eager Keras call (protocol of the test evaluation) | 96–110 |
+  | Compiled model | 13–15 |
+  | Compiled model + Grad-CAM | 13–15 |
+  | Whole demo path for a 256 px JPEG (decode, resize, model, Grad-CAM) | 16–20 |
+  | Whole demo path for a 12-megapixel phone photo | 140 |
+
+  The 239 ms in `results.csv` (Colab CPU, eager) is kept as measured under the protocol fixed for
+  the test evaluation; most of it is Python overhead per layer, not the network. Grad-CAM adds
+  almost nothing because its gradient only flows through the small head. TFLite was not used:
+  the demo needs gradients for Grad-CAM, and the compiled Keras model is already fast enough.
+- **"Not sure".** Below 0.947 (D-019) the demo gives no diagnosis; it shows the best guess, the
+  top-3 and the heat map, and asks for a clearer photo of one whole leaf.
+- **Examples.** Seven test-split photos (110 KB in total, byte-for-byte copies, licence
+  CC BY-SA 3.0) are stored in `app/gradio/examples/` with their original paths and attribution,
+  so the demo works without the 2.2 GB dataset. This is the only exception to D-001. Six are
+  answered correctly with ≥ 99.8% confidence; one, showing only a corner of a tomato leaf, comes
+  out "not sure" (early blight 50.3% vs late blight ≈ 50%).
+- **Keras version.** Loading the release model needs Keras ≥ 3.13: Keras 3.12 rejects a field
+  that newer versions write into every layer config (`quantization_config`). Keras 3.13 needs
+  Python ≥ 3.11, so the package now requires Python 3.11 (D-002 update), the extras require
+  `keras>=3.13`, and `Predictor` explains the problem instead of failing inside Keras. A test
+  downloads the release model and checks the seven example answers (`tests/test_release_model.py`),
+  so CI fails if a dependency change ever breaks loading the real model.
+- **Consequence.** The demo answers exactly as the evaluated model would on a dataset photo.
+  Photos outside the 38 classes still get the closest class, often confidently; the demo says so
+  under "About the model and its limits".
