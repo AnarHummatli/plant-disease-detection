@@ -1,0 +1,52 @@
+{
+  "run_id": "mobilenetv2_ft_all",
+  "rule": "highest val macro-F1; ties -> smaller model (plan 4.3, D-015)",
+  "family_winners": {
+    "cnn_scratch": "cnn_scratch",
+    "mobilenetv2": "mobilenetv2_ft_all"
+  },
+  "candidates": [
+    {
+      "run_id": "mobilenetv2_ft_all",
+      "model": "mobilenetv2",
+      "macro_f1": 0.9773778732174748,
+      "accuracy": 0.9857866361705604,
+      "size_mb": 9.81
+    },
+    {
+      "run_id": "mobilenetv2_ft_lr1e-4",
+      "model": "mobilenetv2",
+      "macro_f1": 0.977223126463651,
+      "accuracy": 0.986276752164679,
+      "size_mb": 9.81
+    },
+    {
+      "run_id": "cnn_scratch",
+      "model": "cnn_scratch",
+      "macro_f1": 0.9732075343635556,
+      "accuracy": 0.9800686162391766,
+      "size_mb": 23.84
+    },
+    {
+      "run_id": "mobilenetv2_ft_lr3e-5",
+      "model": "mobilenetv2",
+      "macro_f1": 0.9550621498167964,
+      "accuracy": 0.967979088384251,
+      "size_mb": 9.81
+    },
+    {
+      "run_id": "mobilenetv2_ft",
+      "model": "mobilenetv2",
+      "macro_f1": 0.9456092400063324,
+      "accuracy": 0.9580133965038392,
+      "size_mb": 9.81
+    },
+    {
+      "run_id": "mobilenetv2_head",
+      "model": "mobilenetv2",
+      "macro_f1": 0.915781645690144,
+      "accuracy": 0.9336709687959484,
+      "size_mb": 9.81
+    }
+  ]
+}

@@ -18,8 +18,10 @@
 3. Per run: metrics_test.json (both parts, per-class scores), test_scores.npz, CPU latency
    (median ms per image, batch 1), and rows "test" / "test_verified" in the results table.
 
-The test split is evaluated **once**: a run that already has metrics_test.json is refused
-unless --force is given, and nothing is selected or tuned after this step.
+The test split is evaluated **once**: `evaluate_run` refuses a run that already has
+metrics_test.json unless --force is given, and `select_and_evaluate` keeps such runs as they are,
+so re-running the notebook after an interrupted session only completes the missing runs.
+Nothing is selected or tuned after this step.
 """
 
 from __future__ import annotations
@@ -234,6 +236,10 @@ def select_and_evaluate(
     )
     to_test = list(dict.fromkeys([final, *winners.values(), *(also or [])]))  # unique, ordered
     for run_id in to_test:
+        if not force and (run_dir(run_id, create=False) / "metrics_test.json").exists():
+            # resume after an interrupted session: keep the existing (only) test evaluation
+            print(f"{run_id}: already evaluated on test, kept")
+            continue
         evaluate_run(run_id, data_root, splits_dir, force=force)
     return final, pd.read_csv(results_path())
 

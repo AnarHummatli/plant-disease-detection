@@ -345,6 +345,18 @@ classes), where they are kept next to a class table generated from the splits.
   per image at batch size 1 (median of 50 after 5 warm-up calls; for the classical models this
   includes feature extraction from a decoded image). Both are written to every row of the run in
   the results table, which also corrects the size of `cnn_scratch` (D-014).
+- **Outcome** (20 Nov 2026, Colab CPU runtime: the GPU quota was used up, and no training
+  happens in this step). Test macro-F1 / verified macro-F1: final MobileNetV2 0.9816 / 0.9849,
+  CNN 0.9671 / 0.9708, logistic regression 0.8839 / 0.8807, linear SVM 0.8731 / 0.8692; the
+  ranking is the same as on validation. The first session was interrupted after scoring the
+  final model; the second completed the other three runs, keeping the first result (since then
+  `select_and_evaluate` resumes this way by itself).
+- **CPU time caveat.** Measured with eager Keras calls at batch size 1 on Colab's shared 2-core
+  CPU: MobileNetV2 239 ms, CNN 147 ms, classical 19 ms per image. MobileNetV2 needs about 9×
+  fewer operations than the CNN, so its higher time reflects TensorFlow's slow CPU path for
+  depthwise convolutions and per-call overhead, not the model's cost. Latency is measured again
+  for the demo with a compiled graph and TFLite; this is not a test metric, so re-measuring it
+  does not touch the one-time test rule.
 
 ## D-016 · MobileNetV2 transfer learning
 

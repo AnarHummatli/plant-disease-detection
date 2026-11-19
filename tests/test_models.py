@@ -272,3 +272,23 @@ def test_evaluate_scores_test_once_and_updates_size(tmp_path, monkeypatch):
 
     with pytest.raises(RuntimeError, match="used once"):
         evaluate_run("smoke", data, splits_dir=splits)
+
+
+def test_select_and_evaluate_resumes_without_repeating_test(tmp_path, monkeypatch, capsys):
+    from plantdx.evaluate import select_and_evaluate
+    from plantdx.train import train
+
+    monkeypatch.setenv("PLANTDX_ARTIFACTS", str(tmp_path / "artifacts"))
+    cfg, data, splits = make_fake_project(tmp_path)
+    train(cfg, data, splits_dir=splits, verbose=0)
+    metrics = tmp_path / "artifacts" / "runs" / "smoke" / "metrics_test.json"
+
+    final, _ = select_and_evaluate(data, ["smoke"], splits_dir=splits)
+    assert final == "smoke" and metrics.is_file()
+    first = metrics.read_text()
+
+    # an interrupted session re-runs the notebook: the existing evaluation is kept, not repeated
+    final, table = select_and_evaluate(data, ["smoke"], splits_dir=splits)
+    assert "already evaluated on test, kept" in capsys.readouterr().out
+    assert metrics.read_text() == first
+    assert sorted(table["split"]) == ["test", "test_verified", "val"]

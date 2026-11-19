@@ -6,14 +6,33 @@ Grad-CAM explanations, a "not sure" answer for low-confidence inputs, and a Grad
 
 Neural Networks group project, Azerbaijan State Oil and Industry University, Fall 2026 (topic 06).
 
-> **Status:** stages 1–3 of 8 done (foundation; leakage-checked data and input pipeline;
-> classical baselines and a CNN from scratch); stage 4: MobileNetV2 trained and selected on
-> validation (D-017); next the one-time test evaluation, then Grad-CAM and the demo.
+> **Status:** stages 1–4 of 8 done (leakage-checked data and pipeline; classical baselines and a
+> CNN from scratch; MobileNetV2 transfer learning, final model selected on validation and scored
+> on test once). Next: error analysis with Grad-CAM, the "not sure" threshold and the demo.
 
-## Results so far (validation split)
+## Final results (test split, evaluated once)
 
-Model selection uses the validation split only; the test split has not been used yet and will
-be evaluated once, on the final models.
+The final model is MobileNetV2 with the whole backbone fine-tuned (`mobilenetv2_ft_all`), chosen
+on validation. Every model below was chosen on validation within its family and scored on the
+test split exactly once (D-015). "Verified" is the part of the test split whose leaf ids are
+known (8,033 images, 30 classes), where same-leaf leakage is impossible by construction.
+
+| Model | Test macro-F1 | Test accuracy | Verified macro-F1 | Test top-3 | Size |
+|---|---|---|---|---|---|
+| **MobileNetV2, fine-tuned (final)** | **0.982** | **0.986** | **0.985** | **1.000** | 9.8 MB |
+| CNN from scratch | 0.967 | 0.977 | 0.971 | 0.999 | 4.9 MB |
+| Colour/HOG/LBP + logistic regression | 0.884 | 0.906 | 0.881 | 0.982 | 2.0 MB |
+| Colour/HOG/LBP + linear SVM | 0.873 | 0.901 | 0.869 | 0.977 | 2.0 MB |
+
+The neural models do not score lower on the verified part, so there is no sign that residual
+leakage inflates the full-test numbers (the verified part lacks 8 classes, two of them among the
+hardest, so the comparison is indicative, not a proof). Weakest test classes of the final model:
+Tomato early blight (F1 0.885, recall 0.805), Corn Cercospora leaf spot (0.912), Tomato target
+spot (0.935). Model file: `inference.keras` in the GitHub release v1.0.
+
+## Validation results (model selection)
+
+All choices were made on the validation split only.
 
 | Model | Val macro-F1 | Val accuracy | Top-3 | Training |
 |---|---|---|---|---|
