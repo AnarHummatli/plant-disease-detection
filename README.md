@@ -114,6 +114,7 @@ make train CONFIG=configs/mobilenetv2_ft_lr3e-5.yaml DATA=...   # fine-tuning va
 make train CONFIG=configs/mobilenetv2_ft_lr1e-4.yaml DATA=...   # D-017 A: LR 1e-4, up to 30 epochs
 make train CONFIG=configs/mobilenetv2_ft_all.yaml DATA=...      # D-017 B: whole backbone, 3e-5
 make eval DATA=/content/data                               # select on val, then test ONCE
+python -m plantdx.analyze --data-root /content/data        # error analysis, Grad-CAM, "not sure"
 ```
 
 Model selection uses validation macro-F1 only: the best run of every neural family, and the final
@@ -128,11 +129,13 @@ leaf-verified part (D-015). Every run writes `config.yaml`, `history.csv`, `best
 ```
 configs/          experiment configs (YAML, inherit from base.yaml)
 src/plantdx/      all logic: data/ (source, splits, duplicates, sameleaf, pipeline, card), baselines/,
-                  models/ (cnn, mobilenet), train, export, evaluate, metrics, results, viz
+                  models/ (cnn, mobilenet), train, export, evaluate, metrics, results,
+                  analysis + analyze (error analysis), gradcam, viz
 notebooks/        00 bootstrap, 01 EDA + first audit, 02 duplicate search, 03 pipeline check, 04 leaf groups,
-                  05 classical baselines, 06 train neural networks, 07 final model + test evaluation
+                  05 classical baselines, 06 train neural networks, 07 final model + test evaluation,
+                  08 error analysis, Grad-CAM and the "not sure" threshold
 splits/           train/val/test CSVs with leaf_id and group_id, grouping pairs (committed)
-tests/            pytest: splits, pipeline, baselines, models, trainer, evaluation, metrics
+tests/            pytest: splits, pipeline, baselines, models, trainer, evaluation, analysis, Grad-CAM
 app/gradio/       demo
 docs/             problem statement, data card, decision log (later: report)
 reports/figures/  every figure used in the report and this README

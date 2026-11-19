@@ -1,4 +1,5 @@
-"""Figures for the EDA step. Every function saves a PNG and returns its path."""
+"""Figures for the report (EDA, training, error analysis). Every function saves an image and
+returns its path; photo grids are saved as JPEG."""
 
 from __future__ import annotations
 
@@ -262,5 +263,102 @@ def plot_learning_curves(history_csv: str | Path, out: str | Path, title: str = 
     axes[0][0].legend(fontsize=8)
     if title:
         fig.suptitle(title, fontsize=10)
+    fig.tight_layout()
+    return _save(fig, out, dpi=130)
+
+
+# ------------------------------------------------------------------ error analysis (stage 5)
+def plot_confusion(
+    cm_norm: np.ndarray, classes: list[str], out: str | Path, title: str = ""
+) -> Path:
+    """Row-normalised confusion matrix (recall on the diagonal), all classes."""
+    n = len(classes)
+    fig, ax = plt.subplots(figsize=(11.5, 10.5))
+    im = ax.imshow(cm_norm, cmap="Blues", vmin=0, vmax=1)
+    ax.set_xticks(range(n))
+    ax.set_yticks(range(n))
+    labels = [_short(c) for c in classes]
+    ax.set_xticklabels(labels, rotation=90, fontsize=6)
+    ax.set_yticklabels(labels, fontsize=6)
+    ax.set_xlabel("predicted class")
+    ax.set_ylabel("true class")
+    for i in range(n):
+        for j in range(n):
+            v = cm_norm[i, j]
+            if v >= 0.005 and i != j:
+                ax.text(j, i, f"{v:.2f}", ha="center", va="center", fontsize=4.5, color="#b00")
+    fig.colorbar(im, ax=ax, fraction=0.035, pad=0.02, label="share of the true class")
+    if title:
+        ax.set_title(title, fontsize=10)
+    fig.tight_layout()
+    return _save(fig, out, dpi=150)
+
+
+def plot_coverage(
+    curves: dict[str, pd.DataFrame], threshold: float, target: float, out: str | Path
+) -> Path:
+    """Accuracy of the answered images vs share answered, for each split, with the threshold."""
+    fig, axes = plt.subplots(1, 2, figsize=(9.5, 3.6))
+    for name, curve in curves.items():
+        axes[0].plot(curve["coverage"], curve["accuracy_answered"], label=name)
+        axes[1].plot(curve["threshold"], curve["coverage"], label=f"{name}: answered")
+        axes[1].plot(
+            curve["threshold"], curve["accuracy_answered"], ls="--", label=f"{name}: accuracy"
+        )
+        at = curve.iloc[(curve["threshold"] - threshold).abs().argmin()]
+        axes[0].scatter([at["coverage"]], [at["accuracy_answered"]], s=25, zorder=3)
+    axes[0].axhline(target, color="k", ls=":", lw=1)
+    axes[0].set_xlabel("share of images answered (coverage)")
+    axes[0].set_ylabel("accuracy of the answered images")
+    axes[0].set_xlim(0.85, 1.0)
+    axes[0].set_ylim(0.97, 1.0005)
+    axes[1].axvline(threshold, color="k", ls=":", lw=1)
+    axes[1].set_xlabel("confidence threshold")
+    axes[1].set_xlim(0.5, 1.0)
+    axes[1].set_ylim(0.8, 1.0005)
+    for ax in axes:
+        ax.grid(alpha=0.3)
+        ax.legend(fontsize=7)
+    fig.suptitle(
+        f'"Not sure" below {threshold:.4f} (chosen on val, target {target:.1%})', fontsize=9
+    )
+    fig.tight_layout()
+    return _save(fig, out, dpi=130)
+
+
+def plot_cam_grid(items: list[dict], out: str | Path, title: str = "", cols: int = 3) -> Path:
+    """Pairs of panels per item: the photo and its Grad-CAM overlay, with a caption.
+
+    Each item: {"image": uint8 RGB, "overlay": uint8 RGB, "caption": str, "bad": bool}.
+    """
+    rows = int(np.ceil(len(items) / cols))
+    fig, axes = plt.subplots(rows, 2 * cols, figsize=(2 * cols * 1.9, rows * 2.35), squeeze=False)
+    for ax in axes.ravel():
+        ax.set_axis_off()
+    for k, item in enumerate(items):
+        r, c = divmod(k, cols)
+        a, b = axes[r, 2 * c], axes[r, 2 * c + 1]
+        a.imshow(item["image"])
+        b.imshow(item["overlay"])
+        colour = "#b00" if item.get("bad") else "#060"
+        a.set_title(item["caption"], fontsize=6, loc="left", color=colour)
+    if title:
+        fig.suptitle(title, fontsize=9)
+    fig.tight_layout()
+    return _save(fig, out, dpi=130)
+
+
+def plot_cam_on_leaf(shares: pd.DataFrame, out: str | Path) -> Path:
+    """Histogram of the Grad-CAM mass on the leaf, against the leaf's share of the image."""
+    fig, ax = plt.subplots(figsize=(6.2, 3.4))
+    bins = np.linspace(0, 1, 41)
+    ax.hist(shares["leaf_area"], bins=bins, alpha=0.55, label="leaf share of the image")
+    ax.hist(shares["cam_on_leaf"], bins=bins, alpha=0.65, label="Grad-CAM mass on the leaf")
+    ax.axvline(shares["cam_on_leaf"].median(), color="C1", ls="--", lw=1)
+    ax.axvline(shares["leaf_area"].median(), color="C0", ls="--", lw=1)
+    ax.set_xlabel("share")
+    ax.set_ylabel("test images")
+    ax.legend(fontsize=8)
+    ax.grid(alpha=0.3)
     fig.tight_layout()
     return _save(fig, out, dpi=130)

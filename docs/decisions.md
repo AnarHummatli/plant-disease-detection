@@ -420,3 +420,32 @@ classes), where they are kept next to a class table generated from the splits.
   fraction of a point; the comparisons in this project (e.g. MobileNetV2 vs CNN: 0.982 vs 0.967
   test macro-F1) are far larger than that. The two final candidates (val macro-F1 0.97738 vs
   0.97722) are within this noise, which is why they are reported as tied (D-017).
+
+## D-019 · The "not sure" threshold
+
+- **Rule** (fixed on 20 Nov 2026, before computing it). The demo answers "not sure" when the
+  final model's highest probability is below a threshold *t*. *t* is the **smallest** threshold
+  for which the answered **validation** images are at least **99.5%** correct; the smallest such
+  *t* keeps the most images answered. If 99.5% is never reached, the threshold with the best
+  answered accuracy is used. Thresholds are searched on a grid that is finest near 1 (steps of
+  0.0001 above 0.99), because a confident model puts most of its probabilities there.
+- **Then** *t* is applied unchanged to test, which shows whether the coverage and accuracy hold
+  on unseen images. Reported: share answered, accuracy of the answered images, errors caught,
+  correct answers held back (`plantdx.analysis`).
+- **Limit.** A confidence threshold catches uncertain in-distribution images; it is not an
+  out-of-distribution detector, and a photo of something that is not a leaf can still receive a
+  confident answer (out of scope, problem statement section 5).
+
+## D-020 · Does the model look at the leaf? Grad-CAM measured with leaf masks
+
+- **Question.** Backgrounds differ between groups of classes (data card, section 3), so a model
+  could classify by background. Grad-CAM pictures alone answer this only for a few images.
+- **Method** (`plantdx.analyze`, `plantdx.gradcam`). Grad-CAM of the final model on the
+  backbone's last feature maps (7 × 7, upsampled to 224 × 224), for the predicted class, on up to
+  15 random test images per class (seed 42). The dataset's *segmented* variant has the same
+  photos with the background set to black, which gives a leaf mask for every image (pixel = leaf
+  if its brightest channel is above 25). Per image: the share of the heat-map mass on the leaf,
+  compared with the leaf's share of the image (what a heat map spread evenly would give).
+- **Reading.** Values well above the leaf's area mean the model concentrates on the leaf. The
+  heat map is coarse (cells of about 32 px), so mass near the leaf edge partly spills onto the
+  background; the masks come from the dataset's own segmentation and contain some errors.

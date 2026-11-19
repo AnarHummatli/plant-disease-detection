@@ -292,3 +292,80 @@ def test_select_and_evaluate_resumes_without_repeating_test(tmp_path, monkeypatc
     assert "already evaluated on test, kept" in capsys.readouterr().out
     assert metrics.read_text() == first
     assert sorted(table["split"]) == ["test", "test_verified", "val"]
+
+
+# ------------------------------------------------------------- stage 5: Grad-CAM + analysis
+def test_gradcam_split_is_exact_and_maps_are_normalised():
+    from plantdx.gradcam import default_layer, gradcam, split_model
+
+    model = build_cnn(image_size=32, num_classes=3, filters=(4, 8), convs_per_block=1)
+    layer = default_layer(model)
+    assert layer == "block2_relu1"
+    features, head = split_model(model, layer)
+    x = np.random.default_rng(0).uniform(0, 255, (3, 32, 32, 3)).astype(np.float32)
+    np.testing.assert_allclose(head(features(x)).numpy(), model(x, training=False).numpy())
+    cams, probs = gradcam(model, x)
+    assert cams.shape == (3, 32, 32) and probs.shape == (3, 3)
+    assert cams.min() >= 0 and cams.max() <= 1 + 1e-6
+    cams_true, _ = gradcam(model, x, class_index=[0, 1, 2])
+    assert cams_true.shape == cams.shape
+
+
+def test_mobilenet_gradcam_layer_is_the_backbone():
+    from plantdx.gradcam import default_layer, split_model
+    from plantdx.models.mobilenet import build_mobilenetv2
+
+    model = build_mobilenetv2(image_size=96, num_classes=4, weights=None)
+    assert default_layer(model) == "backbone"
+    features, head = split_model(model, "backbone")
+    x = np.random.default_rng(1).uniform(0, 255, (2, 96, 96, 3)).astype(np.float32)
+    assert features(x).shape == (2, 3, 3, 1280)
+    np.testing.assert_allclose(
+        head(features(x)).numpy(), model(x, training=False).numpy(), atol=1e-6
+    )
+
+
+def test_analyze_end_to_end(tmp_path, monkeypatch):
+    from PIL import Image as PILImage
+
+    from plantdx.analyze import run
+    from plantdx.evaluate import select_and_evaluate
+    from plantdx.train import train
+
+    monkeypatch.setenv("PLANTDX_ARTIFACTS", str(tmp_path / "artifacts"))
+    cfg, data, splits = make_fake_project(tmp_path)
+    train(cfg, data, splits_dir=splits, verbose=0)
+    select_and_evaluate(data, ["smoke"], splits_dir=splits)
+    # segmented copies: leaf in the centre, black background, "_final_masked" names
+    for f in (data / "raw" / "color").rglob("*.jpg"):
+        seg = data / "raw" / "segmented" / f.parent.name / f"{f.stem}_final_masked.jpg"
+        seg.parent.mkdir(parents=True, exist_ok=True)
+        arr = np.zeros((24, 24, 3), np.uint8)
+        arr[6:18, 6:18] = 200
+        PILImage.fromarray(arr).save(seg)
+    test = pd.read_csv(splits / "test.csv")
+    pd.DataFrame(
+        {
+            "path_a": [test.path[0]],
+            "path_b": [pd.read_csv(splits / "train.csv").path[0]],
+            "label_index": [0],
+            "corr32": [0.95],
+            "corr_hi": [0.93],
+            "transform": ["identity"],
+        }
+    ).to_csv(tmp_path / "dup.csv", index=False)
+
+    out = tmp_path / "stage5"
+    summary = run(
+        data, out, cam_per_class=2, splits_dir=splits, duplicate_pairs=tmp_path / "dup.csv"
+    )
+    figs = out / "reports" / "figures"
+    for name in ("confusion_matrix.png", "coverage_not_sure.png", "gradcam_on_leaf.png"):
+        assert (figs / name).is_file(), name
+    assert (figs / "dup_leak_examples.jpg").is_file()
+    assert summary["leak_pairs_crossing_official_split"] == 1
+    assert summary["gradcam_on_leaf"]["images"] == 8  # 4 classes x 2
+    assert 0 <= summary["not_sure"]["test"]["coverage"] <= 1
+    md = (out / "reports" / "results.md").read_text()
+    assert "## 1. Model comparison" in md and "## 7. Per-class scores" in md
+    assert json.loads((out / "reports" / "analysis.json").read_text())["final_model"] == "smoke"
