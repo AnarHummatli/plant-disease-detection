@@ -28,7 +28,8 @@ The neural models do not score lower on the verified part, so there is no sign t
 leakage inflates the full-test numbers (the verified part lacks 8 classes, two of them among the
 hardest, so the comparison is indicative, not a proof). Weakest test classes of the final model:
 Tomato early blight (F1 0.885, recall 0.805), Corn Cercospora leaf spot (0.912), Tomato target
-spot (0.935). Model file: `inference.keras` in the GitHub release v1.0.
+spot (0.935). Model file: `inference.keras` in the GitHub release
+[v1.0](https://github.com/AnarHummatli/plant-disease-detection/releases/tag/v1.0).
 
 ## Error analysis
 
