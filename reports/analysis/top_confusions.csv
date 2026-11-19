@@ -1,0 +1,6 @@
+true,predicted,count,share_of_true,true_index,predicted_index
+Tomato___Early_blight,Tomato___Target_Spot,21,0.09767441860465116,29,34
+Tomato___Tomato_Yellow_Leaf_Curl_Virus,Tomato___Spider_mites Two-spotted_spider_mite,10,0.00909090909090909,35,33
+Tomato___Early_blight,Tomato___Late_blight,10,0.046511627906976744,29,30
+Corn_(maize)___Northern_Leaf_Blight,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,10,0.045454545454545456,9,7
+Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,Corn_(maize)___Northern_Leaf_Blight,8,0.07476635514018691,7,9

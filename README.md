@@ -6,9 +6,9 @@ Grad-CAM explanations, a "not sure" answer for low-confidence inputs, and a Grad
 
 Neural Networks group project, Azerbaijan State Oil and Industry University, Fall 2026 (topic 06).
 
-> **Status:** stages 1–4 of 8 done (leakage-checked data and pipeline; classical baselines and a
-> CNN from scratch; MobileNetV2 transfer learning, final model selected on validation and scored
-> on test once). Next: error analysis with Grad-CAM, the "not sure" threshold and the demo.
+> **Status:** stages 1–5 of 8 done (leakage-checked data and pipeline; baselines and a CNN from
+> scratch; MobileNetV2 transfer learning scored on test once; error analysis with Grad-CAM and a
+> "not sure" threshold). Next: the Gradio demo, a reproducibility check and the report.
 
 ## Final results (test split, evaluated once)
 
@@ -29,6 +29,24 @@ leakage inflates the full-test numbers (the verified part lacks 8 classes, two o
 hardest, so the comparison is indicative, not a proof). Weakest test classes of the final model:
 Tomato early blight (F1 0.885, recall 0.805), Corn Cercospora leaf spot (0.912), Tomato target
 spot (0.935). Model file: `inference.keras` in the GitHub release v1.0.
+
+## Error analysis
+
+Full write-up: **[`docs/error_analysis.md`](docs/error_analysis.md)**; tables: `reports/results.md`.
+
+- **Where it fails:** similar diseases of one crop (tomato early blight vs target spot and late
+  blight; the two corn leaf-spot diseases) and, across crops, similar healthy leaves and
+  tomato vs potato late blight (same pathogen).
+- **What it looks at:** on 555 test images a median 69% of the Grad-CAM heat map lies on the leaf,
+  which covers 47% of the image (leaf masks from the segmented variant) — the leaf, not the
+  background.
+- **Leakage check:** on the same 30 classes, leaf-verified test images score as high as all test
+  images (macro-F1 0.9849 vs 0.9848): no sign of inflated results.
+- **"Not sure":** below a confidence of 0.947 (chosen on validation) the model abstains; on test
+  it then answers 96.8% of the images with 99.5% accuracy and catches two thirds of its errors.
+  The errors it still makes are confident ones (calibration is future work).
+
+![Misclassified test images with Grad-CAM](reports/figures/failures.jpg)
 
 ## Validation results (model selection)
 
@@ -137,7 +155,7 @@ notebooks/        00 bootstrap, 01 EDA + first audit, 02 duplicate search, 03 pi
 splits/           train/val/test CSVs with leaf_id and group_id, grouping pairs (committed)
 tests/            pytest: splits, pipeline, baselines, models, trainer, evaluation, analysis, Grad-CAM
 app/gradio/       demo
-docs/             problem statement, data card, decision log (later: report)
+docs/             problem statement, data card, decision log, error analysis (later: report)
 reports/figures/  every figure used in the report and this README
 ```
 

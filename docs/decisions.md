@@ -435,6 +435,10 @@ classes), where they are kept next to a class table generated from the splits.
 - **Limit.** A confidence threshold catches uncertain in-distribution images; it is not an
   out-of-distribution detector, and a photo of something that is not a leaf can still receive a
   confident answer (out of scope, problem statement section 5).
+- **Outcome** (20 Nov 2026). *t* = **0.947**. Validation: 96.4% answered, 99.51% of them correct.
+  Test, unchanged: 96.8% answered, 99.51% correct, 100 of 151 errors caught, 245 correct answers
+  (2.3%) held back. The 51 errors above the threshold are confident ones (probability ≈ 1), which
+  calls for calibration (temperature scaling) as future work (`docs/error_analysis.md`).
 
 ## D-020 · Does the model look at the leaf? Grad-CAM measured with leaf masks
 
@@ -449,3 +453,9 @@ classes), where they are kept next to a class table generated from the splits.
 - **Reading.** Values well above the leaf's area mean the model concentrates on the leaf. The
   heat map is coarse (cells of about 32 px), so mass near the leaf edge partly spills onto the
   background; the masks come from the dataset's own segmentation and contain some errors.
+- **Outcome** (20 Nov 2026, 555 test images; 15 of the 570 sampled had no segmented copy). Median
+  Grad-CAM mass on the leaf **0.69** against a median leaf area of 0.47; for 95% of the images the
+  mass on the leaf exceeds the leaf's area, for 10% it is below one half. Correct and wrong
+  predictions: 0.69 and 0.62; healthy and disease classes: both 0.69. Lowest class medians:
+  peach healthy 0.42, tomato mosaic virus 0.54. The model relies on the leaf, not on the
+  background; for healthy leaves part of the evidence is the leaf outline.

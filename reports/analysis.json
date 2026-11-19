@@ -1,0 +1,159 @@
+{
+  "final_model": "mobilenetv2_ft_all",
+  "gradcam_layer": "backbone",
+  "top_confusions": [
+    {
+      "true": "Tomato___Early_blight",
+      "predicted": "Tomato___Target_Spot",
+      "count": 21,
+      "share_of_true": 0.09767441860465116
+    },
+    {
+      "true": "Tomato___Tomato_Yellow_Leaf_Curl_Virus",
+      "predicted": "Tomato___Spider_mites Two-spotted_spider_mite",
+      "count": 10,
+      "share_of_true": 0.00909090909090909
+    },
+    {
+      "true": "Tomato___Early_blight",
+      "predicted": "Tomato___Late_blight",
+      "count": 10,
+      "share_of_true": 0.046511627906976744
+    },
+    {
+      "true": "Corn_(maize)___Northern_Leaf_Blight",
+      "predicted": "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot",
+      "count": 10,
+      "share_of_true": 0.045454545454545456
+    },
+    {
+      "true": "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot",
+      "predicted": "Corn_(maize)___Northern_Leaf_Blight",
+      "count": 8,
+      "share_of_true": 0.07476635514018691
+    }
+  ],
+  "weakest_classes": [
+    {
+      "class": "Tomato___Early_blight",
+      "support": 215,
+      "precision": 0.9829545454545454,
+      "recall": 0.8046511627906977,
+      "f1": 0.8849104859335039
+    },
+    {
+      "class": "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot",
+      "support": 107,
+      "precision": 0.9,
+      "recall": 0.9252336448598131,
+      "f1": 0.9124423963133641
+    },
+    {
+      "class": "Tomato___Target_Spot",
+      "support": 288,
+      "precision": 0.8827160493827161,
+      "recall": 0.9930555555555556,
+      "f1": 0.934640522875817
+    },
+    {
+      "class": "Potato___healthy",
+      "support": 32,
+      "precision": 0.967741935483871,
+      "recall": 0.9375,
+      "f1": 0.9523809523809523
+    },
+    {
+      "class": "Corn_(maize)___Northern_Leaf_Blight",
+      "support": 220,
+      "precision": 0.9587155963302753,
+      "recall": 0.95,
+      "f1": 0.954337899543379
+    }
+  ],
+  "full_vs_verified": {
+    "full_38": {
+      "n": 10709,
+      "classes": 38,
+      "accuracy": 0.9858997105238584,
+      "macro_f1": 0.9815763378110429,
+      "weighted_f1": 0.9858204840816353,
+      "top3": 0.999626482397983
+    },
+    "full_same_30_classes": {
+      "n": 9083,
+      "classes": 30,
+      "accuracy": 0.9862380270835627,
+      "macro_f1": 0.9848425659760595,
+      "weighted_f1": 0.9882018386170343,
+      "top3": 0.999559616866674
+    },
+    "verified_30": {
+      "n": 8033,
+      "classes": 30,
+      "accuracy": 0.9866799452259429,
+      "macro_f1": 0.9848902654914181,
+      "weighted_f1": 0.9887874724731675,
+      "top3": 0.999751027013569
+    },
+    "unverified_in_30_classes": {
+      "n": 1050,
+      "classes": 6,
+      "accuracy": 0.9828571428571429,
+      "macro_f1": 0.8235465341749699,
+      "weighted_f1": 0.9889878473557855,
+      "top3": 0.9980952380952381
+    },
+    "missing_classes": [
+      "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot",
+      "Corn_(maize)___Common_rust_",
+      "Corn_(maize)___Northern_Leaf_Blight",
+      "Corn_(maize)___healthy",
+      "Grape___healthy",
+      "Squash___Powdery_mildew",
+      "Tomato___Target_Spot",
+      "Tomato___Tomato_mosaic_virus"
+    ]
+  },
+  "not_sure": {
+    "rule": "smallest threshold with >= 99.5% accuracy on answered val images",
+    "val": {
+      "threshold": 0.947,
+      "n": 6121,
+      "coverage": 0.9640581604313021,
+      "accuracy_all": 0.9857866361705604,
+      "accuracy_answered": 0.995085578715472,
+      "errors_total": 87,
+      "errors_caught": 58,
+      "share_errors_caught": 0.6666666666666666,
+      "correct_rejected": 162
+    },
+    "test": {
+      "threshold": 0.947,
+      "n": 10709,
+      "coverage": 0.9677841068260342,
+      "accuracy_all": 0.9858997105238584,
+      "accuracy_answered": 0.9950791200308761,
+      "errors_total": 151,
+      "errors_caught": 100,
+      "share_errors_caught": 0.6622516556291391,
+      "correct_rejected": 245
+    }
+  },
+  "gradcam_on_leaf": {
+    "images": 555,
+    "segmented_found": "555 of 570",
+    "median_cam_on_leaf": 0.6892990469932556,
+    "mean_cam_on_leaf": 0.6763222184669864,
+    "median_leaf_area": 0.4696667729591837,
+    "share_cam_on_leaf_above_area": 0.9495495495495495,
+    "share_cam_on_leaf_below_half": 0.1009009009009009,
+    "by_class_lowest": {
+      "Peach___healthy": 0.415,
+      "Tomato___Tomato_mosaic_virus": 0.535,
+      "Tomato___Spider_mites Two-spotted_spider_mite": 0.551,
+      "Tomato___Early_blight": 0.558,
+      "Peach___Bacterial_spot": 0.57
+    }
+  },
+  "leak_pairs_crossing_official_split": 31
+}

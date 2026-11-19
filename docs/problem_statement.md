@@ -44,8 +44,10 @@ indicate and when it is worth asking an expert.
 
 **Status on 20 November 2026** (after the one-time test evaluation): criterion 1 met (final MobileNetV2:
 test macro-F1 0.982, leaf-verified subset 0.985); criterion 2 met for accuracy, macro-F1, per-class F1, top-3,
-model size and CPU time (confusion matrix: error analysis); criterion 3 met (automated tests; 0 cross-split
-pairs); criteria 4–6 follow in the error analysis, the demo and the final reproducibility check.
+model size and CPU time; criterion 3 met (automated tests; 0 cross-split pairs). Error analysis
+(`docs/error_analysis.md`): criterion 2 completed with the confusion matrix; criterion 4 met (6 failure cases
+explained with Grad-CAM, plus a measured Grad-CAM check on 555 images). Criteria 5–6 follow with the demo and the
+final reproducibility check.
 
 ## 5. Out of scope
 

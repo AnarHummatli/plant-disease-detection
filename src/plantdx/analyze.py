@@ -405,6 +405,11 @@ def write_results_md(path: Path, s: dict, final: str, conf, weak, metrics_test) 
         f"Classes without verified leaves (only in the full test): "
         f"{', '.join(short(c) for c in g['missing_classes']) or 'none'}.",
         "",
+        "Rows 2 and 3 cover the same classes, so their difference isolates leakage; row 1 vs 2 "
+        "is the effect of the missing classes. In the last row compare **accuracy**: its macro-F1 "
+        "averages only the classes that have unverified test images, several with few of them, "
+        "and is not comparable.",
+        "",
         "## 3. Most confused class pairs (test)",
         "",
         md_table(conf_df),

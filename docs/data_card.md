@@ -169,11 +169,11 @@ Files: `splits/{train,val,test}.csv` (`path, label, label_index, leaf_id, group_
 | Limitation | Effect | What we do |
 |---|---|---|
 | Lab photos, plain backgrounds | Optimistic accuracy; weak transfer to field photos | State it; field test (PlantDoc) is future work |
-| Class-correlated backgrounds | Possible shortcut learning | Grad-CAM check; segmented variant is future work |
+| Class-correlated backgrounds | Possible shortcut learning | Measured with Grad-CAM and the segmented variant's leaf masks (D-020): median 0.69 of the heat map on the leaf, which covers 0.47 of the image; 95% of the images above their leaf area. The model relies on the leaf |
 | 24.3% of images without verified leaf ids; most of their other photos cannot be found (D-010 recall 0.4%) | Photos of one leaf can still sit in train and test, mainly in the 8 classes without verified ids and in Tomato classes; the full-test score may be optimistic | Test metrics reported twice: full test and leaf-verified subset (8,033 images, 30 classes, leakage excluded by construction). Result: the neural models score no lower on the verified subset (final model macro-F1 0.985 vs 0.982 on the full test), so there is no sign of inflated scores; the subset lacks 8 classes, so this is indicative, not a proof |
 | Near-identical re-shots below r = 0.92 and same-leaf pairs below cosine 0.94 are not grouped | Same as above | Conservative cut-offs chosen to avoid wrong merges; stated in the report |
 | Strong class imbalance (36 : 1) | Accuracy hides weak classes | Macro-F1 for selection; per-class scores with counts |
-| Only 14 crops, 26 diseases | Other crops or diseases are misclassified, not rejected | "Not sure" threshold chosen on val; OOD detection is future work |
+| Only 14 crops, 26 diseases | Other crops or diseases are misclassified, not rejected | "Not sure" below 0.947, chosen on val (D-019): on test 96.8% answered, 99.5% of them correct; OOD detection is future work |
 | Labels from the dataset authors | Label noise unknown | Failure cases are inspected by eye (evaluation) |
 
 ## 8. Intended use
