@@ -11,8 +11,10 @@ load_config -> set_seed -> datasets_from_config -> build_model(model.name) -> co
 
 After training, the best checkpoint is scored on val with scikit-learn (exact macro-F1, per-class
 scores) and one row goes into the shared results table. Everything for one run lands in
-<artifacts>/runs/<run_id>/: config.yaml, best.keras, history.csv, metrics_val.json,
-val_scores.npz (probabilities, kept for threshold selection and error analysis later).
+<artifacts>/runs/<run_id>/: config.yaml, best.keras (training checkpoint), inference.keras
+(float32, no augmentation, no optimizer state; its file size is the reported model size, D-014),
+history.csv, metrics_val.json, val_scores.npz (probabilities, kept for threshold selection and
+error analysis later).
 
 The test split is not evaluated here (plan rule: test once, final model only, step 4.4).
 """
@@ -38,6 +40,7 @@ from plantdx.data.pipeline import (
 )
 from plantdx.data.source import CLASSES
 from plantdx.env import report as env_report
+from plantdx.export import export_inference
 from plantdx.metrics import per_class_metrics, summary_metrics
 from plantdx.models import build_model
 from plantdx.paths import run_dir
@@ -159,7 +162,8 @@ def train(
     metrics = summary_metrics(y_val, probs)
     hist = history.history
     best_epoch = int(np.nanargmax(hist["val_macro_f1"])) + 1 if hist.get("val_macro_f1") else None
-    size_mb = best_path.stat().st_size / 1e6 if best_path.exists() else None
+    inference_path = export_inference(cfg, best, out)
+    size_mb = inference_path.stat().st_size / 1e6
     hyper = {
         "model": cfg.get("model", {}),
         "optimizer": t.get("optimizer", "adam"),
@@ -179,7 +183,7 @@ def train(
         "split": "val",
         "metrics": metrics,
         "params": int(best.count_params()),
-        "size_mb": None if size_mb is None else round(size_mb, 2),
+        "size_mb": round(size_mb, 2),
         "epochs_trained": len(hist.get("loss", [])),
         "best_epoch": best_epoch,
         "train_seconds": round(train_seconds, 1),

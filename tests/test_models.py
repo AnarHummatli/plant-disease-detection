@@ -99,8 +99,18 @@ def test_trainer_one_epoch_writes_run_and_results(tmp_path, monkeypatch):
     report = train(cfg, data, splits_dir=splits, verbose=0)
 
     run = tmp_path / "artifacts" / "runs" / "smoke"
-    for name in ("config.yaml", "env.json", "best.keras", "history.csv", "metrics_val.json"):
+    for name in (
+        "config.yaml",
+        "env.json",
+        "best.keras",
+        "inference.keras",
+        "history.csv",
+        "metrics_val.json",
+    ):
         assert (run / name).is_file(), name
+    # the reported size is the inference model, smaller than the checkpoint with optimizer state
+    assert report["size_mb"] == round((run / "inference.keras").stat().st_size / 1e6, 2)
+    assert (run / "inference.keras").stat().st_size < (run / "best.keras").stat().st_size
     assert report["epochs_trained"] == 1 and report["metrics"]["n"] == 12
     saved = json.loads((run / "metrics_val.json").read_text())
     assert len(saved["per_class"]) == 38
@@ -111,3 +121,43 @@ def test_trainer_one_epoch_writes_run_and_results(tmp_path, monkeypatch):
     assert results["run_id"].tolist() == ["smoke"] and results["split"].tolist() == ["val"]
     history = pd.read_csv(run / "history.csv")
     assert {"loss", "val_loss", "val_macro_f1", "val_top3"} <= set(history.columns)
+
+
+def test_inference_export_matches_mixed_precision_model(tmp_path):
+    """float32 copy without augmentation predicts like the mixed-precision trained model."""
+    from plantdx.export import INFERENCE_FILE, export_inference
+
+    cfg = {
+        "data": {"image_size": 32, "num_classes": 5},
+        "model": {"name": "cnn", "filters": [4, 8], "convs_per_block": 2},
+        "augment": {},
+    }
+    from plantdx.data.pipeline import AugmentConfig, build_augmentation
+
+    keras.mixed_precision.set_global_policy("mixed_float16")
+    try:
+        trained = build_model(cfg, build_augmentation(AugmentConfig(), seed=1))
+    finally:
+        keras.mixed_precision.set_global_policy("float32")
+    trained.compile(optimizer="adam", loss="categorical_crossentropy")
+    x = np.random.default_rng(0).uniform(0, 255, (4, 32, 32, 3)).astype(np.float32)
+    trained.fit(x, np.eye(5)[[0, 1, 2, 3]], epochs=1, verbose=0)  # creates optimizer state
+
+    path = export_inference(cfg, trained, tmp_path)
+    assert path.name == INFERENCE_FILE
+    clean = keras.models.load_model(path)
+    assert all(layer.dtype_policy.name == "float32" for layer in clean.layers)
+    assert "augmentation" not in [layer.name for layer in clean.layers]
+    assert getattr(clean, "optimizer", None) is None
+    np.testing.assert_allclose(
+        clean.predict(x, verbose=0), trained.predict(x, verbose=0), atol=2e-3
+    )
+
+
+def test_copy_weights_by_name_rejects_mismatch():
+    from plantdx.export import copy_weights_by_name
+
+    a = build_cnn(image_size=16, num_classes=3, filters=(4,), convs_per_block=1)
+    b = build_cnn(image_size=16, num_classes=3, filters=(8,), convs_per_block=1)
+    with pytest.raises(ValueError):
+        copy_weights_by_name(a, b)

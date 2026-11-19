@@ -21,9 +21,10 @@ original plan (v1.0, 18 Nov 2026). Each entry: context → decision → conseque
 ## D-002 · Python 3.12 and the TensorFlow that Colab provides
 
 - **Context.** Plan v1.0 said Python 3.11 and TensorFlow 2.21. Colab's default runtime moved to
-  Python 3.12 in 2025, and Colab ships its own CUDA-matched TensorFlow build. TF 2.21 supports
+  Python 3.12 in 2025 and to 3.13 by November 2026 (the stage 3 runs recorded 3.13.16 and
+  3.13.18), and Colab ships its own CUDA-matched TensorFlow build. TF 2.21 supports
   Python 3.10–3.13.
-- **Decision.** Target Python ≥ 3.10 (CI runs 3.12). TensorFlow is an optional extra
+- **Decision.** Target Python ≥ 3.10; CI runs 3.12 and 3.13 (the Colab version). TensorFlow is an optional extra
   (`pip install -e ".[tf]"`) for local machines and is never reinstalled on Colab/Kaggle.
   The exact runtime versions are recorded by `python -m plantdx.env` at the start of each session
   and frozen into `requirements.lock` after the first full run (step 7.2).
@@ -270,8 +271,10 @@ classes), where they are kept next to a class table generated from the splits.
   seed 42); the colour and LBP histograms are passed through unchanged, then everything is
   standardised again (`plantdx.baselines.classical.make_model`). PCA over all features would be
   dominated by the 1,764 HOG values and could drop the colour histogram, which carries most of the
-  symptom colour. With 362 inputs, one fit takes about 7 s (logistic regression) and about 50 s
-  (linear SVM, primal solver) on train-sized data.
+  symptom colour. Measured on Colab (CPU runtime, 19 Nov 2026): feature extraction 9.5 min
+  (train) + 1.3 min (val), then one fit per C: logistic regression 35–46 s; linear SVM 101 s
+  (C = 0.01) to 351 s (C = 1), and C = 10 did not converge in 5,000 iterations (1,396 s). Neither
+  model selected C = 10, so the result is unaffected; the grid is kept as it ran.
 - **Protocol.** `class_weight="balanced"`; C ∈ {0.01, 0.1, 1, 10} chosen on val macro-F1, ties to
   the smaller C; fit on train only; test untouched until the final evaluation. Features are cached
   on Drive as .npz (name = split, size, feature version, hash of the file list).
@@ -290,9 +293,10 @@ classes), where they are kept next to a class table generated from the splits.
   with scikit-learn (exact macro-F1, per-class scores) and its val probabilities are saved for
   threshold selection and error analysis.
 - **Mixed precision** (`train.mixed_precision: true` in `cnn.yaml`): float16 compute on the T4's
-  tensor cores, about 2–3× faster; the output layer stays float32. A saved model keeps the
-  float16 layers; for CPU inference (demo, timing) the evaluation code rebuilds the model in
-  float32 and loads the weights.
+  tensor cores; the output layer stays float32. The speed-up was not measured separately: the
+  run took 244 s per epoch (425 ms per batch of 64), slower than the 1–2 min estimated
+  beforehand. The two 32-filter convolutions at full 224 px resolution are the most likely
+  cost. A saved checkpoint keeps the float16 layers; the float32 inference model is D-014.
 - **Results table.** Every model writes one row per (run, split) to `<artifacts>/reports/results.csv`
   (Drive), the same columns for classical and neural models; notebooks export it with the small
   run files (`plantdx.results.export_for_repo`) so it can be committed under `reports/`.
@@ -307,3 +311,17 @@ classes), where they are kept next to a class table generated from the splits.
   coverage–accuracy curve. Together they take a few hours and answer the main data risk named in
   the data card (class-correlated backgrounds): whether the model looks at the lesions or at the
   background. Still optional: Hugging Face Spaces, a second fine-tuning variant.
+
+## D-014 · Inference model and the reported model size
+
+- **Context.** The first CNN run reported `size_mb` = 23.84: the size of `best.keras`, the
+  training checkpoint, which also stores the Adam state (two extra copies of every weight) and,
+  under mixed precision, float16 compute layers. That is not the model a user would deploy.
+- **Decision.** After training, `plantdx.train` rebuilds the network from its config in float32
+  without the augmentation layers, copies the weights layer by layer by name and saves it
+  uncompiled as `inference.keras` (`plantdx.export`). `size_mb` in the results table and CPU
+  timing in the evaluation use this file; the demo loads it. A test checks that it predicts like
+  the mixed-precision model (max difference 2e-3).
+- **Earlier run.** `cnn_scratch` was trained before this change; `python -m plantdx.export
+  --run-id cnn_scratch` creates its inference model (about 4.9 MB for 1.18 M float32 parameters),
+  and its size in the results table is corrected in the final evaluation (step 4.4).

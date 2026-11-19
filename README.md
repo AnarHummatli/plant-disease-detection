@@ -6,9 +6,23 @@ Grad-CAM explanations, a "not sure" answer for low-confidence inputs, and a Grad
 
 Neural Networks group project, Azerbaijan State Oil and Industry University, Fall 2026 (topic 06).
 
-> **Status:** stages 1–2 of 8 done (foundation; leakage-checked data, input pipeline, data card).
-> Stage 3 code is in (classical baselines, generic trainer, CNN from scratch); results, the
-> transfer-learning model and the demo link will appear here in the next stages.
+> **Status:** stages 1–3 of 8 done (foundation; leakage-checked data and input pipeline;
+> classical baselines and a CNN from scratch). Next: MobileNetV2 transfer learning, then the
+> final test evaluation, Grad-CAM and the demo.
+
+## Results so far (validation split)
+
+Model selection uses the validation split only; the test split has not been used yet and will
+be evaluated once, on the final models.
+
+| Model | Val macro-F1 | Val accuracy | Top-3 | Training |
+|---|---|---|---|---|
+| Colour/HOG/LBP + logistic regression (C = 0.1) | 0.874 | 0.900 | 0.982 | 46 s (CPU) |
+| Colour/HOG/LBP + linear SVM (C = 0.1) | 0.873 | 0.904 | 0.975 | 116 s (CPU) |
+| CNN from scratch (1.18 M parameters) | **0.973** | **0.980** | **0.998** | 107 min (T4, 26 epochs) |
+
+Per-run details: `reports/results.csv`, `reports/runs/`; learning curves:
+`reports/figures/curves_cnn_scratch.png`.
 
 ## Why this project is different
 
@@ -66,7 +80,8 @@ make train CONFIG=configs/cnn.yaml DATA=/content/data      # CNN from scratch
 ```
 
 Model selection uses validation macro-F1 only; the test split is evaluated once, on the final
-models. Every run writes `config.yaml`, `history.csv`, `best.keras` and `metrics_val.json` to
+models. Every run writes `config.yaml`, `history.csv`, `best.keras` (training checkpoint),
+`inference.keras` (float32, for evaluation and the demo) and `metrics_val.json` to
 `<artifacts>/runs/<run_id>/` and one row to the shared results table.
 
 ## Project layout
@@ -74,7 +89,7 @@ models. Every run writes `config.yaml`, `history.csv`, `best.keras` and `metrics
 ```
 configs/          experiment configs (YAML, inherit from base.yaml)
 src/plantdx/      all logic: data/ (source, splits, duplicates, sameleaf, pipeline, card), baselines/,
-                  models/, train, metrics, results, viz
+                  models/, train, export, metrics, results, viz
 notebooks/        00 bootstrap, 01 EDA + first audit, 02 duplicate search, 03 pipeline check, 04 leaf groups,
                   05 classical baselines, 06 train a neural network
 splits/           train/val/test CSVs with leaf_id and group_id, grouping pairs (committed)
