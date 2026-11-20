@@ -2,7 +2,9 @@
 
 Classifies a leaf photo into one of **38 plant disease / healthy classes** (14 crops) with a
 CNN and MobileNetV2 transfer learning, evaluated on a **leaf-grouped, leakage-free split**, with
-Grad-CAM explanations, a "not sure" answer for low-confidence inputs, and a Gradio demo.
+Grad-CAM explanations, a "not sure" answer for low-confidence inputs, and a
+[live demo](https://huggingface.co/spaces/AnarHummatli/plant-disease-detection) that runs in the
+browser.
 
 Neural Networks group project, Azerbaijan State Oil and Industry University, Fall 2026 (topic 06).
 
@@ -15,18 +17,25 @@ Neural Networks group project, Azerbaijan State Oil and Industry University, Fal
 Upload a photo of one leaf: the demo gives the diagnosis (or "not sure"), the top-3 classes and a
 Grad-CAM heat map of the region that drove the answer.
 
-- **Colab, public link:** open `notebooks/09_demo.ipynb`, run all cells (CPU is enough) and open
-  the `*.gradio.live` link it prints.
+- **In the browser, nothing to install:**
+  <https://huggingface.co/spaces/AnarHummatli/plant-disease-detection>. The model runs on your
+  device (ONNX Runtime Web), so photos are not uploaded anywhere (D-023).
+- **Colab, Gradio app with a public link:** open `notebooks/09_demo.ipynb`, run all cells (CPU is
+  enough) and open the `*.gradio.live` link it prints.
 - **Local** (Python ≥ 3.11): `pip install -e ".[tf,demo]"`, then `make demo` (or
   `python app/gradio/app.py`) and open <http://127.0.0.1:7860>.
 - **Command line:** `python -m plantdx.predict leaf.jpg` prints the verdict and the top-3.
+- **Build the browser version:** `pip install -e ".[tf,web]"`, then `make web` (writes
+  `build/web/`, the files of the static Space).
 
-The final model (`inference.keras`, 9.8 MB) is downloaded once from release
-[v1.0](https://github.com/AnarHummatli/plant-disease-detection/releases/tag/v1.0) and checked
-against its SHA-256. A photo is prepared exactly like the training images, so on a dataset photo
-the demo answers as the evaluated model did. One photo takes about 40 ms on Colab's CPU
-including Grad-CAM, 6.6 times faster than calling the model eagerly (D-021). Seven test photos are included as examples; one of them, a corner of
-a tomato leaf, shows the "not sure" answer ([screenshot](reports/figures/demo_not_sure.jpg)).
+The Python demo downloads the final model (`inference.keras`, 9.8 MB) once from release
+[v1.0](https://github.com/AnarHummatli/plant-disease-detection/releases/tag/v1.0) and checks its
+SHA-256. A photo is prepared exactly like the training images, so on a dataset photo the demo
+answers as the evaluated model did; one photo takes about 40 ms on Colab's CPU including
+Grad-CAM, 6.6 times faster than calling the model eagerly (D-021). The browser version runs an
+ONNX export of the same model and gave the same class and verdict as Python on all 47 photos
+checked (D-023). Seven test photos are included as examples; one of them, a corner of a tomato
+leaf, shows the "not sure" answer ([screenshot](reports/figures/demo_not_sure.jpg)).
 
 ![The demo diagnosing a grape leaf](reports/figures/demo_diagnosis.jpg)
 
@@ -171,7 +180,8 @@ leaf-verified part (D-015). Every run writes `config.yaml`, `history.csv`, `best
 configs/          experiment configs (YAML, inherit from base.yaml)
 src/plantdx/      all logic: data/ (source, splits, duplicates, sameleaf, pipeline, card), baselines/,
                   models/ (cnn, mobilenet), train, export, evaluate, metrics, results,
-                  analysis + analyze (error analysis), gradcam, viz, predict (demo core)
+                  analysis + analyze (error analysis), gradcam, viz, predict (demo core),
+                  web_export (browser demo build)
 notebooks/        00 bootstrap, 01 EDA + first audit, 02 duplicate search, 03 pipeline check, 04 leaf groups,
                   05 classical baselines, 06 train neural networks, 07 final model + test evaluation,
                   08 error analysis, Grad-CAM and the "not sure" threshold, 09 demo (public link)
@@ -179,6 +189,7 @@ splits/           train/val/test CSVs with leaf_id and group_id, grouping pairs 
 tests/            pytest: splits, pipeline, baselines, models, trainer, evaluation, analysis, Grad-CAM,
                   demo
 app/gradio/       Gradio demo (app.py) and seven example test photos with attribution
+app/web/          browser demo (static page; the model runs with ONNX Runtime Web)
 docs/             problem statement, data card, decision log, error analysis (later: report)
 reports/figures/  every figure used in the report and this README
 ```

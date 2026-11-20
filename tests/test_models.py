@@ -325,6 +325,45 @@ def test_mobilenet_gradcam_layer_is_the_backbone():
     )
 
 
+def tiny_head_model(num_classes=4, size=16):
+    """backbone -> gap -> dropout -> probs: the layout of the project's MobileNetV2 models."""
+    inp = keras.Input((size, size, 3), name="image")
+    backbone = keras.Sequential(
+        [keras.layers.Conv2D(8, 3, padding="same", activation="relu")], name="backbone"
+    )
+    x = keras.layers.GlobalAveragePooling2D(name="gap")(backbone(inp))
+    x = keras.layers.Dropout(0.2, name="dropout")(x)
+    out = keras.layers.Dense(num_classes, activation="softmax", name="probs")(x)
+    return keras.Model(inp, out)
+
+
+def test_gradcam_uses_logits_and_survives_a_saturated_softmax():
+    """D-022: at p = 1.0 (float32) the probability gradient is rounding noise, the logit is not."""
+    from plantdx.gradcam import gradcam, gradcam_fn, split_model
+
+    keras.utils.set_random_seed(0)
+    model = tiny_head_model()
+    dense = model.get_layer("probs")
+    kernel, bias = dense.get_weights()
+    dense.set_weights([kernel * 50, bias])  # push the softmax to exactly 1.0
+    x = np.random.default_rng(4).uniform(0, 255, (3, 16, 16, 3)).astype(np.float32)
+    cams, probs = gradcam(model, x)
+    np.testing.assert_allclose(probs, model(x, training=False).numpy(), atol=1e-6)
+    assert (probs.max(axis=1) == 1.0).all()
+    features, _ = split_model(model, "backbone")
+    f = features(x).numpy()
+    w_top = (kernel * 50)[:, probs.argmax(axis=1)].T  # class activation map = logit Grad-CAM
+    cam = np.maximum(np.einsum("nhwk,nk->nhw", f, w_top), 0)[..., None]
+    cam = tf.image.resize(cam, (16, 16), method="bilinear")[..., 0].numpy()
+    cam = cam / cam.max(axis=(1, 2), keepdims=True)
+    np.testing.assert_allclose(cams, cam, atol=1e-4)
+    assert cams.max(axis=(1, 2)).min() == pytest.approx(1.0)  # a real map, not noise or zeros
+    fast, _ = gradcam_fn(model)(tf.constant(x))
+    np.testing.assert_allclose(fast.numpy(), cams, atol=1e-4)
+    _, logits = split_model(model, "backbone", logits=True)
+    np.testing.assert_allclose(tf.nn.softmax(logits(features(x))).numpy(), probs, atol=1e-6)
+
+
 def test_analyze_end_to_end(tmp_path, monkeypatch):
     from PIL import Image as PILImage
 

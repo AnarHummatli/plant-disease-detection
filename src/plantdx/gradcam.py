@@ -2,7 +2,14 @@
 
 Grad-CAM (Selvaraju et al., 2017) weights the feature maps of a late convolutional layer by the
 gradient of the class score and keeps the positive part: a coarse heat map of the image regions
-that raised that class's probability.
+that raised that class's score.
+
+The score is the class logit, the value *before* the softmax, as in the paper (D-022). The
+gradient of the probability is not usable here: for 42% of the test images the top probability
+is exactly 1.0 in float32, its gradient then loses the term that favours the class, and the map
+shows rounding noise. For the heads of this project (global average pooling, dropout, softmax
+layer W) the logit gradient is W[:, c] / (h w) at every position, so Grad-CAM equals the class
+activation map relu(sum_k W[k, c] f_k).
 
 Works for every model in plantdx.models, because their inference versions (inference.keras) are
 plain chains of layers: the model is split at `layer` into a feature part and a head part.
@@ -35,8 +42,24 @@ def default_layer(model) -> str:
     raise ValueError("no feature-map layer found; pass layer=")
 
 
-def split_model(model, layer: str):
-    """(features, head): two callables with head(features(x)) == model(x) for chain models."""
+def logits_of(dense, x):
+    """The softmax layer's input score x W + b (its output without the softmax)."""
+    import keras
+
+    act = getattr(dense, "activation", None)
+    if dense.__class__.__name__ != "Dense" or getattr(act, "__name__", "") != "softmax":
+        raise ValueError(f"last layer {dense.name!r} is not a Dense softmax layer")
+    x = keras.ops.cast(x, "float32")
+    return keras.ops.matmul(x, keras.ops.cast(dense.kernel, "float32")) + keras.ops.cast(
+        dense.bias, "float32"
+    )
+
+
+def split_model(model, layer: str, logits: bool = False):
+    """(features, head): two callables with head(features(x)) == model(x) for chain models.
+
+    With `logits=True` the head stops before the final softmax and returns the class scores.
+    """
     layers = [lyr for lyr in model.layers if lyr.__class__.__name__ != "InputLayer"]
     names = [lyr.name for lyr in layers]
     if layer not in names:
@@ -49,9 +72,10 @@ def split_model(model, layer: str):
         return x
 
     def head(f):
-        for lyr in layers[k + 1 :]:
+        rest = layers[k + 1 :]
+        for lyr in rest[:-1] if logits else rest:
             f = lyr(f, training=False)
-        return f
+        return logits_of(rest[-1], f) if logits else f
 
     return features, head
 
@@ -70,7 +94,7 @@ def gradcam(
     if images.ndim != 4:
         raise ValueError(f"expected [n, H, W, 3], got {images.shape}")
     n, h, w = images.shape[:3]
-    features, head = split_model(model, layer or default_layer(model))
+    features, head = split_model(model, layer or default_layer(model), logits=True)
     if class_index is not None:
         class_index = np.broadcast_to(np.asarray(class_index, dtype=np.int64), (n,))
     cams, probs = [], []
@@ -79,16 +103,16 @@ def gradcam(
         with tf.GradientTape() as tape:
             f = features(x)
             tape.watch(f)
-            p = head(f)
+            z = head(f)  # logits
             idx = (
-                tf.argmax(p, axis=1)
+                tf.argmax(z, axis=1)
                 if class_index is None
                 else tf.constant(class_index[s : s + batch_size])
             )
-            score = tf.gather(p, idx, axis=1, batch_dims=1)
+            score = tf.gather(z, idx, axis=1, batch_dims=1)
         cam = _cam_from(f, tape.gradient(score, f), h, w)
         cams.append(cam.numpy())
-        probs.append(p.numpy())
+        probs.append(tf.nn.softmax(z).numpy())
     return np.concatenate(cams), np.concatenate(probs)
 
 
@@ -111,7 +135,7 @@ def gradcam_fn(model, layer: str | None = None):
     """
     import tensorflow as tf
 
-    features, head = split_model(model, layer or default_layer(model))
+    features, head = split_model(model, layer or default_layer(model), logits=True)
     h, w = model.input_shape[1:3]
 
     @tf.function(input_signature=[tf.TensorSpec([None, h, w, 3], tf.float32)])
@@ -119,9 +143,9 @@ def gradcam_fn(model, layer: str | None = None):
         with tf.GradientTape() as tape:
             f = features(x)
             tape.watch(f)
-            p = head(f)
-            score = tf.gather(p, tf.argmax(p, axis=1), axis=1, batch_dims=1)
-        return _cam_from(f, tape.gradient(score, f), h, w), p
+            z = head(f)  # logits
+            score = tf.gather(z, tf.argmax(z, axis=1), axis=1, batch_dims=1)
+        return _cam_from(f, tape.gradient(score, f), h, w), tf.nn.softmax(z)
 
     return run
 

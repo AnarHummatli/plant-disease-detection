@@ -529,3 +529,56 @@ classes), where they are kept next to a class table generated from the splits.
 - **Consequence.** The demo answers exactly as the evaluated model would on a dataset photo.
   Photos outside the 38 classes still get the closest class, often confidently; the demo says so
   under "About the model and its limits".
+
+## D-022 · Grad-CAM from the class score before the softmax (correction)
+
+- **Finding.** Building the browser demo (D-023), Grad-CAM was written in closed form and
+  compared with `gradcam.gradcam`; on some photos the two disagreed. The cause: the stage-5
+  implementation took the gradient of the class *probability*. For 42% of 456 test photos the top
+  probability is exactly 1.0 in float32; the softmax gradient then loses the term that favours the
+  class, and the map shows rounding noise. On those photos the old maps correlate with correct
+  ones at a median of only 0.24 (0.71–0.91 on photos with p < 1.0).
+- **Decision.** Grad-CAM uses the class logit, the score before the softmax, as in the original
+  paper (Selvaraju et al., 2017). For the heads of this project (global average pooling, dropout,
+  softmax layer W) its gradient is W[:, c] / (h w) at every position, so the map equals the
+  class activation map relu(sum_k W[k, c] f_k): stable at any confidence. `gradcam.gradcam`,
+  `gradcam.gradcam_fn` (the Python demo) and the ONNX export (D-023) all use it; a test pushes a
+  softmax to exactly 1.0 and checks the map against the closed form.
+- **Consequence.** The stage-5 Grad-CAM outputs (D-020: the on-leaf measurement, `failures.jpg`,
+  `gradcam_examples.jpg`, `gradcam_on_leaf.png`) were made with the old maps and are recomputed
+  with notebook 08. Nothing else in stage 5 depends on Grad-CAM (confusion matrix, weakest
+  classes, "not sure" threshold), and no model or test result changes. A rough check on the 456
+  photos (leaf = coloured pixels) already showed the main conclusion holding: median share of the
+  map on the leaf 0.45 with the corrected maps (0.40 before), leaf area 0.30.
+
+## D-023 · The demo in the browser (free, permanent link)
+
+- **Context.** Hugging Face's free plan hosts only static Spaces (HTML and JavaScript); Gradio and
+  Docker Spaces need a paid plan. A Colab link (notebook 09) lasts only while the notebook runs.
+- **Decision.** A static page runs the model on the visitor's device with ONNX Runtime Web
+  1.31.1 (WebAssembly, pinned, from the jsDelivr CDN). No server is needed, the link is free and
+  permanent, and photos never leave the device. `python -m plantdx.web_export` builds the site
+  from the release model:
+  - `model.onnx` (9.3 MB) has two outputs, the 38 probabilities and the 7 × 7 Grad-CAM map in
+    closed form (D-022), so the browser needs no gradients. The export is checked against Keras on
+    every build (probabilities within 1·10⁻⁶, Grad-CAM within 5·10⁻⁶) and refuses to write the
+    site otherwise.
+  - The photo is cut to its centred square and resized by a JavaScript port of TensorFlow's
+    antialiased resize (`app/web/imaging.js`, rows then columns, float32, round half to even). It
+    is bit-identical to `tf.image.resize` on the 7 examples and on squares of 100–1,000 px (6.9
+    million values, `tests/test_web.py` runs the check with Node.js). Squares above 512 px are
+    first halved to 448 px by the browser, like the decoder downscale in Python (D-021).
+- **The one remaining difference: the JPEG decoder.** TensorFlow decodes JPEGs with libjpeg's
+  fast integer IDCT by default (`INTEGER_FAST`), so the model was trained on those pixels; PIL and
+  browsers use the accurate one. Checked on 60 photos: TensorFlow's default equals
+  `INTEGER_FAST`, PIL equals TensorFlow's `INTEGER_ACCURATE`, and in headless Chrome the page's
+  input equals PIL decoding plus the exact resize on 45 of 45 photos. The difference is about one
+  grey level on average. On 47 photos (7 examples, 2 phone photos, 38 test photos, one or two per
+  class) the browser gives the same class and the same verdict as Python in every case; the
+  top-class probability differs by a median of 1·10⁻⁷ and at most 0.065, on the borderline
+  example (early vs late blight, "not sure" in both). The Python demo stays the reference.
+- **Speed.** In headless Chrome on the 2-vCPU VM: model loaded in about 2 s, a photo prepared in
+  about 10 ms and the model with Grad-CAM in about 35 ms (single-threaded WebAssembly).
+- **Consequence.** The demo has a permanent public address on a free Hugging Face Space; the
+  Gradio app (D-021) remains for Colab and local use. `.[web]` adds `tf2onnx` and `onnxruntime`;
+  CI installs it, so the export and the JavaScript resize are tested on every push.

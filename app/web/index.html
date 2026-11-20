@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plant disease detection · Yarpaq Həkimləri</title>
+<meta name="description" content="Upload a leaf photo: MobileNetV2 names the plant disease, shows its top-3 classes and a Grad-CAM heat map, or says 'not sure'. Runs in your browser.">
+<style>
+  :root {
+    --bg: #f6f8f7; --card: #ffffff; --text: #1d2a24; --muted: #5b6b63; --line: #dfe7e2;
+    --accent: #1f9d55; --accent-soft: #e6f5ec; --warn: #b7791f; --warn-soft: #fdf3e1;
+    --bad: #c0392b; --bad-soft: #fbeaea;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1512; --card: #17201b; --text: #e3ece7; --muted: #9db0a6; --line: #26332c;
+      --accent: #3ccb7f; --accent-soft: #173426; --warn: #f0b44c; --warn-soft: #3a2e17;
+      --bad: #f2786b; --bad-soft: #3b1f1c;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+         background: var(--bg); color: var(--text); }
+  main { max-width: 1120px; margin: 0 auto; padding: 24px 16px 40px; }
+  h1 { font-size: 1.9rem; margin: 0 0 6px; }
+  .lead { color: var(--muted); margin: 0 0 6px; }
+  .crops { color: var(--muted); font-size: .92rem; margin: 0 0 18px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 820px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+  .drop { border: 2px dashed var(--line); border-radius: 12px; min-height: 280px; display: flex;
+          align-items: center; justify-content: center; text-align: center; cursor: pointer;
+          position: relative; overflow: hidden; }
+  .drop.over { border-color: var(--accent); background: var(--accent-soft); }
+  .drop img { max-width: 100%; max-height: 360px; display: block; }
+  .drop .hint { color: var(--muted); padding: 24px; }
+  .buttons { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  button, .button { font: inherit; border: 1px solid var(--line); background: var(--card);
+                    color: var(--text); border-radius: 10px; padding: 8px 14px; cursor: pointer; }
+  .button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  input[type=file] { display: none; }
+  h2 { font-size: 1rem; margin: 18px 0 8px; color: var(--muted); font-weight: 600; }
+  .examples { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 8px; }
+  .examples button { padding: 0; overflow: hidden; border-radius: 10px; text-align: left; }
+  .examples img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+  .examples span { display: block; font-size: .72rem; padding: 4px 6px; color: var(--muted);
+                   line-height: 1.25; }
+  .verdict { border-radius: 12px; padding: 12px 14px; margin-bottom: 14px; }
+  .verdict h3 { margin: 0 0 4px; font-size: 1.25rem; }
+  .verdict p { margin: 0; }
+  .verdict.ok { background: var(--accent-soft); }
+  .verdict.bad { background: var(--bad-soft); }
+  .verdict.unsure { background: var(--warn-soft); }
+  .verdict.idle { background: transparent; color: var(--muted); padding-left: 0; }
+  .bar { margin: 6px 0; }
+  .bar .label { display: flex; justify-content: space-between; font-size: .92rem; }
+  .bar .track { height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
+  .bar .fill { height: 100%; background: var(--accent); border-radius: 4px; }
+  .cam { display: flex; gap: 10px; align-items: flex-start; }
+  .cam figure { margin: 0; flex: 1; }
+  .cam canvas { width: 100%; aspect-ratio: 1; border-radius: 10px; display: block; }
+  .cam figcaption { font-size: .78rem; color: var(--muted); margin-top: 4px; }
+  .info { font-size: .85rem; color: var(--muted); margin-top: 10px; }
+  .status { font-size: .9rem; color: var(--muted); margin: 0 0 14px; }
+  .status.error { color: var(--bad); }
+  details { margin-top: 18px; }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { color: var(--text); }
+  .disclaimer { margin-top: 18px; font-size: .9rem; color: var(--muted); }
+  a { color: var(--accent); }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<main>
+  <h1>🌿 Plant disease detection</h1>
+  <p class="lead">Upload a photo of <b>one leaf</b> of a supported crop. The model names the disease
+    (or "healthy"), shows its three most likely classes, and highlights the part of the photo that
+    drove the answer. It runs <b>in your browser</b>: the photo is not uploaded anywhere.</p>
+  <p class="crops" id="crops"></p>
+  <p class="status" id="status">Loading the model…</p>
+
+  <div class="grid">
+    <section class="card">
+      <label class="drop" id="drop" for="file">
+        <span class="hint" id="hint">Drop a leaf photo here, or click to choose one<br>
+          (JPG, PNG, WebP; on a phone you can take a picture)</span>
+        <img id="preview" class="hidden" alt="The uploaded leaf photo">
+      </label>
+      <input type="file" id="file" accept="image/*">
+      <div class="buttons">
+        <label class="button primary" for="file">Choose a photo</label>
+        <button type="button" id="paste">Paste from clipboard</button>
+      </div>
+      <h2>Examples: test photos the model never saw in training</h2>
+      <div class="examples" id="examples"></div>
+    </section>
+
+    <section class="card" id="result">
+      <div class="verdict idle" id="verdict"><p>Upload a leaf photo or pick an example.</p></div>
+      <div id="details" class="hidden">
+        <h2 style="margin-top:0">Top-3 classes</h2>
+        <div id="bars"></div>
+        <h2>Grad-CAM: where the model looked</h2>
+        <div class="cam">
+          <figure><canvas id="seen" width="224" height="224"></canvas>
+            <figcaption>What the model saw (224 × 224)</figcaption></figure>
+          <figure><canvas id="heat" width="224" height="224"></canvas>
+            <figcaption id="heatcap">Heat map</figcaption></figure>
+        </div>
+        <p class="info" id="info"></p>
+      </div>
+    </section>
+  </div>
+
+  <details>
+    <summary>About the model and its limits</summary>
+    <p><b>Model.</b> MobileNetV2 (ImageNet weights) with the whole backbone fine-tuned on
+      PlantVillage, 38 classes. On the official test split (10,709 lab photos, scored once):
+      <b>macro-F1 0.982, accuracy 98.6%</b>, top-3 accuracy 99.96%. The split keeps every leaf on
+      one side, so photos of a test leaf were never seen in training.</p>
+    <p><b>"Not sure".</b> If the top class has a probability below <span id="thr">94.7%</span>
+      (a threshold chosen on the validation split), no diagnosis is given. On the test split this
+      happens for 3.2% of the photos; the answered ones are 99.5% correct.</p>
+    <p><b>Heat map (Grad-CAM).</b> Red areas raised the score of the top class the most. The map
+      is coarse (about 1/7 of the photo per cell): it shows a region, not single spots.</p>
+    <p><b>Limits.</b> The training photos are single leaves on plain lab backgrounds. Field photos
+      (several leaves, soil, strong shadows) are harder and were not tested. Crops and diseases
+      outside the 38 classes are not recognised as unknown: they get the closest known class,
+      sometimes with high confidence.</p>
+    <p><b>How it runs.</b> The model (<span id="mb">9 MB</span>, downloaded once) is executed by
+      ONNX Runtime Web on your device. A photo is cut to its centred square and resized exactly as
+      in training; the result matches the Python model of release <span id="ver">v1.0</span>.
+      Code, data checks and the full evaluation:
+      <a href="https://github.com/AnarHummatli/plant-disease-detection">GitHub</a>.</p>
+  </details>
+  <p class="disclaimer">⚠️ Educational prototype. It gives preliminary information only and does
+    not replace an agronomist's diagnosis. Example photos: PlantVillage (Hughes &amp; Salathé, 2015),
+    CC BY-SA 3.0.</p>
+</main>
+<!-- onnxruntime-web, pinned; keep the version equal to ORT_VERSION in plantdx/web_export.py -->
+<script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.31.1/dist/ort.wasm.min.js"></script>
+<script src="imaging.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

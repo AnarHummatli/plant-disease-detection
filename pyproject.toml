@@ -32,6 +32,8 @@ tf = ["tensorflow>=2.19", "keras>=3.13"]
 cpu = ["tensorflow-cpu>=2.19", "keras>=3.13"]
 # the demo uses the Gradio 6 API (theme and css passed to launch)
 demo = ["gradio>=6.0", "keras>=3.13"]
+# browser demo build (plantdx.web_export): Keras -> ONNX, checked with ONNX Runtime
+web = ["tf2onnx>=1.17", "onnxruntime>=1.20"]
 # ruff is pinned so CI, pre-commit and local runs format code identically
 dev = ["pytest>=8.0", "ruff==0.17.5", "pre-commit>=3.7", "nbformat>=5.9"]
 

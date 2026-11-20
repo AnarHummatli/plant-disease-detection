@@ -9,7 +9,7 @@ CANDIDATES ?= cnn_scratch mobilenetv2_head mobilenetv2_ft mobilenetv2_ft_lr3e-5 
               mobilenetv2_ft_lr1e-4 mobilenetv2_ft_all
 RUNS ?= baseline_logreg baseline_linsvm
 
-.PHONY: help install install-local env data card baselines train eval analyze demo test lint format
+.PHONY: help install install-local env data card baselines train eval analyze demo web test lint format
 
 help:
 	@echo "install        core + dev deps (Colab/Kaggle: TensorFlow already present)"
@@ -22,6 +22,7 @@ help:
 	@echo "eval           select on val, score family winners + RUNS on test ONCE (4.3-4.4)"
 	@echo "analyze        error analysis, Grad-CAM, \"not sure\" threshold          (step 5)"
 	@echo "demo           launch the Gradio demo (downloads the model once)       (step 6)"
+	@echo "web            build the browser demo into build/web (static Space)    (step 6)"
 	@echo "test / lint    pytest / ruff"
 
 install:
@@ -53,6 +54,9 @@ analyze:
 
 demo:
 	$(PY) app/gradio/app.py
+
+web:
+	$(PY) -m plantdx.web_export --out build/web
 
 test:
 	$(PY) -m pytest
