@@ -20,7 +20,7 @@ as "plan 4.2" or "step 7.2" point to that plan's stages: 1 foundation, 2 data, 3
   full control over how leaf ids are derived. The share of images without a known leaf id
   ("fallback") is measured and reported in EDA.
 
-## D-002 · Python 3.12–3.13 and the TensorFlow that Colab provides
+## D-002 · Python version and the TensorFlow that Colab provides
 
 - **Context.** Plan v1.0 said Python 3.11 and TensorFlow 2.21. Colab's default runtime moved to
   Python 3.12 in 2025 and to 3.13 by November 2026 (the stage 3 runs recorded 3.13.16 and
@@ -34,7 +34,7 @@ as "plan 4.2" or "step 7.2" point to that plan's stages: 1 foundation, 2 data, 3
   are still documented.
 - **Update (stage 6, D-021).** The minimum is now Python 3.11: the released model was saved by
   Keras 3.13+ and cannot be loaded by Keras 3.12, the last version for Python 3.10 (which reached
-  its end of life in October 2026).
+  its end of life in October 2026). CI runs 3.11, 3.12 and 3.13, so the minimum is tested too.
 
 ## D-003 · Repository language
 
@@ -600,6 +600,11 @@ classes), where they are kept next to a class table generated from the splits.
 - **Two addresses.** The same build is uploaded to the static Space by hand and published on
   GitHub Pages by `.github/workflows/pages.yml`, which rebuilds it from the release model on every
   change to the page.
+- **Errors too.** The six failure cases of stage 5 (`failures.jpg`) get the same wrong class in the
+  page as in the test evaluation, at 98.5–100% confidence.
+- **Backup video (plan 6.3).** A 74 s recording of the page (`plant_disease_demo.mp4`, release
+  v1.2) shows three correct answers, the first failure case (tomato early blight called target
+  spot at 99.8%) and the "not sure" example, for presenting without internet.
 - **Consequence.** The demo has a permanent public address on a free Hugging Face Space; the
   Gradio app (D-021) remains for Colab and local use. `.[web]` adds `tf2onnx` and `onnxruntime`;
   CI installs it, so the export and the JavaScript resize are tested on every push.

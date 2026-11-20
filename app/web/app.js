@@ -124,9 +124,8 @@ function buildExamples() {
     b.setAttribute("aria-pressed", "false");
     b.innerHTML = `<img src="examples/${name}.jpg" alt="" loading="lazy" width="96" height="96">`;
     b.addEventListener("click", async () => {
-      for (const o of box.children) o.setAttribute("aria-pressed", String(o === b));
       const blob = await (await fetch(`examples/${name}.jpg`)).blob();
-      handle(blob);
+      handle(blob, b);
     });
     box.appendChild(b);
   }
@@ -224,9 +223,11 @@ function renderError() {
 }
 
 // ------------------------------------------------------------------------------ the flow
-async function handle(blob) {
+// `example` is the example button that was clicked, or null for the visitor's own photo
+async function handle(blob, example = null) {
   if (!state.ready || state.busy || !blob) return;
   state.busy = true;
+  for (const o of $("examples").children) o.setAttribute("aria-pressed", String(o === example));
   const mount = $("mount");
   mount.classList.add("busy");
   try {

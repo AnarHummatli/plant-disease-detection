@@ -1,7 +1,7 @@
 # Data card · PlantVillage (colour) as used in this project
 
 **Version:** 1.6 · 20 November 2026 · splits frozen after D-010 (1.2–1.6: text and results only)
-**Owner:** Yarpaq Həkimləri (ASOIU Neural Networks project, topic 06)
+**Owner:** Anar Hummatli (ASOIU Neural Networks course project, topic 06)
 
 ## 1. Summary
 

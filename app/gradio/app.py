@@ -39,13 +39,13 @@ test leaf were never seen in training.
 chosen on the validation split), the demo does not give a diagnosis. On the test split this
 happens for 3.2% of the photos; the answered ones are 99.5% correct.
 
-**Heat map (Grad-CAM).** Red areas raised the probability of the top class the most. The map is
+**Heat map (Grad-CAM).** Red areas raised the score of the top class the most. The map is
 coarse (about 1/7 of the photo per cell): it shows a region, not single spots.
 
 **Limits.** The training photos are single leaves on plain lab backgrounds. Field photos
-(several leaves, soil, strong shadows) are harder and were not tested. Crops and diseases
-outside the 38 classes are not recognised as unknown: they get the closest known class, often
-with high confidence. Details: [repository]({REPO}) · model release {MODEL_VERSION}.
+(several leaves, soil, strong shadows) are harder and were not evaluated systematically. Crops
+and diseases outside the 38 classes are not recognised as unknown: they get the closest known
+class, often with high confidence. Details: [repository]({REPO}) · model release {MODEL_VERSION}.
 """
 DISCLAIMER = (
     "⚠️ Educational prototype. It gives preliminary information only and does not replace an "

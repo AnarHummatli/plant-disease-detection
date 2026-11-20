@@ -6,11 +6,13 @@ Grad-CAM explanations, a "not sure" answer for low-confidence inputs, and a
 [live demo](https://huggingface.co/spaces/AnarHummatli/plant-disease-detection) that runs in the
 browser.
 
-Neural Networks group project, Azerbaijan State Oil and Industry University, Fall 2026 (topic 06).
+Neural Networks course project by Anar Hummatli, Azerbaijan State Oil and Industry University,
+Fall 2026 (topic 06).
 
 > **Status:** stages 1–6 of 8 done (leakage-checked data and pipeline; baselines and a CNN from
 > scratch; MobileNetV2 transfer learning scored on test once; error analysis with Grad-CAM and a
-> "not sure" threshold; Gradio demo). Next: a reproducibility check and the report.
+> "not sure" threshold; a browser demo and a Gradio app). Next: a reproducibility check and the
+> report.
 
 ## Demo
 
@@ -28,6 +30,9 @@ Grad-CAM heat map of the region that drove the answer.
 - **Command line:** `python -m plantdx.predict leaf.jpg` prints the verdict and the top-3.
 - **Build the browser version:** `pip install -e ".[tf,web]"`, then `make web` (writes
   `build/web/`, the files of the static Space).
+- **Video, for use without internet** (74 s: three correct answers, one of the test errors and a
+  "not sure"): `plant_disease_demo.mp4` in release
+  [v1.2](https://github.com/AnarHummatli/plant-disease-detection/releases/tag/v1.2).
 
 The Python demo downloads the final model (`inference.keras`, 9.8 MB) once from release
 [v1.0](https://github.com/AnarHummatli/plant-disease-detection/releases/tag/v1.0) and checks its
@@ -188,7 +193,7 @@ notebooks/        00 bootstrap, 01 EDA + first audit, 02 duplicate search, 03 pi
                   08 error analysis, Grad-CAM and the "not sure" threshold, 09 demo (public link)
 splits/           train/val/test CSVs with leaf_id and group_id, grouping pairs (committed)
 tests/            pytest: splits, pipeline, baselines, models, trainer, evaluation, analysis, Grad-CAM,
-                  demo
+                  demo, browser build (ONNX export, JavaScript resize, translations)
 app/gradio/       Gradio demo (app.py) and seven example test photos with attribution
 app/web/          browser demo (static page; the model runs with ONNX Runtime Web)
 docs/             problem statement, data card, decision log, error analysis (later: report)
