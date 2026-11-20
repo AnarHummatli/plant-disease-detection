@@ -8,57 +8,109 @@ const EXAMPLES = [
   "strawberry_leaf_scorch", "tomato_early_blight_part_of_leaf", "tomato_yellow_leaf_curl_virus",
 ];
 const MAX_EXACT = 512; // squares up to this size are resized exactly like training
+const LANG_KEY = "plantdx.lang";
 
 const $ = (id) => document.getElementById(id);
-const state = { meta: null, session: null, busy: false };
+const state = { meta: null, session: null, busy: false, ready: false, lang: "en", last: null };
 window.plantdx = state; // inspected by the automated browser check
 
-function setStatus(text, error = false) {
-  $("status").textContent = text;
-  $("status").className = "status" + (error ? " error" : "");
+// ------------------------------------------------------------------------------ language
+function pickLanguage() {
+  const fromUrl = new URLSearchParams(location.search).get("lang");
+  if (fromUrl === "az" || fromUrl === "en") return fromUrl;
+  try {
+    const saved = localStorage.getItem(LANG_KEY);
+    if (saved === "az" || saved === "en") return saved;
+  } catch { /* storage unavailable: fall back to the browser language */ }
+  return (navigator.language || "").toLowerCase().startsWith("az") ? "az" : "en";
 }
 
-async function fetchWithProgress(url, label) {
+function t(key, vars = {}) {
+  const text = i18n.I18N[state.lang][key] ?? i18n.I18N.en[key] ?? key;
+  return text.replace(/\{(\w+)\}/g, (_, k) => (k in vars ? vars[k] : `{${k}}`));
+}
+
+const pct = (p, digits = 1) => `${(100 * p).toFixed(digits)}%`;
+const threshold = () => pct(state.meta ? state.meta.threshold : 0.947);
+
+// class -> { crop, condition, en } in the current language
+function names(i) {
+  const c = state.meta.classes[i];
+  if (state.lang === "az") {
+    return { crop: i18n.CROPS_AZ[c.crop] || c.crop, condition: i18n.CONDITIONS_AZ[i], en: c.display };
+  }
+  return { crop: c.crop, condition: c.healthy ? "healthy" : c.condition, en: null };
+}
+
+function applyLanguage(lang) {
+  state.lang = lang;
+  try { localStorage.setItem(LANG_KEY, lang); } catch { /* not persisted */ }
+  document.documentElement.lang = lang;
+  document.title = t("doc.title");
+  const vars = { thr: threshold() };
+  for (const el of document.querySelectorAll("[data-i18n]")) el.textContent = t(el.dataset.i18n, vars);
+  const other = lang === "az" ? "en" : "az";
+  $("lang").textContent = t("lang.switch"); // the name of the other language
+  $("lang").lang = other;
+  if (state.meta) {
+    $("crops").textContent = state.meta.crops.map((c) => (lang === "az" ? i18n.CROPS_AZ[c] || c : c)).join(", ");
+  }
+  if (state.status) setStatus(...state.status);
+  if (state.last) renderResult(state.last);
+}
+
+// --------------------------------------------------------------------------------- status
+function setStatus(key, vars = {}, kind = "") {
+  state.status = [key, vars, kind];
+  $("status-text").textContent = t(key, vars);
+  $("status").className = `status ${kind}`;
+  if ("p" in vars) $("progress").style.width = `${vars.p}%`;
+}
+
+async function fetchWithProgress(url) {
   const resp = await fetch(url);
   if (!resp.ok) throw new Error(`${url}: HTTP ${resp.status}`);
-  const total = Number(resp.headers.get("content-length")) || 0;
+  const total = Number(resp.headers.get("content-length")) || state.meta.onnx_bytes || 0;
   if (!resp.body || !total) return new Uint8Array(await resp.arrayBuffer());
   const reader = resp.body.getReader();
-  const buf = new Uint8Array(total);
+  const chunks = [];
   let got = 0;
   for (;;) {
     const { done, value } = await reader.read();
     if (done) break;
-    buf.set(value, got);
+    chunks.push(value);
     got += value.length;
-    setStatus(`${label} ${Math.round((100 * got) / total)}%`);
+    setStatus("status.loading", { p: Math.min(100, Math.round((100 * got) / total)) });
   }
-  return buf.subarray(0, got);
+  const buf = new Uint8Array(got);
+  let at = 0;
+  for (const c of chunks) { buf.set(c, at); at += c.length; }
+  return buf;
 }
 
+// ------------------------------------------------------------------------------- startup
 async function init() {
+  state.lang = pickLanguage();
+  applyLanguage(state.lang);
+  setStatus("status.loading", { p: 0 });
   try {
     state.meta = await (await fetch("meta.json")).json();
-    const m = state.meta;
-    $("crops").innerHTML = `<b>Supported crops (${m.crops.length}):</b> ${m.crops.join(", ")}.`;
-    $("thr").textContent = `${(100 * m.threshold).toFixed(1)}%`;
-    $("mb").textContent = `${(m.onnx_bytes / 1e6).toFixed(1)} MB`;
-    $("ver").textContent = m.model_version;
+    applyLanguage(state.lang);
     buildExamples();
     ort.env.wasm.wasmPaths = ORT_DIST;
     ort.env.wasm.numThreads = self.crossOriginIsolated ? Math.min(4, navigator.hardwareConcurrency || 1) : 1;
-    const bytes = await fetchWithProgress("model.onnx", "Loading the model (once):");
-    setStatus("Preparing the model…");
+    const bytes = await fetchWithProgress("model.onnx");
+    setStatus("status.preparing", { p: 100 });
     state.session = await ort.InferenceSession.create(bytes, {
       executionProviders: ["wasm"],
       graphOptimizationLevel: "all",
     });
     await predict(new Uint8Array(224 * 224 * 3).fill(128)); // warm-up
-    setStatus("Model ready. It runs on this device; photos are not uploaded.");
+    setStatus("status.ready", {}, "ready");
     state.ready = true;
   } catch (err) {
     console.error(err);
-    setStatus(`Could not load the model: ${err.message}`, true);
+    setStatus("status.error", { msg: err.message }, "error");
   }
 }
 
@@ -68,8 +120,11 @@ function buildExamples() {
     const b = document.createElement("button");
     b.type = "button";
     b.title = name.replaceAll("_", " ");
-    b.innerHTML = `<img src="examples/${name}.jpg" alt="${b.title}" loading="lazy"><span>${b.title}</span>`;
+    b.setAttribute("aria-label", b.title);
+    b.setAttribute("aria-pressed", "false");
+    b.innerHTML = `<img src="examples/${name}.jpg" alt="" loading="lazy" width="96" height="96">`;
     b.addEventListener("click", async () => {
+      for (const o of box.children) o.setAttribute("aria-pressed", String(o === b));
       const blob = await (await fetch(`examples/${name}.jpg`)).blob();
       handle(blob);
     });
@@ -77,6 +132,7 @@ function buildExamples() {
   }
 }
 
+// ------------------------------------------------------------------------------ the model
 // Photo -> uint8 RGB [224, 224, 3], like plantdx.predict.prepare_image.
 async function prepare(blob) {
   const opts = { imageOrientation: "from-image", colorSpaceConversion: "none", premultiplyAlpha: "none" };
@@ -104,93 +160,134 @@ async function predict(rgb) {
   const x = new Float32Array(rgb.length);
   for (let i = 0; i < rgb.length; i++) x[i] = rgb[i];
   const out = await state.session.run({ image: new ort.Tensor("float32", x, [1, 224, 224, 3]) });
-  const probs = Array.from(out.probs.data);
-  const cam = new Float32Array(out.cam.data);
   const [ch, cw] = out.cam.dims.slice(1);
-  return { probs, cam, ch, cw };
+  return { probs: Array.from(out.probs.data), cam: new Float32Array(out.cam.data), ch, cw };
 }
 
-function verdictHTML(top, conf, m) {
-  const cls = m.classes[top];
-  const pct = `${(100 * conf).toFixed(1)}%`;
-  if (conf < m.threshold) {
-    return ["unsure", `<h3>🟡 Not sure</h3><p>The best guess is <i>${cls.display}</i>, but with
-      confidence <b>${pct}</b> (below ${(100 * m.threshold).toFixed(1)}%). Please take a clearer
-      photo: one whole leaf, in focus, filling most of the frame.</p>`];
-  }
-  if (cls.healthy) return ["ok", `<h3>🟢 ${cls.crop}: healthy</h3><p>confidence <b>${pct}</b></p>`];
-  return ["bad", `<h3>🔴 ${cls.crop}: ${cls.condition}</h3><p>confidence <b>${pct}</b>. A
-    preliminary result: confirm it with an agronomist before treating.</p>`];
+// ------------------------------------------------------------------------------ the label
+function esc(s) {
+  return String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 }
 
-function drawRGB(canvas, rgb) {
+function renderResult(r) {
+  const m = state.meta;
+  const order = r.probs.map((p, i) => [p, i]).sort((a, b) => b[0] - a[0]);
+  const [conf, top] = order[0];
+  const n = names(top);
+  const unsure = conf < m.threshold;
+  const healthy = m.classes[top].healthy;
+  const kind = unsure ? "unsure" : healthy ? "ok" : "bad";
+  const headline = unsure ? t("verdict.unsure") : healthy ? t("verdict.healthy") : n.condition;
+  const enLine = !unsure && n.en ? `<span class="en" lang="en">${esc(n.en)}</span>` : "";
+  const note = unsure
+    ? t("note.unsure", { name: `${n.crop}: ${n.condition}`, pct: pct(conf), thr: threshold() })
+    : t(healthy ? "note.healthy" : "note.disease");
+  const bars = order.slice(0, 3).map(([p, i]) => {
+    const k = names(i);
+    const label = `${k.crop}: ${m.classes[i].healthy ? t("verdict.healthy").toLowerCase() : k.condition}`;
+    const shown = p >= 0.995 || p < 0.005 ? pct(p, 0) : pct(p);
+    return `<li><span>${esc(label)}</span><span class="pct">${shown}</span>
+      ${k.en ? `<span class="sub" lang="en">${esc(k.en)}</span>` : ""}
+      <span class="track"><span class="fill" style="width:${(100 * p).toFixed(1)}%"></span></span></li>`;
+  }).join("");
+  $("label-no").textContent = new Date().toLocaleDateString(state.lang === "az" ? "az-Latn-AZ" : "en-GB");
+  $("result").innerHTML = `
+    <p class="verdict ${kind}">${esc(headline)}${enLine}</p>
+    <p class="note ${kind}">${esc(note)}</p>
+    <dl class="fields">
+      <dt>${t("label.crop")}</dt><dd>${esc(n.crop)}</dd>
+      <dt>${t("label.condition")}</dt><dd>${esc(unsure ? "—" : healthy ? t("verdict.healthy") : n.condition)}</dd>
+      <dt>${t("label.confidence")}</dt><dd>${pct(conf)}</dd>
+      <dt>${t("label.by")}</dt><dd>${esc(t("label.model", { v: m.model_version }))}</dd>
+    </dl>
+    <div class="analysis">
+      <h3>${t("top.title")}</h3>
+      <ol class="bars">${bars}</ol>
+      <h3>${t("cam.title")}</h3>
+      <div class="pair">
+        <figure><canvas id="seen" width="224" height="224"></canvas><figcaption>${t("cam.seen")}</figcaption></figure>
+        <figure><canvas id="heat" width="224" height="224"></canvas><figcaption>${t("cam.heat")}</figcaption></figure>
+      </div>
+      <p class="timing" id="info">${t("timing", { a: r.prepMs, b: r.runMs })}</p>
+    </div>`;
   const img = new ImageData(224, 224);
-  for (let i = 0, j = 0; j < rgb.length; i += 4, j += 3) {
-    img.data[i] = rgb[j]; img.data[i + 1] = rgb[j + 1]; img.data[i + 2] = rgb[j + 2]; img.data[i + 3] = 255;
+  for (let i = 0, j = 0; j < r.rgb.length; i += 4, j += 3) {
+    img.data[i] = r.rgb[j]; img.data[i + 1] = r.rgb[j + 1]; img.data[i + 2] = r.rgb[j + 2]; img.data[i + 3] = 255;
   }
-  canvas.getContext("2d").putImageData(img, 0, 0);
+  $("seen").getContext("2d").putImageData(img, 0, 0);
+  const heat = imaging.upsampleCam(r.cam, r.ch, r.cw, 224);
+  $("heat").getContext("2d").putImageData(new ImageData(imaging.overlay(r.rgb, heat, 224), 224, 224), 0, 0);
 }
 
+function renderError() {
+  $("result").innerHTML = `<p class="note unsure">${esc(t("note.unreadable"))}</p>`;
+}
+
+// ------------------------------------------------------------------------------ the flow
 async function handle(blob) {
   if (!state.ready || state.busy || !blob) return;
   state.busy = true;
+  const mount = $("mount");
+  mount.classList.add("busy");
   try {
     const url = URL.createObjectURL(blob);
-    $("preview").src = url;
-    $("preview").classList.remove("hidden");
-    $("hint").classList.add("hidden");
+    const img = $("preview");
+    if (img.dataset.url) URL.revokeObjectURL(img.dataset.url);
+    img.dataset.url = url;
+    img.src = url;
+    img.hidden = false;
+    $("empty").hidden = true;
     const t0 = performance.now();
     const rgb = await prepare(blob);
     const t1 = performance.now();
-    const { probs, cam, ch, cw } = await predict(rgb);
+    const out = await predict(rgb);
     const t2 = performance.now();
-    const m = state.meta;
-    const order = probs.map((p, i) => [p, i]).sort((a, b) => b[0] - a[0]);
-    const [conf, top] = order[0];
-    const [kind, html] = verdictHTML(top, conf, m);
-    $("verdict").className = `verdict ${kind}`;
-    $("verdict").innerHTML = html;
-    $("bars").innerHTML = order.slice(0, 3).map(([p, i]) => `<div class="bar"><div class="label">
-      <span>${m.classes[i].display}</span><span>${(100 * p).toFixed(p >= 0.995 || p < 0.005 ? 0 : 1)}%</span>
-      </div><div class="track"><div class="fill" style="width:${(100 * p).toFixed(1)}%"></div></div></div>`).join("");
-    const heat = imaging.upsampleCam(cam, ch, cw, 224);
-    drawRGB($("seen"), rgb);
-    $("heat").getContext("2d").putImageData(new ImageData(imaging.overlay(rgb, heat, 224), 224, 224), 0, 0);
-    $("heatcap").textContent = `Heat map for: ${m.classes[top].display}`;
-    $("info").textContent = `Photo prepared in ${Math.round(t1 - t0)} ms, model and Grad-CAM in ${Math.round(t2 - t1)} ms, on this device.`;
-    $("details").classList.remove("hidden");
-    Object.assign(state, { lastInput: rgb, lastProbs: probs, lastCam: cam, lastTop: top });
+    state.last = { ...out, rgb, prepMs: Math.round(t1 - t0), runMs: Math.round(t2 - t1) };
+    renderResult(state.last);
+    Object.assign(state, { lastInput: rgb, lastProbs: out.probs, lastCam: out.cam });
+    if (window.matchMedia("(max-width: 860px)").matches) {
+      document.querySelector(".label").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   } catch (err) {
     console.error(err);
-    $("verdict").className = "verdict unsure";
-    $("verdict").innerHTML = `<p>Could not read this file as an image (${err.message}).</p>`;
+    state.last = null;
+    renderError();
   } finally {
+    mount.classList.remove("busy");
     state.busy = false;
   }
 }
 
-$("file").addEventListener("change", (e) => { handle(e.target.files[0]); e.target.value = ""; });
-const drop = $("drop");
-drop.addEventListener("dragover", (e) => { e.preventDefault(); drop.classList.add("over"); });
-drop.addEventListener("dragleave", () => drop.classList.remove("over"));
-drop.addEventListener("drop", (e) => {
-  e.preventDefault(); drop.classList.remove("over");
-  handle(e.dataTransfer.files[0]);
-});
-document.addEventListener("paste", (e) => {
-  const item = [...(e.clipboardData?.items || [])].find((i) => i.type.startsWith("image/"));
-  if (item) handle(item.getAsFile());
-});
-$("paste").addEventListener("click", async () => {
-  try {
-    for (const item of await navigator.clipboard.read()) {
-      const type = item.types.find((t) => t.startsWith("image/"));
-      if (type) return handle(await item.getType(type));
-    }
-    setStatus("No image in the clipboard.");
-  } catch {
-    setStatus("Clipboard not available here: use Ctrl+V / ⌘V on the page instead.");
+function wire() {
+  for (const id of ["file", "camera"]) {
+    $(id).addEventListener("change", (e) => { handle(e.target.files[0]); e.target.value = ""; });
   }
-});
+  if (window.matchMedia("(pointer: coarse)").matches) $("camera-btn").hidden = false;
+  const mount = $("mount");
+  mount.addEventListener("dragover", (e) => { e.preventDefault(); mount.classList.add("over"); });
+  mount.addEventListener("dragleave", () => mount.classList.remove("over"));
+  mount.addEventListener("drop", (e) => {
+    e.preventDefault();
+    mount.classList.remove("over");
+    handle(e.dataTransfer.files[0]);
+  });
+  document.addEventListener("paste", (e) => {
+    const item = [...(e.clipboardData?.items || [])].find((i) => i.type.startsWith("image/"));
+    if (item) handle(item.getAsFile());
+  });
+  $("paste").addEventListener("click", async () => {
+    try {
+      for (const item of await navigator.clipboard.read()) {
+        const type = item.types.find((x) => x.startsWith("image/"));
+        if (type) return handle(await item.getType(type));
+      }
+      setStatus("paste.none", {}, state.ready ? "ready" : "");
+    } catch {
+      setStatus("paste.blocked", {}, state.ready ? "ready" : "");
+    }
+  });
+  $("lang").addEventListener("click", () => applyLanguage(state.lang === "az" ? "en" : "az"));
+}
 
+wire();
 init();

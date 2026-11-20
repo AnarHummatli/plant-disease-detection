@@ -10,7 +10,8 @@ device. Written to `--out`:
 * `model.onnx`: the release model with two outputs, the 38 probabilities and the 7 x 7 Grad-CAM
   map of the top class, so the browser needs no gradients;
 * `meta.json`: classes, "not sure" threshold, image size, checksums;
-* `index.html`, `app.js`, `imaging.js` (from `app/web/`), `examples/` (from `app/gradio/examples/`);
+* the page from `app/web/` (`index.html`, `app.js`, `imaging.js`, `i18n.js`, self-hosted fonts,
+  icon, preview image) and `examples/` (from `app/gradio/examples/`);
 * `README.md`: the Hugging Face Space card (`sdk: static`).
 
 Grad-CAM in closed form. The head after the backbone is global average pooling, dropout (a no-op
@@ -35,6 +36,7 @@ from plantdx.paths import repo_root
 from plantdx.predict import IMAGE_SIZE, MODEL_SHA256, MODEL_VERSION, NOT_SURE_THRESHOLD
 
 ORT_VERSION = "1.31.1"  # onnxruntime-web loaded by app/web/index.html; keep the two in step
+SITE_FILES = ("index.html", "app.js", "imaging.js", "i18n.js", "fonts.css", "favicon.svg", "og.png")
 HEAD = ("gap", "dropout", "probs")  # layers after "backbone" in every MobileNetV2 of this project
 
 
@@ -151,8 +153,10 @@ def build_site(out: str | Path, model=None, check_images: np.ndarray | None = No
     if not (check["same_top_class"] and check["probs"] < 1e-4 and check["cam"] < 1e-3):
         raise RuntimeError(f"ONNX export differs from the Keras model: {check}")
     (out / "meta.json").write_text(json.dumps(meta(onnx_path), indent=1), encoding="utf-8")
-    for name in ("index.html", "app.js", "imaging.js"):
-        shutil.copyfile(web / name, out / name)
+    for name in SITE_FILES:
+        if (web / name).is_file():  # og.png is optional
+            shutil.copyfile(web / name, out / name)
+    shutil.copytree(web / "fonts", out / "fonts", dirs_exist_ok=True)
     shutil.copyfile(web / "SPACE.md", out / "README.md")
     shutil.copytree(examples, out / "examples", dirs_exist_ok=True)
     return check

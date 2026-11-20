@@ -17,9 +17,10 @@ Neural Networks group project, Azerbaijan State Oil and Industry University, Fal
 Upload a photo of one leaf: the demo gives the diagnosis (or "not sure"), the top-3 classes and a
 Grad-CAM heat map of the region that drove the answer.
 
-- **In the browser, nothing to install:**
-  <https://huggingface.co/spaces/AnarHummatli/plant-disease-detection>. The model runs on your
-  device (ONNX Runtime Web), so photos are not uploaded anywhere (D-023).
+- **In the browser, nothing to install** (English and Azerbaijani):
+  <https://huggingface.co/spaces/AnarHummatli/plant-disease-detection>, also on GitHub Pages at
+  <https://anarhummatli.github.io/plant-disease-detection/>. The model runs on your device
+  (ONNX Runtime Web), so photos are not uploaded anywhere (D-023).
 - **Colab, Gradio app with a public link:** open `notebooks/09_demo.ipynb`, run all cells (CPU is
   enough) and open the `*.gradio.live` link it prints.
 - **Local** (Python ≥ 3.11): `pip install -e ".[tf,demo]"`, then `make demo` (or
@@ -37,7 +38,7 @@ ONNX export of the same model and gave the same class and verdict as Python on a
 checked (D-023). Seven test photos are included as examples; one of them, a corner of a tomato
 leaf, shows the "not sure" answer ([screenshot](reports/figures/demo_not_sure.jpg)).
 
-![The demo diagnosing a grape leaf](reports/figures/demo_diagnosis.jpg)
+![The browser demo diagnosing a grape leaf](reports/figures/demo_web.jpg)
 
 ## Final results (test split, evaluated once)
 

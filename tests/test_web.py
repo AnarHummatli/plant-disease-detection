@@ -5,6 +5,7 @@ each is skipped when its tools are missing.
 """
 
 import json
+import re
 import shutil
 import subprocess
 from pathlib import Path
@@ -60,6 +61,30 @@ def test_javascript_resize_is_bit_identical_to_tensorflow(tmp_path):
     assert max(out["cam"]) < 1e-5
 
 
+def test_translations_are_complete():
+    node = shutil.which("node")
+    if not node:
+        pytest.skip("Node.js not installed")
+    from plantdx.data.source import CLASSES, CROPS
+
+    script = (
+        f"const i = require({json.dumps(str(ROOT / 'app' / 'web' / 'i18n.js'))});"
+        "console.log(JSON.stringify({en: Object.keys(i.I18N.en), az: Object.keys(i.I18N.az),"
+        " crops: Object.keys(i.CROPS_AZ), conditions: i.CONDITIONS_AZ}));"
+    )
+    out = json.loads(
+        subprocess.run([node, "-e", script], check=True, capture_output=True, text=True).stdout
+    )
+    assert sorted(out["en"]) == sorted(out["az"])  # every text in both languages
+    assert set(out["crops"]) == set(CROPS)
+    assert len(out["conditions"]) == len(CLASSES)
+    healthy = [i for i, c in enumerate(CLASSES) if c.endswith("___healthy")]
+    assert all(out["conditions"][i] == "Sağlam" for i in healthy)  # aligned with the class order
+    html = (ROOT / "app" / "web" / "index.html").read_text(encoding="utf-8")
+    keys = set(re.findall(r'data-i18n="([^"]+)"', html))
+    assert keys <= set(out["en"]), keys - set(out["en"])
+
+
 def test_onnx_export_matches_keras_and_gradcam(tmp_path):
     pytest.importorskip("tf2onnx")
     pytest.importorskip("onnxruntime")
@@ -81,7 +106,11 @@ def test_onnx_export_matches_keras_and_gradcam(tmp_path):
     site = W.build_site(tmp_path / "site", model, check_images=images)
     assert site["same_top_class"]
     names = {p.name for p in (tmp_path / "site").iterdir()}
-    assert {"index.html", "app.js", "imaging.js", "model.onnx", "meta.json", "README.md"} <= names
+    assert {"index.html", "app.js", "imaging.js", "i18n.js", "fonts.css", "favicon.svg"} <= names
+    assert {"model.onnx", "meta.json", "README.md", "fonts"} <= names
+    css = (tmp_path / "site" / "fonts.css").read_text(encoding="utf-8")
+    for font in re.findall(r"url\(fonts/([^)]+)\)", css):  # every font the page asks for exists
+        assert (tmp_path / "site" / "fonts" / font).is_file(), font
     assert len(list((tmp_path / "site" / "examples").glob("*.jpg"))) == 7
     assert "sdk: static" in (tmp_path / "site" / "README.md").read_text(encoding="utf-8")
 

@@ -17,12 +17,14 @@ tags:
   - plantvillage
 ---
 
-# Plant disease detection · Yarpaq Həkimləri
+# Plant disease detection
+
+Made by **Anar Hummatli** · [GitHub](https://github.com/AnarHummatli) · [LinkedIn](https://www.linkedin.com/in/anarhummatli)
 
 Upload a photo of one leaf of a supported crop (14 crops, 38 classes). The page gives the
 diagnosis, or "not sure" below a confidence of 0.947, the three most likely classes and a
 Grad-CAM heat map of the region that drove the answer. The model runs in your browser with
-ONNX Runtime Web: photos are not uploaded anywhere.
+ONNX Runtime Web: photos are not uploaded anywhere. English and Azerbaijani.
 
 - **Model:** MobileNetV2 fine-tuned on PlantVillage; test macro-F1 0.982 on a leaf-grouped,
   leakage-checked split, scored once.

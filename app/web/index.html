@@ -3,144 +3,305 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Plant disease detection · Yarpaq Həkimləri</title>
-<meta name="description" content="Upload a leaf photo: MobileNetV2 names the plant disease, shows its top-3 classes and a Grad-CAM heat map, or says 'not sure'. Runs in your browser.">
+<title>Plant disease detection · by Anar Hummatli</title>
+<meta name="description" content="Show it a leaf, it names the disease: a MobileNetV2 that runs in your browser, with a Grad-CAM heat map and an honest 'not sure'. Made by Anar Hummatli.">
+<meta name="author" content="Anar Hummatli">
+<meta property="og:title" content="Plant disease detection · by Anar Hummatli">
+<meta property="og:description" content="Upload a leaf photo: the model names the disease among 38 classes of 14 crops and shows where it looked. Runs on your device.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://anarhummatli-plant-disease-detection.static.hf.space/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F1F3EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131A15" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css">
 <style>
   :root {
-    --bg: #f6f8f7; --card: #ffffff; --text: #1d2a24; --muted: #5b6b63; --line: #dfe7e2;
-    --accent: #1f9d55; --accent-soft: #e6f5ec; --warn: #b7791f; --warn-soft: #fdf3e1;
-    --bad: #c0392b; --bad-soft: #fbeaea;
+    --paper: #F1F3EC; --sheet: #FBFCF8; --ink: #1F2A22; --muted: #56645A; --rule: #C9D1C2;
+    --leaf: #2F6B3F; --leaf-soft: #DDE9DC; --lesion: #8C3B1F; --lesion-soft: #F2E1D8;
+    --ochre: #9A6B14; --ochre-soft: #F3E7C9; --focus: #2F6B3F;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #0f1512; --card: #17201b; --text: #e3ece7; --muted: #9db0a6; --line: #26332c;
-      --accent: #3ccb7f; --accent-soft: #173426; --warn: #f0b44c; --warn-soft: #3a2e17;
-      --bad: #f2786b; --bad-soft: #3b1f1c;
+      --paper: #131A15; --sheet: #1A231D; --ink: #E3EADF; --muted: #A3B1A6; --rule: #34423A;
+      --leaf: #7FC08F; --leaf-soft: #22382A; --lesion: #E59A7A; --lesion-soft: #3A2620;
+      --ochre: #E2B661; --ochre-soft: #3A3020; --focus: #7FC08F;
+      color-scheme: dark;
     }
   }
   * { box-sizing: border-box; }
-  body { margin: 0; font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-         background: var(--bg); color: var(--text); }
-  main { max-width: 1120px; margin: 0 auto; padding: 24px 16px 40px; }
-  h1 { font-size: 1.9rem; margin: 0 0 6px; }
-  .lead { color: var(--muted); margin: 0 0 6px; }
-  .crops { color: var(--muted); font-size: .92rem; margin: 0 0 18px; }
-  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-  @media (max-width: 820px) { .grid { grid-template-columns: 1fr; } }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
-  .drop { border: 2px dashed var(--line); border-radius: 12px; min-height: 280px; display: flex;
-          align-items: center; justify-content: center; text-align: center; cursor: pointer;
-          position: relative; overflow: hidden; }
-  .drop.over { border-color: var(--accent); background: var(--accent-soft); }
-  .drop img { max-width: 100%; max-height: 360px; display: block; }
-  .drop .hint { color: var(--muted); padding: 24px; }
-  .buttons { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
-  button, .button { font: inherit; border: 1px solid var(--line); background: var(--card);
-                    color: var(--text); border-radius: 10px; padding: 8px 14px; cursor: pointer; }
-  .button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  [hidden] { display: none !important; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 1rem/1.6 var(--sans); }
+  a { color: var(--leaf); text-underline-offset: .18em; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* masthead: the mark, the name of the tool and its maker */
+  .masthead { display: flex; align-items: center; gap: 14px; padding-top: 22px; padding-bottom: 18px; }
+  .masthead::after { content: none; }
+  .rule { border: 0; border-top: 1px solid var(--rule); margin: 0; }
+  .mark { width: 40px; height: 40px; flex: none; }
+  .brand { display: flex; flex-direction: column; line-height: 1.25; margin-right: auto; }
+  .brand b { font: 600 1.05rem/1.25 var(--serif); }
+  .brand a { color: var(--muted); font-size: .9rem; text-decoration: none; }
+  .brand a:hover { color: var(--leaf); text-decoration: underline; }
+  .lang { font: 500 .9rem var(--sans); color: var(--ink); background: transparent; border: 1px solid var(--rule);
+          border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+  .lang:hover { border-color: var(--leaf); }
+
+  /* hero */
+  .hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 12px clamp(18px, 3vw, 36px);
+          align-items: start; padding: clamp(26px, 4vw, 48px) 0 clamp(22px, 3vw, 32px); }
+  @media (max-width: 860px) { .hero { grid-template-columns: 1fr; } }
+  .hero h1 { font: 700 clamp(2.2rem, 5vw, 3.9rem)/1.02 var(--serif); letter-spacing: -.015em; margin: 0;
+             font-variation-settings: "opsz" 60; text-wrap: balance; }
+  .hero p { margin: 0 0 8px; color: var(--muted); font-size: 1.02rem; max-width: 38rem; }
+  .hero .crops { font-size: .9rem; margin-top: 10px; }
+  .hero .private { color: var(--ink); display: flex; gap: 8px; align-items: baseline; }
+  .hero .private::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--leaf); flex: none; transform: translateY(-1px); }
+
+  /* the bench: specimen sheet on the left, determination on the right */
+  .bench { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(18px, 3vw, 36px); align-items: start; }
+  @media (max-width: 860px) { .bench { grid-template-columns: 1fr; } }
+
+  .sheet { background: var(--sheet); border: 1px solid var(--rule); padding: clamp(14px, 2.4vw, 24px); border-radius: 6px; }
+  .mount { position: relative; display: grid; place-items: center; aspect-ratio: 1; width: 100%;
+           background: var(--paper); border-radius: 2px; cursor: pointer; overflow: hidden; }
+  .mount.over { box-shadow: inset 0 0 0 3px var(--leaf); }
+  /* paper photo corners holding the specimen */
+  .mount::before, .mount::after, .corners::before, .corners::after {
+    content: ""; position: absolute; width: 30px; height: 30px; background: var(--rule); z-index: 2;
+    opacity: .9; }
+  .mount::before { top: 0; left: 0; clip-path: polygon(0 0, 100% 0, 0 100%); }
+  .mount::after { top: 0; right: 0; clip-path: polygon(0 0, 100% 0, 100% 100%); }
+  .corners::before { bottom: 0; left: 0; clip-path: polygon(0 0, 0 100%, 100% 100%); }
+  .corners::after { bottom: 0; right: 0; clip-path: polygon(100% 0, 0 100%, 100% 100%); }
+  .mount img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .mount .empty { text-align: center; padding: 24px; max-width: 22rem; }
+  .mount .empty svg { width: 64px; height: 64px; opacity: .55; margin-bottom: 10px; }
+  .mount .empty b { display: block; font: 600 1.25rem/1.3 var(--serif); margin-bottom: 6px; }
+  .mount .empty span { color: var(--muted); font-size: .92rem; }
+  .scan { position: absolute; inset: 0; z-index: 1; pointer-events: none; display: none;
+          background: linear-gradient(180deg, transparent 0 45%, color-mix(in srgb, var(--leaf) 28%, transparent) 50%, transparent 55% 100%);
+          background-size: 100% 220%; animation: scan 1.1s linear infinite; }
+  .mount.busy .scan { display: block; }
+  @keyframes scan { from { background-position: 0 100%; } to { background-position: 0 -120%; } }
+  @media (prefers-reduced-motion: reduce) { .scan { animation: none; opacity: .5; } }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 6px; }
+  .btn { font: 500 .98rem var(--sans); border-radius: 8px; padding: 10px 16px; cursor: pointer; display: inline-flex;
+         align-items: center; gap: 8px; border: 1px solid var(--rule); background: transparent; color: var(--ink); }
+  .btn:hover { border-color: var(--leaf); }
+  .btn.primary { background: var(--leaf); border-color: var(--leaf); color: var(--sheet); }
+  .btn.primary:hover { filter: brightness(1.08); }
+  .btn svg { width: 18px; height: 18px; }
+  .btn[hidden] { display: none; }
   input[type=file] { display: none; }
-  h2 { font-size: 1rem; margin: 18px 0 8px; color: var(--muted); font-weight: 600; }
-  .examples { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 8px; }
-  .examples button { padding: 0; overflow: hidden; border-radius: 10px; text-align: left; }
-  .examples img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-  .examples span { display: block; font-size: .72rem; padding: 4px 6px; color: var(--muted);
-                   line-height: 1.25; }
-  .verdict { border-radius: 12px; padding: 12px 14px; margin-bottom: 14px; }
-  .verdict h3 { margin: 0 0 4px; font-size: 1.25rem; }
-  .verdict p { margin: 0; }
-  .verdict.ok { background: var(--accent-soft); }
-  .verdict.bad { background: var(--bad-soft); }
-  .verdict.unsure { background: var(--warn-soft); }
-  .verdict.idle { background: transparent; color: var(--muted); padding-left: 0; }
-  .bar { margin: 6px 0; }
-  .bar .label { display: flex; justify-content: space-between; font-size: .92rem; }
-  .bar .track { height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
-  .bar .fill { height: 100%; background: var(--accent); border-radius: 4px; }
-  .cam { display: flex; gap: 10px; align-items: flex-start; }
-  .cam figure { margin: 0; flex: 1; }
-  .cam canvas { width: 100%; aspect-ratio: 1; border-radius: 10px; display: block; }
-  .cam figcaption { font-size: .78rem; color: var(--muted); margin-top: 4px; }
-  .info { font-size: .85rem; color: var(--muted); margin-top: 10px; }
-  .status { font-size: .9rem; color: var(--muted); margin: 0 0 14px; }
-  .status.error { color: var(--bad); }
-  details { margin-top: 18px; }
-  summary { cursor: pointer; font-weight: 600; }
-  details p { color: var(--text); }
-  .disclaimer { margin-top: 18px; font-size: .9rem; color: var(--muted); }
-  a { color: var(--accent); }
-  .hidden { display: none; }
+
+  .examples h2 { font: 500 .95rem/1.4 var(--sans); color: var(--muted); margin: 18px 0 10px; }
+  .strip { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; }
+  @media (max-width: 520px) { .strip { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .strip button { padding: 0; border: 1px solid var(--rule); border-radius: 4px; background: var(--paper); cursor: pointer; overflow: hidden; }
+  .strip button:hover, .strip button[aria-pressed=true] { border-color: var(--leaf); box-shadow: 0 0 0 2px var(--leaf); }
+  .strip img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
+
+  /* the determination label: the one typed, archival element of the page */
+  .label { background: var(--sheet); border: 1px solid var(--ink); border-radius: 2px; padding: 4px; }
+  .label-inner { border: 1px solid var(--ink); padding: clamp(16px, 2.4vw, 24px); }
+  .label-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+                border-bottom: 1px solid var(--ink); padding-bottom: 10px; margin-bottom: 14px; }
+  .label-head h2 { font: 600 1.15rem/1.2 var(--serif); margin: 0; }
+  .label-head span { font: 400 .82rem var(--mono); color: var(--muted); }
+  .verdict { font: 700 clamp(1.7rem, 3.4vw, 2.3rem)/1.1 var(--serif); margin: 2px 0 6px; text-wrap: balance; }
+  .verdict.ok { color: var(--leaf); } .verdict.bad { color: var(--lesion); } .verdict.unsure { color: var(--ochre); }
+  .verdict .en { display: block; font: 400 .95rem/1.4 var(--sans); color: var(--muted); margin-top: 4px; }
+  .note { margin: 0 0 16px; padding-left: 12px; border-left: 3px solid var(--rule); color: var(--ink); }
+  .note.ok { border-color: var(--leaf); } .note.bad { border-color: var(--lesion); } .note.unsure { border-color: var(--ochre); background: var(--ochre-soft); padding: 8px 12px; }
+  .fields { display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px; margin: 0; }
+  .fields dt { color: var(--muted); font-size: .9rem; }
+  .fields dd { margin: 0; font: 400 .95rem/1.5 var(--mono); border-bottom: 1px dotted var(--rule); }
+  .label .placeholder { color: var(--muted); font: 400 1rem var(--mono); padding: 28px 0; margin: 0; }
+
+  .analysis { margin-top: 22px; }
+  .analysis h3 { font: 600 1.02rem/1.3 var(--serif); margin: 0 0 10px; }
+  .bars { list-style: none; margin: 0 0 22px; padding: 0; display: grid; gap: 10px; }
+  .bars li { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; font-size: .95rem; }
+  .bars .sub { color: var(--muted); font-size: .82rem; grid-column: 1 / -1; margin-top: -4px; }
+  .bars .track { grid-column: 1 / -1; height: 6px; background: var(--leaf-soft); border-radius: 3px; overflow: hidden; }
+  .bars .fill { height: 100%; background: var(--leaf); }
+  .bars li:first-child .fill { background: var(--ink); }
+  .bars .pct { font-family: var(--mono); font-size: .9rem; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .pair figure { margin: 0; }
+  .pair canvas { width: 100%; aspect-ratio: 1; display: block; border-radius: 2px; background: var(--paper); }
+  .pair figcaption { font-size: .82rem; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+  .timing { font-size: .82rem; color: var(--muted); margin: 14px 0 0; }
+
+  .status { display: flex; align-items: center; gap: 10px; font-size: .92rem; color: var(--muted); margin: 12px 0 0; min-height: 1.6em; }
+  .status .bar { width: 120px; height: 4px; background: var(--rule); border-radius: 2px; overflow: hidden; }
+  .status .bar i { display: block; height: 100%; width: 0; background: var(--leaf); transition: width .2s; }
+  .status.ready .bar { display: none; }
+  .status.error { color: var(--lesion); }
+
+  /* reading sections */
+  .read { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px);
+          border-top: 1px solid var(--rule); margin-top: clamp(40px, 6vw, 72px); padding-top: clamp(28px, 4vw, 44px); }
+  @media (max-width: 860px) { .read { grid-template-columns: 1fr; } }
+  .read h2 { font: 600 1.5rem/1.2 var(--serif); margin: 0 0 16px; }
+  .steps { list-style: none; counter-reset: step; margin: 0; padding: 0; display: grid; gap: 16px; }
+  .steps li { counter-increment: step; display: grid; grid-template-columns: 2.2rem 1fr; gap: 0 12px; }
+  .steps li::before { content: counter(step); grid-row: span 2; font: 600 1.4rem/1.1 var(--serif); color: var(--leaf);
+                      border-right: 1px solid var(--rule); }
+  .steps b { font-weight: 600; }
+  .steps span { color: var(--muted); }
+  .results p { color: var(--muted); margin: 0 0 14px; max-width: 34rem; }
+  .results table { width: 100%; border-collapse: collapse; }
+  .results td { padding: 9px 0; border-bottom: 1px solid var(--rule); vertical-align: baseline; }
+  .results td:last-child { text-align: right; font: 600 1.15rem var(--serif); padding-left: 16px; white-space: nowrap; }
+  .limits { margin-top: clamp(28px, 4vw, 44px); max-width: 46rem; }
+  .limits h2 { font: 600 1.5rem/1.2 var(--serif); margin: 0 0 12px; }
+  .limits ul { margin: 0; padding-left: 1.1rem; color: var(--muted); display: grid; gap: 6px; }
+
+  /* the maker's signature */
+  .signature { margin-top: clamp(44px, 7vw, 88px); border-top: 1px solid var(--ink); padding: 26px 0 40px;
+               display: grid; grid-template-columns: auto 1fr; gap: 6px 20px; align-items: start; }
+  .signature .made { grid-column: 1 / -1; color: var(--muted); font-size: .9rem; margin: 0; }
+  .signature .name { font: 600 italic clamp(1.9rem, 4vw, 2.6rem)/1.1 var(--serif); margin: 0; letter-spacing: -.01em; }
+  .signature .who { margin: 4px 0 0; color: var(--muted); }
+  .signature nav { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 12px; }
+  .signature nav a { font-weight: 500; }
+  .signature .small { grid-column: 1 / -1; color: var(--muted); font-size: .85rem; margin: 14px 0 0; max-width: 46rem; }
+  .signature .warn { grid-column: 1 / -1; font-size: .85rem; margin: 6px 0 0; max-width: 46rem; }
+  @media (max-width: 520px) { .signature { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
-<main>
-  <h1>🌿 Plant disease detection</h1>
-  <p class="lead">Upload a photo of <b>one leaf</b> of a supported crop. The model names the disease
-    (or "healthy"), shows its three most likely classes, and highlights the part of the photo that
-    drove the answer. It runs <b>in your browser</b>: the photo is not uploaded anywhere.</p>
-  <p class="crops" id="crops"></p>
-  <p class="status" id="status">Loading the model…</p>
+<header class="wrap masthead">
+  <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+    <path d="M12 52C12 28 26 12 54 10c-1 27-16 42-42 42z" fill="var(--leaf)"/>
+    <path d="M12 52C22 40 32 30 46 18" stroke="var(--paper)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <circle cx="36" cy="34" r="5" fill="var(--lesion)"/>
+  </svg>
+  <div class="brand">
+    <b data-i18n="brand">Plant disease detection</b>
+    <a href="#author" data-i18n="byline">Made by Anar Hummatli</a>
+  </div>
+  <button class="lang" id="lang" type="button" lang="az">Azərbaycanca</button>
+</header>
+<div class="wrap"><hr class="rule"></div>
 
-  <div class="grid">
-    <section class="card">
-      <label class="drop" id="drop" for="file">
-        <span class="hint" id="hint">Drop a leaf photo here, or click to choose one<br>
-          (JPG, PNG, WebP; on a phone you can take a picture)</span>
-        <img id="preview" class="hidden" alt="The uploaded leaf photo">
+<main class="wrap">
+  <section class="hero">
+    <h1 data-i18n="hero.title">Show it a leaf. It names the disease.</h1>
+    <div>
+    <p data-i18n="hero.lead">Take or upload a photo of one leaf from a supported crop.</p>
+    <p class="private" data-i18n="hero.private">The model runs on your device. Your photo is not uploaded anywhere.</p>
+    <p class="crops"><span data-i18n="crops.label">Supported crops</span>: <span id="crops"></span></p>
+    <p class="status" id="status" role="status" aria-live="polite"><span class="bar"><i id="progress"></i></span><span id="status-text">Loading the model</span></p>
+    </div>
+  </section>
+
+  <section class="bench">
+    <div class="sheet">
+      <label class="mount" id="mount" for="file">
+        <span class="corners" aria-hidden="true"></span>
+        <span class="scan" aria-hidden="true"></span>
+        <span class="empty" id="empty">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M12 52C12 28 26 12 54 10c-1 27-16 42-42 42z" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M12 52C22 40 32 30 46 18" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+          <b data-i18n="mount.title">Drop a leaf photo here</b>
+          <span data-i18n="mount.hint">JPG, PNG or WebP.</span>
+        </span>
+        <img id="preview" alt="" hidden>
       </label>
+      <div class="actions">
+        <label class="btn primary" for="camera" id="camera-btn" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
+          <span data-i18n="btn.camera">Take a photo</span></label>
+        <label class="btn primary" for="file" id="choose-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 17v3h16v-3M12 4v12M7 9l5-5 5 5"/></svg>
+          <span data-i18n="btn.choose">Choose a photo</span></label>
+        <button class="btn" type="button" id="paste">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4h6v3H9z"/></svg>
+          <span data-i18n="btn.paste">Paste</span></button>
+      </div>
       <input type="file" id="file" accept="image/*">
-      <div class="buttons">
-        <label class="button primary" for="file">Choose a photo</label>
-        <button type="button" id="paste">Paste from clipboard</button>
+      <input type="file" id="camera" accept="image/*" capture="environment">
+      <div class="examples">
+        <h2 data-i18n="examples.title">Or try a test photo the model never saw in training</h2>
+        <div class="strip" id="examples"></div>
       </div>
-      <h2>Examples: test photos the model never saw in training</h2>
-      <div class="examples" id="examples"></div>
-    </section>
+    </div>
 
-    <section class="card" id="result">
-      <div class="verdict idle" id="verdict"><p>Upload a leaf photo or pick an example.</p></div>
-      <div id="details" class="hidden">
-        <h2 style="margin-top:0">Top-3 classes</h2>
-        <div id="bars"></div>
-        <h2>Grad-CAM: where the model looked</h2>
-        <div class="cam">
-          <figure><canvas id="seen" width="224" height="224"></canvas>
-            <figcaption>What the model saw (224 × 224)</figcaption></figure>
-          <figure><canvas id="heat" width="224" height="224"></canvas>
-            <figcaption id="heatcap">Heat map</figcaption></figure>
+    <section class="label" aria-labelledby="label-title">
+      <div class="label-inner">
+        <div class="label-head"><h2 id="label-title" data-i18n="label.title">Determination</h2><span id="label-no"></span></div>
+        <div id="result" aria-live="polite">
+          <p class="placeholder" data-i18n="label.empty">The answer appears here.</p>
         </div>
-        <p class="info" id="info"></p>
       </div>
+    </section>
+  </section>
+
+  <div class="read">
+    <section>
+      <h2 data-i18n="how.title">How it works</h2>
+      <ol class="steps">
+        <li><b data-i18n="how.1.t">Photo</b><span data-i18n="how.1.d"></span></li>
+        <li><b data-i18n="how.2.t">Model</b><span data-i18n="how.2.d"></span></li>
+        <li><b data-i18n="how.3.t">Answer</b><span data-i18n="how.3.d"></span></li>
+        <li><b data-i18n="how.4.t">Explanation</b><span data-i18n="how.4.d"></span></li>
+      </ol>
+    </section>
+    <section class="results">
+      <h2 data-i18n="res.title">How well it works</h2>
+      <p data-i18n="res.lead"></p>
+      <table>
+        <tr><td data-i18n="res.f1">Macro-F1</td><td>0.982</td></tr>
+        <tr><td data-i18n="res.acc">Accuracy</td><td>98.6%</td></tr>
+        <tr><td data-i18n="res.top3">Top-3</td><td>99.96%</td></tr>
+        <tr><td data-i18n="res.answered">Answered correct</td><td>99.5%</td></tr>
+      </table>
     </section>
   </div>
 
-  <details>
-    <summary>About the model and its limits</summary>
-    <p><b>Model.</b> MobileNetV2 (ImageNet weights) with the whole backbone fine-tuned on
-      PlantVillage, 38 classes. On the official test split (10,709 lab photos, scored once):
-      <b>macro-F1 0.982, accuracy 98.6%</b>, top-3 accuracy 99.96%. The split keeps every leaf on
-      one side, so photos of a test leaf were never seen in training.</p>
-    <p><b>"Not sure".</b> If the top class has a probability below <span id="thr">94.7%</span>
-      (a threshold chosen on the validation split), no diagnosis is given. On the test split this
-      happens for 3.2% of the photos; the answered ones are 99.5% correct.</p>
-    <p><b>Heat map (Grad-CAM).</b> Red areas raised the score of the top class the most. The map
-      is coarse (about 1/7 of the photo per cell): it shows a region, not single spots.</p>
-    <p><b>Limits.</b> The training photos are single leaves on plain lab backgrounds. Field photos
-      (several leaves, soil, strong shadows) are harder and were not tested. Crops and diseases
-      outside the 38 classes are not recognised as unknown: they get the closest known class,
-      sometimes with high confidence.</p>
-    <p><b>How it runs.</b> The model (<span id="mb">9 MB</span>, downloaded once) is executed by
-      ONNX Runtime Web on your device. A photo is cut to its centred square and resized exactly as
-      in training; the result matches the Python model of release <span id="ver">v1.0</span>.
-      Code, data checks and the full evaluation:
-      <a href="https://github.com/AnarHummatli/plant-disease-detection">GitHub</a>.</p>
-  </details>
-  <p class="disclaimer">⚠️ Educational prototype. It gives preliminary information only and does
-    not replace an agronomist's diagnosis. Example photos: PlantVillage (Hughes &amp; Salathé, 2015),
-    CC BY-SA 3.0.</p>
+  <section class="limits">
+    <h2 data-i18n="lim.title">Limits</h2>
+    <ul>
+      <li data-i18n="lim.1"></li>
+      <li data-i18n="lim.2"></li>
+      <li data-i18n="lim.3"></li>
+    </ul>
+  </section>
+
+  <footer class="signature" id="author">
+    <p class="made" data-i18n="foot.made">Made by</p>
+    <div>
+      <p class="name">Anar Hummatli</p>
+      <p class="who" data-i18n="foot.role">Computer Engineering, Azerbaijan State Oil and Industry University</p>
+    </div>
+    <nav aria-label="Anar Hummatli">
+      <a href="https://github.com/AnarHummatli/plant-disease-detection" data-i18n="foot.repo">Source code</a>
+      <a href="https://github.com/AnarHummatli">GitHub</a>
+      <a href="https://www.linkedin.com/in/anarhummatli">LinkedIn</a>
+      <a href="https://huggingface.co/AnarHummatli">Hugging Face</a>
+    </nav>
+    <p class="small" data-i18n="foot.project">Neural Networks course project, 2026.</p>
+    <p class="small" data-i18n="foot.data">Example photos: PlantVillage (Hughes &amp; Salathé, 2015), CC BY-SA 3.0.</p>
+    <p class="warn" data-i18n="lim.3">It is an educational prototype, not a replacement for an agronomist.</p>
+  </footer>
 </main>
 <!-- onnxruntime-web, pinned; keep the version equal to ORT_VERSION in plantdx/web_export.py -->
 <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.31.1/dist/ort.wasm.min.js"></script>
 <script src="imaging.js"></script>
+<script src="i18n.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

@@ -8,3 +8,5 @@
 *.keras binary
 *.h5 binary
 *.tflite binary
+*.woff2 binary
+*.onnx binary

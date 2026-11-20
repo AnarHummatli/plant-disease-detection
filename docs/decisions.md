@@ -579,6 +579,17 @@ classes), where they are kept next to a class table generated from the splits.
   example (early vs late blight, "not sure" in both). The Python demo stays the reference.
 - **Speed.** In headless Chrome on the 2-vCPU VM: model loaded in about 2 s, a photo prepared in
   about 10 ms and the model with Grad-CAM in about 35 ms (single-threaded WebAssembly).
+- **The page.** English and Azerbaijani (chosen from the browser language, switchable, remembered
+  on the device); class names in Azerbaijani are shown with the English name beside them, so a
+  term can be checked. The result is laid out as a herbarium determination label (crop,
+  condition, confidence, determined by). Fonts (Source Serif 4, IBM Plex Sans and Mono, SIL Open
+  Font License) are served with the page, so it loads nothing from third parties except ONNX
+  Runtime Web. The page works from 390 px phones up, with a camera button on touch devices, a
+  dark colour scheme, keyboard focus and reduced motion respected; tests check that every text
+  exists in both languages and that the class names follow the model's class order.
+- **Two addresses.** The same build is uploaded to the static Space by hand and published on
+  GitHub Pages by `.github/workflows/pages.yml`, which rebuilds it from the release model on every
+  change to the page.
 - **Consequence.** The demo has a permanent public address on a free Hugging Face Space; the
   Gradio app (D-021) remains for Colab and local use. `.[web]` adds `tf2onnx` and `onnxruntime`;
   CI installs it, so the export and the JavaScript resize are tested on every push.
