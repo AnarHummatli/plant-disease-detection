@@ -123,6 +123,25 @@ def test_trainer_one_epoch_writes_run_and_results(tmp_path, monkeypatch):
     assert {"loss", "val_loss", "val_macro_f1", "val_top3"} <= set(history.columns)
 
 
+def test_test_split_is_scored_once(tmp_path, monkeypatch):
+    """D-015: evaluate_run refuses a second test evaluation of the same run."""
+    from plantdx.evaluate import evaluate_run
+    from plantdx.train import train
+
+    monkeypatch.setenv("PLANTDX_ARTIFACTS", str(tmp_path / "artifacts"))
+    cfg, data, splits = make_fake_project(tmp_path)
+    train(cfg, data, splits_dir=splits, verbose=0)
+    report = evaluate_run("smoke", data, splits_dir=splits)
+
+    assert report["test"]["n"] == 8 and report["test_verified"]["n"] == 8
+    run = tmp_path / "artifacts" / "runs" / "smoke"
+    assert (run / "metrics_test.json").is_file() and (run / "test_scores.npz").is_file()
+    results = pd.read_csv(tmp_path / "artifacts" / "reports" / "results.csv")
+    assert sorted(results["split"]) == ["test", "test_verified", "val"]
+    with pytest.raises(RuntimeError, match="used once"):
+        evaluate_run("smoke", data, splits_dir=splits)
+
+
 def test_inference_export_matches_mixed_precision_model(tmp_path):
     """float32 copy without augmentation predicts like the mixed-precision trained model."""
     from plantdx.export import INFERENCE_FILE, export_inference

@@ -16,11 +16,17 @@ from plantdx.paths import artifacts_dir
 PACKAGES = ("numpy", "pandas", "scikit-learn", "tensorflow", "keras", "gradio", "huggingface_hub")
 
 
+# a package may be installed under another distribution name (CPU-only TensorFlow)
+ALIASES = {"tensorflow": ("tensorflow", "tensorflow-cpu")}
+
+
 def _version(pkg: str) -> str:
-    try:
-        return metadata.version(pkg)
-    except metadata.PackageNotFoundError:
-        return "not installed"
+    for name in ALIASES.get(pkg, (pkg,)):
+        try:
+            return metadata.version(name)
+        except metadata.PackageNotFoundError:
+            continue
+    return "not installed"
 
 
 def gpu_names() -> list[str]:

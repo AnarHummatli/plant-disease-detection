@@ -609,3 +609,31 @@ classes), where they are kept next to a class table generated from the splits.
 - **Consequence.** The demo has a permanent public address on a free Hugging Face Space; the
   Gradio app (D-021) remains for Colab and local use. `.[web]` adds `tf2onnx` and `onnxruntime`;
   CI installs it, so the export and the JavaScript resize are tested on every push.
+
+## D-024 · Reproduction check: re-scoring the frozen release model is not a second test evaluation
+
+- **Context.** Plan step 7 asks that someone else can repeat the work from the README. Training
+  every model again takes about three and a half GPU hours and is not bit-deterministic (D-018),
+  so it cannot show on its own whether a fresh environment gives *the same* results. D-015
+  forbids scoring a run on the test split twice.
+- **Decision.** `python -m plantdx.reproduce` (notebook 10, `make reproduce`) compares a fresh
+  environment with the committed numbers, each within a stated tolerance:
+  - the splits rebuilt from the official index files and the committed grouping pairs:
+    byte-identical;
+  - the released `inference.keras` (v1.0, SHA-256 checked) on the test split: macro-F1 and
+    accuracy within 0.001 on the full split and on the leaf-verified part, at most 5 of 10,709
+    predictions different from the committed confusion matrix, and the same "not sure" coverage
+    and accuracy at 0.947 (float results can differ slightly between a GPU and a CPU);
+  - the seven demo examples and the ONNX export (as in the tests);
+  - one model trained again from scratch, `mobilenetv2_head` (frozen backbone, ~15 minutes on a
+    T4): validation macro-F1 within 0.01 of the reported 0.9158.
+  It also writes `requirements.lock`: the exact versions of every package that `plantdx` (all
+  extras) and TensorFlow need, directly or indirectly, in the environment of the run.
+- **Why this keeps the test-once rule.** D-015 protects decisions: the test split must not
+  influence which model, threshold or setting is chosen. Scoring the *frozen, released* model
+  again computes numbers that are already published; its outcome cannot change the model, the
+  threshold or any table. It is a check of the code and the environment, and the report says so.
+  `plantdx.evaluate` still refuses a second test evaluation of a run (now covered by a test).
+- **Consequence.** `reports/reproduction/` holds the report of a clean Colab session (date,
+  commit, versions, every check) and `requirements.lock` the versions it ran with. A failed line
+  points to what changed: the data source, a dependency or the code.

@@ -15,18 +15,11 @@ import pytest
 pytest.importorskip("tensorflow")
 
 from plantdx import predict as P  # noqa: E402
+from plantdx import reproduce as REPRO  # noqa: E402
 
 EXAMPLES = Path(__file__).resolve().parents[1] / "app" / "gradio" / "examples"
-EXPECTED = {
-    "apple_cedar_apple_rust.jpg": "Apple___Cedar_apple_rust",
-    "grape_black_rot.jpg": "Grape___Black_rot",
-    "pepper_bell_healthy.jpg": "Pepper,_bell___healthy",
-    "potato_early_blight.jpg": "Potato___Early_blight",
-    "strawberry_leaf_scorch.jpg": "Strawberry___Leaf_scorch",
-    "tomato_early_blight_part_of_leaf.jpg": "Tomato___Early_blight",
-    "tomato_yellow_leaf_curl_virus.jpg": "Tomato___Tomato_Yellow_Leaf_Curl_Virus",
-}
-NOT_SURE = "tomato_early_blight_part_of_leaf.jpg"
+EXPECTED = REPRO.EXAMPLES  # one list for this test and the reproduction check
+NOT_SURE = REPRO.EXAMPLE_NOT_SURE
 
 
 @pytest.fixture(scope="module")

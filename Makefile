@@ -9,12 +9,13 @@ CANDIDATES ?= cnn_scratch mobilenetv2_head mobilenetv2_ft mobilenetv2_ft_lr3e-5 
               mobilenetv2_ft_lr1e-4 mobilenetv2_ft_all
 RUNS ?= baseline_logreg baseline_linsvm
 
-.PHONY: help install install-local env data card baselines train eval analyze demo web test lint format
+.PHONY: help install install-local env images data card baselines train eval analyze demo web reproduce test lint format
 
 help:
 	@echo "install        core + dev deps (Colab/Kaggle: TensorFlow already present)"
 	@echo "install-local  + TensorFlow and Gradio (your own machine)"
 	@echo "env            print Python / TF / GPU / artifacts report"
+	@echo "images         download the PlantVillage images to DATA (~2.2 GB)        (step 2)"
 	@echo "data           rebuild the leaf- and duplicate-grouped splits          (step 2)"
 	@echo "card           refresh the class table in docs/data_card.md"
 	@echo "baselines      colour/HOG/LBP features + LogReg / linear SVM            (step 3.2)"
@@ -23,6 +24,7 @@ help:
 	@echo "analyze        error analysis, Grad-CAM, \"not sure\" threshold          (step 5)"
 	@echo "demo           launch the Gradio demo (downloads the model once)       (step 6)"
 	@echo "web            build the browser demo into build/web (static Space)    (step 6)"
+	@echo "reproduce      compare a fresh environment with the reported results (step 7)"
 	@echo "test / lint    pytest / ruff"
 
 install:
@@ -33,6 +35,9 @@ install-local:
 
 env:
 	$(PY) -m plantdx.env
+
+images:
+	$(PY) -m plantdx.data.images --out $(DATA)
 
 data:
 	$(PY) -m plantdx.data.prepare
@@ -57,6 +62,9 @@ demo:
 
 web:
 	$(PY) -m plantdx.web_export --out build/web
+
+reproduce:
+	$(PY) -m plantdx.reproduce --data-root $(DATA) --train
 
 test:
 	$(PY) -m pytest

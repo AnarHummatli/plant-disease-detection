@@ -119,7 +119,29 @@ Tuning budget: one configuration for the CNN, five for MobileNetV2. Per-run deta
 
 ## Quick start
 
-### Google Colab (recommended)
+### Reproduce the results
+
+One command compares a fresh environment with every reported number: the splits rebuilt from the
+official index files, the released model on the test split (macro-F1, accuracy, confusion matrix,
+"not sure" numbers), the demo examples, the browser export and one model trained again
+(`mobilenetv2_head`, val macro-F1 within 0.01). Re-scoring the frozen release model reproduces
+published numbers and changes no decision, so the test split stays used once (D-024).
+
+- **Colab:** open `notebooks/10_reproduce.ipynb` on a new T4 session and run all cells (~25 min).
+- **Shell** (Linux, a GPU for the training check):
+
+```bash
+git clone https://github.com/AnarHummatli/plant-disease-detection.git
+cd plant-disease-detection
+pip install -e ".[tf,demo,web,dev]"    # or the exact versions: pip install -r requirements.lock
+make images DATA=data                  # PlantVillage images, ~2.2 GB
+make reproduce DATA=data               # writes reports/reproduction/reproduction.md
+```
+
+`python -m plantdx.reproduce --data-root data` without `--train` skips the training run (~5 min).
+`requirements.lock` holds the exact versions of the package tree that the reproduction ran with.
+
+### Google Colab (recommended for training)
 
 Open `notebooks/00_colab_bootstrap.ipynb` in Colab, select a T4 GPU runtime and run all cells.
 It mounts Drive, installs the package, and checks the dataset and the committed splits
@@ -162,6 +184,7 @@ the repository. From a shell, with the images extracted to `DATA` (the folder th
 `raw/color/`):
 
 ```bash
+make images DATA=/content/data                             # download and extract the images
 make baselines DATA=/content/data                          # colour/HOG/LBP + LogReg / linear SVM
 make train CONFIG=configs/cnn.yaml DATA=/content/data      # CNN from scratch
 make train CONFIG=configs/mobilenetv2_head.yaml DATA=...   # MobileNetV2: frozen backbone, new head
@@ -187,17 +210,19 @@ configs/          experiment configs (YAML, inherit from base.yaml)
 src/plantdx/      all logic: data/ (source, splits, duplicates, sameleaf, pipeline, card), baselines/,
                   models/ (cnn, mobilenet), train, export, evaluate, metrics, results,
                   analysis + analyze (error analysis), gradcam, viz, predict (demo core),
-                  web_export (browser demo build)
+                  web_export (browser demo build), reproduce (reproduction check)
 notebooks/        00 bootstrap, 01 EDA + first audit, 02 duplicate search, 03 pipeline check, 04 leaf groups,
                   05 classical baselines, 06 train neural networks, 07 final model + test evaluation,
-                  08 error analysis, Grad-CAM and the "not sure" threshold, 09 demo (public link)
+                  08 error analysis, Grad-CAM and the "not sure" threshold, 09 demo (public link),
+                  10 reproduction check in a clean session
 splits/           train/val/test CSVs with leaf_id and group_id, grouping pairs (committed)
 tests/            pytest: splits, pipeline, baselines, models, trainer, evaluation, analysis, Grad-CAM,
-                  demo, browser build (ONNX export, JavaScript resize, translations)
+                  demo, browser build (ONNX export, JavaScript resize, translations), reproduction
 app/gradio/       Gradio demo (app.py) and seven example test photos with attribution
 app/web/          browser demo (static page; the model runs with ONNX Runtime Web)
 docs/             problem statement, data card, decision log, error analysis (later: report)
-reports/figures/  every figure used in the report and this README
+reports/          results tables, per-run metrics, analysis, reproduction check; figures/ for the report
+requirements.lock exact package versions of the reproduction run
 ```
 
 ## Data

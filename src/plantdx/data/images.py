@@ -1,5 +1,7 @@
 """Download data.zip and extract one variant's images (plan step 2.1).
 
+    python -m plantdx.data.images --out /content/data      # ~2.2 GB download, ~3 min on Colab
+
 data.zip is about 2.2 GB and contains all three variants (color, grayscale, segmented).
 We extract only `raw/<variant>/...` to a fast local folder (on Colab: /content/data, not
 Drive, because reading thousands of small files from Drive is slow).
@@ -7,6 +9,7 @@ Drive, because reading thousands of small files from Drive is slow).
 
 from __future__ import annotations
 
+import argparse
 import zipfile
 from collections.abc import Iterable
 from pathlib import Path
@@ -59,3 +62,18 @@ def image_path(root: str | Path, variant: str, rel_path: str) -> Path:
 def missing_files(root: str | Path, variant: str, rel_paths: Iterable[str]) -> list[str]:
     """Entries of `rel_paths` that are not present on disk (should be empty)."""
     return [p for p in rel_paths if not image_path(root, variant, p).is_file()]
+
+
+def main(argv: list[str] | None = None) -> None:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument(
+        "--out", required=True, help="destination; images go to <out>/raw/<variant>/"
+    )
+    parser.add_argument("--variant", default="color", choices=["color", "grayscale", "segmented"])
+    args = parser.parse_args(argv)
+    written = extract_variant(download_archive(), args.out, args.variant)
+    print(f"{written:,} new files under {Path(args.out) / 'raw' / args.variant}")
+
+
+if __name__ == "__main__":
+    main()
