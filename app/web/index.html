@@ -11,12 +11,11 @@
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://anarhummatli-plant-disease-detection.static.hf.space/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#F1F3EC" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#131A15" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F1F3EC">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <script>
-  // colour scheme chosen with the header button, else the device setting; set before the page paints
-  try { const s = localStorage.getItem("plantdx.theme"); if (s === "light" || s === "dark") document.documentElement.dataset.theme = s; } catch {}
+  // light by default; dark only if chosen with the header button. Set before the page paints.
+  try { if (localStorage.getItem("plantdx.theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch {}
 </script>
 <link rel="preload" href="fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -36,14 +35,6 @@
     --leaf: #7FC08F; --leaf-soft: #22382A; --lesion: #E59A7A; --lesion-soft: #3A2620;
     --ochre: #E2B661; --ochre-soft: #3A3020; --focus: #7FC08F;
     color-scheme: dark;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme=light]) {
-      --paper: #131A15; --sheet: #1A231D; --ink: #E3EADF; --muted: #A3B1A6; --rule: #34423A;
-      --leaf: #7FC08F; --leaf-soft: #22382A; --lesion: #E59A7A; --lesion-soft: #3A2620;
-      --ochre: #E2B661; --ochre-soft: #3A3020; --focus: #7FC08F;
-      color-scheme: dark;
-    }
   }
   * { box-sizing: border-box; }
   [hidden] { display: none !important; }

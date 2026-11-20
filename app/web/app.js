@@ -62,8 +62,7 @@ function applyLanguage(lang) {
 }
 
 // --------------------------------------------------------------------------- colour scheme
-const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
-const isDark = () => (document.documentElement.dataset.theme || (darkQuery.matches ? "dark" : "light")) === "dark";
+const isDark = () => document.documentElement.dataset.theme === "dark"; // light unless chosen
 
 function showTheme() {
   const dark = isDark();
@@ -312,7 +311,6 @@ function wire() {
     }
   });
   $("theme").addEventListener("click", toggleTheme);
-  darkQuery.addEventListener("change", showTheme);
   for (const b of document.querySelectorAll(".lang button")) {
     b.addEventListener("click", () => applyLanguage(b.dataset.lang));
   }

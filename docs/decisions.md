@@ -594,8 +594,8 @@ classes), where they are kept next to a class table generated from the splits.
   herbarium determination label (crop, condition, confidence, determined by). Fonts (Source Serif
   4, IBM Plex Sans and Mono, SIL Open Font License) are served with the page, so it loads nothing
   from third parties except ONNX Runtime Web. The page works from 390 px phones up, with a camera
-  button on touch devices, light and dark colour schemes (the device setting, or the switch in
-  the header, remembered on the device), keyboard focus and reduced motion respected; tests check
+  button on touch devices, a light colour scheme by default and a dark one with the switch in the
+  header (remembered on the device), keyboard focus and reduced motion respected; tests check
   that every text exists in both languages and that the class names follow the model's class
   order.
 - **Two addresses.** The same build is uploaded to the static Space by hand and published on
