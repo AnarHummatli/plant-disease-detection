@@ -9,6 +9,7 @@ const EXAMPLES = [
 ];
 const MAX_EXACT = 512; // squares up to this size are resized exactly like training
 const LANG_KEY = "plantdx.lang";
+const THEME_KEY = "plantdx.theme"; // also read by the inline script in index.html
 
 const $ = (id) => document.getElementById(id);
 const state = { meta: null, session: null, busy: false, ready: false, lang: "en", last: null };
@@ -55,8 +56,31 @@ function applyLanguage(lang) {
   if (state.meta) {
     $("crops").textContent = state.meta.crops.map((c) => (lang === "az" ? i18n.CROPS_AZ[c] || c : c)).join(", ");
   }
+  showTheme();
   if (state.status) setStatus(...state.status);
   if (state.last) renderResult(state.last);
+}
+
+// --------------------------------------------------------------------------- colour scheme
+const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
+const isDark = () => (document.documentElement.dataset.theme || (darkQuery.matches ? "dark" : "light")) === "dark";
+
+function showTheme() {
+  const dark = isDark();
+  document.documentElement.toggleAttribute("data-dark", dark);
+  const b = $("theme");
+  b.setAttribute("aria-pressed", String(dark));
+  b.setAttribute("aria-label", t(dark ? "theme.light" : "theme.dark"));
+  b.title = b.getAttribute("aria-label");
+  const bg = getComputedStyle(document.documentElement).getPropertyValue("--paper").trim();
+  for (const m of document.querySelectorAll('meta[name="theme-color"]')) m.content = bg;
+}
+
+function toggleTheme() {
+  const next = isDark() ? "light" : "dark";
+  document.documentElement.dataset.theme = next;
+  try { localStorage.setItem(THEME_KEY, next); } catch { /* not persisted */ }
+  showTheme();
 }
 
 // --------------------------------------------------------------------------------- status
@@ -287,6 +311,8 @@ function wire() {
       setStatus("paste.blocked", {}, state.ready ? "ready" : "");
     }
   });
+  $("theme").addEventListener("click", toggleTheme);
+  darkQuery.addEventListener("change", showTheme);
   for (const b of document.querySelectorAll(".lang button")) {
     b.addEventListener("click", () => applyLanguage(b.dataset.lang));
   }

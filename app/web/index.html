@@ -14,6 +14,10 @@
 <meta name="theme-color" content="#F1F3EC" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131A15" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<script>
+  // colour scheme chosen with the header button, else the device setting; set before the page paints
+  try { const s = localStorage.getItem("plantdx.theme"); if (s === "light" || s === "dark") document.documentElement.dataset.theme = s; } catch {}
+</script>
 <link rel="preload" href="fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts.css">
@@ -27,8 +31,14 @@
     --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
     color-scheme: light;
   }
+  :root[data-theme=dark] {
+    --paper: #131A15; --sheet: #1A231D; --ink: #E3EADF; --muted: #A3B1A6; --rule: #34423A;
+    --leaf: #7FC08F; --leaf-soft: #22382A; --lesion: #E59A7A; --lesion-soft: #3A2620;
+    --ochre: #E2B661; --ochre-soft: #3A3020; --focus: #7FC08F;
+    color-scheme: dark;
+  }
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme=light]) {
       --paper: #131A15; --sheet: #1A231D; --ink: #E3EADF; --muted: #A3B1A6; --rule: #34423A;
       --leaf: #7FC08F; --leaf-soft: #22382A; --lesion: #E59A7A; --lesion-soft: #3A2620;
       --ochre: #E2B661; --ochre-soft: #3A3020; --focus: #7FC08F;
@@ -60,6 +70,13 @@
                  border: 0; border-radius: 999px; padding: 7px 12px; cursor: pointer; min-width: 44px; }
   .lang button:hover { color: var(--ink); }
   .lang button[aria-pressed=true] { background: var(--ink); color: var(--paper); }
+  .theme { flex: none; width: 38px; height: 38px; display: grid; place-items: center; padding: 0; cursor: pointer;
+           color: var(--muted); background: transparent; border: 1px solid var(--rule); border-radius: 999px; }
+  .theme:hover { color: var(--ink); }
+  .theme svg { width: 18px; height: 18px; }
+  .theme .sun { display: none; }
+  :root[data-dark] .theme .sun { display: block; }
+  :root[data-dark] .theme .moon { display: none; }
   @media (max-width: 520px) {
     .masthead { gap: 10px; padding-top: 10px; padding-bottom: 10px; }
     .mark { width: 32px; height: 32px; }
@@ -68,6 +85,7 @@
     .brand .long { display: none; }
     .brand .short { display: inline; }
     .lang button { padding: 6px 9px; min-width: 36px; }
+    .theme { width: 34px; height: 34px; }
   }
 
   /* hero */
@@ -221,6 +239,10 @@
     <b><span class="long" data-i18n="brand">Plant disease detection</span><span class="short" data-i18n="brand.short">Plant disease detection</span></b>
     <a href="https://www.linkedin.com/in/anarhummatli" target="_blank" rel="noopener" data-i18n="byline">Made by Anar Hummatli</a>
   </div>
+  <button class="theme" id="theme" type="button" aria-pressed="false">
+    <svg class="moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.5 12.2A7 7 0 0 1 7.8 3.5a7 7 0 1 0 8.7 8.7z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    <svg class="sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 1.8v2.2M10 16v2.2M1.8 10h2.2M16 10h2.2M4.2 4.2l1.6 1.6M14.2 14.2l1.6 1.6M4.2 15.8l1.6-1.6M14.2 5.8l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+  </button>
   <div class="lang" role="group" aria-label="Language / Dil">
     <button type="button" data-lang="az" lang="az" aria-pressed="false">AZ</button>
     <button type="button" data-lang="en" lang="en" aria-pressed="true">EN</button>

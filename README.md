@@ -1,4 +1,4 @@
-# Plant Disease Detection · Yarpaq Həkimləri
+# Plant Disease Detection
 
 Classifies a leaf photo into one of **38 plant disease / healthy classes** (14 crops) with a
 CNN and MobileNetV2 transfer learning, evaluated on a **leaf-grouped, leakage-free split**, with

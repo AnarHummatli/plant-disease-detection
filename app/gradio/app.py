@@ -22,7 +22,7 @@ HERE = Path(__file__).resolve().parent
 EXAMPLES = sorted((HERE / "examples").glob("*.jpg"))
 REPO = "https://github.com/AnarHummatli/plant-disease-detection"
 
-TITLE = "Plant disease detection · Yarpaq Həkimləri"
+TITLE = "Plant disease detection · Anar Hummatli"
 INTRO = f"""# 🌿 Plant disease detection
 Upload a photo of **one leaf** of a supported crop. The model names the disease (or "healthy"),
 shows its three most likely classes, and highlights the part of the photo that drove the answer.
