@@ -462,6 +462,15 @@ classes), where they are kept next to a class table generated from the splits.
   predictions: 0.69 and 0.62; healthy and disease classes: both 0.69. Lowest class medians:
   peach healthy 0.42, tomato mosaic virus 0.54. The model relies on the leaf, not on the
   background; for healthy leaves part of the evidence is the leaf outline.
+- **Outcome after the Grad-CAM correction** (D-022, same 555 images and masks, notebook 08 run
+  again on 20 Nov 2026). The numbers above came from probability-gradient maps, which are
+  rounding noise when the probability is 1.0. With the logit maps: median mass on the leaf
+  **0.70** against a leaf area of 0.47; for **97%** of the images the mass on the leaf exceeds
+  the leaf's area, for 8% it is below one half. Correct and wrong predictions: 0.70 and 0.67;
+  healthy and disease classes: 0.69 and 0.71. Lowest class medians: peach healthy 0.43, tomato
+  mosaic virus 0.49, apple healthy 0.58. The conclusion holds and is stronger. The remark about
+  the leaf outline does not: in the corrected maps healthy leaves light up on the leaf blade, so
+  it was an artefact of the noisy maps.
 
 ## D-021 · The demo: same input as in training, compiled model, examples in the repository
 
@@ -545,11 +554,11 @@ classes), where they are kept next to a class table generated from the splits.
   `gradcam.gradcam_fn` (the Python demo) and the ONNX export (D-023) all use it; a test pushes a
   softmax to exactly 1.0 and checks the map against the closed form.
 - **Consequence.** The stage-5 Grad-CAM outputs (D-020: the on-leaf measurement, `failures.jpg`,
-  `gradcam_examples.jpg`, `gradcam_on_leaf.png`) were made with the old maps and are recomputed
-  with notebook 08. Nothing else in stage 5 depends on Grad-CAM (confusion matrix, weakest
-  classes, "not sure" threshold), and no model or test result changes. A rough check on the 456
-  photos (leaf = coloured pixels) already showed the main conclusion holding: median share of the
-  map on the leaf 0.45 with the corrected maps (0.40 before), leaf area 0.30.
+  `gradcam_examples.jpg`, `gradcam_on_leaf.png`) were made with the old maps and were recomputed
+  with notebook 08 on 20 Nov 2026 (results in D-020). In that run every other stage-5 output came
+  out unchanged: the confusion tables, weakest classes, per-class scores, failure list and
+  "not sure" numbers are identical, and the other three figures are pixel-identical. No model or
+  test result changes.
 
 ## D-023 · The demo in the browser (free, permanent link)
 
@@ -579,14 +588,15 @@ classes), where they are kept next to a class table generated from the splits.
   example (early vs late blight, "not sure" in both). The Python demo stays the reference.
 - **Speed.** In headless Chrome on the 2-vCPU VM: model loaded in about 2 s, a photo prepared in
   about 10 ms and the model with Grad-CAM in about 35 ms (single-threaded WebAssembly).
-- **The page.** English and Azerbaijani (chosen from the browser language, switchable, remembered
-  on the device); class names in Azerbaijani are shown with the English name beside them, so a
-  term can be checked. The result is laid out as a herbarium determination label (crop,
-  condition, confidence, determined by). Fonts (Source Serif 4, IBM Plex Sans and Mono, SIL Open
-  Font License) are served with the page, so it loads nothing from third parties except ONNX
-  Runtime Web. The page works from 390 px phones up, with a camera button on touch devices, a
-  dark colour scheme, keyboard focus and reduced motion respected; tests check that every text
-  exists in both languages and that the class names follow the model's class order.
+- **The page.** English by default, Azerbaijani with the AZ | EN switch in the header (the choice
+  is remembered on the device; `?lang=az` opens it directly); class names in Azerbaijani are
+  shown with the English name beside them, so a term can be checked. The result is laid out as a
+  herbarium determination label (crop, condition, confidence, determined by). Fonts (Source Serif
+  4, IBM Plex Sans and Mono, SIL Open Font License) are served with the page, so it loads nothing
+  from third parties except ONNX Runtime Web. The page works from 390 px phones up, with a camera
+  button on touch devices, a dark colour scheme, keyboard focus and reduced motion respected;
+  tests check that every text exists in both languages and that the class names follow the
+  model's class order.
 - **Two addresses.** The same build is uploaded to the static Space by hand and published on
   GitHub Pages by `.github/workflows/pages.yml`, which rebuilds it from the release model on every
   change to the page.

@@ -21,8 +21,8 @@ function pickLanguage() {
   try {
     const saved = localStorage.getItem(LANG_KEY);
     if (saved === "az" || saved === "en") return saved;
-  } catch { /* storage unavailable: fall back to the browser language */ }
-  return (navigator.language || "").toLowerCase().startsWith("az") ? "az" : "en";
+  } catch { /* storage unavailable: use the default */ }
+  return "en"; // English unless the visitor chose Azerbaijani
 }
 
 function t(key, vars = {}) {
@@ -49,9 +49,9 @@ function applyLanguage(lang) {
   document.title = t("doc.title");
   const vars = { thr: threshold() };
   for (const el of document.querySelectorAll("[data-i18n]")) el.textContent = t(el.dataset.i18n, vars);
-  const other = lang === "az" ? "en" : "az";
-  $("lang").textContent = t("lang.switch"); // the name of the other language
-  $("lang").lang = other;
+  for (const b of document.querySelectorAll(".lang button")) {
+    b.setAttribute("aria-pressed", String(b.dataset.lang === lang));
+  }
   if (state.meta) {
     $("crops").textContent = state.meta.crops.map((c) => (lang === "az" ? i18n.CROPS_AZ[c] || c : c)).join(", ");
   }
@@ -286,7 +286,9 @@ function wire() {
       setStatus("paste.blocked", {}, state.ready ? "ready" : "");
     }
   });
-  $("lang").addEventListener("click", () => applyLanguage(state.lang === "az" ? "en" : "az"));
+  for (const b of document.querySelectorAll(".lang button")) {
+    b.addEventListener("click", () => applyLanguage(b.dataset.lang));
+  }
 }
 
 wire();

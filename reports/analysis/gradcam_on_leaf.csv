@@ -1,556 +1,556 @@
 path,label,correct,leaf_area,cam_on_leaf
-Apple___Apple_scab/80ddd81b-9c75-4711-8012-7ee68af378db___FREC_Scab 3458.JPG,Apple___Apple_scab,True,0.38341039540816324,0.5553488731384277
-Apple___Apple_scab/8a8f8dd2-a938-4288-a8ec-56ef0aaa2d4f___FREC_Scab 2947.JPG,Apple___Apple_scab,True,0.5227798150510204,0.7031064629554749
-Apple___Apple_scab/debd9885-73c5-4ba8-9a95-f820846cec77___FREC_Scab 3433.JPG,Apple___Apple_scab,True,0.5653898278061225,0.6991080641746521
-Apple___Apple_scab/c4175126-9e07-4465-9574-0229bb5b1f41___FREC_Scab 3304.JPG,Apple___Apple_scab,True,0.6169682716836735,0.7869144082069397
-Apple___Apple_scab/1ceeeee0-40bd-4ac9-8a57-59385bf5df8a___FREC_Scab 3001.JPG,Apple___Apple_scab,True,0.5304528061224489,0.7304592728614807
-Apple___Apple_scab/ba94f188-df0b-41fd-94e3-f0ed4924e23e___FREC_Scab 3102.JPG,Apple___Apple_scab,True,0.5864756058673469,0.8224379420280457
-Apple___Apple_scab/154842bb-6ee3-4176-9007-cf7a43cfe140___FREC_Scab 3434.JPG,Apple___Apple_scab,True,0.4065489477040816,0.6984038949012756
-Apple___Apple_scab/895252c3-5047-4e87-8e13-2cdd765f3e0a___FREC_Scab 3056.JPG,Apple___Apple_scab,True,0.7166772959183674,0.7791432738304138
-Apple___Apple_scab/e8f5c962-6f40-443e-9913-5a43b5f2ef07___FREC_Scab 3191.JPG,Apple___Apple_scab,True,0.39504942602040816,0.75632643699646
-Apple___Apple_scab/c0f4f71a-8f53-4a0a-816f-d400a445680a___FREC_Scab 3459.JPG,Apple___Apple_scab,False,0.4489795918367347,0.5112636685371399
-Apple___Apple_scab/6b66d8dd-af9f-43b5-a43f-6e4c6d64bede___FREC_Scab 3248.JPG,Apple___Apple_scab,True,0.5706114477040817,0.7920013666152954
-Apple___Apple_scab/4098b029-fcda-4d2f-9703-c16e6e5fae49___FREC_Scab 3455.JPG,Apple___Apple_scab,True,0.3257533482142857,0.5463113188743591
-Apple___Apple_scab/b98c71e9-79a0-4e8d-9c8d-0438c4fe8a57___FREC_Scab 2948.JPG,Apple___Apple_scab,True,0.45565609056122447,0.5955879092216492
-Apple___Apple_scab/cf1d9afc-3473-4c97-ae0b-6f2352d9d595___FREC_Scab 3457.JPG,Apple___Apple_scab,True,0.30514588647959184,0.45209819078445435
-Apple___Apple_scab/900e46e0-2f82-4062-8963-50fa06834c38___FREC_Scab 3301.JPG,Apple___Apple_scab,True,0.6828364158163265,0.8188931345939636
-Apple___Black_rot/5a41cc86-178f-488e-9d96-e63291247737___JR_FrgE.S 2984.JPG,Apple___Black_rot,True,0.3405811543367347,0.6049104928970337
-Apple___Black_rot/af952e46-4478-4672-a9dc-b0ed14cc1f8c___JR_FrgE.S 8598.JPG,Apple___Black_rot,True,0.5710499043367347,0.7767254114151001
-Apple___Black_rot/bc6642f0-62ee-419c-90c8-e1e2f19aaecb___JR_FrgE.S 2907.JPG,Apple___Black_rot,True,0.4381576849489796,0.4359076917171478
-Apple___Black_rot/9eaff91a-1260-4d17-844d-65ab1ee09752___JR_FrgE.S 2736.JPG,Apple___Black_rot,True,0.5580955038265306,0.7550025582313538
-Apple___Black_rot/9db24caa-7d1e-4b4d-a5fd-ddc794e48ec4___JR_FrgE.S 2980.JPG,Apple___Black_rot,True,0.4108737244897959,0.6423348188400269
-Apple___Black_rot/1fe7faa9-61a7-4152-9a85-a57d9486af0a___JR_FrgE.S 8599.JPG,Apple___Black_rot,True,0.5742386798469388,0.7949614524841309
-Apple___Black_rot/4eeb04f2-38b3-49be-a5d0-1c35450d8953___JR_FrgE.S 8714.JPG,Apple___Black_rot,True,0.5117785395408163,0.7816998362541199
-Apple___Black_rot/e2da6207-2cfa-4620-8569-2f4c57a34f30___JR_FrgE.S 8682.JPG,Apple___Black_rot,True,0.3766541772959184,0.6982502937316895
-Apple___Black_rot/c035251c-a97e-4a3a-afb6-5e465bb23ba1___JR_FrgE.S 2906.JPG,Apple___Black_rot,True,0.44529257015306123,0.6358911991119385
-Apple___Black_rot/50fa49cd-002e-4352-816e-c5df10dc5f3f___JR_FrgE.S 2950.JPG,Apple___Black_rot,True,0.5219626913265306,0.7536451816558838
-Apple___Black_rot/8cd80d06-a223-433e-adce-c0feed839b97___JR_FrgE.S 8679.JPG,Apple___Black_rot,True,0.44521285076530615,0.7612196803092957
-Apple___Black_rot/2f6a52cd-21f5-41d0-870e-f8a67d1f5c56___JR_FrgE.S 2901.JPG,Apple___Black_rot,True,0.47098214285714285,0.6631597280502319
-Apple___Black_rot/3afb0100-58b4-4825-bfb4-037258cd5925___JR_FrgE.S 8755.JPG,Apple___Black_rot,True,0.4318797831632653,0.7175131440162659
-Apple___Black_rot/09baab32-8360-4251-9c84-a5ce6bfdfff1___JR_FrgE.S 2883.JPG,Apple___Black_rot,True,0.40170599489795916,0.6406733393669128
-Apple___Black_rot/f1844803-f6fb-4cfb-851e-b9095fb40c9e___JR_FrgE.S 2898.JPG,Apple___Black_rot,True,0.5280612244897959,0.6690384745597839
-Apple___Cedar_apple_rust/a523f082-e20a-40a4-b91a-6806b3794f29___FREC_C.Rust 3965.JPG,Apple___Cedar_apple_rust,True,0.5137914540816326,0.7843236327171326
-Apple___Cedar_apple_rust/4dc8e2a8-4374-488a-afc6-fd0ea7f15c88___FREC_C.Rust 3991.JPG,Apple___Cedar_apple_rust,True,0.4768016581632653,0.7509083151817322
-Apple___Cedar_apple_rust/83a6031c-8219-4f22-8476-530c6bb1ee31___FREC_C.Rust 3765.JPG,Apple___Cedar_apple_rust,True,0.4510921556122449,0.6874195337295532
-Apple___Cedar_apple_rust/402aad30-3914-4227-a9b4-4d40a49fae72___FREC_C.Rust 0230.JPG,Apple___Cedar_apple_rust,True,0.4729751275510204,0.7212246656417847
-Apple___Cedar_apple_rust/6fe0e179-4491-4257-a1d3-9cff9e9e2d27___FREC_C.Rust 0225.JPG,Apple___Cedar_apple_rust,True,0.2862523915816326,0.3848479092121124
-Apple___Cedar_apple_rust/2ac8d689-f30a-4eee-a856-86c92f8dcbd2___FREC_C.Rust 3952.JPG,Apple___Cedar_apple_rust,True,0.5259088010204082,0.77400803565979
-Apple___Cedar_apple_rust/5069c246-1254-4396-a0f3-11bb6becd234___FREC_C.Rust 9868.JPG,Apple___Cedar_apple_rust,True,0.2985291772959184,0.5061402916908264
-Apple___Cedar_apple_rust/f02732b5-5250-4c05-80cf-fa68e71fee69___FREC_C.Rust 0234.JPG,Apple___Cedar_apple_rust,True,0.4971898915816326,0.6892990469932556
-Apple___Cedar_apple_rust/1cfc6e73-1d86-4fb9-bffb-010163531711___FREC_C.Rust 3944.JPG,Apple___Cedar_apple_rust,True,0.43789859693877553,0.7087025046348572
-Apple___Cedar_apple_rust/adc62175-3fb6-4273-81d2-818c75ba0ab1___FREC_C.Rust 0233.JPG,Apple___Cedar_apple_rust,True,0.3922791772959184,0.5660321712493896
-Apple___Cedar_apple_rust/11a41b2a-5bf3-458a-801c-0898dd280c1e___FREC_C.Rust 9874.JPG,Apple___Cedar_apple_rust,True,0.33808992346938777,0.5355145335197449
-Apple___Cedar_apple_rust/af89cf7a-446b-4a39-b454-99a611c10ed2___FREC_C.Rust 3862.JPG,Apple___Cedar_apple_rust,True,0.5866749043367347,0.7713218331336975
-Apple___Cedar_apple_rust/821d427b-7aff-475c-8d76-6c984e09463f___FREC_C.Rust 3760.JPG,Apple___Cedar_apple_rust,True,0.48399633290816324,0.7388690710067749
-Apple___Cedar_apple_rust/98db1965-ab83-41ac-bd9b-a029d42a236c___FREC_C.Rust 9878.JPG,Apple___Cedar_apple_rust,True,0.32553411989795916,0.55885910987854
-Apple___Cedar_apple_rust/6ddafe85-27e6-4ca2-915f-2db6015cdf29___FREC_C.Rust 3983.JPG,Apple___Cedar_apple_rust,True,0.30674027423469385,0.5932666659355164
-Apple___healthy/c35175e9-8421-4af6-a6dd-fc8163d7ba73___RS_HL 7876.JPG,Apple___healthy,True,0.4162547831632653,0.6156479716300964
-Apple___healthy/cb237ceb-a536-4864-a5df-34aafa90dc5e___RS_HL 7871.JPG,Apple___healthy,True,0.48441485969387754,0.641486644744873
-Apple___healthy/b13ada28-ecc1-43e6-bfa2-e8847cd7ec02___RS_HL 7835.JPG,Apple___healthy,True,0.5112603635204082,0.6498034596443176
-Apple___healthy/6504ca1b-442e-4839-b61e-2660fffcb67b___RS_HL 7952.JPG,Apple___healthy,True,0.4647241709183674,0.7055887579917908
-Apple___healthy/1ceda3e6-3df1-4a82-a5f5-6c62dbd8ccc3___RS_HL 8072.JPG,Apple___healthy,True,0.4349888392857143,0.5483369827270508
-Apple___healthy/99b369d2-fa9b-4d3b-8516-462dbae8561a___RS_HL 7242.JPG,Apple___healthy,True,0.37661431760204084,0.6942514181137085
-Apple___healthy/c3d84f64-28b0-4ea7-a45a-ea564a9b801e___RS_HL 5648.JPG,Apple___healthy,True,0.33872767857142855,0.4913228750228882
-Apple___healthy/fa6db5ca-4c60-4ab4-8c23-b6bb852eafbe___RS_HL 7809.JPG,Apple___healthy,True,0.3210499043367347,0.5597301721572876
-Apple___healthy/a1788b2d-2440-4087-b2b8-166029c423ef___RS_HL 5713.JPG,Apple___healthy,True,0.5295758928571429,0.8036548495292664
-Apple___healthy/2b21526f-9ab0-444b-829a-fa97cd727733___RS_HL 7844.JPG,Apple___healthy,True,0.3276865433673469,0.5680631399154663
-Apple___healthy/37b1cd89-582a-40ce-b2ec-6a635e1fea17___RS_HL 6151.JPG,Apple___healthy,True,0.36373963647959184,0.5765408873558044
-Apple___healthy/c53b358c-9cf4-4388-9743-7c3447715424___RS_HL 7880.JPG,Apple___healthy,True,0.40834263392857145,0.5281031131744385
-Apple___healthy/2408e9ef-1a03-44f4-9432-e24113c409e3___RS_HL 7556.JPG,Apple___healthy,True,0.5171197385204082,0.6758067011833191
-Apple___healthy/02fe229e-2b2e-4e1e-b56f-3af97996bee6___RS_HL 8134.JPG,Apple___healthy,True,0.33671476403061223,0.5348390936851501
-Apple___healthy/a600f02f-b4a8-43e5-8d31-4c0d99009d7b___RS_HL 8132.JPG,Apple___healthy,True,0.3360172193877551,0.521892249584198
-Blueberry___healthy/08bed9e5-8ee2-47e3-a6c2-6f97db9e05cc___RS_HL 0645.JPG,Blueberry___healthy,True,0.2536073022959184,0.5626315474510193
-Blueberry___healthy/91b72d35-a43c-42f4-a436-76ac189a9aef___RS_HL 0746.JPG,Blueberry___healthy,True,0.2479671556122449,0.4771008789539337
-Blueberry___healthy/b4dc7c09-cfa3-4159-b76a-121c9f819852___RS_HL 5257.JPG,Blueberry___healthy,True,0.44876036352040816,0.6617964506149292
-Blueberry___healthy/1718d8be-4fa8-4d5e-92ed-37bc06bb92ac___RS_HL 5218.JPG,Blueberry___healthy,True,0.487125318877551,0.711822509765625
-Blueberry___healthy/9cb81de3-7bc9-40a3-87e9-e54d29048fc8___RS_HL 2294.JPG,Blueberry___healthy,True,0.31351642219387754,0.5717997550964355
-Blueberry___healthy/c1a2c7e3-519d-4104-8641-acc54e2daf0c___RS_HL 0501.JPG,Blueberry___healthy,True,0.3281847895408163,0.5391368865966797
-Blueberry___healthy/931b27f1-991b-43cf-84b3-f9f576a481fc___RS_HL 5052.JPG,Blueberry___healthy,True,0.4281728316326531,0.640489399433136
-Blueberry___healthy/1462f830-67a4-4ae3-bf7a-199837a24623___RS_HL 5501.JPG,Blueberry___healthy,True,0.4497169961734694,0.8048542141914368
-Blueberry___healthy/92077618-89d9-403c-8e01-410ec8d22c22___RS_HL 0575.JPG,Blueberry___healthy,True,0.3770727040816326,0.6638762950897217
-Blueberry___healthy/92c5c7e7-deeb-4651-ae8b-82e7fb49bb95___RS_HL 2382.JPG,Blueberry___healthy,True,0.32686941964285715,0.5946963429450989
-Blueberry___healthy/4f92ff8c-f097-4696-b7ba-35f4d16cd702___RS_HL 5280.JPG,Blueberry___healthy,True,0.46006058673469385,0.6809077262878418
-Blueberry___healthy/a122ec24-96e3-4164-af6f-e87a38168c3f___RS_HL 0648.JPG,Blueberry___healthy,True,0.29765226403061223,0.554290771484375
-Blueberry___healthy/5886e7f1-39d6-49c0-80e1-01a424469726___RS_HL 0446.JPG,Blueberry___healthy,True,0.28061224489795916,0.578016996383667
-Blueberry___healthy/94c6876f-4d68-4cc4-a361-75ae56d7a885___RS_HL 0617.JPG,Blueberry___healthy,True,0.20934311224489796,0.45101094245910645
-Blueberry___healthy/72cb878c-5714-4170-97ee-deee097d6de4___RS_HL 0743.JPG,Blueberry___healthy,True,0.2274792729591837,0.4387458264827728
-Cherry_(including_sour)___Powdery_mildew/cc770f77-f915-4832-a688-fd5adac8fae0___FREC_Pwd.M 0475.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.35546875,0.5418679714202881
-Cherry_(including_sour)___Powdery_mildew/6014d664-cf2e-4d0d-98c9-221789b4a3b9___FREC_Pwd.M 0312.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.44559151785714285,0.7227755188941956
-Cherry_(including_sour)___Powdery_mildew/4e64e49b-ff7b-435d-a304-4ab059403849___FREC_Pwd.M 5098.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.5398995535714286,0.8308305144309998
-Cherry_(including_sour)___Powdery_mildew/7c8e53d5-bb27-4fda-b7a0-1d1713d2bb3a___FREC_Pwd.M 4764.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.37814891581632654,0.720369815826416
-Cherry_(including_sour)___Powdery_mildew/1d8075d8-202f-44a6-821d-a596eb480c5c___FREC_Pwd.M 4576.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.48668686224489793,0.686408519744873
-Cherry_(including_sour)___Powdery_mildew/f8541ff1-4f29-4c2a-8ee6-8ac486706f6c___FREC_Pwd.M 4535.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.3856624681122449,0.6141080260276794
-Cherry_(including_sour)___Powdery_mildew/49008a5d-9ba2-4291-ad7a-93c8bc72b4b2___FREC_Pwd.M 0463.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.4985451211734694,0.7284514307975769
-Cherry_(including_sour)___Powdery_mildew/bec20378-8230-4b53-8dc4-942bc878a592___FREC_Pwd.M 4495.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.5227798150510204,0.7140280604362488
-Cherry_(including_sour)___Powdery_mildew/7103d533-8699-4038-886c-65556c9524fb___FREC_Pwd.M 4668.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.3635801977040816,0.6224226355552673
-Cherry_(including_sour)___Powdery_mildew/f22b9bbe-1c84-4e0b-bc23-f9da36765801___FREC_Pwd.M 0472.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.333805006377551,0.6606319546699524
-Cherry_(including_sour)___Powdery_mildew/9f1b8936-8c75-4b99-aac1-5e716edd6d9c___FREC_Pwd.M 4672.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.3764548788265306,0.6797407865524292
-Cherry_(including_sour)___Powdery_mildew/5d4a44a9-b7a1-46a4-9355-651e3c205b0c___FREC_Pwd.M 4972.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.4272560586734694,0.6767057180404663
-Cherry_(including_sour)___Powdery_mildew/2ab4a5c8-c899-4dc2-978a-606b63030047___FREC_Pwd.M 0457.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.4204001913265306,0.6489697694778442
-Cherry_(including_sour)___Powdery_mildew/9d879873-2f64-473a-8c76-72ad55131402___FREC_Pwd.M 4800.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.3806999362244898,0.6529302000999451
-Cherry_(including_sour)___Powdery_mildew/6144ff3e-3899-4577-b9a8-cb342a106afb___FREC_Pwd.M 4980.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.4224131058673469,0.7639227509498596
-Cherry_(including_sour)___healthy/ab6b65e2-f258-49cc-a0f4-7164023d43a6___JR_HL 4254.JPG,Cherry_(including_sour)___healthy,True,0.5067562181122449,0.7703248262405396
-Cherry_(including_sour)___healthy/a02b4505-3eca-4e10-bed7-4988f600ac27___JR_HL 9769.JPG,Cherry_(including_sour)___healthy,True,0.34568319515306123,0.5646899938583374
-Cherry_(including_sour)___healthy/a36fb3a6-f05b-4541-8617-6079781ea8ed___JR_HL 9831.JPG,Cherry_(including_sour)___healthy,True,0.4526267538265306,0.7375930547714233
-Cherry_(including_sour)___healthy/1d35cd7f-0de2-4f64-a9e3-046c3e342276___JR_HL 9886.JPG,Cherry_(including_sour)___healthy,True,0.413265306122449,0.6526787281036377
-Cherry_(including_sour)___healthy/6fdf8890-145d-4390-9e9d-eb529a4abb3d___JR_HL 4252.JPG,Cherry_(including_sour)___healthy,True,0.47458944515306123,0.6998705267906189
-Cherry_(including_sour)___healthy/9c1ddac2-44fa-4a3a-b7cb-4ab597faf089___JR_HL 4070.JPG,Cherry_(including_sour)___healthy,True,0.5166613520408163,0.6760744452476501
-Cherry_(including_sour)___healthy/ef018098-16b5-4b7d-828a-d9003376f24a___JR_HL 4108.JPG,Cherry_(including_sour)___healthy,True,0.5520169005102041,0.8018602728843689
-Cherry_(including_sour)___healthy/6108b75d-868c-4184-bb14-978dd5100fee___JR_HL 9704.JPG,Cherry_(including_sour)___healthy,True,0.3645766900510204,0.5994521379470825
-Cherry_(including_sour)___healthy/135f64b7-91ed-40b5-a27b-9a8a602001ec___JR_HL 9878 copy.JPG,Cherry_(including_sour)___healthy,True,0.32760682397959184,0.5426186919212341
-Cherry_(including_sour)___healthy/3b32151e-5a15-4ca5-a5c2-025bda5bbd81___JR_HL 4292.JPG,Cherry_(including_sour)___healthy,True,0.40742586096938777,0.4371764063835144
-Cherry_(including_sour)___healthy/17c449c1-f296-4cb3-8d12-156b27d2981a___JR_HL 9703.JPG,Cherry_(including_sour)___healthy,True,0.42966757015306123,0.6208025217056274
-Cherry_(including_sour)___healthy/f6cb26cb-c5b2-4373-ab61-a93a32051ead___JR_HL 4300.JPG,Cherry_(including_sour)___healthy,True,0.5063974808673469,0.6984888315200806
-Cherry_(including_sour)___healthy/4ccaaa5f-1624-4144-b079-21f64c7bd781___JR_HL 9631.JPG,Cherry_(including_sour)___healthy,True,0.4362244897959184,0.64763343334198
-Cherry_(including_sour)___healthy/465c6766-6de2-4923-8560-ce0e265e88b2___JR_HL 9766.JPG,Cherry_(including_sour)___healthy,True,0.31692442602040816,0.6168726682662964
-Cherry_(including_sour)___healthy/32c38f0d-bc33-4579-b0d0-76305106d325___JR_HL 4291.JPG,Cherry_(including_sour)___healthy,True,0.4620336415816326,0.524373471736908
-Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/13e25fae-97ee-44c0-92c0-05328de64148___RS_GLSp 4645.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.436702806122449,0.7710816860198975
-Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/bbea95f8-cc26-40b6-9436-228f70d605d7___RS_GLSp 7332.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.7007533482142857,0.7858063578605652
-Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/d07122b2-20b4-4f1b-9071-bd90d77cc478___RS_GLSp 9310.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.754524075255102,0.8079491257667542
-Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/7b0308b0-8997-4318-b3e0-26c658f8dadf___RS_GLSp 7300.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.5883091517857143,0.7681730389595032
-Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/be07b9de-4629-49c1-bde7-e4c9b79c55ef___RS_GLSp 4495.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.6301419005102041,0.9078810811042786
-Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/629273b6-9eaa-4084-b72b-ac856a9ef899___RS_GLSp 4636.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,False,0.37356505102040816,0.619498610496521
-Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/48beb71e-555f-4510-9951-a57f7edce204___RS_GLSp 9334.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.8476363201530612,0.8284844756126404
-Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/54ff4537-6187-4a07-b478-7a06d159915c___RS_GLSp 9368.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.7159797512755102,0.8918476104736328
-Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/837474e2-d11d-44b7-b39b-0a21442b1e04___RS_GLSp 4455.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.6830556441326531,0.8685567378997803
-Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/bc43c710-9fa2-44a2-8420-94c71c01c2c6___RS_GLSp 7278.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.6111487563775511,0.7995486259460449
-Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/8776bae7-ccdc-46b8-95d6-7bb0610db123___RS_GLSp 4392.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.7467912946428571,0.8955461978912354
-Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/1b3e0f15-bbfb-4629-840f-310c7bf2a17c___RS_GLSp 9335.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.8429129464285714,0.9128206372261047
-Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/b7fb9cd4-1b3a-400d-8520-514e5dedc7f3___RS_GLSp 4632.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,False,0.6768574617346939,0.6470270752906799
-Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/d46dd43c-2fdf-4235-bada-e7a2c5a04ec0___RS_GLSp 9273.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.5704719387755102,0.7830093502998352
-Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/2788c3da-4e36-408e-b2e5-a08442f7f432___RS_GLSp 4500.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.8515027104591837,0.7856966853141785
-Corn_(maize)___Northern_Leaf_Blight/66fb9e0e-39cb-4a5f-8780-1bcfbda5577c___RS_NLB 3919.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.5010164221938775,0.7449547648429871
-Corn_(maize)___Northern_Leaf_Blight/39d7cc50-1271-4196-8a7b-ac11b470fe1f___RS_NLB 4163.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.5387436224489796,0.7434396147727966
+Apple___Apple_scab/80ddd81b-9c75-4711-8012-7ee68af378db___FREC_Scab 3458.JPG,Apple___Apple_scab,True,0.38341039540816324,0.5927047729492188
+Apple___Apple_scab/8a8f8dd2-a938-4288-a8ec-56ef0aaa2d4f___FREC_Scab 2947.JPG,Apple___Apple_scab,True,0.5227798150510204,0.7552480101585388
+Apple___Apple_scab/debd9885-73c5-4ba8-9a95-f820846cec77___FREC_Scab 3433.JPG,Apple___Apple_scab,True,0.5653898278061225,0.7249107360839844
+Apple___Apple_scab/c4175126-9e07-4465-9574-0229bb5b1f41___FREC_Scab 3304.JPG,Apple___Apple_scab,True,0.6169682716836735,0.7760602235794067
+Apple___Apple_scab/1ceeeee0-40bd-4ac9-8a57-59385bf5df8a___FREC_Scab 3001.JPG,Apple___Apple_scab,True,0.5304528061224489,0.7714383006095886
+Apple___Apple_scab/ba94f188-df0b-41fd-94e3-f0ed4924e23e___FREC_Scab 3102.JPG,Apple___Apple_scab,True,0.5864756058673469,0.834431529045105
+Apple___Apple_scab/154842bb-6ee3-4176-9007-cf7a43cfe140___FREC_Scab 3434.JPG,Apple___Apple_scab,True,0.4065489477040816,0.7414078116416931
+Apple___Apple_scab/895252c3-5047-4e87-8e13-2cdd765f3e0a___FREC_Scab 3056.JPG,Apple___Apple_scab,True,0.7166772959183674,0.7951622605323792
+Apple___Apple_scab/e8f5c962-6f40-443e-9913-5a43b5f2ef07___FREC_Scab 3191.JPG,Apple___Apple_scab,True,0.39504942602040816,0.7140691876411438
+Apple___Apple_scab/c0f4f71a-8f53-4a0a-816f-d400a445680a___FREC_Scab 3459.JPG,Apple___Apple_scab,False,0.4489795918367347,0.708087146282196
+Apple___Apple_scab/6b66d8dd-af9f-43b5-a43f-6e4c6d64bede___FREC_Scab 3248.JPG,Apple___Apple_scab,True,0.5706114477040817,0.7791961431503296
+Apple___Apple_scab/4098b029-fcda-4d2f-9703-c16e6e5fae49___FREC_Scab 3455.JPG,Apple___Apple_scab,True,0.3257533482142857,0.701797604560852
+Apple___Apple_scab/b98c71e9-79a0-4e8d-9c8d-0438c4fe8a57___FREC_Scab 2948.JPG,Apple___Apple_scab,True,0.45565609056122447,0.6079724431037903
+Apple___Apple_scab/cf1d9afc-3473-4c97-ae0b-6f2352d9d595___FREC_Scab 3457.JPG,Apple___Apple_scab,True,0.30514588647959184,0.4667375087738037
+Apple___Apple_scab/900e46e0-2f82-4062-8963-50fa06834c38___FREC_Scab 3301.JPG,Apple___Apple_scab,True,0.6828364158163265,0.807655394077301
+Apple___Black_rot/5a41cc86-178f-488e-9d96-e63291247737___JR_FrgE.S 2984.JPG,Apple___Black_rot,True,0.3405811543367347,0.6444875001907349
+Apple___Black_rot/af952e46-4478-4672-a9dc-b0ed14cc1f8c___JR_FrgE.S 8598.JPG,Apple___Black_rot,True,0.5710499043367347,0.776727020740509
+Apple___Black_rot/bc6642f0-62ee-419c-90c8-e1e2f19aaecb___JR_FrgE.S 2907.JPG,Apple___Black_rot,True,0.4381576849489796,0.6095505356788635
+Apple___Black_rot/9eaff91a-1260-4d17-844d-65ab1ee09752___JR_FrgE.S 2736.JPG,Apple___Black_rot,True,0.5580955038265306,0.7549879550933838
+Apple___Black_rot/9db24caa-7d1e-4b4d-a5fd-ddc794e48ec4___JR_FrgE.S 2980.JPG,Apple___Black_rot,True,0.4108737244897959,0.6812918186187744
+Apple___Black_rot/1fe7faa9-61a7-4152-9a85-a57d9486af0a___JR_FrgE.S 8599.JPG,Apple___Black_rot,True,0.5742386798469388,0.794953465461731
+Apple___Black_rot/4eeb04f2-38b3-49be-a5d0-1c35450d8953___JR_FrgE.S 8714.JPG,Apple___Black_rot,True,0.5117785395408163,0.7548044323921204
+Apple___Black_rot/e2da6207-2cfa-4620-8569-2f4c57a34f30___JR_FrgE.S 8682.JPG,Apple___Black_rot,True,0.3766541772959184,0.6984150409698486
+Apple___Black_rot/c035251c-a97e-4a3a-afb6-5e465bb23ba1___JR_FrgE.S 2906.JPG,Apple___Black_rot,True,0.44529257015306123,0.629337728023529
+Apple___Black_rot/50fa49cd-002e-4352-816e-c5df10dc5f3f___JR_FrgE.S 2950.JPG,Apple___Black_rot,True,0.5219626913265306,0.753746509552002
+Apple___Black_rot/8cd80d06-a223-433e-adce-c0feed839b97___JR_FrgE.S 8679.JPG,Apple___Black_rot,True,0.44521285076530615,0.7612197995185852
+Apple___Black_rot/2f6a52cd-21f5-41d0-870e-f8a67d1f5c56___JR_FrgE.S 2901.JPG,Apple___Black_rot,True,0.47098214285714285,0.6666105389595032
+Apple___Black_rot/3afb0100-58b4-4825-bfb4-037258cd5925___JR_FrgE.S 8755.JPG,Apple___Black_rot,True,0.4318797831632653,0.7168893218040466
+Apple___Black_rot/09baab32-8360-4251-9c84-a5ce6bfdfff1___JR_FrgE.S 2883.JPG,Apple___Black_rot,True,0.40170599489795916,0.6408731937408447
+Apple___Black_rot/f1844803-f6fb-4cfb-851e-b9095fb40c9e___JR_FrgE.S 2898.JPG,Apple___Black_rot,True,0.5280612244897959,0.6675838828086853
+Apple___Cedar_apple_rust/a523f082-e20a-40a4-b91a-6806b3794f29___FREC_C.Rust 3965.JPG,Apple___Cedar_apple_rust,True,0.5137914540816326,0.7328175902366638
+Apple___Cedar_apple_rust/4dc8e2a8-4374-488a-afc6-fd0ea7f15c88___FREC_C.Rust 3991.JPG,Apple___Cedar_apple_rust,True,0.4768016581632653,0.7509337067604065
+Apple___Cedar_apple_rust/83a6031c-8219-4f22-8476-530c6bb1ee31___FREC_C.Rust 3765.JPG,Apple___Cedar_apple_rust,True,0.4510921556122449,0.7335475087165833
+Apple___Cedar_apple_rust/402aad30-3914-4227-a9b4-4d40a49fae72___FREC_C.Rust 0230.JPG,Apple___Cedar_apple_rust,True,0.4729751275510204,0.7254751920700073
+Apple___Cedar_apple_rust/6fe0e179-4491-4257-a1d3-9cff9e9e2d27___FREC_C.Rust 0225.JPG,Apple___Cedar_apple_rust,True,0.2862523915816326,0.49584341049194336
+Apple___Cedar_apple_rust/2ac8d689-f30a-4eee-a856-86c92f8dcbd2___FREC_C.Rust 3952.JPG,Apple___Cedar_apple_rust,True,0.5259088010204082,0.7665964961051941
+Apple___Cedar_apple_rust/5069c246-1254-4396-a0f3-11bb6becd234___FREC_C.Rust 9868.JPG,Apple___Cedar_apple_rust,True,0.2985291772959184,0.518200695514679
+Apple___Cedar_apple_rust/f02732b5-5250-4c05-80cf-fa68e71fee69___FREC_C.Rust 0234.JPG,Apple___Cedar_apple_rust,True,0.4971898915816326,0.7386851906776428
+Apple___Cedar_apple_rust/1cfc6e73-1d86-4fb9-bffb-010163531711___FREC_C.Rust 3944.JPG,Apple___Cedar_apple_rust,True,0.43789859693877553,0.7087159156799316
+Apple___Cedar_apple_rust/adc62175-3fb6-4273-81d2-818c75ba0ab1___FREC_C.Rust 0233.JPG,Apple___Cedar_apple_rust,True,0.3922791772959184,0.6556511521339417
+Apple___Cedar_apple_rust/11a41b2a-5bf3-458a-801c-0898dd280c1e___FREC_C.Rust 9874.JPG,Apple___Cedar_apple_rust,True,0.33808992346938777,0.5657548308372498
+Apple___Cedar_apple_rust/af89cf7a-446b-4a39-b454-99a611c10ed2___FREC_C.Rust 3862.JPG,Apple___Cedar_apple_rust,True,0.5866749043367347,0.7830891609191895
+Apple___Cedar_apple_rust/821d427b-7aff-475c-8d76-6c984e09463f___FREC_C.Rust 3760.JPG,Apple___Cedar_apple_rust,True,0.48399633290816324,0.746527373790741
+Apple___Cedar_apple_rust/98db1965-ab83-41ac-bd9b-a029d42a236c___FREC_C.Rust 9878.JPG,Apple___Cedar_apple_rust,True,0.32553411989795916,0.550906777381897
+Apple___Cedar_apple_rust/6ddafe85-27e6-4ca2-915f-2db6015cdf29___FREC_C.Rust 3983.JPG,Apple___Cedar_apple_rust,True,0.30674027423469385,0.5931464433670044
+Apple___healthy/c35175e9-8421-4af6-a6dd-fc8163d7ba73___RS_HL 7876.JPG,Apple___healthy,True,0.4162547831632653,0.6156168580055237
+Apple___healthy/cb237ceb-a536-4864-a5df-34aafa90dc5e___RS_HL 7871.JPG,Apple___healthy,True,0.48441485969387754,0.6268718838691711
+Apple___healthy/b13ada28-ecc1-43e6-bfa2-e8847cd7ec02___RS_HL 7835.JPG,Apple___healthy,True,0.5112603635204082,0.6393426060676575
+Apple___healthy/6504ca1b-442e-4839-b61e-2660fffcb67b___RS_HL 7952.JPG,Apple___healthy,True,0.4647241709183674,0.7050392031669617
+Apple___healthy/1ceda3e6-3df1-4a82-a5f5-6c62dbd8ccc3___RS_HL 8072.JPG,Apple___healthy,True,0.4349888392857143,0.5412275195121765
+Apple___healthy/99b369d2-fa9b-4d3b-8516-462dbae8561a___RS_HL 7242.JPG,Apple___healthy,True,0.37661431760204084,0.664806067943573
+Apple___healthy/c3d84f64-28b0-4ea7-a45a-ea564a9b801e___RS_HL 5648.JPG,Apple___healthy,True,0.33872767857142855,0.5371010899543762
+Apple___healthy/fa6db5ca-4c60-4ab4-8c23-b6bb852eafbe___RS_HL 7809.JPG,Apple___healthy,True,0.3210499043367347,0.5597375631332397
+Apple___healthy/a1788b2d-2440-4087-b2b8-166029c423ef___RS_HL 5713.JPG,Apple___healthy,True,0.5295758928571429,0.7668228149414062
+Apple___healthy/2b21526f-9ab0-444b-829a-fa97cd727733___RS_HL 7844.JPG,Apple___healthy,True,0.3276865433673469,0.5680730938911438
+Apple___healthy/37b1cd89-582a-40ce-b2ec-6a635e1fea17___RS_HL 6151.JPG,Apple___healthy,True,0.36373963647959184,0.5764398574829102
+Apple___healthy/c53b358c-9cf4-4388-9743-7c3447715424___RS_HL 7880.JPG,Apple___healthy,True,0.40834263392857145,0.5280992984771729
+Apple___healthy/2408e9ef-1a03-44f4-9432-e24113c409e3___RS_HL 7556.JPG,Apple___healthy,True,0.5171197385204082,0.6735960245132446
+Apple___healthy/02fe229e-2b2e-4e1e-b56f-3af97996bee6___RS_HL 8134.JPG,Apple___healthy,True,0.33671476403061223,0.5113713145256042
+Apple___healthy/a600f02f-b4a8-43e5-8d31-4c0d99009d7b___RS_HL 8132.JPG,Apple___healthy,True,0.3360172193877551,0.5001825094223022
+Blueberry___healthy/08bed9e5-8ee2-47e3-a6c2-6f97db9e05cc___RS_HL 0645.JPG,Blueberry___healthy,True,0.2536073022959184,0.4279949963092804
+Blueberry___healthy/91b72d35-a43c-42f4-a436-76ac189a9aef___RS_HL 0746.JPG,Blueberry___healthy,True,0.2479671556122449,0.47277650237083435
+Blueberry___healthy/b4dc7c09-cfa3-4159-b76a-121c9f819852___RS_HL 5257.JPG,Blueberry___healthy,True,0.44876036352040816,0.6618047952651978
+Blueberry___healthy/1718d8be-4fa8-4d5e-92ed-37bc06bb92ac___RS_HL 5218.JPG,Blueberry___healthy,True,0.487125318877551,0.7339127063751221
+Blueberry___healthy/9cb81de3-7bc9-40a3-87e9-e54d29048fc8___RS_HL 2294.JPG,Blueberry___healthy,True,0.31351642219387754,0.5714296698570251
+Blueberry___healthy/c1a2c7e3-519d-4104-8641-acc54e2daf0c___RS_HL 0501.JPG,Blueberry___healthy,True,0.3281847895408163,0.5639224648475647
+Blueberry___healthy/931b27f1-991b-43cf-84b3-f9f576a481fc___RS_HL 5052.JPG,Blueberry___healthy,True,0.4281728316326531,0.6407489776611328
+Blueberry___healthy/1462f830-67a4-4ae3-bf7a-199837a24623___RS_HL 5501.JPG,Blueberry___healthy,True,0.4497169961734694,0.6767393946647644
+Blueberry___healthy/92077618-89d9-403c-8e01-410ec8d22c22___RS_HL 0575.JPG,Blueberry___healthy,True,0.3770727040816326,0.7088558077812195
+Blueberry___healthy/92c5c7e7-deeb-4651-ae8b-82e7fb49bb95___RS_HL 2382.JPG,Blueberry___healthy,True,0.32686941964285715,0.5880804061889648
+Blueberry___healthy/4f92ff8c-f097-4696-b7ba-35f4d16cd702___RS_HL 5280.JPG,Blueberry___healthy,True,0.46006058673469385,0.6808875799179077
+Blueberry___healthy/a122ec24-96e3-4164-af6f-e87a38168c3f___RS_HL 0648.JPG,Blueberry___healthy,True,0.29765226403061223,0.43420764803886414
+Blueberry___healthy/5886e7f1-39d6-49c0-80e1-01a424469726___RS_HL 0446.JPG,Blueberry___healthy,True,0.28061224489795916,0.5892407298088074
+Blueberry___healthy/94c6876f-4d68-4cc4-a361-75ae56d7a885___RS_HL 0617.JPG,Blueberry___healthy,True,0.20934311224489796,0.4528614580631256
+Blueberry___healthy/72cb878c-5714-4170-97ee-deee097d6de4___RS_HL 0743.JPG,Blueberry___healthy,True,0.2274792729591837,0.43866854906082153
+Cherry_(including_sour)___Powdery_mildew/cc770f77-f915-4832-a688-fd5adac8fae0___FREC_Pwd.M 0475.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.35546875,0.6107827425003052
+Cherry_(including_sour)___Powdery_mildew/6014d664-cf2e-4d0d-98c9-221789b4a3b9___FREC_Pwd.M 0312.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.44559151785714285,0.722773551940918
+Cherry_(including_sour)___Powdery_mildew/4e64e49b-ff7b-435d-a304-4ab059403849___FREC_Pwd.M 5098.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.5398995535714286,0.8312233090400696
+Cherry_(including_sour)___Powdery_mildew/7c8e53d5-bb27-4fda-b7a0-1d1713d2bb3a___FREC_Pwd.M 4764.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.37814891581632654,0.7204897403717041
+Cherry_(including_sour)___Powdery_mildew/1d8075d8-202f-44a6-821d-a596eb480c5c___FREC_Pwd.M 4576.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.48668686224489793,0.6847169399261475
+Cherry_(including_sour)___Powdery_mildew/f8541ff1-4f29-4c2a-8ee6-8ac486706f6c___FREC_Pwd.M 4535.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.3856624681122449,0.6141122579574585
+Cherry_(including_sour)___Powdery_mildew/49008a5d-9ba2-4291-ad7a-93c8bc72b4b2___FREC_Pwd.M 0463.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.4985451211734694,0.7284582853317261
+Cherry_(including_sour)___Powdery_mildew/bec20378-8230-4b53-8dc4-942bc878a592___FREC_Pwd.M 4495.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.5227798150510204,0.7588931918144226
+Cherry_(including_sour)___Powdery_mildew/7103d533-8699-4038-886c-65556c9524fb___FREC_Pwd.M 4668.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.3635801977040816,0.6226375102996826
+Cherry_(including_sour)___Powdery_mildew/f22b9bbe-1c84-4e0b-bc23-f9da36765801___FREC_Pwd.M 0472.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.333805006377551,0.6606343984603882
+Cherry_(including_sour)___Powdery_mildew/9f1b8936-8c75-4b99-aac1-5e716edd6d9c___FREC_Pwd.M 4672.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.3764548788265306,0.6815613508224487
+Cherry_(including_sour)___Powdery_mildew/5d4a44a9-b7a1-46a4-9355-651e3c205b0c___FREC_Pwd.M 4972.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.4272560586734694,0.6763878464698792
+Cherry_(including_sour)___Powdery_mildew/2ab4a5c8-c899-4dc2-978a-606b63030047___FREC_Pwd.M 0457.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.4204001913265306,0.6489732265472412
+Cherry_(including_sour)___Powdery_mildew/9d879873-2f64-473a-8c76-72ad55131402___FREC_Pwd.M 4800.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.3806999362244898,0.6529307961463928
+Cherry_(including_sour)___Powdery_mildew/6144ff3e-3899-4577-b9a8-cb342a106afb___FREC_Pwd.M 4980.JPG,Cherry_(including_sour)___Powdery_mildew,True,0.4224131058673469,0.7381870150566101
+Cherry_(including_sour)___healthy/ab6b65e2-f258-49cc-a0f4-7164023d43a6___JR_HL 4254.JPG,Cherry_(including_sour)___healthy,True,0.5067562181122449,0.7584688067436218
+Cherry_(including_sour)___healthy/a02b4505-3eca-4e10-bed7-4988f600ac27___JR_HL 9769.JPG,Cherry_(including_sour)___healthy,True,0.34568319515306123,0.5644568800926208
+Cherry_(including_sour)___healthy/a36fb3a6-f05b-4541-8617-6079781ea8ed___JR_HL 9831.JPG,Cherry_(including_sour)___healthy,True,0.4526267538265306,0.7091062068939209
+Cherry_(including_sour)___healthy/1d35cd7f-0de2-4f64-a9e3-046c3e342276___JR_HL 9886.JPG,Cherry_(including_sour)___healthy,True,0.413265306122449,0.6525772213935852
+Cherry_(including_sour)___healthy/6fdf8890-145d-4390-9e9d-eb529a4abb3d___JR_HL 4252.JPG,Cherry_(including_sour)___healthy,True,0.47458944515306123,0.693678081035614
+Cherry_(including_sour)___healthy/9c1ddac2-44fa-4a3a-b7cb-4ab597faf089___JR_HL 4070.JPG,Cherry_(including_sour)___healthy,True,0.5166613520408163,0.6759629845619202
+Cherry_(including_sour)___healthy/ef018098-16b5-4b7d-828a-d9003376f24a___JR_HL 4108.JPG,Cherry_(including_sour)___healthy,True,0.5520169005102041,0.7083956003189087
+Cherry_(including_sour)___healthy/6108b75d-868c-4184-bb14-978dd5100fee___JR_HL 9704.JPG,Cherry_(including_sour)___healthy,True,0.3645766900510204,0.5934286117553711
+Cherry_(including_sour)___healthy/135f64b7-91ed-40b5-a27b-9a8a602001ec___JR_HL 9878 copy.JPG,Cherry_(including_sour)___healthy,True,0.32760682397959184,0.5419644713401794
+Cherry_(including_sour)___healthy/3b32151e-5a15-4ca5-a5c2-025bda5bbd81___JR_HL 4292.JPG,Cherry_(including_sour)___healthy,True,0.40742586096938777,0.54942387342453
+Cherry_(including_sour)___healthy/17c449c1-f296-4cb3-8d12-156b27d2981a___JR_HL 9703.JPG,Cherry_(including_sour)___healthy,True,0.42966757015306123,0.6195341944694519
+Cherry_(including_sour)___healthy/f6cb26cb-c5b2-4373-ab61-a93a32051ead___JR_HL 4300.JPG,Cherry_(including_sour)___healthy,True,0.5063974808673469,0.685875415802002
+Cherry_(including_sour)___healthy/4ccaaa5f-1624-4144-b079-21f64c7bd781___JR_HL 9631.JPG,Cherry_(including_sour)___healthy,True,0.4362244897959184,0.6476304531097412
+Cherry_(including_sour)___healthy/465c6766-6de2-4923-8560-ce0e265e88b2___JR_HL 9766.JPG,Cherry_(including_sour)___healthy,True,0.31692442602040816,0.6002300977706909
+Cherry_(including_sour)___healthy/32c38f0d-bc33-4579-b0d0-76305106d325___JR_HL 4291.JPG,Cherry_(including_sour)___healthy,True,0.4620336415816326,0.5375162363052368
+Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/13e25fae-97ee-44c0-92c0-05328de64148___RS_GLSp 4645.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.436702806122449,0.7456265091896057
+Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/bbea95f8-cc26-40b6-9436-228f70d605d7___RS_GLSp 7332.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.7007533482142857,0.7787029147148132
+Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/d07122b2-20b4-4f1b-9071-bd90d77cc478___RS_GLSp 9310.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.754524075255102,0.8564273118972778
+Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/7b0308b0-8997-4318-b3e0-26c658f8dadf___RS_GLSp 7300.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.5883091517857143,0.7625266313552856
+Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/be07b9de-4629-49c1-bde7-e4c9b79c55ef___RS_GLSp 4495.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.6301419005102041,0.8713198900222778
+Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/629273b6-9eaa-4084-b72b-ac856a9ef899___RS_GLSp 4636.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,False,0.37356505102040816,0.5961964130401611
+Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/48beb71e-555f-4510-9951-a57f7edce204___RS_GLSp 9334.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.8476363201530612,0.8595485687255859
+Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/54ff4537-6187-4a07-b478-7a06d159915c___RS_GLSp 9368.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.7159797512755102,0.8298336863517761
+Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/837474e2-d11d-44b7-b39b-0a21442b1e04___RS_GLSp 4455.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.6830556441326531,0.8325259685516357
+Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/bc43c710-9fa2-44a2-8420-94c71c01c2c6___RS_GLSp 7278.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.6111487563775511,0.7816471457481384
+Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/8776bae7-ccdc-46b8-95d6-7bb0610db123___RS_GLSp 4392.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.7467912946428571,0.8175886273384094
+Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/1b3e0f15-bbfb-4629-840f-310c7bf2a17c___RS_GLSp 9335.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.8429129464285714,0.8974774479866028
+Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/b7fb9cd4-1b3a-400d-8520-514e5dedc7f3___RS_GLSp 4632.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,False,0.6768574617346939,0.7663861513137817
+Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/d46dd43c-2fdf-4235-bada-e7a2c5a04ec0___RS_GLSp 9273.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.5704719387755102,0.7595697641372681
+Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/2788c3da-4e36-408e-b2e5-a08442f7f432___RS_GLSp 4500.JPG,Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot,True,0.8515027104591837,0.8345914483070374
+Corn_(maize)___Northern_Leaf_Blight/66fb9e0e-39cb-4a5f-8780-1bcfbda5577c___RS_NLB 3919.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.5010164221938775,0.7368359565734863
+Corn_(maize)___Northern_Leaf_Blight/39d7cc50-1271-4196-8a7b-ac11b470fe1f___RS_NLB 4163.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.5387436224489796,0.7312901020050049
 Corn_(maize)___Northern_Leaf_Blight/02eee796-1a1e-4d63-8247-a6aac6bfb272___RS_NLB 3546.JPG,Corn_(maize)___Northern_Leaf_Blight,True,1.0,1.0
-Corn_(maize)___Northern_Leaf_Blight/39bbce49-e9e0-463b-8c87-a3c0b1204050___RS_NLB 4011.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.8614477040816326,0.7831968069076538
-Corn_(maize)___Northern_Leaf_Blight/7d027426-d1bb-40b5-9d82-55a7f78045bb___RS_NLB 3960.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.5183753188775511,0.7416196465492249
-Corn_(maize)___Northern_Leaf_Blight/e04b792b-62d1-4447-b9e2-cf3b8f565883___RS_NLB 3879.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.35439253826530615,0.513114333152771
-Corn_(maize)___Northern_Leaf_Blight/0da62220-7007-447a-8260-816c2b3afe7d___RS_NLB 3982.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.837531887755102,0.8127008080482483
-Corn_(maize)___Northern_Leaf_Blight/a5427e24-26fc-4d4f-af7d-882b9ca2bcdc___RS_NLB 4228 copy 3.jpg,Corn_(maize)___Northern_Leaf_Blight,True,0.49178890306122447,0.6592074036598206
-Corn_(maize)___Northern_Leaf_Blight/7f5a02de-b04a-4476-8bfe-dc0980913892___RS_NLB 0804.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.6160116390306123,0.8298486471176147
-Corn_(maize)___Northern_Leaf_Blight/08afb40d-4814-481d-a0a7-760034a2e81b___RS_NLB 3657.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.9571508290816326,0.987173855304718
-Corn_(maize)___Northern_Leaf_Blight/78d28bb5-2b07-42eb-aff8-d205eaf38fc9___RS_NLB 3967.JPG,Corn_(maize)___Northern_Leaf_Blight,False,0.8018176020408163,0.9776843190193176
-Corn_(maize)___Northern_Leaf_Blight/76071bfd-f326-4e3d-b3b9-c2d364ec2d49___RS_NLB 3623.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.5089883609693877,0.8296200037002563
-Corn_(maize)___Northern_Leaf_Blight/bce0336e-2867-4e62-8169-145bc711cba4___RS_NLB 3878.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.4177295918367347,0.7201817631721497
+Corn_(maize)___Northern_Leaf_Blight/39bbce49-e9e0-463b-8c87-a3c0b1204050___RS_NLB 4011.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.8614477040816326,0.8320996761322021
+Corn_(maize)___Northern_Leaf_Blight/7d027426-d1bb-40b5-9d82-55a7f78045bb___RS_NLB 3960.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.5183753188775511,0.7780787944793701
+Corn_(maize)___Northern_Leaf_Blight/e04b792b-62d1-4447-b9e2-cf3b8f565883___RS_NLB 3879.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.35439253826530615,0.5683563351631165
+Corn_(maize)___Northern_Leaf_Blight/0da62220-7007-447a-8260-816c2b3afe7d___RS_NLB 3982.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.837531887755102,0.8673497438430786
+Corn_(maize)___Northern_Leaf_Blight/a5427e24-26fc-4d4f-af7d-882b9ca2bcdc___RS_NLB 4228 copy 3.jpg,Corn_(maize)___Northern_Leaf_Blight,True,0.49178890306122447,0.6181807518005371
+Corn_(maize)___Northern_Leaf_Blight/7f5a02de-b04a-4476-8bfe-dc0980913892___RS_NLB 0804.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.6160116390306123,0.8205645680427551
+Corn_(maize)___Northern_Leaf_Blight/08afb40d-4814-481d-a0a7-760034a2e81b___RS_NLB 3657.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.9571508290816326,0.9803686141967773
+Corn_(maize)___Northern_Leaf_Blight/78d28bb5-2b07-42eb-aff8-d205eaf38fc9___RS_NLB 3967.JPG,Corn_(maize)___Northern_Leaf_Blight,False,0.8018176020408163,0.9115703701972961
+Corn_(maize)___Northern_Leaf_Blight/76071bfd-f326-4e3d-b3b9-c2d364ec2d49___RS_NLB 3623.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.5089883609693877,0.788228452205658
+Corn_(maize)___Northern_Leaf_Blight/bce0336e-2867-4e62-8169-145bc711cba4___RS_NLB 3878.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.4177295918367347,0.6855482459068298
 Corn_(maize)___Northern_Leaf_Blight/1e974f0a-834e-4288-bba8-134c860882f5___RS_NLB 4268.JPG,Corn_(maize)___Northern_Leaf_Blight,True,1.0,1.0
-Corn_(maize)___Northern_Leaf_Blight/74c8a3a5-7a9d-40a4-9ec7-4003ef2a6eed___RS_NLB 4251.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.7536073022959183,0.9497182965278625
-Corn_(maize)___healthy/500c13c7-2b8e-43ea-b842-154de7cf7f50___R.S_HL 8003 copy 2.jpg,Corn_(maize)___healthy,True,0.9998405612244898,0.9999122619628906
-Corn_(maize)___healthy/9fcbdd37-3bc2-44b1-aa8a-08a1f85ea5bf___R.S_HL 0606 copy 2.jpg,Corn_(maize)___healthy,True,0.9895567602040817,0.9837493300437927
+Corn_(maize)___Northern_Leaf_Blight/74c8a3a5-7a9d-40a4-9ec7-4003ef2a6eed___RS_NLB 4251.JPG,Corn_(maize)___Northern_Leaf_Blight,True,0.7536073022959183,0.9233083128929138
+Corn_(maize)___healthy/500c13c7-2b8e-43ea-b842-154de7cf7f50___R.S_HL 8003 copy 2.jpg,Corn_(maize)___healthy,True,0.9998405612244898,0.9999129772186279
+Corn_(maize)___healthy/9fcbdd37-3bc2-44b1-aa8a-08a1f85ea5bf___R.S_HL 0606 copy 2.jpg,Corn_(maize)___healthy,True,0.9895567602040817,0.991023063659668
 Corn_(maize)___healthy/41273258-e17c-44e1-a12d-bf8582235994___R.S_HL 0650 copy 3.jpg,Corn_(maize)___healthy,True,1.0,1.0
 Corn_(maize)___healthy/a0737ce0-3cdb-4773-95eb-377efa68bc06___R.S_HL 8174 copy.jpg,Corn_(maize)___healthy,True,1.0,1.0
-Corn_(maize)___healthy/1e79939c-ad56-48fe-b742-bee115562523___R.S_HL 8060 copy.jpg,Corn_(maize)___healthy,True,0.4990234375,0.5677008628845215
+Corn_(maize)___healthy/1e79939c-ad56-48fe-b742-bee115562523___R.S_HL 8060 copy.jpg,Corn_(maize)___healthy,True,0.4990234375,0.5677016973495483
 Corn_(maize)___healthy/7784be50-f9e7-4268-aa17-80359bc7688a___R.S_HL 8231 copy.jpg,Corn_(maize)___healthy,True,1.0,1.0
 Corn_(maize)___healthy/d128a635-3090-4ca1-904d-d471f67134e3___R.S_HL 0623 copy 3.jpg,Corn_(maize)___healthy,True,1.0,1.0
-Corn_(maize)___healthy/0487da8b-736c-4310-82d2-fa8acf4aed07___R.S_HL 0646 copy 3.jpg,Corn_(maize)___healthy,True,0.9992825255102041,0.999009907245636
+Corn_(maize)___healthy/0487da8b-736c-4310-82d2-fa8acf4aed07___R.S_HL 0646 copy 3.jpg,Corn_(maize)___healthy,True,0.9992825255102041,0.999260425567627
 Corn_(maize)___healthy/be7c9d7f-2a89-4364-9173-76eecdd3d29e___R.S_HL 8298 copy.jpg,Corn_(maize)___healthy,True,1.0,1.0
-Corn_(maize)___healthy/445d1b31-6f77-4597-9ded-4b94581dfa75___R.S_HL 5531 copy.jpg,Corn_(maize)___healthy,True,0.9999202806122449,0.9998775124549866
-Corn_(maize)___healthy/1970b015-02d3-405a-a1d7-3457a6977557___R.S_HL 7891 copy 2.jpg,Corn_(maize)___healthy,True,0.998405612244898,0.9993337988853455
+Corn_(maize)___healthy/445d1b31-6f77-4597-9ded-4b94581dfa75___R.S_HL 5531 copy.jpg,Corn_(maize)___healthy,True,0.9999202806122449,0.9998783469200134
+Corn_(maize)___healthy/1970b015-02d3-405a-a1d7-3457a6977557___R.S_HL 7891 copy 2.jpg,Corn_(maize)___healthy,True,0.998405612244898,0.9993135929107666
 Corn_(maize)___healthy/7c09e620-aa1a-4516-b97c-fafecba84622___R.S_HL 0637 copy.jpg,Corn_(maize)___healthy,True,1.0,1.0
-Corn_(maize)___healthy/1b969db5-ff14-4340-94c2-c4bafd6e35b9___R.S_HL 0639 copy 3.jpg,Corn_(maize)___healthy,True,0.99609375,0.9965956211090088
+Corn_(maize)___healthy/1b969db5-ff14-4340-94c2-c4bafd6e35b9___R.S_HL 0639 copy 3.jpg,Corn_(maize)___healthy,True,0.99609375,0.9967079162597656
 Corn_(maize)___healthy/48296a13-4359-4df3-b19d-d457c14721ba___R.S_HL 8157 copy 2.jpg,Corn_(maize)___healthy,True,1.0,1.0
 Corn_(maize)___healthy/02e76b75-f201-44ee-a694-35edf97cc82b___R.S_HL 8015 copy.jpg,Corn_(maize)___healthy,True,1.0,1.0
-Grape___Black_rot/ca2d4db1-7716-4007-a5d9-fc6d23655c2b___FAM_B.Rot 5051.JPG,Grape___Black_rot,True,0.5432676977040817,0.766730010509491
-Grape___Black_rot/7b2ca8d1-8192-4009-920d-06b5ec7378c0___FAM_B.Rot 3266.JPG,Grape___Black_rot,True,0.5089485012755102,0.6681088805198669
-Grape___Black_rot/aa2b7d73-7b7a-4182-98d4-7b8693a3aac0___FAM_B.Rot 3347.JPG,Grape___Black_rot,True,0.4959741709183674,0.7170718908309937
-Grape___Black_rot/fb8d7c2b-beea-4216-9f06-1e4fd081a2a2___FAM_B.Rot 3621.JPG,Grape___Black_rot,True,0.4752869897959184,0.6615244746208191
-Grape___Black_rot/9107adf6-cf65-4071-822b-e68850cfcb52___FAM_B.Rot 0481.JPG,Grape___Black_rot,True,0.4453722895408163,0.520514726638794
-Grape___Black_rot/f0263437-2f45-4237-851f-ca6a5237f362___FAM_B.Rot 5062.JPG,Grape___Black_rot,True,0.48573022959183676,0.639000654220581
-Grape___Black_rot/18994b78-1505-4c21-b6b4-459c4e673735___FAM_B.Rot 3269.JPG,Grape___Black_rot,True,0.49376195790816324,0.606753945350647
-Grape___Black_rot/4dd5393a-fbcd-41da-b67c-5f74c3a5851d___FAM_B.Rot 3336.JPG,Grape___Black_rot,True,0.46006058673469385,0.6780931353569031
-Grape___Black_rot/4ed51751-01c2-4b59-8b10-1e8005d2e421___FAM_B.Rot 3467.JPG,Grape___Black_rot,True,0.6081991390306123,0.6253271102905273
-Grape___Black_rot/916a177a-421c-4db0-9cff-22583bf4fbf7___FAM_B.Rot 3224.JPG,Grape___Black_rot,True,0.4780173788265306,0.6056393980979919
-Grape___Black_rot/33f329ff-48f1-4c8d-b88c-2fcf9e2a94f7___FAM_B.Rot 3037.JPG,Grape___Black_rot,True,0.47658242984693877,0.6613969802856445
-Grape___Black_rot/f0cb2eb6-70cf-4270-9091-0d9ad45eee5c___FAM_B.Rot 3223.JPG,Grape___Black_rot,True,0.40975765306122447,0.544459879398346
-Grape___Black_rot/58130ddc-0d95-4e13-945d-54de9ef50fb9___FAM_B.Rot 3019.JPG,Grape___Black_rot,True,0.49629304846938777,0.681529700756073
-Grape___Black_rot/aa600fb5-718b-443a-b959-21d13c97a5c2___FAM_B.Rot 0686.JPG,Grape___Black_rot,True,0.4595424107142857,0.6910566687583923
-Grape___Black_rot/c7b7d7a8-fb2b-4149-b2c8-83ee2b9a7ead___FAM_B.Rot 0746.JPG,Grape___Black_rot,True,0.44941804846938777,0.6492544412612915
-Grape___Esca_(Black_Measles)/c5a4696f-ca91-4d1d-b243-11bd8733a723___FAM_B.Msls 1334.JPG,Grape___Esca_(Black_Measles),True,0.47829639668367346,0.7473633289337158
-Grape___Esca_(Black_Measles)/70938717-c063-4d06-bc1e-bae06f9474e5___FAM_B.Msls 1013.JPG,Grape___Esca_(Black_Measles),True,0.4932238520408163,0.7033925652503967
-Grape___Esca_(Black_Measles)/4d32a5c9-2b48-4fcf-ace1-ab0f81def6b7___FAM_B.Msls 4101.JPG,Grape___Esca_(Black_Measles),False,0.4345105229591837,0.5378084182739258
-Grape___Esca_(Black_Measles)/a7ec5e11-7c67-4802-bb69-9d27c81457c7___FAM_B.Msls 1308.JPG,Grape___Esca_(Black_Measles),True,0.5109813456632653,0.5693053603172302
-Grape___Esca_(Black_Measles)/d91774fe-94c4-4f98-a4ad-106794907f27___FAM_B.Msls 4393.JPG,Grape___Esca_(Black_Measles),True,0.49868463010204084,0.6064457297325134
-Grape___Esca_(Black_Measles)/513edc8d-76f5-4604-bb7b-90195a600b60___FAM_B.Msls 4016.JPG,Grape___Esca_(Black_Measles),True,0.3877551020408163,0.6100175380706787
-Grape___Esca_(Black_Measles)/d7cc174f-080d-4587-943d-700429fb6dff___FAM_B.Msls 4225.JPG,Grape___Esca_(Black_Measles),True,0.482601243622449,0.7390956878662109
-Grape___Esca_(Black_Measles)/b5cd7194-ba06-4fd5-a24c-4c384f49e65b___FAM_B.Msls 4232.JPG,Grape___Esca_(Black_Measles),True,0.47341358418367346,0.6706326603889465
-Grape___Esca_(Black_Measles)/d1867d3e-ddbb-4d52-8aa1-1ce40181cb67___FAM_B.Msls 3810.JPG,Grape___Esca_(Black_Measles),True,0.4930046237244898,0.6961228251457214
-Grape___Esca_(Black_Measles)/1bb0dd90-cc27-4893-bd0a-5437cd4b45d8___FAM_B.Msls 4449.JPG,Grape___Esca_(Black_Measles),True,0.4057517538265306,0.722848117351532
-Grape___Esca_(Black_Measles)/7ea4cc7f-58c1-4183-b039-c601dde02ded___FAM_B.Msls 1011.JPG,Grape___Esca_(Black_Measles),True,0.436702806122449,0.6846519112586975
-Grape___Esca_(Black_Measles)/171667ab-a5ad-4adb-8a5d-0bf872956ca0___FAM_B.Msls 3858.JPG,Grape___Esca_(Black_Measles),True,0.38767538265306123,0.6105723977088928
-Grape___Esca_(Black_Measles)/0ac1749b-6c4a-4a60-92d4-f4e957cfa4b4___FAM_B.Msls 0887.JPG,Grape___Esca_(Black_Measles),True,0.36830357142857145,0.5914909243583679
-Grape___Esca_(Black_Measles)/3b8f1006-2bc9-429e-8120-d697632c6642___FAM_B.Msls 3960.JPG,Grape___Esca_(Black_Measles),True,0.4771205357142857,0.6225675940513611
-Grape___Esca_(Black_Measles)/da2ded91-338e-47db-a640-269590ea2b8b___FAM_B.Msls 1127.JPG,Grape___Esca_(Black_Measles),True,0.5293367346938775,0.7299640774726868
-Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/279b02e6-6c6e-43eb-abfa-171cd1bded41___FAM_L.Blight 4548.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.6089166135204082,0.769990086555481
-Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/e10e2b0d-b03c-4181-9684-27710008c0d8___FAM_L.Blight 3784.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.41151147959183676,0.6548702120780945
-Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/5acd6847-c005-4bf8-a676-80c93e802f87___FAM_L.Blight 0810.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.5427893813775511,0.7595699429512024
-Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/e184669d-b068-434e-95ef-a7d59a9c47a2___FAM_L.Blight 1715.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.5919164540816326,0.8212238550186157
-Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/0cd3c290-1fe0-47e1-a2a4-ad8566fb7147___FAM_L.Blight 1714.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.5692960778061225,0.7801579833030701
-Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/c08c3e56-4192-40a6-9b51-8733e642dafa___FAM_L.Blight 1422.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.5382254464285714,0.7567042708396912
-Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/10473db7-4efd-4620-80a1-7f7183b1481f___FAM_L.Blight 1578.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.6493742028061225,0.8251367211341858
-Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/9efcc427-cf1c-4db8-88de-02251ea43ed5___FAM_L.Blight 1657.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.9975286989795918,0.9981217980384827
-Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/cf4eead0-46bc-4947-9333-84c133c4e161___FAM_L.Blight 1537.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.5519969706632653,0.7626668810844421
-Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/511895ed-cbb6-478d-a023-11cc5fa94550___FAM_L.Blight 1670.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.5820910395408163,0.8213428258895874
-Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/fe6c78a9-5db7-4cef-afbe-fc3a57a068e0___FAM_L.Blight 4795.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.5248525191326531,0.7525128722190857
-Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/2b735e09-c466-4d1d-903c-f4ea036225fa___FAM_L.Blight 4703.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.5879902742346939,0.7445557713508606
-Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/450588a9-80f0-4fc7-85a2-7dd3f17ab26b___FAM_L.Blight 0795.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.5651506696428571,0.7412686944007874
-Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/c173c3eb-ad1b-4e04-965d-4139336683cb___FAM_L.Blight 1577.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.6583824936224489,0.8390197157859802
+Grape___Black_rot/ca2d4db1-7716-4007-a5d9-fc6d23655c2b___FAM_B.Rot 5051.JPG,Grape___Black_rot,True,0.5432676977040817,0.766701877117157
+Grape___Black_rot/7b2ca8d1-8192-4009-920d-06b5ec7378c0___FAM_B.Rot 3266.JPG,Grape___Black_rot,True,0.5089485012755102,0.6500403881072998
+Grape___Black_rot/aa2b7d73-7b7a-4182-98d4-7b8693a3aac0___FAM_B.Rot 3347.JPG,Grape___Black_rot,True,0.4959741709183674,0.717129647731781
+Grape___Black_rot/fb8d7c2b-beea-4216-9f06-1e4fd081a2a2___FAM_B.Rot 3621.JPG,Grape___Black_rot,True,0.4752869897959184,0.6617937088012695
+Grape___Black_rot/9107adf6-cf65-4071-822b-e68850cfcb52___FAM_B.Rot 0481.JPG,Grape___Black_rot,True,0.4453722895408163,0.5661220550537109
+Grape___Black_rot/f0263437-2f45-4237-851f-ca6a5237f362___FAM_B.Rot 5062.JPG,Grape___Black_rot,True,0.48573022959183676,0.6718544960021973
+Grape___Black_rot/18994b78-1505-4c21-b6b4-459c4e673735___FAM_B.Rot 3269.JPG,Grape___Black_rot,True,0.49376195790816324,0.6823440790176392
+Grape___Black_rot/4dd5393a-fbcd-41da-b67c-5f74c3a5851d___FAM_B.Rot 3336.JPG,Grape___Black_rot,True,0.46006058673469385,0.6780736446380615
+Grape___Black_rot/4ed51751-01c2-4b59-8b10-1e8005d2e421___FAM_B.Rot 3467.JPG,Grape___Black_rot,True,0.6081991390306123,0.7266775965690613
+Grape___Black_rot/916a177a-421c-4db0-9cff-22583bf4fbf7___FAM_B.Rot 3224.JPG,Grape___Black_rot,True,0.4780173788265306,0.6749144792556763
+Grape___Black_rot/33f329ff-48f1-4c8d-b88c-2fcf9e2a94f7___FAM_B.Rot 3037.JPG,Grape___Black_rot,True,0.47658242984693877,0.6613978147506714
+Grape___Black_rot/f0cb2eb6-70cf-4270-9091-0d9ad45eee5c___FAM_B.Rot 3223.JPG,Grape___Black_rot,True,0.40975765306122447,0.592249870300293
+Grape___Black_rot/58130ddc-0d95-4e13-945d-54de9ef50fb9___FAM_B.Rot 3019.JPG,Grape___Black_rot,True,0.49629304846938777,0.6799979209899902
+Grape___Black_rot/aa600fb5-718b-443a-b959-21d13c97a5c2___FAM_B.Rot 0686.JPG,Grape___Black_rot,True,0.4595424107142857,0.6733582019805908
+Grape___Black_rot/c7b7d7a8-fb2b-4149-b2c8-83ee2b9a7ead___FAM_B.Rot 0746.JPG,Grape___Black_rot,True,0.44941804846938777,0.6495029926300049
+Grape___Esca_(Black_Measles)/c5a4696f-ca91-4d1d-b243-11bd8733a723___FAM_B.Msls 1334.JPG,Grape___Esca_(Black_Measles),True,0.47829639668367346,0.7473535537719727
+Grape___Esca_(Black_Measles)/70938717-c063-4d06-bc1e-bae06f9474e5___FAM_B.Msls 1013.JPG,Grape___Esca_(Black_Measles),True,0.4932238520408163,0.7026391625404358
+Grape___Esca_(Black_Measles)/4d32a5c9-2b48-4fcf-ace1-ab0f81def6b7___FAM_B.Msls 4101.JPG,Grape___Esca_(Black_Measles),False,0.4345105229591837,0.6626394987106323
+Grape___Esca_(Black_Measles)/a7ec5e11-7c67-4802-bb69-9d27c81457c7___FAM_B.Msls 1308.JPG,Grape___Esca_(Black_Measles),True,0.5109813456632653,0.6603680849075317
+Grape___Esca_(Black_Measles)/d91774fe-94c4-4f98-a4ad-106794907f27___FAM_B.Msls 4393.JPG,Grape___Esca_(Black_Measles),True,0.49868463010204084,0.6687886714935303
+Grape___Esca_(Black_Measles)/513edc8d-76f5-4604-bb7b-90195a600b60___FAM_B.Msls 4016.JPG,Grape___Esca_(Black_Measles),True,0.3877551020408163,0.6100174784660339
+Grape___Esca_(Black_Measles)/d7cc174f-080d-4587-943d-700429fb6dff___FAM_B.Msls 4225.JPG,Grape___Esca_(Black_Measles),True,0.482601243622449,0.6644468307495117
+Grape___Esca_(Black_Measles)/b5cd7194-ba06-4fd5-a24c-4c384f49e65b___FAM_B.Msls 4232.JPG,Grape___Esca_(Black_Measles),True,0.47341358418367346,0.6695379018783569
+Grape___Esca_(Black_Measles)/d1867d3e-ddbb-4d52-8aa1-1ce40181cb67___FAM_B.Msls 3810.JPG,Grape___Esca_(Black_Measles),True,0.4930046237244898,0.6961174011230469
+Grape___Esca_(Black_Measles)/1bb0dd90-cc27-4893-bd0a-5437cd4b45d8___FAM_B.Msls 4449.JPG,Grape___Esca_(Black_Measles),True,0.4057517538265306,0.6552910208702087
+Grape___Esca_(Black_Measles)/7ea4cc7f-58c1-4183-b039-c601dde02ded___FAM_B.Msls 1011.JPG,Grape___Esca_(Black_Measles),True,0.436702806122449,0.6847198605537415
+Grape___Esca_(Black_Measles)/171667ab-a5ad-4adb-8a5d-0bf872956ca0___FAM_B.Msls 3858.JPG,Grape___Esca_(Black_Measles),True,0.38767538265306123,0.6105422377586365
+Grape___Esca_(Black_Measles)/0ac1749b-6c4a-4a60-92d4-f4e957cfa4b4___FAM_B.Msls 0887.JPG,Grape___Esca_(Black_Measles),True,0.36830357142857145,0.5838321447372437
+Grape___Esca_(Black_Measles)/3b8f1006-2bc9-429e-8120-d697632c6642___FAM_B.Msls 3960.JPG,Grape___Esca_(Black_Measles),True,0.4771205357142857,0.6384297609329224
+Grape___Esca_(Black_Measles)/da2ded91-338e-47db-a640-269590ea2b8b___FAM_B.Msls 1127.JPG,Grape___Esca_(Black_Measles),True,0.5293367346938775,0.7287467122077942
+Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/279b02e6-6c6e-43eb-abfa-171cd1bded41___FAM_L.Blight 4548.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.6089166135204082,0.7699836492538452
+Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/e10e2b0d-b03c-4181-9684-27710008c0d8___FAM_L.Blight 3784.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.41151147959183676,0.6687536239624023
+Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/5acd6847-c005-4bf8-a676-80c93e802f87___FAM_L.Blight 0810.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.5427893813775511,0.741256833076477
+Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/e184669d-b068-434e-95ef-a7d59a9c47a2___FAM_L.Blight 1715.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.5919164540816326,0.8212352395057678
+Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/0cd3c290-1fe0-47e1-a2a4-ad8566fb7147___FAM_L.Blight 1714.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.5692960778061225,0.7966833710670471
+Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/c08c3e56-4192-40a6-9b51-8733e642dafa___FAM_L.Blight 1422.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.5382254464285714,0.7567068934440613
+Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/10473db7-4efd-4620-80a1-7f7183b1481f___FAM_L.Blight 1578.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.6493742028061225,0.8255863785743713
+Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/9efcc427-cf1c-4db8-88de-02251ea43ed5___FAM_L.Blight 1657.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.9975286989795918,0.9981215000152588
+Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/cf4eead0-46bc-4947-9333-84c133c4e161___FAM_L.Blight 1537.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.5519969706632653,0.7626677751541138
+Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/511895ed-cbb6-478d-a023-11cc5fa94550___FAM_L.Blight 1670.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.5820910395408163,0.8103839755058289
+Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/fe6c78a9-5db7-4cef-afbe-fc3a57a068e0___FAM_L.Blight 4795.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.5248525191326531,0.7618385553359985
+Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/2b735e09-c466-4d1d-903c-f4ea036225fa___FAM_L.Blight 4703.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.5879902742346939,0.7446633577346802
+Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/450588a9-80f0-4fc7-85a2-7dd3f17ab26b___FAM_L.Blight 0795.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.5651506696428571,0.7412686347961426
+Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/c173c3eb-ad1b-4e04-965d-4139336683cb___FAM_L.Blight 1577.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.6583824936224489,0.8425694704055786
 Grape___Leaf_blight_(Isariopsis_Leaf_Spot)/347efc0d-b067-4c8a-8ee9-df88b70bbe2d___FAM_L.Blight 4628.JPG,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),True,0.6279097576530612,0.7578492164611816
-Grape___healthy/3212eeb2-e75c-45a3-9211-6147cd370274___Mt.N.V_HL 6041.JPG,Grape___healthy,True,0.4999402104591837,0.7701118588447571
-Grape___healthy/793f26c8-77cd-4134-939f-655a290e7e6c___Mt.N.V_HL 8925.JPG,Grape___healthy,True,0.5530731823979592,0.7913516163825989
-Grape___healthy/9466c0cc-2ae1-429e-b07e-eb75b94b2cf9___Mt.N.V_HL 9080.JPG,Grape___healthy,True,0.520866549744898,0.8161868453025818
-Grape___healthy/5367d0e4-7902-4dce-bfda-eeb0c9195873___Mt.N.V_HL 9092.JPG,Grape___healthy,True,0.5528340242346939,0.7807208299636841
-Grape___healthy/bc9f03e8-d545-4ba9-a68d-7032b3c36670___Mt.N.V_HL 6075.JPG,Grape___healthy,True,0.4936423788265306,0.7052093148231506
-Grape___healthy/0f8906e9-86e1-49f8-aea0-3e887924799d___Mt.N.V_HL 9012.JPG,Grape___healthy,True,0.5934311224489796,0.7885845303535461
-Grape___healthy/86f98f21-f6aa-439b-a8b3-dd80beaf147c___Mt.N.V_HL 9118.JPG,Grape___healthy,True,0.6036551339285714,0.7107513546943665
-Grape___healthy/a23b47a4-048d-4992-bc61-f3adec202543___Mt.N.V_HL 6113.JPG,Grape___healthy,True,0.40174585459183676,0.7862252593040466
-Grape___healthy/e51ee2ab-a7f5-4558-83e3-7bf6d0364c63___Mt.N.V_HL 6064.JPG,Grape___healthy,True,0.6172672193877551,0.9142852425575256
-Grape___healthy/c95315d3-0a8f-476e-9eee-c6c9f4246841___Mt.N.V_HL 6197.JPG,Grape___healthy,True,0.5909598214285714,0.8736094832420349
-Grape___healthy/629195e5-85c1-444f-bd02-0fb635586d8e___Mt.N.V_HL 6079.JPG,Grape___healthy,True,0.5298349808673469,0.8576515316963196
-Grape___healthy/fed74aa9-511b-4958-824b-41066b2e5406___Mt.N.V_HL 8918.JPG,Grape___healthy,True,0.491390306122449,0.8031327128410339
-Grape___healthy/07d28aaf-09ea-4223-9a65-88ef49e54924___Mt.N.V_HL 9121.JPG,Grape___healthy,True,0.5448820153061225,0.8297138810157776
-Grape___healthy/25180138-3b60-452e-ac9c-70b664d315e8___Mt.N.V_HL 8988.JPG,Grape___healthy,True,0.5487882653061225,0.7261965274810791
-Grape___healthy/cad08b01-b03c-4bee-a786-a6118ec09c37___Mt.N.V_HL 6081.JPG,Grape___healthy,True,0.5211455676020408,0.8064465522766113
-Orange___Haunglongbing_(Citrus_greening)/4d8ba5bc-f623-4f95-9b64-60273cc4a83f___CREC_HLB 4774.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.5426897321428571,0.8062558174133301
+Grape___healthy/3212eeb2-e75c-45a3-9211-6147cd370274___Mt.N.V_HL 6041.JPG,Grape___healthy,True,0.4999402104591837,0.7164875864982605
+Grape___healthy/793f26c8-77cd-4134-939f-655a290e7e6c___Mt.N.V_HL 8925.JPG,Grape___healthy,True,0.5530731823979592,0.8174891471862793
+Grape___healthy/9466c0cc-2ae1-429e-b07e-eb75b94b2cf9___Mt.N.V_HL 9080.JPG,Grape___healthy,True,0.520866549744898,0.7080889344215393
+Grape___healthy/5367d0e4-7902-4dce-bfda-eeb0c9195873___Mt.N.V_HL 9092.JPG,Grape___healthy,True,0.5528340242346939,0.7757623791694641
+Grape___healthy/bc9f03e8-d545-4ba9-a68d-7032b3c36670___Mt.N.V_HL 6075.JPG,Grape___healthy,True,0.4936423788265306,0.730114221572876
+Grape___healthy/0f8906e9-86e1-49f8-aea0-3e887924799d___Mt.N.V_HL 9012.JPG,Grape___healthy,True,0.5934311224489796,0.8147237300872803
+Grape___healthy/86f98f21-f6aa-439b-a8b3-dd80beaf147c___Mt.N.V_HL 9118.JPG,Grape___healthy,True,0.6036551339285714,0.8015637397766113
+Grape___healthy/a23b47a4-048d-4992-bc61-f3adec202543___Mt.N.V_HL 6113.JPG,Grape___healthy,True,0.40174585459183676,0.6532256603240967
+Grape___healthy/e51ee2ab-a7f5-4558-83e3-7bf6d0364c63___Mt.N.V_HL 6064.JPG,Grape___healthy,True,0.6172672193877551,0.8262216448783875
+Grape___healthy/c95315d3-0a8f-476e-9eee-c6c9f4246841___Mt.N.V_HL 6197.JPG,Grape___healthy,True,0.5909598214285714,0.8949687480926514
+Grape___healthy/629195e5-85c1-444f-bd02-0fb635586d8e___Mt.N.V_HL 6079.JPG,Grape___healthy,True,0.5298349808673469,0.7543875575065613
+Grape___healthy/fed74aa9-511b-4958-824b-41066b2e5406___Mt.N.V_HL 8918.JPG,Grape___healthy,True,0.491390306122449,0.7456997036933899
+Grape___healthy/07d28aaf-09ea-4223-9a65-88ef49e54924___Mt.N.V_HL 9121.JPG,Grape___healthy,True,0.5448820153061225,0.8298305869102478
+Grape___healthy/25180138-3b60-452e-ac9c-70b664d315e8___Mt.N.V_HL 8988.JPG,Grape___healthy,True,0.5487882653061225,0.8197097182273865
+Grape___healthy/cad08b01-b03c-4bee-a786-a6118ec09c37___Mt.N.V_HL 6081.JPG,Grape___healthy,True,0.5211455676020408,0.7129496932029724
+Orange___Haunglongbing_(Citrus_greening)/4d8ba5bc-f623-4f95-9b64-60273cc4a83f___CREC_HLB 4774.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.5426897321428571,0.806441605091095
 Orange___Haunglongbing_(Citrus_greening)/078ec033-e541-4c94-a42c-9b3d66907705___UF.Citrus_HLB_Lab 9631.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.5996890943877551,0.8452184796333313
-Orange___Haunglongbing_(Citrus_greening)/f1517adc-da51-4886-87a1-c31ba03ed4cd___CREC_HLB 6476.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.5749362244897959,0.8511101603507996
+Orange___Haunglongbing_(Citrus_greening)/f1517adc-da51-4886-87a1-c31ba03ed4cd___CREC_HLB 6476.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.5749362244897959,0.8511098623275757
 Orange___Haunglongbing_(Citrus_greening)/52be8aec-bced-4123-907a-d6281bcd8a0e___CREC_HLB 7587.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.4684311224489796,0.7198941111564636
-Orange___Haunglongbing_(Citrus_greening)/f4237b29-cc98-4d8e-9307-fc0d66fd316a___UF.Citrus_HLB_Lab 0926.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.49814652423469385,0.7265323996543884
-Orange___Haunglongbing_(Citrus_greening)/ecadb4cc-0f18-4228-8aad-fab8cc97c7d6___CREC_HLB 7918.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.3977598852040816,0.6860398054122925
+Orange___Haunglongbing_(Citrus_greening)/f4237b29-cc98-4d8e-9307-fc0d66fd316a___UF.Citrus_HLB_Lab 0926.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.49814652423469385,0.7359060645103455
+Orange___Haunglongbing_(Citrus_greening)/ecadb4cc-0f18-4228-8aad-fab8cc97c7d6___CREC_HLB 7918.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.3977598852040816,0.6860319375991821
 Orange___Haunglongbing_(Citrus_greening)/9a76afc7-bde4-47b7-923e-9373efb59695___CREC_HLB 4164.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.5503826530612245,0.7661667466163635
-Orange___Haunglongbing_(Citrus_greening)/299a004e-6b6a-498f-a8f1-3be100478f40___UF.Citrus_HLB_Lab 0184.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.5497648278061225,0.7703040838241577
-Orange___Haunglongbing_(Citrus_greening)/87208043-da35-46d3-9357-6fc5f4e0ffd5___CREC_HLB 7454.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.3893295599489796,0.7097824215888977
-Orange___Haunglongbing_(Citrus_greening)/7b1e25b6-1ff9-4ccc-b21d-4803ac820955___CREC_HLB 6848.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.2729392538265306,0.463164746761322
-Orange___Haunglongbing_(Citrus_greening)/7f51b10c-4b2c-4d90-9d1f-9b0f2d3a60a5___CREC_HLB 5289.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.4036391900510204,0.7064011096954346
-Orange___Haunglongbing_(Citrus_greening)/7a2b1ce9-a5fa-4212-a491-1b0181087dd8___UF.Citrus_HLB_Lab 9725.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.6095742984693877,0.8051290512084961
-Orange___Haunglongbing_(Citrus_greening)/d6306b8c-d296-4370-a78c-75e78b8bca05___CREC_HLB 6463.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.4348294005102041,0.7602046132087708
-Orange___Haunglongbing_(Citrus_greening)/91149a76-70c1-4f15-b847-2f911d5863ee___CREC_HLB 4847.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.4069674744897959,0.7137384414672852
-Orange___Haunglongbing_(Citrus_greening)/9fdcabdd-7e29-4034-953a-61136d2cd042___CREC_HLB 5490.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.4881616709183674,0.7735828161239624
-Peach___Bacterial_spot/a6f937b8-260a-4a8b-80ff-219c212e6ee1___Rutg._Bact.S 1183.JPG,Peach___Bacterial_spot,True,0.49013472576530615,0.6446056365966797
-Peach___Bacterial_spot/4c14bd82-660c-42c2-a051-b455f7234557___Rutg._Bact.S 1528.JPG,Peach___Bacterial_spot,True,0.36356026785714285,0.5695255994796753
-Peach___Bacterial_spot/43f7a0f2-7083-4598-8846-7ccea0ee4ca3___Rut._Bact.S 3348.JPG,Peach___Bacterial_spot,True,0.5940290178571429,0.7807341814041138
-Peach___Bacterial_spot/9f129ce3-4222-47bb-9f0d-b11f6f25cdc8___Rutg._Bact.S 2034.JPG,Peach___Bacterial_spot,True,0.3804408482142857,0.5803489685058594
-Peach___Bacterial_spot/03af86e0-1988-4f99-9e5f-0d7920fc974c___Rutg._Bact.S 1494.JPG,Peach___Bacterial_spot,True,0.3557278380102041,0.5612095594406128
-Peach___Bacterial_spot/870e377d-fd6f-4ead-bdcb-6dbbbbc81467___Rutg._Bact.S 1914.JPG,Peach___Bacterial_spot,True,0.37637515943877553,0.6072394847869873
-Peach___Bacterial_spot/73d11663-9e0b-4056-a2f6-68ec80173294___Rutg._Bact.S 1496.JPG,Peach___Bacterial_spot,True,0.35794005102040816,0.5405362248420715
-Peach___Bacterial_spot/d18a5e20-4cbd-4e33-9d7a-5bd47edc6633___Rutg._Bact.S 1452.JPG,Peach___Bacterial_spot,True,0.4318000637755102,0.5789899230003357
-Peach___Bacterial_spot/c29fd1d3-9b8c-46f5-bf52-811b76be65b7___Rut._Bact.S 1241.JPG,Peach___Bacterial_spot,True,0.2924705038265306,0.5020056366920471
-Peach___Bacterial_spot/1dc17e0d-a9cf-491b-ad20-26f2062f44e7___Rutg._Bact.S 1354.JPG,Peach___Bacterial_spot,True,0.21141581632653061,0.3881036043167114
-Peach___Bacterial_spot/5676c948-58cc-4f67-8d25-7cc0a4814983___Rutg._Bact.S 1156.JPG,Peach___Bacterial_spot,True,0.3771125637755102,0.6485434770584106
-Peach___Bacterial_spot/c730587a-e8c7-489b-a8a1-d6e05ac0fb92___Rut._Bact.S 3365.JPG,Peach___Bacterial_spot,True,0.4209781568877551,0.5661770105361938
-Peach___Bacterial_spot/3edc912d-3267-40c4-a709-9d6c41397a4e___Rut._Bact.S 1332.JPG,Peach___Bacterial_spot,True,0.2404735331632653,0.3443349599838257
-Peach___Bacterial_spot/cde1624d-7727-495d-81ff-ef8216b1a3f9___Rutg._Bact.S 2154.JPG,Peach___Bacterial_spot,True,0.2175342793367347,0.38945430517196655
-Peach___Bacterial_spot/75e2d06e-d7f4-4472-8cc0-318f35e9598d___Rut._Bact.S 3370.JPG,Peach___Bacterial_spot,True,0.5236766581632653,0.6704528331756592
-Peach___healthy/b14946ae-b85f-4c7c-976f-ff77c09f7508___Rutg._HL 3556.JPG,Peach___healthy,True,0.26357222576530615,0.4614376127719879
-Peach___healthy/a2f68cd8-68fc-41f9-a5e8-c1eea81a69ad___Rutg._HL 3557.JPG,Peach___healthy,True,0.2551419005102041,0.496583491563797
-Peach___healthy/0f9f9b7d-8396-4c62-8700-5008ca0b9db4___Rutg._HL 3613.JPG,Peach___healthy,True,0.34580277423469385,0.5336208939552307
-Peach___healthy/5b4ce44b-5186-4ee8-9b5f-19ee5a01a2ea___Rutg._HL 3551.JPG,Peach___healthy,True,0.31533003826530615,0.4032585918903351
-Peach___healthy/fcd5573f-73c7-4cbc-9856-24c858a49ed9___Rutg._HL 3711.JPG,Peach___healthy,True,0.24119100765306123,0.35973718762397766
-Peach___healthy/293d1635-ff8f-4005-b057-1a539ad2cf0d___Rutg._HL 2474.JPG,Peach___healthy,True,0.19573102678571427,0.35499438643455505
-Peach___healthy/e7e532ec-6d7f-4c2a-9687-c8b4843048b0___Rutg._HL 2404.JPG,Peach___healthy,True,0.16214923469387754,0.32794898748397827
-Peach___healthy/2e0bf8e0-d3a2-4612-a1db-0ff3aba0ee42___Rutg._HL 3534.JPG,Peach___healthy,True,0.19606983418367346,0.36122214794158936
-Peach___healthy/ec3aa964-fde7-4b00-9231-b9350057aa8a___Rutg._HL 2403.JPG,Peach___healthy,True,0.23923788265306123,0.4538642466068268
-Peach___healthy/b37d17c9-3614-47df-8f7c-0a30bfd50d8d___Rutg._HL 3606.JPG,Peach___healthy,True,0.2708266900510204,0.4413778781890869
-Peach___healthy/ad535bed-68fa-4808-94b3-f2d7472f23f3___Rutg._HL 2478.JPG,Peach___healthy,True,0.2587890625,0.4654771089553833
-Peach___healthy/659c5db9-c0b2-42d8-9c85-356f81fca223___Rutg._HL 3705.JPG,Peach___healthy,True,0.2403938137755102,0.4141194224357605
-Peach___healthy/c70b9d48-a03d-4a6b-a58a-d34c21537e86___Rutg._HL 3707.JPG,Peach___healthy,True,0.15748565051020408,0.2142452746629715
-Peach___healthy/b889fc2e-dc97-43c7-bd44-467976bb274f___Rutg._HL 3535.JPG,Peach___healthy,True,0.2276187818877551,0.41495540738105774
-Peach___healthy/afe8e161-e2bd-4bd0-9596-1b81b8ccef92___Rutg._HL 3726.JPG,Peach___healthy,True,0.23871970663265307,0.4711299538612366
-"Pepper,_bell___Bacterial_spot/30559581-e3ea-4ac4-8e8b-ff8bbc44b014___JR_B.Spot 8832.JPG","Pepper,_bell___Bacterial_spot",True,0.3094905931122449,0.6846128702163696
-"Pepper,_bell___Bacterial_spot/2a8a3b2f-d65a-416b-a251-63bb89f448c3___JR_B.Spot 3322.JPG","Pepper,_bell___Bacterial_spot",True,0.49888392857142855,0.7207556962966919
-"Pepper,_bell___Bacterial_spot/0d524d59-fb02-481b-9034-64f1de0da914___NREC_B.Spot 9060.JPG","Pepper,_bell___Bacterial_spot",True,0.39219945790816324,0.5317444801330566
-"Pepper,_bell___Bacterial_spot/f2c48f6c-f92e-4543-816c-0621648003fe___JR_B.Spot 9010.JPG","Pepper,_bell___Bacterial_spot",True,0.5446627869897959,0.7130628228187561
-"Pepper,_bell___Bacterial_spot/72572ac8-d26b-4684-8e8c-7b396677f2fc___NREC_B.Spot 9191.JPG","Pepper,_bell___Bacterial_spot",True,0.3970224808673469,0.5134045481681824
-"Pepper,_bell___Bacterial_spot/b143a281-5395-4a2a-8308-f6b23a476505___JR_B.Spot 8854.JPG","Pepper,_bell___Bacterial_spot",True,0.45234773596938777,0.5002597570419312
-"Pepper,_bell___Bacterial_spot/31add1a3-eab6-4c9c-946f-d85d89297a0e___NREC_B.Spot 1842.JPG","Pepper,_bell___Bacterial_spot",True,0.35176179846938777,0.6162866353988647
-"Pepper,_bell___Bacterial_spot/4434e395-4f3d-435d-9101-ece6be005fd6___JR_B.Spot 8928.JPG","Pepper,_bell___Bacterial_spot",True,0.521843112244898,0.632607638835907
-"Pepper,_bell___Bacterial_spot/858e8261-f962-4ce6-825c-d498e24e957c___JR_B.Spot 3273.JPG","Pepper,_bell___Bacterial_spot",True,0.5627192283163265,0.7720819115638733
-"Pepper,_bell___Bacterial_spot/8e142609-2257-448f-84e0-b20a6e85dcba___NREC_B.Spot 9160.JPG","Pepper,_bell___Bacterial_spot",True,0.36918048469387754,0.6664625406265259
-"Pepper,_bell___Bacterial_spot/32d3951c-8c10-4e8f-b35c-81f7de2513c7___JR_B.Spot 3112.JPG","Pepper,_bell___Bacterial_spot",True,0.4477040816326531,0.7580800652503967
-"Pepper,_bell___Bacterial_spot/d877c51c-12ce-44e0-b737-d06d0e8431b6___JR_B.Spot 3114.JPG","Pepper,_bell___Bacterial_spot",True,0.439453125,0.7273311018943787
-"Pepper,_bell___Bacterial_spot/fe079adb-1a16-4c71-822d-bbb25a21314f___JR_B.Spot 3276.JPG","Pepper,_bell___Bacterial_spot",True,0.5627989477040817,0.8155286312103271
-"Pepper,_bell___Bacterial_spot/09035eae-2a1c-4718-8877-5270a1fe8462___JR_B.Spot 3280.JPG","Pepper,_bell___Bacterial_spot",True,0.6157525510204082,0.799532949924469
-"Pepper,_bell___Bacterial_spot/26ca895f-8155-4d26-a0ac-7e04a7487832___NREC_B.Spot 9222.JPG","Pepper,_bell___Bacterial_spot",True,0.39295679209183676,0.6258543133735657
-"Pepper,_bell___healthy/337c9b27-d3a4-4e15-b61d-0ff21f717a45___JR_HL 7943.JPG","Pepper,_bell___healthy",True,0.5797991071428571,0.7269600629806519
-"Pepper,_bell___healthy/7bb213e0-2c58-43dc-9fb2-7c90474887eb___JR_HL 8689.JPG","Pepper,_bell___healthy",True,0.5432676977040817,0.6933961510658264
-"Pepper,_bell___healthy/12e22bb7-46e1-4714-8139-83e3a9bfef07___JR_HL 7813.JPG","Pepper,_bell___healthy",True,0.5459382971938775,0.6980500817298889
-"Pepper,_bell___healthy/023563f1-a71a-433d-aefc-d6c7aef8e9eb___JR_HL 8067.JPG","Pepper,_bell___healthy",True,0.5984335140306123,0.7915400862693787
-"Pepper,_bell___healthy/dc16830f-b977-49cc-808b-9b1432a047a2___JR_HL 5925.JPG","Pepper,_bell___healthy",True,0.45461973852040816,0.7494282722473145
-"Pepper,_bell___healthy/8c58fb10-b940-4cef-9fe5-34ea5cb9eb07___JR_HL 7659.JPG","Pepper,_bell___healthy",True,0.5898038903061225,0.7892643213272095
-"Pepper,_bell___healthy/ad1303c4-8c71-484d-aa80-2f43e8cce03d___JR_HL 8207.JPG","Pepper,_bell___healthy",True,0.48140545280612246,0.6043639183044434
-"Pepper,_bell___healthy/9c949d87-f2fb-4b21-9648-69ba51f7a9b9___JR_HL 7948.JPG","Pepper,_bell___healthy",True,0.4883609693877551,0.7067589163780212
-"Pepper,_bell___healthy/4b305da8-ccc7-4c6c-938c-cef12420aaab___JR_HL 5954.JPG","Pepper,_bell___healthy",True,0.4626315369897959,0.6547349691390991
-"Pepper,_bell___healthy/95c8741a-b5a8-4e49-baad-2015bcaf5c3f___JR_HL 5811.JPG","Pepper,_bell___healthy",True,0.4198421556122449,0.7094781398773193
-"Pepper,_bell___healthy/0eeb924f-88db-44e6-a278-e016fa2d25a4___JR_HL 8016.JPG","Pepper,_bell___healthy",True,0.4953762755102041,0.6519126892089844
-"Pepper,_bell___healthy/f170473e-77b2-4b80-94bf-9479622bac75___JR_HL 8381.JPG","Pepper,_bell___healthy",True,0.5060586734693877,0.7301904559135437
-"Pepper,_bell___healthy/452dd2b2-6d8e-46d5-a791-6e693fd9354b___JR_HL 8887.JPG","Pepper,_bell___healthy",True,0.41794882015306123,0.7256584167480469
-"Pepper,_bell___healthy/56223cf2-b449-4088-afef-74476af7f93a___JR_HL 7604.JPG","Pepper,_bell___healthy",True,0.6052893813775511,0.7356950044631958
-"Pepper,_bell___healthy/4652c2fe-d7b7-430a-986b-d63820123cc8___JR_HL 8764.JPG","Pepper,_bell___healthy",True,0.48592952806122447,0.8444437980651855
-Potato___Early_blight/c53d85d7-bddb-422b-955c-6842cce9a927___RS_Early.B 7253.JPG,Potato___Early_blight,True,0.5052614795918368,0.8045560717582703
-Potato___Early_blight/212c3c65-e30e-496f-ab5e-c2f4b0446d8f___RS_Early.B 8195.JPG,Potato___Early_blight,True,0.6012436224489796,0.828394889831543
-Potato___Early_blight/cea35641-b4f8-49cb-bbeb-c98cfc79870e___RS_Early.B 7189.JPG,Potato___Early_blight,True,0.5531728316326531,0.7847442030906677
-Potato___Early_blight/fa61b2e4-413c-4503-a2a2-cff2d8a11351___RS_Early.B 7370.JPG,Potato___Early_blight,True,0.5822504783163265,0.8299793004989624
-Potato___Early_blight/a6dbc59a-ca8a-40e0-a896-3e2270d771bb___RS_Early.B 7195.JPG,Potato___Early_blight,True,0.5840242346938775,0.8059466481208801
-Potato___Early_blight/d472b6e3-a00c-4b4e-b13a-cdababff9d24___RS_Early.B 7699.JPG,Potato___Early_blight,True,0.4758848852040816,0.7138211131095886
-Potato___Early_blight/4e40c113-4ab2-4a71-9ecc-5ceb67905190___RS_Early.B 7446.JPG,Potato___Early_blight,True,0.5823102678571429,0.7468088269233704
-Potato___Early_blight/3de47a70-4a74-462f-8b56-2088507be4ef___RS_Early.B 8832.JPG,Potato___Early_blight,True,0.6037547831632653,0.7860483527183533
-Potato___Early_blight/fdc1f5ed-66b5-4564-8957-055905b8a569___RS_Early.B 8244.JPG,Potato___Early_blight,True,0.5744180484693877,0.7795549035072327
-Potato___Early_blight/caef0735-6517-4194-b124-5916815e4a71___RS_Early.B 7956.JPG,Potato___Early_blight,True,0.4975486288265306,0.7676535844802856
-Potato___Early_blight/aa687aac-2f1a-44d8-89aa-3f7d413b4763___RS_Early.B 8055.JPG,Potato___Early_blight,True,0.5909199617346939,0.7133774161338806
-Potato___Early_blight/ce9d9a96-23cc-4d24-ab68-3932cba59ae2___RS_Early.B 7080.JPG,Potato___Early_blight,True,0.5759725765306123,0.6833755373954773
-Potato___Early_blight/e786a4fe-5aa1-4da2-a16f-4ee82c56e317___RS_Early.B 7245.JPG,Potato___Early_blight,True,0.5397999043367347,0.7427211403846741
-Potato___Early_blight/93c6b48d-cde9-4e8b-bbfb-1a9c06234419___RS_Early.B 7000.JPG,Potato___Early_blight,True,0.5369300063775511,0.7492552399635315
-Potato___Early_blight/fc73fc01-6a63-4b3b-bfed-74625c5b4b05___RS_Early.B 6945.JPG,Potato___Early_blight,True,0.5588329081632653,0.7619302868843079
-Potato___Late_blight/2f6382f7-12fc-4309-b7db-b034b8165c67___RS_LB 4955.JPG,Potato___Late_blight,True,0.44571109693877553,0.7016882300376892
-Potato___Late_blight/33b849d5-ec92-4acb-88e6-530accf22734___RS_LB 4994.JPG,Potato___Late_blight,True,0.5050023915816326,0.6291866302490234
-Potato___Late_blight/16e37160-9dca-4110-a914-955304e7daf5___RS_LB 3033.JPG,Potato___Late_blight,True,0.46878985969387754,0.7623395919799805
-Potato___Late_blight/8b0ef54c-6d28-47bb-a657-287afbb8a620___RS_LB 3298.JPG,Potato___Late_blight,True,0.3090919961734694,0.6325169801712036
-Potato___Late_blight/fd81a3e2-1d3e-4e52-a010-ad1b36a5220d___RS_LB 4067.JPG,Potato___Late_blight,True,0.6016422193877551,0.756460964679718
-Potato___Late_blight/63490f84-88b0-4105-bb76-23990e98c692___RS_LB 3041.JPG,Potato___Late_blight,True,0.4911511479591837,0.7906418442726135
-Potato___Late_blight/9e1dc573-9cc5-4bc1-9c95-63c7bfba54f1___RS_LB 2976.JPG,Potato___Late_blight,True,0.5467554209183674,0.5942480564117432
-Potato___Late_blight/77c271bd-0798-4336-8bea-f2a80e8e8906___RS_LB 3290.JPG,Potato___Late_blight,True,0.45663265306122447,0.7538723349571228
-Potato___Late_blight/c01daf14-9595-4b10-974d-3452fe133060___RS_LB 4463.JPG,Potato___Late_blight,True,0.5088488520408163,0.7270776629447937
-Potato___Late_blight/430b0d0d-c0aa-4e5b-9826-34251466f735___RS_LB 4718.JPG,Potato___Late_blight,True,0.40443638392857145,0.6437109708786011
-Potato___Late_blight/7bf67e1e-57c8-4f68-bc5a-56b2a69f30ec___RS_LB 2509.JPG,Potato___Late_blight,True,0.4477040816326531,0.7291567325592041
-Potato___Late_blight/fe9d57f1-8e00-4069-963a-b344cceca7b3___RS_LB 4486.JPG,Potato___Late_blight,True,0.38456632653061223,0.6743007302284241
-Potato___Late_blight/58adb74c-a1b3-4b9d-95b7-f0721c499388___RS_LB 4326.JPG,Potato___Late_blight,True,0.39475047831632654,0.6756998896598816
-Potato___Late_blight/74ee080b-cad8-4090-9f2a-07411eb8481a___RS_LB 4956.JPG,Potato___Late_blight,True,0.4032007334183674,0.713421642780304
-Potato___Late_blight/74277267-6a9f-44d0-95fe-7f52f89630a0___RS_LB 5074.JPG,Potato___Late_blight,True,0.3991549744897959,0.7242288589477539
-Potato___healthy/45bc0b37-ca59-4a89-8531-705af42a6fd5___RS_HL 1946.JPG,Potato___healthy,True,0.5531927614795918,0.7568095922470093
-Potato___healthy/142fb983-2166-4a0f-b99b-a6c21e99987e___RS_HL 5398.JPG,Potato___healthy,True,0.4962133290816326,0.7006465792655945
-Potato___healthy/1f9870b3-899e-46fb-98c9-cfc2ce92895b___RS_HL 1816.JPG,Potato___healthy,True,0.5494858099489796,0.7468138933181763
-Potato___healthy/8c1e1281-5937-4559-a02f-02817de6e122___RS_HL 4173.JPG,Potato___healthy,True,0.4749083227040816,0.6111255288124084
-Potato___healthy/54f86311-9d76-421b-b401-0b02f6e738a5___RS_HL 4172.JPG,Potato___healthy,True,0.48610889668367346,0.6134651899337769
-Potato___healthy/369479a9-3c28-4d77-8731-9ae54e719af3___RS_HL 1785.JPG,Potato___healthy,True,0.5075135522959183,0.7544507384300232
-Potato___healthy/683b04ad-7941-4819-9965-ba32c725eb22___RS_HL 1861.JPG,Potato___healthy,True,0.5551060267857143,0.8789923191070557
-Potato___healthy/57e24d88-fd01-4422-b8b5-d688d2296184___RS_HL 5401.JPG,Potato___healthy,True,0.5231385522959183,0.7657737135887146
-Potato___healthy/762672f4-17e6-4fd6-84f1-3bcb091b3ca5___RS_HL 5417.JPG,Potato___healthy,False,0.5048429528061225,0.6530529260635376
-Potato___healthy/0b3e5032-8ae8-49ac-8157-a1cac3df01dd___RS_HL 1817.JPG,Potato___healthy,True,0.5487683354591837,0.8015411496162415
-Potato___healthy/111cd9d8-4d27-4225-be9e-d29b21cf56b9___RS_HL 5419.JPG,Potato___healthy,False,0.5187141262755102,0.6114333868026733
-Potato___healthy/b8b7b98a-eb1a-4213-9b0b-aeef4df427e8___RS_HL 1858.JPG,Potato___healthy,True,0.6011240433673469,0.829749345779419
-Potato___healthy/3edf7c3f-73e0-439c-870d-76cfd7c3bc45___RS_HL 1859.JPG,Potato___healthy,True,0.5480907206632653,0.8649681210517883
-Potato___healthy/51a03694-82cd-43a5-9877-ddce42c1a5ad___RS_HL 1779.JPG,Potato___healthy,True,0.4824816645408163,0.7390468716621399
-Potato___healthy/2d98cbc8-cbe6-423c-b2ab-3f7f8bcea5d5___RS_HL 1945.JPG,Potato___healthy,True,0.4926658163265306,0.46006256341934204
-Raspberry___healthy/fe1c1683-06cc-49c5-b86a-a41fb36f058b___Mary_HL 6249.JPG,Raspberry___healthy,True,0.4877232142857143,0.8550131916999817
-Raspberry___healthy/6c2e049f-38c9-42c5-864f-613e6e12d59e___Mary_HL 6318.JPG,Raspberry___healthy,True,0.43550701530612246,0.7461928725242615
-Raspberry___healthy/b679f3ff-3a86-4b6a-a385-15a3a1dc506c___Mary_HL 6375.JPG,Raspberry___healthy,True,0.48826132015306123,0.6555923819541931
-Raspberry___healthy/eae1663a-1498-43c0-ae7e-f5457ae8494f___Mary_HL 9336.JPG,Raspberry___healthy,True,0.6151745854591837,0.7235099673271179
-Raspberry___healthy/27ef7a65-771c-4eab-9169-03a5fa121c71___Mary_HL 9195.JPG,Raspberry___healthy,True,0.5650310905612245,0.7676502466201782
-Raspberry___healthy/e52f84a2-6942-4abe-bdd7-eb14156c0361___Mary_HL 9222.JPG,Raspberry___healthy,True,0.5021524234693877,0.646402895450592
-Raspberry___healthy/d1793bb4-1e90-4377-8cf9-d8f14630eed0___Mary_HL 6277.JPG,Raspberry___healthy,True,0.42582110969387754,0.75307297706604
-Raspberry___healthy/8e8297fd-5e23-44f2-be98-92f7b8908f81___Mary_HL 6315.JPG,Raspberry___healthy,True,0.49844547193877553,0.6566334962844849
-Raspberry___healthy/1f8174d5-38a1-449f-912d-33cd4615d189___Mary_HL 6308.JPG,Raspberry___healthy,True,0.5666852678571429,0.6529718637466431
-Raspberry___healthy/eda7f6bf-dc99-4287-a38c-f259e2f21886___Mary_HL 9323.JPG,Raspberry___healthy,True,0.5466956313775511,0.7411516904830933
-Raspberry___healthy/7ea7a4b0-d404-4355-acfb-c0fa23d976b0___Mary_HL 6342.JPG,Raspberry___healthy,True,0.42069913903061223,0.6144148111343384
-Raspberry___healthy/141f4953-4e0d-4e5d-bb1b-e3a880cd7bf6___Mary_HL 9192.JPG,Raspberry___healthy,True,0.5135722257653061,0.7696892023086548
-Raspberry___healthy/72badd0b-182b-407e-a600-60a6ce2bb926___Mary_HL 9218.JPG,Raspberry___healthy,True,0.5254304846938775,0.6386978626251221
-Raspberry___healthy/d20b63ce-4849-4c33-960e-74ac2ddb048c___Mary_HL 6319.JPG,Raspberry___healthy,True,0.48628826530612246,0.6965002417564392
-Raspberry___healthy/9f89443e-fa60-4b30-b579-1542b87f8c99___Mary_HL 9245.JPG,Raspberry___healthy,True,0.44760443239795916,0.759769856929779
-Soybean___healthy/be6b278a-5900-41a5-af06-4e06b005e7ed___RS_HL 4215.JPG,Soybean___healthy,True,0.52734375,0.690922200679779
-Soybean___healthy/7aefdc99-b1a2-41bb-9a55-b1b81c17b489___RS_HL 5428.JPG,Soybean___healthy,True,0.5282206632653061,0.6957710981369019
-Soybean___healthy/9e8a0da5-0c4e-46c2-a28e-777563faa9fa___RS_HL 5588 1.JPG,Soybean___healthy,True,0.5659279336734694,0.6953333616256714
-Soybean___healthy/ef0ea26f-39e3-433b-9b6d-b5ff7e8a6292___RS_HL 7249.JPG,Soybean___healthy,True,0.4480030293367347,0.7144452333450317
-Soybean___healthy/b2f02bfa-61f6-4fb9-92de-ffe77f250466___RS_HL 3513.JPG,Soybean___healthy,True,0.5703722895408163,0.6953305602073669
-Soybean___healthy/837d7335-f52c-486a-a1a7-8b07b7c9e06b___RS_HL 6928.JPG,Soybean___healthy,True,0.5229990433673469,0.7870938181877136
-Soybean___healthy/7d363b79-bc24-4fe8-84eb-4fae533536bf___RS_HL 3765.JPG,Soybean___healthy,True,0.43550701530612246,0.6190071105957031
-Soybean___healthy/935369be-b082-4836-ba97-81f5f8e274b9___RS_HL 4247.JPG,Soybean___healthy,True,0.46578045280612246,0.6428493857383728
-Soybean___healthy/8a17ec9a-809e-4e8b-a7f0-5d691c7ca4a8___RS_HL 5583 1.JPG,Soybean___healthy,True,0.5672034438775511,0.7317250967025757
-Soybean___healthy/89bfc70d-90bb-4c71-aa60-974b43120a01___RS_HL 3767.JPG,Soybean___healthy,True,0.49629304846938777,0.6617579460144043
-Soybean___healthy/c8af80df-2b9d-4751-b0c2-9112d5f67944___RS_HL 6716.JPG,Soybean___healthy,True,0.6636639030612245,0.7934220433235168
-Soybean___healthy/00f1cdb1-82bb-4924-b5cb-768621f07187___RS_HL 5960.JPG,Soybean___healthy,True,0.6104910714285714,0.684233546257019
-Soybean___healthy/d2845484-18f2-40ba-b65a-3c7d183aa36a___RS_HL 5784 1.JPG,Soybean___healthy,True,0.47106186224489793,0.6976040005683899
-Soybean___healthy/3d6f5842-4a38-49a0-82e4-e79315ddb7da___RS_HL 5221.JPG,Soybean___healthy,True,0.45936304209183676,0.7106687426567078
-Soybean___healthy/959d5089-9f15-4ecc-afae-d9cbe63554d3___RS_HL 5028.JPG,Soybean___healthy,True,0.5796396683673469,0.7223570346832275
-Squash___Powdery_mildew/b64394f9-a13f-44b0-8d59-4e6787f7c490___MD_Powd.M 9919.JPG,Squash___Powdery_mildew,True,0.8286830357142857,0.8806901574134827
-Squash___Powdery_mildew/d19bfbae-aff1-4b04-8720-2884c1a6149f___UMD_Powd.M 0636.JPG,Squash___Powdery_mildew,True,0.7564572704081632,0.9760746359825134
-Squash___Powdery_mildew/634ba67a-8aa1-4f12-b66b-aa090bfdcb12___UMD_Powd.M 9810.JPG,Squash___Powdery_mildew,True,0.8308354591836735,0.9342250823974609
+Orange___Haunglongbing_(Citrus_greening)/299a004e-6b6a-498f-a8f1-3be100478f40___UF.Citrus_HLB_Lab 0184.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.5497648278061225,0.7704274654388428
+Orange___Haunglongbing_(Citrus_greening)/87208043-da35-46d3-9357-6fc5f4e0ffd5___CREC_HLB 7454.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.3893295599489796,0.7097774744033813
+Orange___Haunglongbing_(Citrus_greening)/7b1e25b6-1ff9-4ccc-b21d-4803ac820955___CREC_HLB 6848.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.2729392538265306,0.5393782258033752
+Orange___Haunglongbing_(Citrus_greening)/7f51b10c-4b2c-4d90-9d1f-9b0f2d3a60a5___CREC_HLB 5289.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.4036391900510204,0.706400990486145
+Orange___Haunglongbing_(Citrus_greening)/7a2b1ce9-a5fa-4212-a491-1b0181087dd8___UF.Citrus_HLB_Lab 9725.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.6095742984693877,0.8050083518028259
+Orange___Haunglongbing_(Citrus_greening)/d6306b8c-d296-4370-a78c-75e78b8bca05___CREC_HLB 6463.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.4348294005102041,0.7602040767669678
+Orange___Haunglongbing_(Citrus_greening)/91149a76-70c1-4f15-b847-2f911d5863ee___CREC_HLB 4847.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.4069674744897959,0.7137311697006226
+Orange___Haunglongbing_(Citrus_greening)/9fdcabdd-7e29-4034-953a-61136d2cd042___CREC_HLB 5490.JPG,Orange___Haunglongbing_(Citrus_greening),True,0.4881616709183674,0.7727695107460022
+Peach___Bacterial_spot/a6f937b8-260a-4a8b-80ff-219c212e6ee1___Rutg._Bact.S 1183.JPG,Peach___Bacterial_spot,True,0.49013472576530615,0.6221225261688232
+Peach___Bacterial_spot/4c14bd82-660c-42c2-a051-b455f7234557___Rutg._Bact.S 1528.JPG,Peach___Bacterial_spot,True,0.36356026785714285,0.5689350366592407
+Peach___Bacterial_spot/43f7a0f2-7083-4598-8846-7ccea0ee4ca3___Rut._Bact.S 3348.JPG,Peach___Bacterial_spot,True,0.5940290178571429,0.8241725564002991
+Peach___Bacterial_spot/9f129ce3-4222-47bb-9f0d-b11f6f25cdc8___Rutg._Bact.S 2034.JPG,Peach___Bacterial_spot,True,0.3804408482142857,0.5803446769714355
+Peach___Bacterial_spot/03af86e0-1988-4f99-9e5f-0d7920fc974c___Rutg._Bact.S 1494.JPG,Peach___Bacterial_spot,True,0.3557278380102041,0.5632073283195496
+Peach___Bacterial_spot/870e377d-fd6f-4ead-bdcb-6dbbbbc81467___Rutg._Bact.S 1914.JPG,Peach___Bacterial_spot,True,0.37637515943877553,0.6067379117012024
+Peach___Bacterial_spot/73d11663-9e0b-4056-a2f6-68ec80173294___Rutg._Bact.S 1496.JPG,Peach___Bacterial_spot,True,0.35794005102040816,0.5405269861221313
+Peach___Bacterial_spot/d18a5e20-4cbd-4e33-9d7a-5bd47edc6633___Rutg._Bact.S 1452.JPG,Peach___Bacterial_spot,True,0.4318000637755102,0.6345404386520386
+Peach___Bacterial_spot/c29fd1d3-9b8c-46f5-bf52-811b76be65b7___Rut._Bact.S 1241.JPG,Peach___Bacterial_spot,True,0.2924705038265306,0.5253353118896484
+Peach___Bacterial_spot/1dc17e0d-a9cf-491b-ad20-26f2062f44e7___Rutg._Bact.S 1354.JPG,Peach___Bacterial_spot,True,0.21141581632653061,0.4049626886844635
+Peach___Bacterial_spot/5676c948-58cc-4f67-8d25-7cc0a4814983___Rutg._Bact.S 1156.JPG,Peach___Bacterial_spot,True,0.3771125637755102,0.6487576961517334
+Peach___Bacterial_spot/c730587a-e8c7-489b-a8a1-d6e05ac0fb92___Rut._Bact.S 3365.JPG,Peach___Bacterial_spot,True,0.4209781568877551,0.6228172779083252
+Peach___Bacterial_spot/3edc912d-3267-40c4-a709-9d6c41397a4e___Rut._Bact.S 1332.JPG,Peach___Bacterial_spot,True,0.2404735331632653,0.3933626413345337
+Peach___Bacterial_spot/cde1624d-7727-495d-81ff-ef8216b1a3f9___Rutg._Bact.S 2154.JPG,Peach___Bacterial_spot,True,0.2175342793367347,0.4111696481704712
+Peach___Bacterial_spot/75e2d06e-d7f4-4472-8cc0-318f35e9598d___Rut._Bact.S 3370.JPG,Peach___Bacterial_spot,True,0.5236766581632653,0.7359389662742615
+Peach___healthy/b14946ae-b85f-4c7c-976f-ff77c09f7508___Rutg._HL 3556.JPG,Peach___healthy,True,0.26357222576530615,0.45591190457344055
+Peach___healthy/a2f68cd8-68fc-41f9-a5e8-c1eea81a69ad___Rutg._HL 3557.JPG,Peach___healthy,True,0.2551419005102041,0.48645448684692383
+Peach___healthy/0f9f9b7d-8396-4c62-8700-5008ca0b9db4___Rutg._HL 3613.JPG,Peach___healthy,True,0.34580277423469385,0.5158367156982422
+Peach___healthy/5b4ce44b-5186-4ee8-9b5f-19ee5a01a2ea___Rutg._HL 3551.JPG,Peach___healthy,True,0.31533003826530615,0.5063073635101318
+Peach___healthy/fcd5573f-73c7-4cbc-9856-24c858a49ed9___Rutg._HL 3711.JPG,Peach___healthy,True,0.24119100765306123,0.4457853138446808
+Peach___healthy/293d1635-ff8f-4005-b057-1a539ad2cf0d___Rutg._HL 2474.JPG,Peach___healthy,True,0.19573102678571427,0.3415927588939667
+Peach___healthy/e7e532ec-6d7f-4c2a-9687-c8b4843048b0___Rutg._HL 2404.JPG,Peach___healthy,True,0.16214923469387754,0.33711498975753784
+Peach___healthy/2e0bf8e0-d3a2-4612-a1db-0ff3aba0ee42___Rutg._HL 3534.JPG,Peach___healthy,True,0.19606983418367346,0.3647170066833496
+Peach___healthy/ec3aa964-fde7-4b00-9231-b9350057aa8a___Rutg._HL 2403.JPG,Peach___healthy,True,0.23923788265306123,0.4660590887069702
+Peach___healthy/b37d17c9-3614-47df-8f7c-0a30bfd50d8d___Rutg._HL 3606.JPG,Peach___healthy,True,0.2708266900510204,0.471475213766098
+Peach___healthy/ad535bed-68fa-4808-94b3-f2d7472f23f3___Rutg._HL 2478.JPG,Peach___healthy,True,0.2587890625,0.4073411226272583
+Peach___healthy/659c5db9-c0b2-42d8-9c85-356f81fca223___Rutg._HL 3705.JPG,Peach___healthy,True,0.2403938137755102,0.4263087809085846
+Peach___healthy/c70b9d48-a03d-4a6b-a58a-d34c21537e86___Rutg._HL 3707.JPG,Peach___healthy,True,0.15748565051020408,0.2925857603549957
+Peach___healthy/b889fc2e-dc97-43c7-bd44-467976bb274f___Rutg._HL 3535.JPG,Peach___healthy,True,0.2276187818877551,0.41143912076950073
+Peach___healthy/afe8e161-e2bd-4bd0-9596-1b81b8ccef92___Rutg._HL 3726.JPG,Peach___healthy,True,0.23871970663265307,0.43321895599365234
+"Pepper,_bell___Bacterial_spot/30559581-e3ea-4ac4-8e8b-ff8bbc44b014___JR_B.Spot 8832.JPG","Pepper,_bell___Bacterial_spot",True,0.3094905931122449,0.6123710870742798
+"Pepper,_bell___Bacterial_spot/2a8a3b2f-d65a-416b-a251-63bb89f448c3___JR_B.Spot 3322.JPG","Pepper,_bell___Bacterial_spot",True,0.49888392857142855,0.7304515838623047
+"Pepper,_bell___Bacterial_spot/0d524d59-fb02-481b-9034-64f1de0da914___NREC_B.Spot 9060.JPG","Pepper,_bell___Bacterial_spot",True,0.39219945790816324,0.5322777032852173
+"Pepper,_bell___Bacterial_spot/f2c48f6c-f92e-4543-816c-0621648003fe___JR_B.Spot 9010.JPG","Pepper,_bell___Bacterial_spot",True,0.5446627869897959,0.7139312624931335
+"Pepper,_bell___Bacterial_spot/72572ac8-d26b-4684-8e8c-7b396677f2fc___NREC_B.Spot 9191.JPG","Pepper,_bell___Bacterial_spot",True,0.3970224808673469,0.5023842453956604
+"Pepper,_bell___Bacterial_spot/b143a281-5395-4a2a-8308-f6b23a476505___JR_B.Spot 8854.JPG","Pepper,_bell___Bacterial_spot",True,0.45234773596938777,0.5962128639221191
+"Pepper,_bell___Bacterial_spot/31add1a3-eab6-4c9c-946f-d85d89297a0e___NREC_B.Spot 1842.JPG","Pepper,_bell___Bacterial_spot",True,0.35176179846938777,0.6315308213233948
+"Pepper,_bell___Bacterial_spot/4434e395-4f3d-435d-9101-ece6be005fd6___JR_B.Spot 8928.JPG","Pepper,_bell___Bacterial_spot",True,0.521843112244898,0.6972999572753906
+"Pepper,_bell___Bacterial_spot/858e8261-f962-4ce6-825c-d498e24e957c___JR_B.Spot 3273.JPG","Pepper,_bell___Bacterial_spot",True,0.5627192283163265,0.7818895578384399
+"Pepper,_bell___Bacterial_spot/8e142609-2257-448f-84e0-b20a6e85dcba___NREC_B.Spot 9160.JPG","Pepper,_bell___Bacterial_spot",True,0.36918048469387754,0.6674830913543701
+"Pepper,_bell___Bacterial_spot/32d3951c-8c10-4e8f-b35c-81f7de2513c7___JR_B.Spot 3112.JPG","Pepper,_bell___Bacterial_spot",True,0.4477040816326531,0.798739492893219
+"Pepper,_bell___Bacterial_spot/d877c51c-12ce-44e0-b737-d06d0e8431b6___JR_B.Spot 3114.JPG","Pepper,_bell___Bacterial_spot",True,0.439453125,0.7894992828369141
+"Pepper,_bell___Bacterial_spot/fe079adb-1a16-4c71-822d-bbb25a21314f___JR_B.Spot 3276.JPG","Pepper,_bell___Bacterial_spot",True,0.5627989477040817,0.8088197708129883
+"Pepper,_bell___Bacterial_spot/09035eae-2a1c-4718-8877-5270a1fe8462___JR_B.Spot 3280.JPG","Pepper,_bell___Bacterial_spot",True,0.6157525510204082,0.7908802032470703
+"Pepper,_bell___Bacterial_spot/26ca895f-8155-4d26-a0ac-7e04a7487832___NREC_B.Spot 9222.JPG","Pepper,_bell___Bacterial_spot",True,0.39295679209183676,0.6748002767562866
+"Pepper,_bell___healthy/337c9b27-d3a4-4e15-b61d-0ff21f717a45___JR_HL 7943.JPG","Pepper,_bell___healthy",True,0.5797991071428571,0.7376707792282104
+"Pepper,_bell___healthy/7bb213e0-2c58-43dc-9fb2-7c90474887eb___JR_HL 8689.JPG","Pepper,_bell___healthy",True,0.5432676977040817,0.7034758925437927
+"Pepper,_bell___healthy/12e22bb7-46e1-4714-8139-83e3a9bfef07___JR_HL 7813.JPG","Pepper,_bell___healthy",True,0.5459382971938775,0.7441421151161194
+"Pepper,_bell___healthy/023563f1-a71a-433d-aefc-d6c7aef8e9eb___JR_HL 8067.JPG","Pepper,_bell___healthy",True,0.5984335140306123,0.7939417958259583
+"Pepper,_bell___healthy/dc16830f-b977-49cc-808b-9b1432a047a2___JR_HL 5925.JPG","Pepper,_bell___healthy",True,0.45461973852040816,0.6891568899154663
+"Pepper,_bell___healthy/8c58fb10-b940-4cef-9fe5-34ea5cb9eb07___JR_HL 7659.JPG","Pepper,_bell___healthy",True,0.5898038903061225,0.738467276096344
+"Pepper,_bell___healthy/ad1303c4-8c71-484d-aa80-2f43e8cce03d___JR_HL 8207.JPG","Pepper,_bell___healthy",True,0.48140545280612246,0.6041712760925293
+"Pepper,_bell___healthy/9c949d87-f2fb-4b21-9648-69ba51f7a9b9___JR_HL 7948.JPG","Pepper,_bell___healthy",True,0.4883609693877551,0.7032921314239502
+"Pepper,_bell___healthy/4b305da8-ccc7-4c6c-938c-cef12420aaab___JR_HL 5954.JPG","Pepper,_bell___healthy",True,0.4626315369897959,0.6784499883651733
+"Pepper,_bell___healthy/95c8741a-b5a8-4e49-baad-2015bcaf5c3f___JR_HL 5811.JPG","Pepper,_bell___healthy",True,0.4198421556122449,0.7021859288215637
+"Pepper,_bell___healthy/0eeb924f-88db-44e6-a278-e016fa2d25a4___JR_HL 8016.JPG","Pepper,_bell___healthy",True,0.4953762755102041,0.6849804520606995
+"Pepper,_bell___healthy/f170473e-77b2-4b80-94bf-9479622bac75___JR_HL 8381.JPG","Pepper,_bell___healthy",True,0.5060586734693877,0.7197816967964172
+"Pepper,_bell___healthy/452dd2b2-6d8e-46d5-a791-6e693fd9354b___JR_HL 8887.JPG","Pepper,_bell___healthy",True,0.41794882015306123,0.712134599685669
+"Pepper,_bell___healthy/56223cf2-b449-4088-afef-74476af7f93a___JR_HL 7604.JPG","Pepper,_bell___healthy",True,0.6052893813775511,0.73274165391922
+"Pepper,_bell___healthy/4652c2fe-d7b7-430a-986b-d63820123cc8___JR_HL 8764.JPG","Pepper,_bell___healthy",True,0.48592952806122447,0.8063799142837524
+Potato___Early_blight/c53d85d7-bddb-422b-955c-6842cce9a927___RS_Early.B 7253.JPG,Potato___Early_blight,True,0.5052614795918368,0.7948520183563232
+Potato___Early_blight/212c3c65-e30e-496f-ab5e-c2f4b0446d8f___RS_Early.B 8195.JPG,Potato___Early_blight,True,0.6012436224489796,0.8458557724952698
+Potato___Early_blight/cea35641-b4f8-49cb-bbeb-c98cfc79870e___RS_Early.B 7189.JPG,Potato___Early_blight,True,0.5531728316326531,0.7847433090209961
+Potato___Early_blight/fa61b2e4-413c-4503-a2a2-cff2d8a11351___RS_Early.B 7370.JPG,Potato___Early_blight,True,0.5822504783163265,0.845276415348053
+Potato___Early_blight/a6dbc59a-ca8a-40e0-a896-3e2270d771bb___RS_Early.B 7195.JPG,Potato___Early_blight,True,0.5840242346938775,0.8060657382011414
+Potato___Early_blight/d472b6e3-a00c-4b4e-b13a-cdababff9d24___RS_Early.B 7699.JPG,Potato___Early_blight,True,0.4758848852040816,0.7140856385231018
+Potato___Early_blight/4e40c113-4ab2-4a71-9ecc-5ceb67905190___RS_Early.B 7446.JPG,Potato___Early_blight,True,0.5823102678571429,0.8013908863067627
+Potato___Early_blight/3de47a70-4a74-462f-8b56-2088507be4ef___RS_Early.B 8832.JPG,Potato___Early_blight,True,0.6037547831632653,0.8092373013496399
+Potato___Early_blight/fdc1f5ed-66b5-4564-8957-055905b8a569___RS_Early.B 8244.JPG,Potato___Early_blight,True,0.5744180484693877,0.7800316214561462
+Potato___Early_blight/caef0735-6517-4194-b124-5916815e4a71___RS_Early.B 7956.JPG,Potato___Early_blight,True,0.4975486288265306,0.7671303153038025
+Potato___Early_blight/aa687aac-2f1a-44d8-89aa-3f7d413b4763___RS_Early.B 8055.JPG,Potato___Early_blight,True,0.5909199617346939,0.7662175297737122
+Potato___Early_blight/ce9d9a96-23cc-4d24-ab68-3932cba59ae2___RS_Early.B 7080.JPG,Potato___Early_blight,True,0.5759725765306123,0.7612373232841492
+Potato___Early_blight/e786a4fe-5aa1-4da2-a16f-4ee82c56e317___RS_Early.B 7245.JPG,Potato___Early_blight,True,0.5397999043367347,0.7515121102333069
+Potato___Early_blight/93c6b48d-cde9-4e8b-bbfb-1a9c06234419___RS_Early.B 7000.JPG,Potato___Early_blight,True,0.5369300063775511,0.7493383884429932
+Potato___Early_blight/fc73fc01-6a63-4b3b-bfed-74625c5b4b05___RS_Early.B 6945.JPG,Potato___Early_blight,True,0.5588329081632653,0.7650163769721985
+Potato___Late_blight/2f6382f7-12fc-4309-b7db-b034b8165c67___RS_LB 4955.JPG,Potato___Late_blight,True,0.44571109693877553,0.7222461104393005
+Potato___Late_blight/33b849d5-ec92-4acb-88e6-530accf22734___RS_LB 4994.JPG,Potato___Late_blight,True,0.5050023915816326,0.7054526805877686
+Potato___Late_blight/16e37160-9dca-4110-a914-955304e7daf5___RS_LB 3033.JPG,Potato___Late_blight,True,0.46878985969387754,0.7036085724830627
+Potato___Late_blight/8b0ef54c-6d28-47bb-a657-287afbb8a620___RS_LB 3298.JPG,Potato___Late_blight,True,0.3090919961734694,0.5286309719085693
+Potato___Late_blight/fd81a3e2-1d3e-4e52-a010-ad1b36a5220d___RS_LB 4067.JPG,Potato___Late_blight,True,0.6016422193877551,0.8000391125679016
+Potato___Late_blight/63490f84-88b0-4105-bb76-23990e98c692___RS_LB 3041.JPG,Potato___Late_blight,True,0.4911511479591837,0.7774407267570496
+Potato___Late_blight/9e1dc573-9cc5-4bc1-9c95-63c7bfba54f1___RS_LB 2976.JPG,Potato___Late_blight,True,0.5467554209183674,0.6576893329620361
+Potato___Late_blight/77c271bd-0798-4336-8bea-f2a80e8e8906___RS_LB 3290.JPG,Potato___Late_blight,True,0.45663265306122447,0.8326172828674316
+Potato___Late_blight/c01daf14-9595-4b10-974d-3452fe133060___RS_LB 4463.JPG,Potato___Late_blight,True,0.5088488520408163,0.7359989881515503
+Potato___Late_blight/430b0d0d-c0aa-4e5b-9826-34251466f735___RS_LB 4718.JPG,Potato___Late_blight,True,0.40443638392857145,0.6020339131355286
+Potato___Late_blight/7bf67e1e-57c8-4f68-bc5a-56b2a69f30ec___RS_LB 2509.JPG,Potato___Late_blight,True,0.4477040816326531,0.7301486730575562
+Potato___Late_blight/fe9d57f1-8e00-4069-963a-b344cceca7b3___RS_LB 4486.JPG,Potato___Late_blight,True,0.38456632653061223,0.6910865306854248
+Potato___Late_blight/58adb74c-a1b3-4b9d-95b7-f0721c499388___RS_LB 4326.JPG,Potato___Late_blight,True,0.39475047831632654,0.7370424270629883
+Potato___Late_blight/74ee080b-cad8-4090-9f2a-07411eb8481a___RS_LB 4956.JPG,Potato___Late_blight,True,0.4032007334183674,0.717758059501648
+Potato___Late_blight/74277267-6a9f-44d0-95fe-7f52f89630a0___RS_LB 5074.JPG,Potato___Late_blight,True,0.3991549744897959,0.7123608589172363
+Potato___healthy/45bc0b37-ca59-4a89-8531-705af42a6fd5___RS_HL 1946.JPG,Potato___healthy,True,0.5531927614795918,0.7267872095108032
+Potato___healthy/142fb983-2166-4a0f-b99b-a6c21e99987e___RS_HL 5398.JPG,Potato___healthy,True,0.4962133290816326,0.6359650492668152
+Potato___healthy/1f9870b3-899e-46fb-98c9-cfc2ce92895b___RS_HL 1816.JPG,Potato___healthy,True,0.5494858099489796,0.7236003279685974
+Potato___healthy/8c1e1281-5937-4559-a02f-02817de6e122___RS_HL 4173.JPG,Potato___healthy,True,0.4749083227040816,0.6860685348510742
+Potato___healthy/54f86311-9d76-421b-b401-0b02f6e738a5___RS_HL 4172.JPG,Potato___healthy,True,0.48610889668367346,0.721522867679596
+Potato___healthy/369479a9-3c28-4d77-8731-9ae54e719af3___RS_HL 1785.JPG,Potato___healthy,True,0.5075135522959183,0.7158480882644653
+Potato___healthy/683b04ad-7941-4819-9965-ba32c725eb22___RS_HL 1861.JPG,Potato___healthy,True,0.5551060267857143,0.7718985080718994
+Potato___healthy/57e24d88-fd01-4422-b8b5-d688d2296184___RS_HL 5401.JPG,Potato___healthy,True,0.5231385522959183,0.7909390926361084
+Potato___healthy/762672f4-17e6-4fd6-84f1-3bcb091b3ca5___RS_HL 5417.JPG,Potato___healthy,False,0.5048429528061225,0.6332162618637085
+Potato___healthy/0b3e5032-8ae8-49ac-8157-a1cac3df01dd___RS_HL 1817.JPG,Potato___healthy,True,0.5487683354591837,0.7572281956672668
+Potato___healthy/111cd9d8-4d27-4225-be9e-d29b21cf56b9___RS_HL 5419.JPG,Potato___healthy,False,0.5187141262755102,0.6022483110427856
+Potato___healthy/b8b7b98a-eb1a-4213-9b0b-aeef4df427e8___RS_HL 1858.JPG,Potato___healthy,True,0.6011240433673469,0.7497381567955017
+Potato___healthy/3edf7c3f-73e0-439c-870d-76cfd7c3bc45___RS_HL 1859.JPG,Potato___healthy,True,0.5480907206632653,0.7845893502235413
+Potato___healthy/51a03694-82cd-43a5-9877-ddce42c1a5ad___RS_HL 1779.JPG,Potato___healthy,True,0.4824816645408163,0.7341724634170532
+Potato___healthy/2d98cbc8-cbe6-423c-b2ab-3f7f8bcea5d5___RS_HL 1945.JPG,Potato___healthy,True,0.4926658163265306,0.7001115083694458
+Raspberry___healthy/fe1c1683-06cc-49c5-b86a-a41fb36f058b___Mary_HL 6249.JPG,Raspberry___healthy,True,0.4877232142857143,0.7254384756088257
+Raspberry___healthy/6c2e049f-38c9-42c5-864f-613e6e12d59e___Mary_HL 6318.JPG,Raspberry___healthy,True,0.43550701530612246,0.6508617997169495
+Raspberry___healthy/b679f3ff-3a86-4b6a-a385-15a3a1dc506c___Mary_HL 6375.JPG,Raspberry___healthy,True,0.48826132015306123,0.653697669506073
+Raspberry___healthy/eae1663a-1498-43c0-ae7e-f5457ae8494f___Mary_HL 9336.JPG,Raspberry___healthy,True,0.6151745854591837,0.7603941559791565
+Raspberry___healthy/27ef7a65-771c-4eab-9169-03a5fa121c71___Mary_HL 9195.JPG,Raspberry___healthy,True,0.5650310905612245,0.7266379594802856
+Raspberry___healthy/e52f84a2-6942-4abe-bdd7-eb14156c0361___Mary_HL 9222.JPG,Raspberry___healthy,True,0.5021524234693877,0.6773467063903809
+Raspberry___healthy/d1793bb4-1e90-4377-8cf9-d8f14630eed0___Mary_HL 6277.JPG,Raspberry___healthy,True,0.42582110969387754,0.7372590899467468
+Raspberry___healthy/8e8297fd-5e23-44f2-be98-92f7b8908f81___Mary_HL 6315.JPG,Raspberry___healthy,True,0.49844547193877553,0.6578095555305481
+Raspberry___healthy/1f8174d5-38a1-449f-912d-33cd4615d189___Mary_HL 6308.JPG,Raspberry___healthy,True,0.5666852678571429,0.7374721765518188
+Raspberry___healthy/eda7f6bf-dc99-4287-a38c-f259e2f21886___Mary_HL 9323.JPG,Raspberry___healthy,True,0.5466956313775511,0.7551108598709106
+Raspberry___healthy/7ea7a4b0-d404-4355-acfb-c0fa23d976b0___Mary_HL 6342.JPG,Raspberry___healthy,True,0.42069913903061223,0.60521000623703
+Raspberry___healthy/141f4953-4e0d-4e5d-bb1b-e3a880cd7bf6___Mary_HL 9192.JPG,Raspberry___healthy,True,0.5135722257653061,0.6852174997329712
+Raspberry___healthy/72badd0b-182b-407e-a600-60a6ce2bb926___Mary_HL 9218.JPG,Raspberry___healthy,True,0.5254304846938775,0.7051723003387451
+Raspberry___healthy/d20b63ce-4849-4c33-960e-74ac2ddb048c___Mary_HL 6319.JPG,Raspberry___healthy,True,0.48628826530612246,0.68824702501297
+Raspberry___healthy/9f89443e-fa60-4b30-b579-1542b87f8c99___Mary_HL 9245.JPG,Raspberry___healthy,True,0.44760443239795916,0.6333369016647339
+Soybean___healthy/be6b278a-5900-41a5-af06-4e06b005e7ed___RS_HL 4215.JPG,Soybean___healthy,True,0.52734375,0.6913991570472717
+Soybean___healthy/7aefdc99-b1a2-41bb-9a55-b1b81c17b489___RS_HL 5428.JPG,Soybean___healthy,True,0.5282206632653061,0.6957829594612122
+Soybean___healthy/9e8a0da5-0c4e-46c2-a28e-777563faa9fa___RS_HL 5588 1.JPG,Soybean___healthy,True,0.5659279336734694,0.7187803387641907
+Soybean___healthy/ef0ea26f-39e3-433b-9b6d-b5ff7e8a6292___RS_HL 7249.JPG,Soybean___healthy,True,0.4480030293367347,0.712435245513916
+Soybean___healthy/b2f02bfa-61f6-4fb9-92de-ffe77f250466___RS_HL 3513.JPG,Soybean___healthy,True,0.5703722895408163,0.743663489818573
+Soybean___healthy/837d7335-f52c-486a-a1a7-8b07b7c9e06b___RS_HL 6928.JPG,Soybean___healthy,True,0.5229990433673469,0.7539356350898743
+Soybean___healthy/7d363b79-bc24-4fe8-84eb-4fae533536bf___RS_HL 3765.JPG,Soybean___healthy,True,0.43550701530612246,0.6187500357627869
+Soybean___healthy/935369be-b082-4836-ba97-81f5f8e274b9___RS_HL 4247.JPG,Soybean___healthy,True,0.46578045280612246,0.6429463624954224
+Soybean___healthy/8a17ec9a-809e-4e8b-a7f0-5d691c7ca4a8___RS_HL 5583 1.JPG,Soybean___healthy,True,0.5672034438775511,0.7390313148498535
+Soybean___healthy/89bfc70d-90bb-4c71-aa60-974b43120a01___RS_HL 3767.JPG,Soybean___healthy,True,0.49629304846938777,0.6617224216461182
+Soybean___healthy/c8af80df-2b9d-4751-b0c2-9112d5f67944___RS_HL 6716.JPG,Soybean___healthy,True,0.6636639030612245,0.7933700680732727
+Soybean___healthy/00f1cdb1-82bb-4924-b5cb-768621f07187___RS_HL 5960.JPG,Soybean___healthy,True,0.6104910714285714,0.68476802110672
+Soybean___healthy/d2845484-18f2-40ba-b65a-3c7d183aa36a___RS_HL 5784 1.JPG,Soybean___healthy,True,0.47106186224489793,0.6976008415222168
+Soybean___healthy/3d6f5842-4a38-49a0-82e4-e79315ddb7da___RS_HL 5221.JPG,Soybean___healthy,True,0.45936304209183676,0.7102024555206299
+Soybean___healthy/959d5089-9f15-4ecc-afae-d9cbe63554d3___RS_HL 5028.JPG,Soybean___healthy,True,0.5796396683673469,0.7232320308685303
+Squash___Powdery_mildew/b64394f9-a13f-44b0-8d59-4e6787f7c490___MD_Powd.M 9919.JPG,Squash___Powdery_mildew,True,0.8286830357142857,0.8831390142440796
+Squash___Powdery_mildew/d19bfbae-aff1-4b04-8720-2884c1a6149f___UMD_Powd.M 0636.JPG,Squash___Powdery_mildew,True,0.7564572704081632,0.9526515007019043
+Squash___Powdery_mildew/634ba67a-8aa1-4f12-b66b-aa090bfdcb12___UMD_Powd.M 9810.JPG,Squash___Powdery_mildew,True,0.8308354591836735,0.9342519044876099
 Squash___Powdery_mildew/c0034f5c-77ae-4876-a74e-976877c78ddc___UMD_Powd.M 0023.JPG,Squash___Powdery_mildew,True,1.0,1.0
-Squash___Powdery_mildew/a719298b-411c-4d72-bc69-083091397c48___MD_Powd.M 0670.JPG,Squash___Powdery_mildew,True,0.45041454081632654,0.7075102925300598
-Squash___Powdery_mildew/3b44d041-8020-470f-8321-54a03e9f3273___UMD_Powd.M 0694.JPG,Squash___Powdery_mildew,True,0.7986686862244898,0.9249682426452637
-Squash___Powdery_mildew/ff76d228-2237-424b-8739-fbb9515db85f___MD_Powd.M 0656.JPG,Squash___Powdery_mildew,True,0.6911670918367347,0.770924985408783
-Squash___Powdery_mildew/49ee5cc6-da83-400e-9fc2-49ac6c08f67d___MD_Powd.M 0430.JPG,Squash___Powdery_mildew,True,0.6758808992346939,0.7913128733634949
-Squash___Powdery_mildew/5437be87-2adb-45db-b983-a79bfa39c687___MD_Powd.M 9896.JPG,Squash___Powdery_mildew,True,0.9999601403061225,0.9999857544898987
-Squash___Powdery_mildew/e58e1a96-dd97-4724-8e5c-626a71c15326___UMD_Powd.M 0655.JPG,Squash___Powdery_mildew,True,0.5855189732142857,0.8975725769996643
-Squash___Powdery_mildew/cc3d281d-fb67-4063-8348-0f05f4155c73___MD_Powd.M 1056.JPG,Squash___Powdery_mildew,True,0.7059948979591837,0.8496317863464355
-Squash___Powdery_mildew/964cf17d-da16-4719-a7f4-aeefa86dd84b___MD_Powd.M 0122.JPG,Squash___Powdery_mildew,True,0.9228515625,0.9420827627182007
-Squash___Powdery_mildew/ac6a2115-1ee1-424c-9fec-029669cb0194___UMD_Powd.M 0122.JPG,Squash___Powdery_mildew,True,0.8302176339285714,0.9007750749588013
-Squash___Powdery_mildew/52631c01-12a9-4ecf-810c-3ba800554ee9___MD_Powd.M 0017.JPG,Squash___Powdery_mildew,True,0.7439811862244898,0.8297703266143799
-Squash___Powdery_mildew/b4edcf2d-c27f-43e5-affc-f7158c73ff80___MD_Powd.M 0103.JPG,Squash___Powdery_mildew,True,0.5636559311224489,0.6355466842651367
-Strawberry___Leaf_scorch/01b7dc2e-af4a-4708-a6ea-4cb19d6f167c___RS_L.Scorch 0072.JPG,Strawberry___Leaf_scorch,True,0.978515625,0.991142988204956
-Strawberry___Leaf_scorch/24b4756b-eea7-43b9-ace7-8f74e68b8c4f___RS_L.Scorch 0991.JPG,Strawberry___Leaf_scorch,True,0.594367825255102,0.7940120100975037
-Strawberry___Leaf_scorch/9376ef24-0403-42bb-910d-60c3eda976ec___RS_L.Scorch 1105.JPG,Strawberry___Leaf_scorch,True,0.4446348852040816,0.558628261089325
-Strawberry___Leaf_scorch/5fc91330-7005-4f57-9676-c57e653c8e12___RS_L.Scorch 1204.JPG,Strawberry___Leaf_scorch,True,0.6019810267857143,0.8178871870040894
-Strawberry___Leaf_scorch/bb640f01-3adc-4b11-aa2a-f17bcbd15e30___RS_L.Scorch 0937.JPG,Strawberry___Leaf_scorch,True,0.5612244897959183,0.7231545448303223
-Strawberry___Leaf_scorch/ef952b0f-08f9-4165-aed3-574182e3f050___RS_L.Scorch 0980.JPG,Strawberry___Leaf_scorch,True,0.5057597257653061,0.7233846187591553
-Strawberry___Leaf_scorch/de13aaa8-a3bb-45bc-946a-703b22016935___RS_L.Scorch 0845.JPG,Strawberry___Leaf_scorch,True,0.43666294642857145,0.6712337732315063
-Strawberry___Leaf_scorch/f3e99f65-fec8-45af-a2c0-196ad7188d70___RS_L.Scorch 1272.JPG,Strawberry___Leaf_scorch,True,0.4973891900510204,0.7302601337432861
-Strawberry___Leaf_scorch/235b0b45-a56a-427c-9fef-b6ca4688598d___RS_L.Scorch 1205.JPG,Strawberry___Leaf_scorch,True,0.5365513392857143,0.7734518647193909
-Strawberry___Leaf_scorch/b5604b29-f13b-4467-b24a-804175a38268___RS_L.Scorch 1599.JPG,Strawberry___Leaf_scorch,True,0.3903260522959184,0.49367713928222656
-Strawberry___Leaf_scorch/59c99b9e-9646-49b3-b534-c8cf072d6837___RS_L.Scorch 0083.JPG,Strawberry___Leaf_scorch,True,0.6486965880102041,0.7329359650611877
-Strawberry___Leaf_scorch/9f03c242-ec82-4e5c-a310-cfc080dcd65a___RS_L.Scorch 0981.JPG,Strawberry___Leaf_scorch,True,0.552375637755102,0.7061164379119873
-Strawberry___Leaf_scorch/73b8b390-0ae1-4510-b30b-e25248660f2f___RS_L.Scorch 0979.JPG,Strawberry___Leaf_scorch,True,0.5347377232142857,0.7294081449508667
-Strawberry___Leaf_scorch/d0615e5a-1eae-42b7-9b24-d02ceb86c16b___RS_L.Scorch 0131.JPG,Strawberry___Leaf_scorch,True,0.6349649234693877,0.6523561477661133
-Strawberry___Leaf_scorch/7bbe5315-950e-4e0e-9285-84ff29dbf64a___RS_L.Scorch 1104.JPG,Strawberry___Leaf_scorch,True,0.4646045918367347,0.7007430791854858
-Strawberry___healthy/904b163c-bb30-4fe5-bf79-d19ddb7adbba___RS_HL 1951.JPG,Strawberry___healthy,True,0.5588926977040817,0.7448254227638245
-Strawberry___healthy/e54205fc-ef01-4553-8305-0067ebf3bdc5___RS_HL 1839.JPG,Strawberry___healthy,True,0.550422512755102,0.6698489189147949
-Strawberry___healthy/4c3cc96f-e1d9-4237-b72d-2a1ea0a755f8___RS_HL 2167.JPG,Strawberry___healthy,True,0.626594387755102,0.7642700672149658
-Strawberry___healthy/0370bc9b-c0c8-49b5-b999-c44323c45216___RS_HL 2202.JPG,Strawberry___healthy,True,0.49314413265306123,0.6781452894210815
-Strawberry___healthy/ef5cbfe5-8ba7-4291-8246-27219808808a___RS_HL 1842.JPG,Strawberry___healthy,True,0.49605389030612246,0.6712812185287476
-Strawberry___healthy/ec4ad3dd-4feb-4027-8cab-3cca8428eeb4___RS_HL 4705.JPG,Strawberry___healthy,True,0.6084582270408163,0.7667917609214783
-Strawberry___healthy/da4dcda4-9c5e-43e5-a19d-f13b53be68fc___RS_HL 2130.JPG,Strawberry___healthy,True,0.5692562181122449,0.7174637913703918
-Strawberry___healthy/7e242504-8dad-42f5-ac47-91f0f4cb3523___RS_HL 2143.JPG,Strawberry___healthy,True,0.5598692602040817,0.7453529834747314
-Strawberry___healthy/6980e462-3536-4e42-8924-8eda8c360fdc___RS_HL 4834.JPG,Strawberry___healthy,True,0.5499441964285714,0.668114185333252
-Strawberry___healthy/5455791a-eeab-4665-841c-a38e68058b54___RS_HL 2135.JPG,Strawberry___healthy,True,0.49513711734693877,0.6940559148788452
-Strawberry___healthy/f3e00f77-450d-4271-be54-5884aaa8d64e___RS_HL 2241.JPG,Strawberry___healthy,True,0.48961654974489793,0.6924023032188416
-Strawberry___healthy/9f807512-4c4c-46f9-a9d1-66f398f29bfb___RS_HL 1873.JPG,Strawberry___healthy,True,0.4220344387755102,0.7009016871452332
-Strawberry___healthy/bf79e7f8-5b1e-4acd-b4aa-7c023fb284e1___RS_HL 4699.JPG,Strawberry___healthy,True,0.5786631058673469,0.7517046332359314
-Strawberry___healthy/6e8627f0-d19e-46c2-876a-d36c5c57c25a___RS_HL 4503.JPG,Strawberry___healthy,True,0.604133450255102,0.6382259130477905
-Strawberry___healthy/b973706d-80b9-43bc-bcc7-c451bf0e7835___RS_HL 2243.JPG,Strawberry___healthy,True,0.451351243622449,0.662433922290802
-Tomato___Bacterial_spot/7b3ae7bd-0438-47a3-88ef-f8096e0fca60___GCREC_Bact.Sp 3229.JPG,Tomato___Bacterial_spot,True,0.5639349489795918,0.7121397256851196
-Tomato___Bacterial_spot/235073b6-d329-4ebe-9e1d-015108760d6f___GCREC_Bact.Sp 5907.JPG,Tomato___Bacterial_spot,True,0.38831313775510207,0.6663699150085449
-Tomato___Bacterial_spot/dc8612c8-6b25-4bf7-b6e8-49b20fda59ee___GCREC_Bact.Sp 3380.JPG,Tomato___Bacterial_spot,True,0.4448740433673469,0.5589998960494995
-Tomato___Bacterial_spot/16899432-0c58-4c00-a212-f24faed4d040___GCREC_Bact.Sp 2981.JPG,Tomato___Bacterial_spot,True,0.42544244260204084,0.7094133496284485
-Tomato___Bacterial_spot/b391ff43-597e-431d-b3eb-d852e5c9c754___GCREC_Bact.Sp 3758.JPG,Tomato___Bacterial_spot,True,0.5492267219387755,0.7634621858596802
-Tomato___Bacterial_spot/433edf15-2e97-4582-8305-a0805ff6f271___GCREC_Bact.Sp 6073.JPG,Tomato___Bacterial_spot,True,0.4696667729591837,0.7727406620979309
-Tomato___Bacterial_spot/dc3f2b4a-e8ee-4934-8d79-cd1d1bc6a303___GCREC_Bact.Sp 3760.JPG,Tomato___Bacterial_spot,True,0.5454001913265306,0.6924211978912354
-Tomato___Bacterial_spot/cb496f19-8673-40dd-abe1-bff32695b2ab___UF.GRC_BS_Lab Leaf 0468.JPG,Tomato___Bacterial_spot,True,0.3960658482142857,0.31234705448150635
-Tomato___Bacterial_spot/076ef17d-dfd3-4dbc-a351-a14eff1aecdb___UF.GRC_BS_Lab Leaf 8980.JPG,Tomato___Bacterial_spot,True,0.36021205357142855,0.638260006904602
-Tomato___Bacterial_spot/e28da6e4-81ad-42ff-ad15-b7a60d9546f2___GCREC_Bact.Sp 6363.JPG,Tomato___Bacterial_spot,True,0.47327407525510207,0.7444500923156738
-Tomato___Bacterial_spot/a0ec622e-0819-47ad-9970-2591846757d6___GCREC_Bact.Sp 6371.JPG,Tomato___Bacterial_spot,True,0.5205277423469388,0.7046422958374023
-Tomato___Bacterial_spot/42e0e9cd-15aa-4709-b783-1b1a8b306608___GCREC_Bact.Sp 3755.JPG,Tomato___Bacterial_spot,True,0.4342713647959184,0.6058704257011414
-Tomato___Bacterial_spot/a85b3db9-6b49-4ce8-91ce-97ce0abb9758___GCREC_Bact.Sp 3412.JPG,Tomato___Bacterial_spot,True,0.4475247130102041,0.6500019431114197
-Tomato___Bacterial_spot/a4e1a90d-db92-47bf-8fa8-65e6d6c0780f___GCREC_Bact.Sp 5846.JPG,Tomato___Bacterial_spot,True,0.47261639030612246,0.7765498757362366
-Tomato___Bacterial_spot/26503027-c1b5-491a-b9eb-2002d9aa7e77___GCREC_Bact.Sp 5622.JPG,Tomato___Bacterial_spot,True,0.5441446109693877,0.81099933385849
-Tomato___Early_blight/30f2c918-bb60-4d4f-b171-7fecdfac7cac___RS_Erly.B 9543.JPG,Tomato___Early_blight,True,0.4211375956632653,0.6907640099525452
-Tomato___Early_blight/a278a40a-bb25-4210-b646-2d232245851a___RS_Erly.B 7719.JPG,Tomato___Early_blight,True,0.2564174107142857,0.10281283408403397
-Tomato___Early_blight/2f6115d3-4997-4174-aa6a-9025c654e81f___RS_Erly.B 9374.JPG,Tomato___Early_blight,True,0.23871970663265307,0.41625815629959106
-Tomato___Early_blight/be03b7aa-4c59-4ea9-b3cc-33a93a34b402___RS_Erly.B 7742.JPG,Tomato___Early_blight,True,0.3403419961734694,0.7641503214836121
-Tomato___Early_blight/dda45973-b7a1-4080-93a2-bd7cd3e3026f___RS_Erly.B 8407.JPG,Tomato___Early_blight,True,0.4377391581632653,0.6700594425201416
-Tomato___Early_blight/c43cc003-56f4-4d9d-b224-6948f499cf95___RS_Erly.B 7675.JPG,Tomato___Early_blight,True,0.44565130739795916,0.6007280945777893
-Tomato___Early_blight/0c865fa4-b0bf-4e69-b39a-d97b068cef84___RS_Erly.B 7477.JPG,Tomato___Early_blight,True,0.32814492984693877,0.3859700560569763
-Tomato___Early_blight/171b6622-c111-4fe9-b3f9-12b12ee0db06___RS_Erly.B 7836.JPG,Tomato___Early_blight,True,0.3141342474489796,0.27816885709762573
-Tomato___Early_blight/bb12ec71-c438-43f5-a077-e5924af2409e___RS_Erly.B 8402.JPG,Tomato___Early_blight,True,0.5725645727040817,0.677324116230011
-Tomato___Early_blight/375a4113-c296-4b3a-897b-da6f4ac660dc___RS_Erly.B 6408.JPG,Tomato___Early_blight,True,0.34213568239795916,0.5576977133750916
-Tomato___Early_blight/e084577f-bb13-4baf-8384-2b37eb430236___RS_Erly.B 7673.JPG,Tomato___Early_blight,True,0.3622249681122449,0.5871468782424927
-Tomato___Early_blight/c73fd35a-bc55-46c3-baf3-a943a6e396c5___RS_Erly.B 9563.JPG,Tomato___Early_blight,True,0.1326530612244898,0.26516926288604736
-Tomato___Early_blight/d032b2d0-3c5b-4f1d-9532-4fd09cbd5482___RS_Erly.B 7689.JPG,Tomato___Early_blight,True,0.37759088010204084,0.35908830165863037
-Tomato___Early_blight/fa5e382e-d1ad-42f9-a4e5-afb343f77a53___RS_Erly.B 9453.JPG,Tomato___Early_blight,True,0.32065130739795916,0.5004628300666809
-Tomato___Early_blight/efb0d54f-53c7-4a6a-a194-2bd449799c8c___RS_Erly.B 7726.JPG,Tomato___Early_blight,False,0.42422672193877553,0.6142626404762268
-Tomato___Late_blight/76ca83b8-0695-470d-a715-2fcb9efb4fc4___RS_Late.B 5062.JPG,Tomato___Late_blight,True,0.2167370854591837,0.30162325501441956
-Tomato___Late_blight/08816f81-65f4-4372-84e8-d27b67a193d5___GHLB2 Leaf 152.JPG,Tomato___Late_blight,True,0.44497369260204084,0.8097794055938721
-Tomato___Late_blight/017a9839-6097-45aa-85b0-3051db151484___RS_Late.B 5125.JPG,Tomato___Late_blight,True,0.4431202168367347,0.6682315468788147
-Tomato___Late_blight/239111ba-7348-4075-bacb-e206d440ecc8___RS_Late.B 5389.JPG,Tomato___Late_blight,False,0.3436304209183674,0.6329837441444397
-Tomato___Late_blight/d45e9f86-2819-4c41-886c-73b7012674b3___GHLB Leaf 2 Day 16 .JPG,Tomato___Late_blight,True,0.43221859056122447,0.5578519701957703
-Tomato___Late_blight/c95eaeb8-7673-4411-bbbe-b2464526f303___RS_Late.B 6233.JPG,Tomato___Late_blight,True,0.43002630739795916,0.6842061281204224
-Tomato___Late_blight/147539f7-632d-42ee-a19a-071b9c7c85f2___RS_Late.B 5140.JPG,Tomato___Late_blight,True,0.48533163265306123,0.7659456133842468
-Tomato___Late_blight/88e31b4e-77e8-46ed-8e90-e48e6ec4e8eb___RS_Late.B 7077.JPG,Tomato___Late_blight,True,0.37143255739795916,0.3107525110244751
-Tomato___Late_blight/43018540-7022-4fcd-a240-e5f861914bbd___GHLB2 Leaf 84.5.JPG,Tomato___Late_blight,True,0.41378348214285715,0.5316565632820129
-Tomato___Late_blight/b3e8d2db-5531-41cc-86ce-d4ac76c5be56___RS_Late.B 7070.JPG,Tomato___Late_blight,True,0.3405612244897959,0.5985618829727173
-Tomato___Late_blight/f843c76c-a7d4-4031-abe2-9245602fbb15___GHLB_PS Leaf 49.1 Day 18.jpg,Tomato___Late_blight,True,0.4526267538265306,0.6141044497489929
-Tomato___Late_blight/9bb49d22-976d-40c3-bc9a-bff5cbbd8e28___RS_Late.B 5057.JPG,Tomato___Late_blight,True,0.3103874362244898,0.5190629959106445
-Tomato___Late_blight/b6a42b14-eb81-4e7b-9ca7-be9bed86c3b8___GHLB Leaf 1.5 Day 12.JPG,Tomato___Late_blight,True,0.562858737244898,0.8846716284751892
-Tomato___Late_blight/2d649ade-8085-44b7-ba6c-ec5d70f1d051___RS_Late.B 5604.JPG,Tomato___Late_blight,True,0.29651626275510207,0.46737098693847656
-Tomato___Late_blight/19b2b71e-d648-46fb-921d-a7858a1c67c7___GHLB2 Leaf 9102.JPG,Tomato___Late_blight,True,0.1916454081632653,0.41882088780403137
-Tomato___Leaf_Mold/a36014db-d82c-4b96-8de0-87d9b32bcfd0___Crnl_L.Mold 6634.JPG,Tomato___Leaf_Mold,True,0.2478077168367347,0.5376515984535217
-Tomato___Leaf_Mold/56779b93-da91-4f00-b562-ed5114e6d378___Crnl_L.Mold 6635.JPG,Tomato___Leaf_Mold,False,0.40660873724489793,0.7670421004295349
-Tomato___Leaf_Mold/760c9629-46ea-41dc-8a59-5ddff5352e86___Crnl_L.Mold 8635.JPG,Tomato___Leaf_Mold,True,0.2935068558673469,0.48464053869247437
-Tomato___Leaf_Mold/8e92b724-a066-4039-a090-2699c5cfed4e___Crnl_L.Mold 6724.JPG,Tomato___Leaf_Mold,True,0.24443957270408162,0.5453664064407349
-Tomato___Leaf_Mold/408bcf77-7dd7-4a8a-9f3a-b97684520217___Crnl_L.Mold 6611.JPG,Tomato___Leaf_Mold,True,0.2768056441326531,0.6189233660697937
-Tomato___Leaf_Mold/10e1a86f-0355-4534-aed8-08c6f01548d4___Crnl_L.Mold 7018.JPG,Tomato___Leaf_Mold,True,0.2766262755102041,0.5443552136421204
-Tomato___Leaf_Mold/74cb417c-24ca-43b2-897a-8c310636ac22___Crnl_L.Mold 7149.JPG,Tomato___Leaf_Mold,True,0.26193797831632654,0.6132595539093018
-Tomato___Leaf_Mold/c587613b-d130-4cc2-b9d6-6981b2c2f954___Crnl_L.Mold 6981.JPG,Tomato___Leaf_Mold,True,0.25735411352040816,0.564834713935852
-Tomato___Leaf_Mold/f1cba359-4553-46a7-a1b3-3b6dbbcb81ae___Crnl_L.Mold 7151.JPG,Tomato___Leaf_Mold,True,0.24681122448979592,0.5651422142982483
-Tomato___Leaf_Mold/5ea3c837-2de6-4da6-bd96-47da4eeccf2c___Crnl_L.Mold 6697.JPG,Tomato___Leaf_Mold,True,0.33689413265306123,0.6628704071044922
-Tomato___Leaf_Mold/fdec728a-c3e5-478d-9e14-ac1a717d5ffc___Crnl_L.Mold 9045.JPG,Tomato___Leaf_Mold,True,0.6345065369897959,0.8263177871704102
-Tomato___Leaf_Mold/9829462d-ce9d-4f1e-a44c-bb586a4a5f83___Crnl_L.Mold 6948.JPG,Tomato___Leaf_Mold,True,0.37400350765306123,0.687202513217926
-Tomato___Leaf_Mold/dbbb1200-16e8-4842-acbf-57ccd1afc2dc___Crnl_L.Mold 7035.JPG,Tomato___Leaf_Mold,True,0.3233617665816326,0.559288740158081
-Tomato___Leaf_Mold/2715ba21-6d2a-485a-bd10-ea6e8177250d___Crnl_L.Mold 6863.JPG,Tomato___Leaf_Mold,True,0.35120376275510207,0.6438683271408081
-Tomato___Leaf_Mold/bee64636-a53b-4ecd-9f4f-d71d61148f55___Crnl_L.Mold 8980.JPG,Tomato___Leaf_Mold,True,0.42265226403061223,0.7066811323165894
-Tomato___Septoria_leaf_spot/f1e6fb1c-fcd6-4164-963b-0cc10f1bc218___Matt.S_CG 7506.JPG,Tomato___Septoria_leaf_spot,True,0.5169204400510204,0.7838696241378784
-Tomato___Septoria_leaf_spot/53d795c2-0784-4d1e-b475-a54dd3e5a6a1___Matt.S_CG 7479.JPG,Tomato___Septoria_leaf_spot,True,0.4213169642857143,0.5785256028175354
-Tomato___Septoria_leaf_spot/132e22f8-a438-433a-a6b1-035499046450___Matt.S_CG 2659.JPG,Tomato___Septoria_leaf_spot,True,0.5523557079081632,0.8350963592529297
-Tomato___Septoria_leaf_spot/24e690fe-3696-49c3-ae2d-7ea5dd4aeb48___JR_Sept.L.S 2466.JPG,Tomato___Septoria_leaf_spot,True,0.4816844706632653,0.7138090133666992
-Tomato___Septoria_leaf_spot/481c8d4a-1bfa-48a7-9385-3352286bd765___Keller.St_CG 2036.JPG,Tomato___Septoria_leaf_spot,True,0.28404017857142855,0.6321607232093811
-Tomato___Septoria_leaf_spot/85078c60-8c80-4e59-844c-351693a46cbe___Matt.S_CG 2736.JPG,Tomato___Septoria_leaf_spot,True,0.5037069515306123,0.5764171481132507
-Tomato___Septoria_leaf_spot/77afbf01-7a6e-421a-838e-224b2988c0f7___JR_Sept.L.S 8515.JPG,Tomato___Septoria_leaf_spot,True,0.3111049107142857,0.5610551834106445
-Tomato___Septoria_leaf_spot/a885be53-67e7-4897-b0ee-179971cd7976___Matt.S_CG 1642.JPG,Tomato___Septoria_leaf_spot,True,0.4203603316326531,0.6416695713996887
-Tomato___Septoria_leaf_spot/1f6955e1-0c57-45ef-a769-8578aa3425d6___JR_Sept.L.S 8502.JPG,Tomato___Septoria_leaf_spot,True,0.15832270408163265,0.46521246433258057
-Tomato___Septoria_leaf_spot/7f1a7403-f9d4-4910-9495-550a263c6e77___Matt.S_CG 7624.JPG,Tomato___Septoria_leaf_spot,True,0.5034279336734694,0.5630925297737122
-Tomato___Septoria_leaf_spot/696f8ae9-a39b-42a4-925a-05a1c69a62a8___Matt.S_CG 7493.JPG,Tomato___Septoria_leaf_spot,True,0.42580117984693877,0.585058331489563
-Tomato___Septoria_leaf_spot/2139cc43-0f52-4782-9966-059e4538b624___JR_Sept.L.S 2653.JPG,Tomato___Septoria_leaf_spot,True,0.42402742346938777,0.6806472539901733
-Tomato___Septoria_leaf_spot/224c7002-2660-42fb-9be0-f55f7fa49e14___Matt.S_CG 7647.JPG,Tomato___Septoria_leaf_spot,True,0.47299505739795916,0.751544177532196
-Tomato___Septoria_leaf_spot/e55e5031-3f13-4784-b8fc-6663323fc073___Keller.St_CG 1877.JPG,Tomato___Septoria_leaf_spot,True,0.1761798469387755,0.34857067465782166
-Tomato___Septoria_leaf_spot/f70d5b07-2df5-4dc7-a0b0-689b822c9b65___Keller.St_CG 1990.JPG,Tomato___Septoria_leaf_spot,True,0.1507294323979592,0.42214328050613403
-Tomato___Spider_mites Two-spotted_spider_mite/0af13d73-170d-4b37-bddf-51a14e597905___Com.G_SpM_FL 1438.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.22560586734693877,0.39332279562950134
-Tomato___Spider_mites Two-spotted_spider_mite/464dc57d-cd9d-43b3-980a-1a0d292edb8a___Com.G_SpM_FL 8444.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.35805963010204084,0.4849322736263275
-Tomato___Spider_mites Two-spotted_spider_mite/93584043-384a-48eb-885d-cb87a1e432c1___Com.G_SpM_FL 1629.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.4032007334183674,0.7571452260017395
-Tomato___Spider_mites Two-spotted_spider_mite/9210af52-11b5-4c66-9772-876c52c2d3cc___Com.G_SpM_FL 1614.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.31090561224489793,0.686710000038147
-Tomato___Spider_mites Two-spotted_spider_mite/3bc0207a-406f-49e9-bf64-7082897ef2a4___Com.G_SpM_FL 1583.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.36912069515306123,0.6274282336235046
-Tomato___Spider_mites Two-spotted_spider_mite/5792673e-ed65-4ff0-b119-bfdf795251cb___Com.G_SpM_FL 1682.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.39333545918367346,0.4659632742404938
-Tomato___Spider_mites Two-spotted_spider_mite/67e4a4a4-f166-423d-a07b-a83cffec807a___Com.G_SpM_FL 8728.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.30115991709183676,0.4847778379917145
-Tomato___Spider_mites Two-spotted_spider_mite/4ad85b66-43f0-476f-aee4-a320e793a42f___Com.G_SpM_FL 8645.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.36690848214285715,0.42360591888427734
-Tomato___Spider_mites Two-spotted_spider_mite/e5de9377-3690-48c0-aa3b-45592b342fbe___Com.G_SpM_FL 1241.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.2459343112244898,0.6005750298500061
-Tomato___Spider_mites Two-spotted_spider_mite/75c39e92-9f7a-4266-b6bb-56bb3cd48dcb___Com.G_SpM_FL 9523.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.29685507015306123,0.6095708012580872
-Tomato___Spider_mites Two-spotted_spider_mite/8f2eedcb-2e42-4d92-8492-a45c1fb06991___Com.G_SpM_FL 8525.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.0885483099489796,0.28042441606521606
-Tomato___Spider_mites Two-spotted_spider_mite/8ed0563f-2ffc-454f-bd20-73de9f26e553___Com.G_SpM_FL 1303.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.3784677933673469,0.7392498850822449
-Tomato___Spider_mites Two-spotted_spider_mite/245d8d65-da20-4d9e-9970-c3e6bbb08800___Com.G_SpM_FL 9624.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.26528619260204084,0.5123884677886963
-Tomato___Spider_mites Two-spotted_spider_mite/fd5d5849-18dc-4850-8432-10fa95e9cf33___Com.G_SpM_FL 8417.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.40025111607142855,0.5510511994361877
-Tomato___Spider_mites Two-spotted_spider_mite/17f512bf-921f-4c9e-bc1d-24a330e5dd75___Com.G_SpM_FL 8527.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.4096181441326531,0.6206609010696411
-Tomato___Target_Spot/96c75932-74b2-4571-b668-f50f1526950d___Com.G_TgS_FL 0726.JPG,Tomato___Target_Spot,True,0.47718032525510207,0.6321132183074951
-Tomato___Target_Spot/8d694e08-2754-418c-8986-e0e554053e99___Com.G_TgS_FL 8235.JPG,Tomato___Target_Spot,True,0.4362045599489796,0.646885335445404
-Tomato___Target_Spot/636eb33d-ba3a-446b-8a98-993ae5c08a20___Com.G_TgS_FL 0924.JPG,Tomato___Target_Spot,True,0.4821229272959184,0.5872987508773804
-Tomato___Target_Spot/90939ea0-9f49-4b33-be99-8a36bd719b94___Com.G_TgS_FL 7918.JPG,Tomato___Target_Spot,True,0.4396922831632653,0.839572548866272
-Tomato___Target_Spot/eb7ad835-1ca0-4a70-8398-53cc93aaaeaa___Com.G_TgS_FL 7884.JPG,Tomato___Target_Spot,True,0.464046556122449,0.6463455557823181
-Tomato___Target_Spot/be295ff6-6efd-417a-900d-ad44a2823ded___Com.G_TgS_FL 0025.JPG,Tomato___Target_Spot,True,0.4846739477040816,0.7470148205757141
-Tomato___Target_Spot/a31f50af-fbd3-4e07-a972-5a61ebe7c06c___Com.G_TgS_FL 1099.JPG,Tomato___Target_Spot,True,0.5502830038265306,0.7026740312576294
-Tomato___Target_Spot/2685b528-885d-4ee4-b525-2d4c10ec2d21___Com.G_TgS_FL 0045.JPG,Tomato___Target_Spot,True,0.41109295280612246,0.7670899629592896
-Tomato___Target_Spot/c400f472-f08a-4924-b6bf-86d8f59e306b___Com.G_TgS_FL 9927.JPG,Tomato___Target_Spot,True,0.29512117346938777,0.505518913269043
-Tomato___Target_Spot/e148d32e-b3e5-421f-8f30-838fc4792a71___Com.G_TgS_FL 0916.JPG,Tomato___Target_Spot,True,0.47421077806122447,0.6937766671180725
-Tomato___Target_Spot/ca7de317-7f03-4223-a880-b4e37f5be25a___Com.G_TgS_FL 8203.JPG,Tomato___Target_Spot,True,0.3645766900510204,0.7014294266700745
-Tomato___Target_Spot/feb1b0d0-aa78-4ba8-93a1-384229fc92fd___Com.G_TgS_FL 0715.JPG,Tomato___Target_Spot,True,0.4989038584183674,0.6742735505104065
-Tomato___Target_Spot/efa8a3d8-caf5-438e-bcce-ad8ed2f2929f___Com.G_TgS_FL 7881.JPG,Tomato___Target_Spot,True,0.4419642857142857,0.6377434730529785
-Tomato___Target_Spot/dad184c0-5248-4868-9ab6-0877fa19f9d6___Com.G_TgS_FL 0836.JPG,Tomato___Target_Spot,True,0.384944993622449,0.5969637632369995
-Tomato___Target_Spot/8c06b690-c804-4471-873f-e19f84d49fc7___Com.G_TgS_FL 8242.JPG,Tomato___Target_Spot,True,0.40114795918367346,0.6823940277099609
-Tomato___Tomato_Yellow_Leaf_Curl_Virus/4ebe0762-d421-4a65-ae3b-2ecfe863a88a___YLCV_NREC 2429.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.2573341836734694,0.6977081298828125
-Tomato___Tomato_Yellow_Leaf_Curl_Virus/409b001a-586a-4b69-9337-af6f78f7ef31___YLCV_NREC 2074.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.2551817602040816,0.6829975843429565
-Tomato___Tomato_Yellow_Leaf_Curl_Virus/04152c87-fbb2-4044-8fac-a1cf2166e43e___YLCV_NREC 2828.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.34127869897959184,0.6669899225234985
-Tomato___Tomato_Yellow_Leaf_Curl_Virus/10a8ae32-5394-4cda-a99a-1c79501416d0___YLCV_NREC 2486.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.19038982780612246,0.5398208498954773
+Squash___Powdery_mildew/a719298b-411c-4d72-bc69-083091397c48___MD_Powd.M 0670.JPG,Squash___Powdery_mildew,True,0.45041454081632654,0.7051612138748169
+Squash___Powdery_mildew/3b44d041-8020-470f-8321-54a03e9f3273___UMD_Powd.M 0694.JPG,Squash___Powdery_mildew,True,0.7986686862244898,0.9248741865158081
+Squash___Powdery_mildew/ff76d228-2237-424b-8739-fbb9515db85f___MD_Powd.M 0656.JPG,Squash___Powdery_mildew,True,0.6911670918367347,0.7708843946456909
+Squash___Powdery_mildew/49ee5cc6-da83-400e-9fc2-49ac6c08f67d___MD_Powd.M 0430.JPG,Squash___Powdery_mildew,True,0.6758808992346939,0.7912360429763794
+Squash___Powdery_mildew/5437be87-2adb-45db-b983-a79bfa39c687___MD_Powd.M 9896.JPG,Squash___Powdery_mildew,True,0.9999601403061225,0.9999668598175049
+Squash___Powdery_mildew/e58e1a96-dd97-4724-8e5c-626a71c15326___UMD_Powd.M 0655.JPG,Squash___Powdery_mildew,True,0.5855189732142857,0.8638914227485657
+Squash___Powdery_mildew/cc3d281d-fb67-4063-8348-0f05f4155c73___MD_Powd.M 1056.JPG,Squash___Powdery_mildew,True,0.7059948979591837,0.8496323227882385
+Squash___Powdery_mildew/964cf17d-da16-4719-a7f4-aeefa86dd84b___MD_Powd.M 0122.JPG,Squash___Powdery_mildew,True,0.9228515625,0.9420826435089111
+Squash___Powdery_mildew/ac6a2115-1ee1-424c-9fec-029669cb0194___UMD_Powd.M 0122.JPG,Squash___Powdery_mildew,True,0.8302176339285714,0.8776163458824158
+Squash___Powdery_mildew/52631c01-12a9-4ecf-810c-3ba800554ee9___MD_Powd.M 0017.JPG,Squash___Powdery_mildew,True,0.7439811862244898,0.8285313844680786
+Squash___Powdery_mildew/b4edcf2d-c27f-43e5-affc-f7158c73ff80___MD_Powd.M 0103.JPG,Squash___Powdery_mildew,True,0.5636559311224489,0.6355560421943665
+Strawberry___Leaf_scorch/01b7dc2e-af4a-4708-a6ea-4cb19d6f167c___RS_L.Scorch 0072.JPG,Strawberry___Leaf_scorch,True,0.978515625,0.9901978373527527
+Strawberry___Leaf_scorch/24b4756b-eea7-43b9-ace7-8f74e68b8c4f___RS_L.Scorch 0991.JPG,Strawberry___Leaf_scorch,True,0.594367825255102,0.7963004112243652
+Strawberry___Leaf_scorch/9376ef24-0403-42bb-910d-60c3eda976ec___RS_L.Scorch 1105.JPG,Strawberry___Leaf_scorch,True,0.4446348852040816,0.713088870048523
+Strawberry___Leaf_scorch/5fc91330-7005-4f57-9676-c57e653c8e12___RS_L.Scorch 1204.JPG,Strawberry___Leaf_scorch,True,0.6019810267857143,0.8148714303970337
+Strawberry___Leaf_scorch/bb640f01-3adc-4b11-aa2a-f17bcbd15e30___RS_L.Scorch 0937.JPG,Strawberry___Leaf_scorch,True,0.5612244897959183,0.757374107837677
+Strawberry___Leaf_scorch/ef952b0f-08f9-4165-aed3-574182e3f050___RS_L.Scorch 0980.JPG,Strawberry___Leaf_scorch,True,0.5057597257653061,0.7233791947364807
+Strawberry___Leaf_scorch/de13aaa8-a3bb-45bc-946a-703b22016935___RS_L.Scorch 0845.JPG,Strawberry___Leaf_scorch,True,0.43666294642857145,0.6844280958175659
+Strawberry___Leaf_scorch/f3e99f65-fec8-45af-a2c0-196ad7188d70___RS_L.Scorch 1272.JPG,Strawberry___Leaf_scorch,True,0.4973891900510204,0.7298990488052368
+Strawberry___Leaf_scorch/235b0b45-a56a-427c-9fef-b6ca4688598d___RS_L.Scorch 1205.JPG,Strawberry___Leaf_scorch,True,0.5365513392857143,0.7502162456512451
+Strawberry___Leaf_scorch/b5604b29-f13b-4467-b24a-804175a38268___RS_L.Scorch 1599.JPG,Strawberry___Leaf_scorch,True,0.3903260522959184,0.6274579167366028
+Strawberry___Leaf_scorch/59c99b9e-9646-49b3-b534-c8cf072d6837___RS_L.Scorch 0083.JPG,Strawberry___Leaf_scorch,True,0.6486965880102041,0.7323971390724182
+Strawberry___Leaf_scorch/9f03c242-ec82-4e5c-a310-cfc080dcd65a___RS_L.Scorch 0981.JPG,Strawberry___Leaf_scorch,True,0.552375637755102,0.706114649772644
+Strawberry___Leaf_scorch/73b8b390-0ae1-4510-b30b-e25248660f2f___RS_L.Scorch 0979.JPG,Strawberry___Leaf_scorch,True,0.5347377232142857,0.7293570637702942
+Strawberry___Leaf_scorch/d0615e5a-1eae-42b7-9b24-d02ceb86c16b___RS_L.Scorch 0131.JPG,Strawberry___Leaf_scorch,True,0.6349649234693877,0.6823766827583313
+Strawberry___Leaf_scorch/7bbe5315-950e-4e0e-9285-84ff29dbf64a___RS_L.Scorch 1104.JPG,Strawberry___Leaf_scorch,True,0.4646045918367347,0.7400983572006226
+Strawberry___healthy/904b163c-bb30-4fe5-bf79-d19ddb7adbba___RS_HL 1951.JPG,Strawberry___healthy,True,0.5588926977040817,0.7448256611824036
+Strawberry___healthy/e54205fc-ef01-4553-8305-0067ebf3bdc5___RS_HL 1839.JPG,Strawberry___healthy,True,0.550422512755102,0.718696653842926
+Strawberry___healthy/4c3cc96f-e1d9-4237-b72d-2a1ea0a755f8___RS_HL 2167.JPG,Strawberry___healthy,True,0.626594387755102,0.7624103426933289
+Strawberry___healthy/0370bc9b-c0c8-49b5-b999-c44323c45216___RS_HL 2202.JPG,Strawberry___healthy,True,0.49314413265306123,0.699554979801178
+Strawberry___healthy/ef5cbfe5-8ba7-4291-8246-27219808808a___RS_HL 1842.JPG,Strawberry___healthy,True,0.49605389030612246,0.7214747667312622
+Strawberry___healthy/ec4ad3dd-4feb-4027-8cab-3cca8428eeb4___RS_HL 4705.JPG,Strawberry___healthy,True,0.6084582270408163,0.769523024559021
+Strawberry___healthy/da4dcda4-9c5e-43e5-a19d-f13b53be68fc___RS_HL 2130.JPG,Strawberry___healthy,True,0.5692562181122449,0.718052089214325
+Strawberry___healthy/7e242504-8dad-42f5-ac47-91f0f4cb3523___RS_HL 2143.JPG,Strawberry___healthy,True,0.5598692602040817,0.7562634944915771
+Strawberry___healthy/6980e462-3536-4e42-8924-8eda8c360fdc___RS_HL 4834.JPG,Strawberry___healthy,True,0.5499441964285714,0.7157891392707825
+Strawberry___healthy/5455791a-eeab-4665-841c-a38e68058b54___RS_HL 2135.JPG,Strawberry___healthy,True,0.49513711734693877,0.6940551400184631
+Strawberry___healthy/f3e00f77-450d-4271-be54-5884aaa8d64e___RS_HL 2241.JPG,Strawberry___healthy,True,0.48961654974489793,0.6923535466194153
+Strawberry___healthy/9f807512-4c4c-46f9-a9d1-66f398f29bfb___RS_HL 1873.JPG,Strawberry___healthy,True,0.4220344387755102,0.7060443162918091
+Strawberry___healthy/bf79e7f8-5b1e-4acd-b4aa-7c023fb284e1___RS_HL 4699.JPG,Strawberry___healthy,True,0.5786631058673469,0.8063825964927673
+Strawberry___healthy/6e8627f0-d19e-46c2-876a-d36c5c57c25a___RS_HL 4503.JPG,Strawberry___healthy,True,0.604133450255102,0.731088399887085
+Strawberry___healthy/b973706d-80b9-43bc-bcc7-c451bf0e7835___RS_HL 2243.JPG,Strawberry___healthy,True,0.451351243622449,0.6625326871871948
+Tomato___Bacterial_spot/7b3ae7bd-0438-47a3-88ef-f8096e0fca60___GCREC_Bact.Sp 3229.JPG,Tomato___Bacterial_spot,True,0.5639349489795918,0.7573290467262268
+Tomato___Bacterial_spot/235073b6-d329-4ebe-9e1d-015108760d6f___GCREC_Bact.Sp 5907.JPG,Tomato___Bacterial_spot,True,0.38831313775510207,0.7412437796592712
+Tomato___Bacterial_spot/dc8612c8-6b25-4bf7-b6e8-49b20fda59ee___GCREC_Bact.Sp 3380.JPG,Tomato___Bacterial_spot,True,0.4448740433673469,0.7041667103767395
+Tomato___Bacterial_spot/16899432-0c58-4c00-a212-f24faed4d040___GCREC_Bact.Sp 2981.JPG,Tomato___Bacterial_spot,True,0.42544244260204084,0.7482054829597473
+Tomato___Bacterial_spot/b391ff43-597e-431d-b3eb-d852e5c9c754___GCREC_Bact.Sp 3758.JPG,Tomato___Bacterial_spot,True,0.5492267219387755,0.805653989315033
+Tomato___Bacterial_spot/433edf15-2e97-4582-8305-a0805ff6f271___GCREC_Bact.Sp 6073.JPG,Tomato___Bacterial_spot,True,0.4696667729591837,0.7261365056037903
+Tomato___Bacterial_spot/dc3f2b4a-e8ee-4934-8d79-cd1d1bc6a303___GCREC_Bact.Sp 3760.JPG,Tomato___Bacterial_spot,True,0.5454001913265306,0.735045313835144
+Tomato___Bacterial_spot/cb496f19-8673-40dd-abe1-bff32695b2ab___UF.GRC_BS_Lab Leaf 0468.JPG,Tomato___Bacterial_spot,True,0.3960658482142857,0.5887177586555481
+Tomato___Bacterial_spot/076ef17d-dfd3-4dbc-a351-a14eff1aecdb___UF.GRC_BS_Lab Leaf 8980.JPG,Tomato___Bacterial_spot,True,0.36021205357142855,0.6324623823165894
+Tomato___Bacterial_spot/e28da6e4-81ad-42ff-ad15-b7a60d9546f2___GCREC_Bact.Sp 6363.JPG,Tomato___Bacterial_spot,True,0.47327407525510207,0.7635266184806824
+Tomato___Bacterial_spot/a0ec622e-0819-47ad-9970-2591846757d6___GCREC_Bact.Sp 6371.JPG,Tomato___Bacterial_spot,True,0.5205277423469388,0.7045730352401733
+Tomato___Bacterial_spot/42e0e9cd-15aa-4709-b783-1b1a8b306608___GCREC_Bact.Sp 3755.JPG,Tomato___Bacterial_spot,True,0.4342713647959184,0.7172189950942993
+Tomato___Bacterial_spot/a85b3db9-6b49-4ce8-91ce-97ce0abb9758___GCREC_Bact.Sp 3412.JPG,Tomato___Bacterial_spot,True,0.4475247130102041,0.7085307240486145
+Tomato___Bacterial_spot/a4e1a90d-db92-47bf-8fa8-65e6d6c0780f___GCREC_Bact.Sp 5846.JPG,Tomato___Bacterial_spot,True,0.47261639030612246,0.7402343153953552
+Tomato___Bacterial_spot/26503027-c1b5-491a-b9eb-2002d9aa7e77___GCREC_Bact.Sp 5622.JPG,Tomato___Bacterial_spot,True,0.5441446109693877,0.8220658302307129
+Tomato___Early_blight/30f2c918-bb60-4d4f-b171-7fecdfac7cac___RS_Erly.B 9543.JPG,Tomato___Early_blight,True,0.4211375956632653,0.6344972848892212
+Tomato___Early_blight/a278a40a-bb25-4210-b646-2d232245851a___RS_Erly.B 7719.JPG,Tomato___Early_blight,True,0.2564174107142857,0.4437098503112793
+Tomato___Early_blight/2f6115d3-4997-4174-aa6a-9025c654e81f___RS_Erly.B 9374.JPG,Tomato___Early_blight,True,0.23871970663265307,0.4511426091194153
+Tomato___Early_blight/be03b7aa-4c59-4ea9-b3cc-33a93a34b402___RS_Erly.B 7742.JPG,Tomato___Early_blight,True,0.3403419961734694,0.7164508104324341
+Tomato___Early_blight/dda45973-b7a1-4080-93a2-bd7cd3e3026f___RS_Erly.B 8407.JPG,Tomato___Early_blight,True,0.4377391581632653,0.6431946754455566
+Tomato___Early_blight/c43cc003-56f4-4d9d-b224-6948f499cf95___RS_Erly.B 7675.JPG,Tomato___Early_blight,True,0.44565130739795916,0.6010100245475769
+Tomato___Early_blight/0c865fa4-b0bf-4e69-b39a-d97b068cef84___RS_Erly.B 7477.JPG,Tomato___Early_blight,True,0.32814492984693877,0.4094962775707245
+Tomato___Early_blight/171b6622-c111-4fe9-b3f9-12b12ee0db06___RS_Erly.B 7836.JPG,Tomato___Early_blight,True,0.3141342474489796,0.528984010219574
+Tomato___Early_blight/bb12ec71-c438-43f5-a077-e5924af2409e___RS_Erly.B 8402.JPG,Tomato___Early_blight,True,0.5725645727040817,0.6974566578865051
+Tomato___Early_blight/375a4113-c296-4b3a-897b-da6f4ac660dc___RS_Erly.B 6408.JPG,Tomato___Early_blight,True,0.34213568239795916,0.5909220576286316
+Tomato___Early_blight/e084577f-bb13-4baf-8384-2b37eb430236___RS_Erly.B 7673.JPG,Tomato___Early_blight,True,0.3622249681122449,0.5843015909194946
+Tomato___Early_blight/c73fd35a-bc55-46c3-baf3-a943a6e396c5___RS_Erly.B 9563.JPG,Tomato___Early_blight,True,0.1326530612244898,0.27227330207824707
+Tomato___Early_blight/d032b2d0-3c5b-4f1d-9532-4fd09cbd5482___RS_Erly.B 7689.JPG,Tomato___Early_blight,True,0.37759088010204084,0.5513707995414734
+Tomato___Early_blight/fa5e382e-d1ad-42f9-a4e5-afb343f77a53___RS_Erly.B 9453.JPG,Tomato___Early_blight,True,0.32065130739795916,0.6085415482521057
+Tomato___Early_blight/efb0d54f-53c7-4a6a-a194-2bd449799c8c___RS_Erly.B 7726.JPG,Tomato___Early_blight,False,0.42422672193877553,0.6937825083732605
+Tomato___Late_blight/76ca83b8-0695-470d-a715-2fcb9efb4fc4___RS_Late.B 5062.JPG,Tomato___Late_blight,True,0.2167370854591837,0.4352632462978363
+Tomato___Late_blight/08816f81-65f4-4372-84e8-d27b67a193d5___GHLB2 Leaf 152.JPG,Tomato___Late_blight,True,0.44497369260204084,0.7697504758834839
+Tomato___Late_blight/017a9839-6097-45aa-85b0-3051db151484___RS_Late.B 5125.JPG,Tomato___Late_blight,True,0.4431202168367347,0.6219050884246826
+Tomato___Late_blight/239111ba-7348-4075-bacb-e206d440ecc8___RS_Late.B 5389.JPG,Tomato___Late_blight,False,0.3436304209183674,0.6660256385803223
+Tomato___Late_blight/d45e9f86-2819-4c41-886c-73b7012674b3___GHLB Leaf 2 Day 16 .JPG,Tomato___Late_blight,True,0.43221859056122447,0.5562140345573425
+Tomato___Late_blight/c95eaeb8-7673-4411-bbbe-b2464526f303___RS_Late.B 6233.JPG,Tomato___Late_blight,True,0.43002630739795916,0.6338966488838196
+Tomato___Late_blight/147539f7-632d-42ee-a19a-071b9c7c85f2___RS_Late.B 5140.JPG,Tomato___Late_blight,True,0.48533163265306123,0.7723578810691833
+Tomato___Late_blight/88e31b4e-77e8-46ed-8e90-e48e6ec4e8eb___RS_Late.B 7077.JPG,Tomato___Late_blight,True,0.37143255739795916,0.7193177342414856
+Tomato___Late_blight/43018540-7022-4fcd-a240-e5f861914bbd___GHLB2 Leaf 84.5.JPG,Tomato___Late_blight,True,0.41378348214285715,0.5930456519126892
+Tomato___Late_blight/b3e8d2db-5531-41cc-86ce-d4ac76c5be56___RS_Late.B 7070.JPG,Tomato___Late_blight,True,0.3405612244897959,0.5988190770149231
+Tomato___Late_blight/f843c76c-a7d4-4031-abe2-9245602fbb15___GHLB_PS Leaf 49.1 Day 18.jpg,Tomato___Late_blight,True,0.4526267538265306,0.5369642376899719
+Tomato___Late_blight/9bb49d22-976d-40c3-bc9a-bff5cbbd8e28___RS_Late.B 5057.JPG,Tomato___Late_blight,True,0.3103874362244898,0.5948500037193298
+Tomato___Late_blight/b6a42b14-eb81-4e7b-9ca7-be9bed86c3b8___GHLB Leaf 1.5 Day 12.JPG,Tomato___Late_blight,True,0.562858737244898,0.858626127243042
+Tomato___Late_blight/2d649ade-8085-44b7-ba6c-ec5d70f1d051___RS_Late.B 5604.JPG,Tomato___Late_blight,True,0.29651626275510207,0.6682116985321045
+Tomato___Late_blight/19b2b71e-d648-46fb-921d-a7858a1c67c7___GHLB2 Leaf 9102.JPG,Tomato___Late_blight,True,0.1916454081632653,0.43010637164115906
+Tomato___Leaf_Mold/a36014db-d82c-4b96-8de0-87d9b32bcfd0___Crnl_L.Mold 6634.JPG,Tomato___Leaf_Mold,True,0.2478077168367347,0.5344697833061218
+Tomato___Leaf_Mold/56779b93-da91-4f00-b562-ed5114e6d378___Crnl_L.Mold 6635.JPG,Tomato___Leaf_Mold,False,0.40660873724489793,0.7699098587036133
+Tomato___Leaf_Mold/760c9629-46ea-41dc-8a59-5ddff5352e86___Crnl_L.Mold 8635.JPG,Tomato___Leaf_Mold,True,0.2935068558673469,0.5439552068710327
+Tomato___Leaf_Mold/8e92b724-a066-4039-a090-2699c5cfed4e___Crnl_L.Mold 6724.JPG,Tomato___Leaf_Mold,True,0.24443957270408162,0.5362314581871033
+Tomato___Leaf_Mold/408bcf77-7dd7-4a8a-9f3a-b97684520217___Crnl_L.Mold 6611.JPG,Tomato___Leaf_Mold,True,0.2768056441326531,0.6454535126686096
+Tomato___Leaf_Mold/10e1a86f-0355-4534-aed8-08c6f01548d4___Crnl_L.Mold 7018.JPG,Tomato___Leaf_Mold,True,0.2766262755102041,0.5662057399749756
+Tomato___Leaf_Mold/74cb417c-24ca-43b2-897a-8c310636ac22___Crnl_L.Mold 7149.JPG,Tomato___Leaf_Mold,True,0.26193797831632654,0.6616839170455933
+Tomato___Leaf_Mold/c587613b-d130-4cc2-b9d6-6981b2c2f954___Crnl_L.Mold 6981.JPG,Tomato___Leaf_Mold,True,0.25735411352040816,0.5648455023765564
+Tomato___Leaf_Mold/f1cba359-4553-46a7-a1b3-3b6dbbcb81ae___Crnl_L.Mold 7151.JPG,Tomato___Leaf_Mold,True,0.24681122448979592,0.6386959552764893
+Tomato___Leaf_Mold/5ea3c837-2de6-4da6-bd96-47da4eeccf2c___Crnl_L.Mold 6697.JPG,Tomato___Leaf_Mold,True,0.33689413265306123,0.6965498328208923
+Tomato___Leaf_Mold/fdec728a-c3e5-478d-9e14-ac1a717d5ffc___Crnl_L.Mold 9045.JPG,Tomato___Leaf_Mold,True,0.6345065369897959,0.8271492719650269
+Tomato___Leaf_Mold/9829462d-ce9d-4f1e-a44c-bb586a4a5f83___Crnl_L.Mold 6948.JPG,Tomato___Leaf_Mold,True,0.37400350765306123,0.7196617722511292
+Tomato___Leaf_Mold/dbbb1200-16e8-4842-acbf-57ccd1afc2dc___Crnl_L.Mold 7035.JPG,Tomato___Leaf_Mold,True,0.3233617665816326,0.6250602602958679
+Tomato___Leaf_Mold/2715ba21-6d2a-485a-bd10-ea6e8177250d___Crnl_L.Mold 6863.JPG,Tomato___Leaf_Mold,True,0.35120376275510207,0.7316041588783264
+Tomato___Leaf_Mold/bee64636-a53b-4ecd-9f4f-d71d61148f55___Crnl_L.Mold 8980.JPG,Tomato___Leaf_Mold,True,0.42265226403061223,0.7067582607269287
+Tomato___Septoria_leaf_spot/f1e6fb1c-fcd6-4164-963b-0cc10f1bc218___Matt.S_CG 7506.JPG,Tomato___Septoria_leaf_spot,True,0.5169204400510204,0.7800056338310242
+Tomato___Septoria_leaf_spot/53d795c2-0784-4d1e-b475-a54dd3e5a6a1___Matt.S_CG 7479.JPG,Tomato___Septoria_leaf_spot,True,0.4213169642857143,0.6246849298477173
+Tomato___Septoria_leaf_spot/132e22f8-a438-433a-a6b1-035499046450___Matt.S_CG 2659.JPG,Tomato___Septoria_leaf_spot,True,0.5523557079081632,0.873946487903595
+Tomato___Septoria_leaf_spot/24e690fe-3696-49c3-ae2d-7ea5dd4aeb48___JR_Sept.L.S 2466.JPG,Tomato___Septoria_leaf_spot,True,0.4816844706632653,0.7122781276702881
+Tomato___Septoria_leaf_spot/481c8d4a-1bfa-48a7-9385-3352286bd765___Keller.St_CG 2036.JPG,Tomato___Septoria_leaf_spot,True,0.28404017857142855,0.6559552550315857
+Tomato___Septoria_leaf_spot/85078c60-8c80-4e59-844c-351693a46cbe___Matt.S_CG 2736.JPG,Tomato___Septoria_leaf_spot,True,0.5037069515306123,0.6884474754333496
+Tomato___Septoria_leaf_spot/77afbf01-7a6e-421a-838e-224b2988c0f7___JR_Sept.L.S 8515.JPG,Tomato___Septoria_leaf_spot,True,0.3111049107142857,0.7059309482574463
+Tomato___Septoria_leaf_spot/a885be53-67e7-4897-b0ee-179971cd7976___Matt.S_CG 1642.JPG,Tomato___Septoria_leaf_spot,True,0.4203603316326531,0.7653989195823669
+Tomato___Septoria_leaf_spot/1f6955e1-0c57-45ef-a769-8578aa3425d6___JR_Sept.L.S 8502.JPG,Tomato___Septoria_leaf_spot,True,0.15832270408163265,0.39239755272865295
+Tomato___Septoria_leaf_spot/7f1a7403-f9d4-4910-9495-550a263c6e77___Matt.S_CG 7624.JPG,Tomato___Septoria_leaf_spot,True,0.5034279336734694,0.7384741902351379
+Tomato___Septoria_leaf_spot/696f8ae9-a39b-42a4-925a-05a1c69a62a8___Matt.S_CG 7493.JPG,Tomato___Septoria_leaf_spot,True,0.42580117984693877,0.6196838021278381
+Tomato___Septoria_leaf_spot/2139cc43-0f52-4782-9966-059e4538b624___JR_Sept.L.S 2653.JPG,Tomato___Septoria_leaf_spot,True,0.42402742346938777,0.7118493318557739
+Tomato___Septoria_leaf_spot/224c7002-2660-42fb-9be0-f55f7fa49e14___Matt.S_CG 7647.JPG,Tomato___Septoria_leaf_spot,True,0.47299505739795916,0.7825563549995422
+Tomato___Septoria_leaf_spot/e55e5031-3f13-4784-b8fc-6663323fc073___Keller.St_CG 1877.JPG,Tomato___Septoria_leaf_spot,True,0.1761798469387755,0.3994757831096649
+Tomato___Septoria_leaf_spot/f70d5b07-2df5-4dc7-a0b0-689b822c9b65___Keller.St_CG 1990.JPG,Tomato___Septoria_leaf_spot,True,0.1507294323979592,0.4456957280635834
+Tomato___Spider_mites Two-spotted_spider_mite/0af13d73-170d-4b37-bddf-51a14e597905___Com.G_SpM_FL 1438.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.22560586734693877,0.40907666087150574
+Tomato___Spider_mites Two-spotted_spider_mite/464dc57d-cd9d-43b3-980a-1a0d292edb8a___Com.G_SpM_FL 8444.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.35805963010204084,0.6748741269111633
+Tomato___Spider_mites Two-spotted_spider_mite/93584043-384a-48eb-885d-cb87a1e432c1___Com.G_SpM_FL 1629.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.4032007334183674,0.7483598589897156
+Tomato___Spider_mites Two-spotted_spider_mite/9210af52-11b5-4c66-9772-876c52c2d3cc___Com.G_SpM_FL 1614.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.31090561224489793,0.6593427658081055
+Tomato___Spider_mites Two-spotted_spider_mite/3bc0207a-406f-49e9-bf64-7082897ef2a4___Com.G_SpM_FL 1583.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.36912069515306123,0.6640558838844299
+Tomato___Spider_mites Two-spotted_spider_mite/5792673e-ed65-4ff0-b119-bfdf795251cb___Com.G_SpM_FL 1682.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.39333545918367346,0.545504093170166
+Tomato___Spider_mites Two-spotted_spider_mite/67e4a4a4-f166-423d-a07b-a83cffec807a___Com.G_SpM_FL 8728.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.30115991709183676,0.531965970993042
+Tomato___Spider_mites Two-spotted_spider_mite/4ad85b66-43f0-476f-aee4-a320e793a42f___Com.G_SpM_FL 8645.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.36690848214285715,0.5745331645011902
+Tomato___Spider_mites Two-spotted_spider_mite/e5de9377-3690-48c0-aa3b-45592b342fbe___Com.G_SpM_FL 1241.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.2459343112244898,0.5840422511100769
+Tomato___Spider_mites Two-spotted_spider_mite/75c39e92-9f7a-4266-b6bb-56bb3cd48dcb___Com.G_SpM_FL 9523.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.29685507015306123,0.583000123500824
+Tomato___Spider_mites Two-spotted_spider_mite/8f2eedcb-2e42-4d92-8492-a45c1fb06991___Com.G_SpM_FL 8525.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.0885483099489796,0.22263267636299133
+Tomato___Spider_mites Two-spotted_spider_mite/8ed0563f-2ffc-454f-bd20-73de9f26e553___Com.G_SpM_FL 1303.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.3784677933673469,0.6539760828018188
+Tomato___Spider_mites Two-spotted_spider_mite/245d8d65-da20-4d9e-9970-c3e6bbb08800___Com.G_SpM_FL 9624.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.26528619260204084,0.45567023754119873
+Tomato___Spider_mites Two-spotted_spider_mite/fd5d5849-18dc-4850-8432-10fa95e9cf33___Com.G_SpM_FL 8417.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.40025111607142855,0.5696834325790405
+Tomato___Spider_mites Two-spotted_spider_mite/17f512bf-921f-4c9e-bc1d-24a330e5dd75___Com.G_SpM_FL 8527.JPG,Tomato___Spider_mites Two-spotted_spider_mite,True,0.4096181441326531,0.7200584411621094
+Tomato___Target_Spot/96c75932-74b2-4571-b668-f50f1526950d___Com.G_TgS_FL 0726.JPG,Tomato___Target_Spot,True,0.47718032525510207,0.6771965622901917
+Tomato___Target_Spot/8d694e08-2754-418c-8986-e0e554053e99___Com.G_TgS_FL 8235.JPG,Tomato___Target_Spot,True,0.4362045599489796,0.6725624799728394
+Tomato___Target_Spot/636eb33d-ba3a-446b-8a98-993ae5c08a20___Com.G_TgS_FL 0924.JPG,Tomato___Target_Spot,True,0.4821229272959184,0.682148814201355
+Tomato___Target_Spot/90939ea0-9f49-4b33-be99-8a36bd719b94___Com.G_TgS_FL 7918.JPG,Tomato___Target_Spot,True,0.4396922831632653,0.6780706644058228
+Tomato___Target_Spot/eb7ad835-1ca0-4a70-8398-53cc93aaaeaa___Com.G_TgS_FL 7884.JPG,Tomato___Target_Spot,True,0.464046556122449,0.6576812863349915
+Tomato___Target_Spot/be295ff6-6efd-417a-900d-ad44a2823ded___Com.G_TgS_FL 0025.JPG,Tomato___Target_Spot,True,0.4846739477040816,0.7475258111953735
+Tomato___Target_Spot/a31f50af-fbd3-4e07-a972-5a61ebe7c06c___Com.G_TgS_FL 1099.JPG,Tomato___Target_Spot,True,0.5502830038265306,0.7507975697517395
+Tomato___Target_Spot/2685b528-885d-4ee4-b525-2d4c10ec2d21___Com.G_TgS_FL 0045.JPG,Tomato___Target_Spot,True,0.41109295280612246,0.7182207703590393
+Tomato___Target_Spot/c400f472-f08a-4924-b6bf-86d8f59e306b___Com.G_TgS_FL 9927.JPG,Tomato___Target_Spot,True,0.29512117346938777,0.41484034061431885
+Tomato___Target_Spot/e148d32e-b3e5-421f-8f30-838fc4792a71___Com.G_TgS_FL 0916.JPG,Tomato___Target_Spot,True,0.47421077806122447,0.7226696610450745
+Tomato___Target_Spot/ca7de317-7f03-4223-a880-b4e37f5be25a___Com.G_TgS_FL 8203.JPG,Tomato___Target_Spot,True,0.3645766900510204,0.6727291345596313
+Tomato___Target_Spot/feb1b0d0-aa78-4ba8-93a1-384229fc92fd___Com.G_TgS_FL 0715.JPG,Tomato___Target_Spot,True,0.4989038584183674,0.7044619917869568
+Tomato___Target_Spot/efa8a3d8-caf5-438e-bcce-ad8ed2f2929f___Com.G_TgS_FL 7881.JPG,Tomato___Target_Spot,True,0.4419642857142857,0.6890820860862732
+Tomato___Target_Spot/dad184c0-5248-4868-9ab6-0877fa19f9d6___Com.G_TgS_FL 0836.JPG,Tomato___Target_Spot,True,0.384944993622449,0.6230484843254089
+Tomato___Target_Spot/8c06b690-c804-4471-873f-e19f84d49fc7___Com.G_TgS_FL 8242.JPG,Tomato___Target_Spot,True,0.40114795918367346,0.632199764251709
+Tomato___Tomato_Yellow_Leaf_Curl_Virus/4ebe0762-d421-4a65-ae3b-2ecfe863a88a___YLCV_NREC 2429.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.2573341836734694,0.6944464445114136
+Tomato___Tomato_Yellow_Leaf_Curl_Virus/409b001a-586a-4b69-9337-af6f78f7ef31___YLCV_NREC 2074.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.2551817602040816,0.6771360635757446
+Tomato___Tomato_Yellow_Leaf_Curl_Virus/04152c87-fbb2-4044-8fac-a1cf2166e43e___YLCV_NREC 2828.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.34127869897959184,0.6669909954071045
+Tomato___Tomato_Yellow_Leaf_Curl_Virus/10a8ae32-5394-4cda-a99a-1c79501416d0___YLCV_NREC 2486.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.19038982780612246,0.536061704158783
 Tomato___Tomato_Yellow_Leaf_Curl_Virus/cd8ddaf0-b321-41e0-af97-ef89477e819f___UF.GRC_YLCV_Lab 02209.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.45607461734693877,0.7315064072608948
-Tomato___Tomato_Yellow_Leaf_Curl_Virus/7997a8cd-bc11-411a-8992-2842a65b6c62___YLCV_GCREC 5232.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.42410714285714285,0.8318085074424744
-Tomato___Tomato_Yellow_Leaf_Curl_Virus/0ee45ebe-5685-40d8-962c-e9f83b6af513___YLCV_NREC 2034.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.29799107142857145,0.739521861076355
-Tomato___Tomato_Yellow_Leaf_Curl_Virus/b741967a-f8e9-4a2a-a22c-a530ca3f9e07___YLCV_NREC 2858.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.32581313775510207,0.7221657037734985
-Tomato___Tomato_Yellow_Leaf_Curl_Virus/0c5ab0f1-9f4c-47f0-980d-f9b67201ce51___YLCV_NREC 0058.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.46739477040816324,0.7858112454414368
-Tomato___Tomato_Yellow_Leaf_Curl_Virus/26308383-47d1-4bff-b79a-adebe7aeddc3___UF.GRC_YLCV_Lab 08535.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,False,0.5056202168367347,0.4780130386352539
-Tomato___Tomato_Yellow_Leaf_Curl_Virus/6bd39b91-63eb-4b23-9fe2-67ceed0a8a8c___UF.GRC_YLCV_Lab 02052.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.33402423469387754,0.6226827502250671
-Tomato___Tomato_Yellow_Leaf_Curl_Virus/8a910cae-20e3-4576-a6fc-f22d002eb6b0___UF.GRC_YLCV_Lab 02943.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.48477359693877553,0.7546771168708801
-Tomato___Tomato_Yellow_Leaf_Curl_Virus/bb1e3988-1c45-4b77-bdad-cc7c6585e505___UF.GRC_YLCV_Lab 03185.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.48630819515306123,0.724225640296936
+Tomato___Tomato_Yellow_Leaf_Curl_Virus/7997a8cd-bc11-411a-8992-2842a65b6c62___YLCV_GCREC 5232.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.42410714285714285,0.8153114914894104
+Tomato___Tomato_Yellow_Leaf_Curl_Virus/0ee45ebe-5685-40d8-962c-e9f83b6af513___YLCV_NREC 2034.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.29799107142857145,0.769819438457489
+Tomato___Tomato_Yellow_Leaf_Curl_Virus/b741967a-f8e9-4a2a-a22c-a530ca3f9e07___YLCV_NREC 2858.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.32581313775510207,0.7114442586898804
+Tomato___Tomato_Yellow_Leaf_Curl_Virus/0c5ab0f1-9f4c-47f0-980d-f9b67201ce51___YLCV_NREC 0058.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.46739477040816324,0.8052424788475037
+Tomato___Tomato_Yellow_Leaf_Curl_Virus/26308383-47d1-4bff-b79a-adebe7aeddc3___UF.GRC_YLCV_Lab 08535.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,False,0.5056202168367347,0.6006065607070923
+Tomato___Tomato_Yellow_Leaf_Curl_Virus/6bd39b91-63eb-4b23-9fe2-67ceed0a8a8c___UF.GRC_YLCV_Lab 02052.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.33402423469387754,0.6247454285621643
+Tomato___Tomato_Yellow_Leaf_Curl_Virus/8a910cae-20e3-4576-a6fc-f22d002eb6b0___UF.GRC_YLCV_Lab 02943.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.48477359693877553,0.7546767592430115
+Tomato___Tomato_Yellow_Leaf_Curl_Virus/bb1e3988-1c45-4b77-bdad-cc7c6585e505___UF.GRC_YLCV_Lab 03185.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.48630819515306123,0.7242255210876465
 Tomato___Tomato_Yellow_Leaf_Curl_Virus/49c01986-9483-4a7e-903f-d9bf612d4bf3___UF.GRC_YLCV_Lab 02605.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.39732142857142855,0.631545901298523
-Tomato___Tomato_Yellow_Leaf_Curl_Virus/e9b47c15-a61a-49e3-a62c-38b0cc55b81d___YLCV_GCREC 2791.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.5114198022959183,0.8181532025337219
-Tomato___Tomato_mosaic_virus/227c893f-5a46-4df3-859d-ba3a74e4cb82___PSU_CG 2277.JPG,Tomato___Tomato_mosaic_virus,True,0.360172193877551,0.5506415963172913
-Tomato___Tomato_mosaic_virus/9ef0e7b7-ce38-4829-aad9-23b954a26000___PSU_CG 2324.JPG,Tomato___Tomato_mosaic_virus,True,0.24027423469387754,0.4545002579689026
-Tomato___Tomato_mosaic_virus/42896f16-bf4c-4db1-b488-08d830dff66b___PSU_CG 2341.JPG,Tomato___Tomato_mosaic_virus,True,0.2225964604591837,0.3679916262626648
-Tomato___Tomato_mosaic_virus/59e3d4c3-f6fe-4d68-82a5-d509b810b39d___PSU_CG 2303.JPG,Tomato___Tomato_mosaic_virus,True,0.24990035076530612,0.5708694458007812
-Tomato___Tomato_mosaic_virus/a409fdf6-263d-4160-b007-52e531010def___PSU_CG 2291.JPG,Tomato___Tomato_mosaic_virus,True,0.2618383290816326,0.526721715927124
-Tomato___Tomato_mosaic_virus/e3abcfd4-0994-4f38-a18e-83b90498d30c___PSU_CG 2297.JPG,Tomato___Tomato_mosaic_virus,True,0.2981704400510204,0.6225545406341553
-Tomato___Tomato_mosaic_virus/ee5d3bda-66ef-4de8-878d-e345c3eae676___PSU_CG 2086.JPG,Tomato___Tomato_mosaic_virus,True,0.25197305484693877,0.5135300755500793
-Tomato___Tomato_mosaic_virus/0ce34f26-3bd6-420e-ba31-0373b465f267___PSU_CG 2099.JPG,Tomato___Tomato_mosaic_virus,True,0.20226801658163265,0.4928107261657715
-Tomato___Tomato_mosaic_virus/8a398af5-59cc-4d7e-9de9-07c5a5bb2cf3___PSU_CG 2116.JPG,Tomato___Tomato_mosaic_virus,True,0.24768813775510204,0.5349430441856384
-Tomato___Tomato_mosaic_virus/875b2d3c-44cd-440c-8807-8f52b1e7d45a___PSU_CG 2318.JPG,Tomato___Tomato_mosaic_virus,True,0.19533242984693877,0.5048590898513794
-Tomato___Tomato_mosaic_virus/f7d8d2a1-2cc6-41e7-9626-76ddf51e7a8b___PSU_CG 2179.JPG,Tomato___Tomato_mosaic_virus,True,0.23116629464285715,0.5522055625915527
-Tomato___Tomato_mosaic_virus/cc8059de-bae3-4ace-b6a5-f12a07fef342___PSU_CG 2410.JPG,Tomato___Tomato_mosaic_virus,True,0.27431441326530615,0.45183679461479187
-Tomato___Tomato_mosaic_virus/847307bc-58ab-45fc-8001-f1e07a38bc82___PSU_CG 2065.JPG,Tomato___Tomato_mosaic_virus,True,0.22439014668367346,0.5563914775848389
-Tomato___Tomato_mosaic_virus/b455e70e-1ff9-4081-a0bb-6d16c88402e3___PSU_CG 2105.JPG,Tomato___Tomato_mosaic_virus,True,0.2701889349489796,0.5544266104698181
-Tomato___Tomato_mosaic_virus/d8106a03-3742-4e57-9ea7-d634b56c76cf___PSU_CG 2265.JPG,Tomato___Tomato_mosaic_virus,True,0.19810267857142858,0.6163365244865417
-Tomato___healthy/1cb9d4d1-280b-479c-95a9-01f71acf70bc___RS_HL 0641.JPG,Tomato___healthy,True,0.3994738520408163,0.48155832290649414
-Tomato___healthy/cf6c530d-522f-4990-9d02-3445623266d7___RS_HL 0364.JPG,Tomato___healthy,True,0.37392378826530615,0.5079590678215027
-Tomato___healthy/10a4a3bd-e4c3-4e1c-94bd-cd0cd4e2705b___GH_HL Leaf 526.JPG,Tomato___healthy,True,0.29432397959183676,0.5613982081413269
-Tomato___healthy/c5db6d9e-4821-4b05-8b44-80ba702a8401___GH_HL Leaf 373.JPG,Tomato___healthy,True,0.3988560267857143,0.6406281590461731
-Tomato___healthy/bc36c64a-8e37-4275-80e9-81431c4ba98f___GH_HL Leaf 184.2.JPG,Tomato___healthy,True,0.3630221619897959,0.5535959601402283
-Tomato___healthy/939be2cc-6c00-4205-85cd-5276c12969e0___RS_HL 9883.JPG,Tomato___healthy,True,0.40977758290816324,0.5954422950744629
-Tomato___healthy/7181181c-b571-4cf0-80c3-c52bd785ccf9___GH_HL Leaf 218.JPG,Tomato___healthy,True,0.4606385522959184,0.6538931131362915
-Tomato___healthy/2b6c6705-59ce-4afe-8ad1-62a367ea10e0___RS_HL 9994.JPG,Tomato___healthy,True,0.4644052933673469,0.601920485496521
-Tomato___healthy/7f80c0af-c88f-40ec-be87-14d7595248d8___RS_HL 9721.JPG,Tomato___healthy,True,0.4514907525510204,0.5277443528175354
-Tomato___healthy/65d89a16-45b5-4ce7-9dad-f702c4b14e95___RS_HL 9896.JPG,Tomato___healthy,True,0.5712890625,0.6368846893310547
-Tomato___healthy/d19a7818-769b-4633-bd09-5c3c20d2b4d1___GH_HL Leaf 172.JPG,Tomato___healthy,True,0.47169961734693877,0.6843647956848145
-Tomato___healthy/4ed0a372-fe3d-49a6-82a1-2e904e6c66e3___GH_HL Leaf 200.JPG,Tomato___healthy,True,0.48495296556122447,0.6804004907608032
-Tomato___healthy/ef23fd72-1367-41c5-820f-c89533ad258e___GH_HL Leaf 303.1.JPG,Tomato___healthy,True,0.31544961734693877,0.5951482653617859
-Tomato___healthy/e357a876-daff-428c-828f-7f1b6e998175___RS_HL 0593.JPG,Tomato___healthy,True,0.38614078443877553,0.21945902705192566
-Tomato___healthy/5c4d21aa-76f8-4ab7-8440-65fd3cac640b___GH_HL Leaf 263.JPG,Tomato___healthy,True,0.3415377869897959,0.5761886239051819
+Tomato___Tomato_Yellow_Leaf_Curl_Virus/e9b47c15-a61a-49e3-a62c-38b0cc55b81d___YLCV_GCREC 2791.JPG,Tomato___Tomato_Yellow_Leaf_Curl_Virus,True,0.5114198022959183,0.8290450572967529
+Tomato___Tomato_mosaic_virus/227c893f-5a46-4df3-859d-ba3a74e4cb82___PSU_CG 2277.JPG,Tomato___Tomato_mosaic_virus,True,0.360172193877551,0.6094925403594971
+Tomato___Tomato_mosaic_virus/9ef0e7b7-ce38-4829-aad9-23b954a26000___PSU_CG 2324.JPG,Tomato___Tomato_mosaic_virus,True,0.24027423469387754,0.49931663274765015
+Tomato___Tomato_mosaic_virus/42896f16-bf4c-4db1-b488-08d830dff66b___PSU_CG 2341.JPG,Tomato___Tomato_mosaic_virus,True,0.2225964604591837,0.44037461280822754
+Tomato___Tomato_mosaic_virus/59e3d4c3-f6fe-4d68-82a5-d509b810b39d___PSU_CG 2303.JPG,Tomato___Tomato_mosaic_virus,True,0.24990035076530612,0.5529651641845703
+Tomato___Tomato_mosaic_virus/a409fdf6-263d-4160-b007-52e531010def___PSU_CG 2291.JPG,Tomato___Tomato_mosaic_virus,True,0.2618383290816326,0.4820452928543091
+Tomato___Tomato_mosaic_virus/e3abcfd4-0994-4f38-a18e-83b90498d30c___PSU_CG 2297.JPG,Tomato___Tomato_mosaic_virus,True,0.2981704400510204,0.6095232963562012
+Tomato___Tomato_mosaic_virus/ee5d3bda-66ef-4de8-878d-e345c3eae676___PSU_CG 2086.JPG,Tomato___Tomato_mosaic_virus,True,0.25197305484693877,0.4653533399105072
+Tomato___Tomato_mosaic_virus/0ce34f26-3bd6-420e-ba31-0373b465f267___PSU_CG 2099.JPG,Tomato___Tomato_mosaic_virus,True,0.20226801658163265,0.4742947518825531
+Tomato___Tomato_mosaic_virus/8a398af5-59cc-4d7e-9de9-07c5a5bb2cf3___PSU_CG 2116.JPG,Tomato___Tomato_mosaic_virus,True,0.24768813775510204,0.5261293053627014
+Tomato___Tomato_mosaic_virus/875b2d3c-44cd-440c-8807-8f52b1e7d45a___PSU_CG 2318.JPG,Tomato___Tomato_mosaic_virus,True,0.19533242984693877,0.48614877462387085
+Tomato___Tomato_mosaic_virus/f7d8d2a1-2cc6-41e7-9626-76ddf51e7a8b___PSU_CG 2179.JPG,Tomato___Tomato_mosaic_virus,True,0.23116629464285715,0.4985544681549072
+Tomato___Tomato_mosaic_virus/cc8059de-bae3-4ace-b6a5-f12a07fef342___PSU_CG 2410.JPG,Tomato___Tomato_mosaic_virus,True,0.27431441326530615,0.4293873608112335
+Tomato___Tomato_mosaic_virus/847307bc-58ab-45fc-8001-f1e07a38bc82___PSU_CG 2065.JPG,Tomato___Tomato_mosaic_virus,True,0.22439014668367346,0.47543665766716003
+Tomato___Tomato_mosaic_virus/b455e70e-1ff9-4081-a0bb-6d16c88402e3___PSU_CG 2105.JPG,Tomato___Tomato_mosaic_virus,True,0.2701889349489796,0.5271492004394531
+Tomato___Tomato_mosaic_virus/d8106a03-3742-4e57-9ea7-d634b56c76cf___PSU_CG 2265.JPG,Tomato___Tomato_mosaic_virus,True,0.19810267857142858,0.4790937900543213
+Tomato___healthy/1cb9d4d1-280b-479c-95a9-01f71acf70bc___RS_HL 0641.JPG,Tomato___healthy,True,0.3994738520408163,0.5593145489692688
+Tomato___healthy/cf6c530d-522f-4990-9d02-3445623266d7___RS_HL 0364.JPG,Tomato___healthy,True,0.37392378826530615,0.5527204871177673
+Tomato___healthy/10a4a3bd-e4c3-4e1c-94bd-cd0cd4e2705b___GH_HL Leaf 526.JPG,Tomato___healthy,True,0.29432397959183676,0.5240976810455322
+Tomato___healthy/c5db6d9e-4821-4b05-8b44-80ba702a8401___GH_HL Leaf 373.JPG,Tomato___healthy,True,0.3988560267857143,0.6361981630325317
+Tomato___healthy/bc36c64a-8e37-4275-80e9-81431c4ba98f___GH_HL Leaf 184.2.JPG,Tomato___healthy,True,0.3630221619897959,0.5432558655738831
+Tomato___healthy/939be2cc-6c00-4205-85cd-5276c12969e0___RS_HL 9883.JPG,Tomato___healthy,True,0.40977758290816324,0.595464289188385
+Tomato___healthy/7181181c-b571-4cf0-80c3-c52bd785ccf9___GH_HL Leaf 218.JPG,Tomato___healthy,True,0.4606385522959184,0.652805507183075
+Tomato___healthy/2b6c6705-59ce-4afe-8ad1-62a367ea10e0___RS_HL 9994.JPG,Tomato___healthy,True,0.4644052933673469,0.6093817949295044
+Tomato___healthy/7f80c0af-c88f-40ec-be87-14d7595248d8___RS_HL 9721.JPG,Tomato___healthy,True,0.4514907525510204,0.5446551442146301
+Tomato___healthy/65d89a16-45b5-4ce7-9dad-f702c4b14e95___RS_HL 9896.JPG,Tomato___healthy,True,0.5712890625,0.636834442615509
+Tomato___healthy/d19a7818-769b-4633-bd09-5c3c20d2b4d1___GH_HL Leaf 172.JPG,Tomato___healthy,True,0.47169961734693877,0.6843550205230713
+Tomato___healthy/4ed0a372-fe3d-49a6-82a1-2e904e6c66e3___GH_HL Leaf 200.JPG,Tomato___healthy,True,0.48495296556122447,0.6871644854545593
+Tomato___healthy/ef23fd72-1367-41c5-820f-c89533ad258e___GH_HL Leaf 303.1.JPG,Tomato___healthy,True,0.31544961734693877,0.587302029132843
+Tomato___healthy/e357a876-daff-428c-828f-7f1b6e998175___RS_HL 0593.JPG,Tomato___healthy,True,0.38614078443877553,0.5024061799049377
+Tomato___healthy/5c4d21aa-76f8-4ab7-8440-65fd3cac640b___GH_HL Leaf 263.JPG,Tomato___healthy,True,0.3415377869897959,0.5698943734169006

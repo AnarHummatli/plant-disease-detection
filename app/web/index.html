@@ -44,18 +44,31 @@
   .wrap { max-width: 1160px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); }
   .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-  /* masthead: the mark, the name of the tool and its maker */
-  .masthead { display: flex; align-items: center; gap: 14px; padding-top: 22px; padding-bottom: 18px; }
-  .masthead::after { content: none; }
-  .rule { border: 0; border-top: 1px solid var(--rule); margin: 0; }
+  /* masthead: the mark, the name of the tool and its maker; stays at the top while scrolling */
+  .top { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--paper) 92%, transparent);
+         -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); }
+  .masthead { display: flex; align-items: center; gap: 14px; padding-top: 16px; padding-bottom: 14px; }
   .mark { width: 40px; height: 40px; flex: none; }
-  .brand { display: flex; flex-direction: column; line-height: 1.25; margin-right: auto; }
+  .brand { display: flex; flex-direction: column; line-height: 1.25; margin-right: auto; min-width: 0; }
+  .brand b, .brand a { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .brand .short { display: none; }
   .brand b { font: 600 1.05rem/1.25 var(--serif); }
   .brand a { color: var(--muted); font-size: .9rem; text-decoration: none; }
   .brand a:hover { color: var(--leaf); text-decoration: underline; }
-  .lang { font: 500 .9rem var(--sans); color: var(--ink); background: transparent; border: 1px solid var(--rule);
-          border-radius: 999px; padding: 7px 14px; cursor: pointer; }
-  .lang:hover { border-color: var(--leaf); }
+  .lang { display: inline-flex; border: 1px solid var(--rule); border-radius: 999px; padding: 3px; flex: none; }
+  .lang button { font: 500 .85rem/1 var(--sans); letter-spacing: .02em; color: var(--muted); background: transparent;
+                 border: 0; border-radius: 999px; padding: 7px 12px; cursor: pointer; min-width: 44px; }
+  .lang button:hover { color: var(--ink); }
+  .lang button[aria-pressed=true] { background: var(--ink); color: var(--paper); }
+  @media (max-width: 520px) {
+    .masthead { gap: 10px; padding-top: 10px; padding-bottom: 10px; }
+    .mark { width: 32px; height: 32px; }
+    .brand b { font-size: .95rem; }
+    .brand a { font-size: .8rem; }
+    .brand .long { display: none; }
+    .brand .short { display: inline; }
+    .lang button { padding: 6px 9px; min-width: 36px; }
+  }
 
   /* hero */
   .hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 12px clamp(18px, 3vw, 36px);
@@ -114,7 +127,7 @@
   .strip img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
 
   /* the determination label: the one typed, archival element of the page */
-  .label { background: var(--sheet); border: 1px solid var(--ink); border-radius: 2px; padding: 4px; }
+  .label { background: var(--sheet); border: 1px solid var(--ink); border-radius: 2px; padding: 4px; scroll-margin-top: 84px; }
   .label-inner { border: 1px solid var(--ink); padding: clamp(16px, 2.4vw, 24px); }
   .label-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
                 border-bottom: 1px solid var(--ink); padding-bottom: 10px; margin-bottom: 14px; }
@@ -170,33 +183,49 @@
   .limits h2 { font: 600 1.5rem/1.2 var(--serif); margin: 0 0 12px; }
   .limits ul { margin: 0; padding-left: 1.1rem; color: var(--muted); display: grid; gap: 6px; }
 
-  /* the maker's signature */
-  .signature { margin-top: clamp(44px, 7vw, 88px); border-top: 1px solid var(--ink); padding: 26px 0 40px;
-               display: grid; grid-template-columns: auto 1fr; gap: 6px 20px; align-items: start; }
-  .signature .made { grid-column: 1 / -1; color: var(--muted); font-size: .9rem; margin: 0; }
-  .signature .name { font: 600 italic clamp(1.9rem, 4vw, 2.6rem)/1.1 var(--serif); margin: 0; letter-spacing: -.01em; }
-  .signature .who { margin: 4px 0 0; color: var(--muted); }
-  .signature nav { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 12px; }
-  .signature nav a { font-weight: 500; }
-  .signature .small { grid-column: 1 / -1; color: var(--muted); font-size: .85rem; margin: 14px 0 0; max-width: 46rem; }
-  .signature .warn { grid-column: 1 / -1; font-size: .85rem; margin: 6px 0 0; max-width: 46rem; }
-  @media (max-width: 520px) { .signature { grid-template-columns: 1fr; } }
+  /* footer: a quiet band that closes the page */
+  .site-foot { margin-top: clamp(56px, 8vw, 96px); background: var(--sheet); border-top: 1px solid var(--rule);
+               color: var(--muted); font-size: .9rem; }
+  .foot-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr) minmax(0, .8fr);
+               gap: clamp(24px, 4vw, 56px); padding-top: clamp(32px, 4vw, 44px); padding-bottom: 28px; }
+  .foot-id { display: grid; grid-template-columns: 28px 1fr; column-gap: 12px; align-items: start; align-content: start; }
+  .foot-id svg { width: 28px; height: 28px; margin-top: 1px; }
+  .foot-id b { font: 600 1rem/1.4 var(--serif); color: var(--ink); }
+  .foot-id p { grid-column: 2; margin: 6px 0 0; line-height: 1.55; max-width: 34ch; }
+  .site-foot h2 { font: 600 .85rem/1.4 var(--sans); color: var(--ink); margin: 0 0 10px; }
+  .foot-col p { margin: 0 0 6px; line-height: 1.55; }
+  .foot-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .foot-links a { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); text-decoration: none; }
+  .foot-links a span { border-bottom: 1px solid transparent; }
+  .foot-links a:hover { color: var(--leaf); }
+  .foot-links a:hover span { border-bottom-color: currentColor; }
+  .foot-links svg { width: 12px; height: 12px; flex: none; opacity: .7; }
+  .foot-base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 32px;
+               border-top: 1px solid var(--rule); padding: 16px 0 28px; font-size: .8rem; }
+  .foot-base p { margin: 0; }
+  @media (max-width: 760px) {
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+    .foot-id { grid-column: 1 / -1; }
+  }
+  @media (max-width: 460px) { .foot-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
-<header class="wrap masthead">
+<header class="top"><div class="wrap masthead">
   <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
     <path d="M12 52C12 28 26 12 54 10c-1 27-16 42-42 42z" fill="var(--leaf)"/>
     <path d="M12 52C22 40 32 30 46 18" stroke="var(--paper)" stroke-width="3" fill="none" stroke-linecap="round"/>
     <circle cx="36" cy="34" r="5" fill="var(--lesion)"/>
   </svg>
   <div class="brand">
-    <b data-i18n="brand">Plant disease detection</b>
-    <a href="#author" data-i18n="byline">Made by Anar Hummatli</a>
+    <b><span class="long" data-i18n="brand">Plant disease detection</span><span class="short" data-i18n="brand.short">Plant disease detection</span></b>
+    <a href="https://www.linkedin.com/in/anarhummatli" target="_blank" rel="noopener" data-i18n="byline">Made by Anar Hummatli</a>
   </div>
-  <button class="lang" id="lang" type="button" lang="az">Azərbaycanca</button>
-</header>
-<div class="wrap"><hr class="rule"></div>
+  <div class="lang" role="group" aria-label="Language / Dil">
+    <button type="button" data-lang="az" lang="az" aria-pressed="false">AZ</button>
+    <button type="button" data-lang="en" lang="en" aria-pressed="true">EN</button>
+  </div>
+</div></header>
 
 <main class="wrap">
   <section class="hero">
@@ -277,27 +306,39 @@
     <ul>
       <li data-i18n="lim.1"></li>
       <li data-i18n="lim.2"></li>
-      <li data-i18n="lim.3"></li>
     </ul>
   </section>
 
-  <footer class="signature" id="author">
-    <p class="made" data-i18n="foot.made">Made by</p>
-    <div>
-      <p class="name">Anar Hummatli</p>
-      <p class="who" data-i18n="foot.role">Computer Engineering, Azerbaijan State Oil and Industry University</p>
-    </div>
-    <nav aria-label="Anar Hummatli">
-      <a href="https://github.com/AnarHummatli/plant-disease-detection" data-i18n="foot.repo">Source code</a>
-      <a href="https://github.com/AnarHummatli">GitHub</a>
-      <a href="https://www.linkedin.com/in/anarhummatli">LinkedIn</a>
-      <a href="https://huggingface.co/AnarHummatli">Hugging Face</a>
-    </nav>
-    <p class="small" data-i18n="foot.project">Neural Networks course project, 2026.</p>
-    <p class="small" data-i18n="foot.data">Example photos: PlantVillage (Hughes &amp; Salathé, 2015), CC BY-SA 3.0.</p>
-    <p class="warn" data-i18n="lim.3">It is an educational prototype, not a replacement for an agronomist.</p>
-  </footer>
 </main>
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div class="foot-id">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M12 52C12 28 26 12 54 10c-1 27-16 42-42 42z" fill="var(--leaf)"/>
+        <path d="M12 52C22 40 32 30 46 18" stroke="var(--sheet)" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <circle cx="36" cy="34" r="5" fill="var(--lesion)"/>
+      </svg>
+      <b data-i18n="brand">Plant disease detection</b>
+      <p data-i18n="foot.desc">Names 38 leaf conditions of 14 crops from one photo. The model runs in your browser.</p>
+    </div>
+    <div class="foot-col">
+      <h2 data-i18n="foot.about">Project</h2>
+      <p data-i18n="foot.role">Computer Engineering, Azerbaijan State Oil and Industry University</p>
+      <p data-i18n="foot.project">Neural Networks course project, 2026.</p>
+    </div>
+    <nav class="foot-col" aria-labelledby="foot-links">
+      <h2 id="foot-links" data-i18n="foot.links">Links</h2>
+      <ul class="foot-links">
+        <li><a href="https://github.com/AnarHummatli/plant-disease-detection" target="_blank" rel="noopener"><span data-i18n="foot.repo">Source code</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4.5 2.5h5v5M9.5 2.5 3 9" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/in/anarhummatli" target="_blank" rel="noopener"><span>LinkedIn</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4.5 2.5h5v5M9.5 2.5 3 9" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap"><div class="foot-base">
+    <p data-i18n="foot.data">Example photos: PlantVillage (Hughes &amp; Salathé, 2015), CC BY-SA 3.0.</p>
+    <p data-i18n="lim.3">It is an educational prototype, not a replacement for an agronomist.</p>
+  </div></div>
+</footer>
 <!-- onnxruntime-web, pinned; keep the version equal to ORT_VERSION in plantdx/web_export.py -->
 <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.31.1/dist/ort.wasm.min.js"></script>
 <script src="imaging.js"></script>

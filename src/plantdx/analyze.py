@@ -393,8 +393,8 @@ def write_results_md(path: Path, s: dict, final: str, conf, weak, metrics_test) 
         "\\* CPU time per image at batch size 1, eager Keras on Colab's shared 2-core CPU,",
         "including feature extraction for the classical models. It overstates MobileNetV2's cost",
         "(D-015);",
-        "the demo measures latency again. The other MobileNetV2 runs were selection candidates and",
-        "were not scored on test.",
+        "compiled for the demo, the same model takes 39 ms on that CPU (D-021). The other",
+        "MobileNetV2 runs were selection candidates and were not scored on test.",
         "",
         "## 2. Full test vs leaf-verified test (residual leakage)",
         "",
@@ -403,10 +403,11 @@ def write_results_md(path: Path, s: dict, final: str, conf, weak, metrics_test) 
         f"Classes without verified leaves (only in the full test): "
         f"{', '.join(short(c) for c in g['missing_classes']) or 'none'}.",
         "",
-        "Rows 2 and 3 cover the same classes, so their difference isolates leakage; row 1 vs 2 "
-        "is the effect of the missing classes. In the last row compare **accuracy**: its macro-F1 "
-        "averages only the classes that have unverified test images, several with few of them, "
-        "and is not comparable.",
+        f"Rows 2 and 3 cover the same {g['verified_30']['classes']} classes, so their difference "
+        f"isolates leakage; row 1 vs 2 is the effect of the {len(g['missing_classes'])} missing "
+        "classes. In the last row compare **accuracy**: its macro-F1 averages only the "
+        f"{(g['unverified_in_30_classes'] or {}).get('classes', 0)} classes that have unverified "
+        "test images, several with few of them, and is not comparable.",
         "",
         "## 3. Most confused class pairs (test)",
         "",

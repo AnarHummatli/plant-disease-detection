@@ -68,9 +68,9 @@ Full write-up: **[`docs/error_analysis.md`](docs/error_analysis.md)**; tables: `
 - **Where it fails:** similar diseases of one crop (tomato early blight vs target spot and late
   blight; the two corn leaf-spot diseases) and, across crops, similar healthy leaves and
   tomato vs potato late blight (same pathogen).
-- **What it looks at:** on 555 test images a median 69% of the Grad-CAM heat map lies on the leaf,
-  which covers 47% of the image (leaf masks from the segmented variant) — the leaf, not the
-  background.
+- **What it looks at:** on 555 test images a median 70% of the Grad-CAM heat map lies on the leaf,
+  which covers 47% of the image (leaf masks from the segmented variant); for 97% of the images
+  the map is more concentrated on the leaf than its area alone would give (D-020, D-022).
 - **Leakage check:** on the same 30 classes, leaf-verified test images score as high as all test
   images (macro-F1 0.9849 vs 0.9848): no sign of inflated results.
 - **"Not sure":** below a confidence of 0.947 (chosen on validation) the model abstains; on test

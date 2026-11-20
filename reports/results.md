@@ -20,8 +20,8 @@ test number comes from the single test evaluation (D-015).
 \* CPU time per image at batch size 1, eager Keras on Colab's shared 2-core CPU,
 including feature extraction for the classical models. It overstates MobileNetV2's cost
 (D-015);
-the demo measures latency again. The other MobileNetV2 runs were selection candidates and
-were not scored on test.
+compiled for the demo, the same model takes 39 ms on that CPU (D-021). The other
+MobileNetV2 runs were selection candidates and were not scored on test.
 
 ## 2. Full test vs leaf-verified test (residual leakage)
 
@@ -32,7 +32,7 @@ were not scored on test.
 | Leaf-verified images (leakage impossible) | 8,033 | 30 | 0.9849 | 0.9867 |
 | Unverified images of those classes | 1,050 | 6 | 0.8235 | 0.9829 |
 
-Classes without verified leaves (only in the full test): Corn · Cercospora leaf spot Gray leaf spot, Corn · Common rust , Corn · Northern Leaf Blight, Corn · healthy, Grape · healthy, Squash · Powdery mildew, Tomato · Target Spot, Tomato · Tomato mosaic virus.
+Classes without verified leaves (only in the full test): Corn · Cercospora leaf spot Gray leaf spot, Corn · Common rust, Corn · Northern Leaf Blight, Corn · healthy, Grape · healthy, Squash · Powdery mildew, Tomato · Target Spot, Tomato · Tomato mosaic virus.
 
 Rows 2 and 3 cover the same 30 classes, so their difference isolates leakage; row 1 vs 2 is the effect of the 8 missing classes. In the last row compare **accuracy**: its macro-F1 averages only the 6 classes that have unverified test images, several with few of them, and is not comparable.
 
@@ -67,7 +67,7 @@ Rule fixed before looking at the result (D-019): smallest threshold with >= 99.5
 
 ## 6. Does the model look at the leaf? (Grad-CAM, D-020)
 
-On 555 test images (up to 15 per class), the share of the Grad-CAM mass that lies on the leaf (leaf mask from the dataset's segmented variant): median **0.69**, while the leaf covers a median 0.47 of the image. For 95% of the images the heat map is more concentrated on the leaf than the leaf's area alone would give; for 10% less than half of it is on the leaf. Figures: `figures/gradcam_on_leaf.png`, `figures/gradcam_examples.jpg`, `figures/failures.jpg`.
+On 555 test images (up to 15 per class), the share of the Grad-CAM mass that lies on the leaf (leaf mask from the dataset's segmented variant): median **0.70**, while the leaf covers a median 0.47 of the image. For 97% of the images the heat map is more concentrated on the leaf than the leaf's area alone would give; for 8% less than half of it is on the leaf. Figures: `figures/gradcam_on_leaf.png`, `figures/gradcam_examples.jpg`, `figures/failures.jpg`.
 
 ## 7. Per-class scores of the final model (test)
 
@@ -81,7 +81,7 @@ On 555 test images (up to 15 per class), the share of the Grad-CAM mass that lie
 | Cherry · Powdery mildew | 219 | 1.000 | 0.995 | 0.998 | 0.998 |
 | Cherry · healthy | 123 | 0.939 | 1.000 | 0.969 | 0.969 |
 | Corn · Cercospora leaf spot Gray leaf spot | 107 | 0.900 | 0.925 | 0.912 | — |
-| Corn · Common rust  | 217 | 0.995 | 0.995 | 0.995 | — |
+| Corn · Common rust | 217 | 0.995 | 0.995 | 0.995 | — |
 | Corn · Northern Leaf Blight | 220 | 0.959 | 0.950 | 0.954 | — |
 | Corn · healthy | 250 | 0.996 | 1.000 | 0.998 | — |
 | Grape · Black rot | 168 | 0.988 | 1.000 | 0.994 | 0.994 |

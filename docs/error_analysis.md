@@ -3,7 +3,8 @@
 **Model:** MobileNetV2, whole backbone fine-tuned (`mobilenetv2_ft_all`, release v1.0)
 **Data:** the test split, scored once (D-015); this analysis reuses the saved predictions.
 **Generated tables and figures:** `reports/results.md`, `reports/analysis/`, `reports/figures/`
-(`python -m plantdx.analyze`, notebook 08). Version 1.0 · 20 November 2026.
+(`python -m plantdx.analyze`, notebook 08). Version 1.1 · 20 November 2026: Grad-CAM maps and
+numbers recomputed after the correction in D-022 (version 1.0 used probability-gradient maps).
 
 ## 1. Summary
 
@@ -12,8 +13,8 @@
   (tomato early blight / target spot / late blight, the two corn leaf-spot diseases). The 21% of
   errors that cross crops are mostly healthy leaves of similar shape, or tomato vs potato (same
   plant family; late blight of both is the same pathogen).
-- The model **looks at the leaf**: on 555 test images, a median 69% of the Grad-CAM mass lies on
-  the leaf, which covers a median 47% of the image (D-020).
+- The model **looks at the leaf**: on 555 test images, a median 70% of the Grad-CAM mass lies on
+  the leaf, which covers a median 47% of the image (D-020, D-022).
 - **No sign of leakage inflating the score**: on the same 30 classes, leaf-verified test images
   (leakage impossible) score as high as the full test (macro-F1 0.9849 vs 0.9848).
 - A **"not sure" threshold** of 0.947, chosen on validation, holds on test: 96.8% of the images
@@ -60,8 +61,8 @@ error; left the photo, right the Grad-CAM for the predicted class.
 
 | # | True → predicted (probability) | What the image and the heat map show |
 |---|---|---|
-| 1 | Tomato early blight → target spot (1.00) | A leaf with only a few small brown spots near its base and a strong shadow. The heat map sits on those spots. With so few lesions, the concentric-ring pattern shared by both diseases is all there is to go on. |
-| 2 | Tomato yellow leaf curl virus → spider mites (1.00) | Mottled, slightly yellow leaf surface without the typical curling. The heat map covers the speckled centre of the leaf; fine yellow stippling is also what spider-mite feeding looks like. |
+| 1 | Tomato early blight → target spot (1.00) | A leaf with only a few small brown spots near its base and a strong shadow. The heat map covers the lower half of the leaf blade around those spots. With so few lesions, the concentric-ring pattern shared by both diseases is all there is to go on. |
+| 2 | Tomato yellow leaf curl virus → spider mites (1.00) | Mottled, slightly yellow leaf surface without the typical curling. The heat map covers the speckled upper centre of the leaf; fine yellow stippling is also what spider-mite feeding looks like. |
 | 3 | Tomato early blight → late blight (1.00) | A late-stage leaf: large dry, brown, curled areas. At this stage both blights destroy large parts of the leaf and look alike; the heat map is on the necrotic tissue. |
 | 4 | Corn northern leaf blight → Cercospora leaf spot (1.00) | A close-up of a corn leaf with many small, short tan spots; the long "cigar-shaped" lesions typical of northern leaf blight are not in the picture. The heat map follows the spot clusters. |
 | 5 | Corn Cercospora leaf spot → northern leaf blight (0.99) | The opposite case: one long continuous lesion along the midrib, the shape typical of northern leaf blight. The heat map lies on that lesion. |
@@ -79,17 +80,20 @@ these cases with probability ≥ 0.98.
 | | Median |
 |---|--:|
 | Leaf share of the image (leaf masks from the segmented variant) | 0.47 |
-| Grad-CAM mass on the leaf, all 555 images | **0.69** |
-| … correctly classified (544) / misclassified (11) | 0.69 / 0.62 |
-| … healthy classes / disease classes | 0.69 / 0.69 |
+| Grad-CAM mass on the leaf, all 555 images | **0.70** |
+| … correctly classified (544) / misclassified (11) | 0.70 / 0.67 |
+| … healthy classes / disease classes | 0.69 / 0.71 |
 
-For 95% of the images the heat map is more concentrated on the leaf than its area alone would
-give; for 10% less than half of it is on the leaf. The lowest class medians are peach healthy
-(0.42), tomato mosaic virus (0.54) and tomato spider mites (0.55). In the examples, disease classes
-light up on lesions and discoloured tissue, while healthy leaves without lesions light up on the
-leaf margin and outline (e.g. tomato healthy), where the coarse 7 × 7 map partly spills onto the
-background. So the background is not what the model relies on, but for healthy leaves part of the
-evidence is the leaf's shape at its edge.
+For 97% of the images the heat map is more concentrated on the leaf than its area alone would
+give; for 8% less than half of it is on the leaf. The lowest class medians are peach healthy
+(0.43), tomato mosaic virus (0.49) and apple healthy (0.58). In the examples, disease classes
+light up on lesions and discoloured tissue, and healthy leaves light up on the leaf blade (e.g.
+raspberry and tomato healthy). So the background is not what the model relies on.
+
+An earlier version of this section (1.0) read the healthy-leaf maps as lighting up on the leaf
+outline. Those maps came from the gradient of the probability, which is rounding noise when the
+probability is 1.0; with the gradient of the class score before the softmax (D-022) the outline
+pattern disappears, so it was an artefact, not a property of the model.
 
 ## 5. Residual leakage (D-004, D-010)
 

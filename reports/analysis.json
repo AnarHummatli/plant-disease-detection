@@ -142,17 +142,17 @@
   "gradcam_on_leaf": {
     "images": 555,
     "segmented_found": "555 of 570",
-    "median_cam_on_leaf": 0.6892990469932556,
-    "mean_cam_on_leaf": 0.6763222184669864,
+    "median_cam_on_leaf": 0.7034758925437927,
+    "mean_cam_on_leaf": 0.6877951565626506,
     "median_leaf_area": 0.4696667729591837,
-    "share_cam_on_leaf_above_area": 0.9495495495495495,
-    "share_cam_on_leaf_below_half": 0.1009009009009009,
+    "share_cam_on_leaf_above_area": 0.972972972972973,
+    "share_cam_on_leaf_below_half": 0.08288288288288288,
     "by_class_lowest": {
-      "Peach___healthy": 0.415,
-      "Tomato___Tomato_mosaic_virus": 0.535,
-      "Tomato___Spider_mites Two-spotted_spider_mite": 0.551,
-      "Tomato___Early_blight": 0.558,
-      "Peach___Bacterial_spot": 0.57
+      "Peach___healthy": 0.433,
+      "Tomato___Tomato_mosaic_virus": 0.486,
+      "Apple___healthy": 0.576,
+      "Peach___Bacterial_spot": 0.58,
+      "Tomato___Spider_mites Two-spotted_spider_mite": 0.583
     }
   },
   "leak_pairs_crossing_official_split": 31

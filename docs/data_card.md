@@ -1,6 +1,6 @@
 # Data card · PlantVillage (colour) as used in this project
 
-**Version:** 1.5 · 20 November 2026 · splits frozen after D-010 (1.2–1.5: text and results only)
+**Version:** 1.6 · 20 November 2026 · splits frozen after D-010 (1.2–1.6: text and results only)
 **Owner:** Yarpaq Həkimləri (ASOIU Neural Networks project, topic 06)
 
 ## 1. Summary
@@ -40,7 +40,7 @@ and most leaves were photographed several times. Consequences for this project:
 - Background colour differs between groups of classes (grey, purple-grey, pink-brown; some images
   look pre-segmented on black). A model could learn the background instead of the symptoms. This was
   measured with Grad-CAM and the leaf masks of the segmented variant (D-020): the final model puts a
-  median 69% of its heat map on the leaf, which covers 47% of the image (section 7).
+  median 70% of its heat map on the leaf, which covers 47% of the image (section 7; D-022).
 - Several photos of one leaf must never be split across train and test (section 5).
 
 ## 4. Composition
@@ -170,7 +170,7 @@ Files: `splits/{train,val,test}.csv` (`path, label, label_index, leaf_id, group_
 | Limitation | Effect | What we do |
 |---|---|---|
 | Lab photos, plain backgrounds | Optimistic accuracy; weak transfer to field photos | State it; field test (PlantDoc) is future work |
-| Class-correlated backgrounds | Possible shortcut learning | Measured with Grad-CAM and the segmented variant's leaf masks (D-020): median 0.69 of the heat map on the leaf, which covers 0.47 of the image; 95% of the images above their leaf area. The model relies on the leaf |
+| Class-correlated backgrounds | Possible shortcut learning | Measured with Grad-CAM and the segmented variant's leaf masks (D-020): median 0.70 of the heat map on the leaf, which covers 0.47 of the image; 97% of the images above their leaf area (D-022). The model relies on the leaf |
 | 24.3% of images without verified leaf ids; most of their other photos cannot be found (D-010 recall 0.4%) | Photos of one leaf can still sit in train and test, mainly in the 8 classes without verified ids and in Tomato classes; the full-test score may be optimistic | Test metrics reported twice: full test and leaf-verified subset (8,033 images, 30 classes, leakage excluded by construction). Result: the neural models score no lower on the verified subset (final model macro-F1 0.985 vs 0.982 on the full test), so there is no sign of inflated scores; the subset lacks 8 classes, so this is indicative, not a proof |
 | Near-identical re-shots below r = 0.92 and same-leaf pairs below cosine 0.94 are not grouped | Same as above | Conservative cut-offs chosen to avoid wrong merges; stated in the report |
 | Strong class imbalance (36 : 1) | Accuracy hides weak classes | Macro-F1 for selection; per-class scores with counts |
