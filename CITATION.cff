@@ -9,8 +9,8 @@ authors:
 repository-code: "https://github.com/AnarHummatli/plant-disease-detection"
 url: "https://huggingface.co/spaces/AnarHummatli/plant-disease-detection"
 license: MIT
-version: "1.2.0"
-date-released: "2026-11-20"
+version: "1.3.0"
+date-released: "2026-11-21"
 keywords:
   - plant disease detection
   - deep learning
