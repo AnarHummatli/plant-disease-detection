@@ -32,7 +32,9 @@ ONNX Runtime Web: photos are not uploaded anywhere. English and Azerbaijani.
   (bit-identical on the checked images) and the ONNX export is checked against Keras.
 - **Code, data checks and the full evaluation:**
   <https://github.com/AnarHummatli/plant-disease-detection> (this Space is built by
-  `python -m plantdx.web_export` from the release model).
+  `python -m plantdx.web_export` from the release model). Technical report:
+  [PDF](https://github.com/AnarHummatli/plant-disease-detection/blob/main/docs/report.pdf);
+  [model card](https://github.com/AnarHummatli/plant-disease-detection/blob/main/docs/model_card.md).
 - **Limits:** trained on single leaves photographed on plain lab backgrounds; field photos and
   plants outside the 38 classes are not handled reliably.
 

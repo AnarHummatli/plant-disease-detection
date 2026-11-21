@@ -39,3 +39,4 @@ decision log says why. **Status: all stages done.**
 | | 7.3 | Tests for every module, CI green | `tests/`, CI on Python 3.11–3.13 |
 | | 7.4 | Clean-session reproduction check | `plantdx.reproduce`, notebook 10, [`reports/reproduction/`](../reports/reproduction/reproduction.md), D-024 |
 | **8 · Write-up** | 8.1 | Technical report | [`report.pdf`](report.pdf), source [`report.md`](report.md) |
+| | 8.2 | Model card | [`model_card.md`](model_card.md) |

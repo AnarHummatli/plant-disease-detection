@@ -18,8 +18,32 @@ Computer Engineering (SABAH Groups), Azerbaijan State Oil and Industry Universit
 ![The browser demo: three diagnoses with Grad-CAM, then a "not sure" answer](reports/figures/demo.gif)
 
 **Technical report** (7 pages): [`docs/report.pdf`](docs/report.pdf) ·
+**Model card:** [`docs/model_card.md`](docs/model_card.md) ·
 **Roadmap** (8 stages, all done): [`docs/roadmap.md`](docs/roadmap.md) ·
 **Decision log** (D-001 to D-024): [`docs/decisions.md`](docs/decisions.md)
+
+## Highlights
+
+- **Leakage-checked evaluation.** PlantVillage's official split puts photos of the same leaf in
+  both train and test. The split was rebuilt around physical leaves and near-identical re-shots
+  (a correlation search over all 54,305 images), guarded by automated tests, and every test
+  number is also reported on a subset where leakage is impossible (macro-F1 0.985 there).
+- **A fair comparison.** MobileNetV2 fine-tuned reaches test macro-F1 **0.982** (accuracy
+  0.986), against 0.967 for a CNN trained from scratch and 0.884 for a classical baseline; every
+  choice was made on validation and each model was scored on test once.
+- **Looks at the leaf, says when it is unsure.** Grad-CAM measured with leaf masks: a median
+  70% of the heat map lies on the leaf. A "not sure" threshold answers 96.8% of the test photos
+  with 99.5% accuracy.
+- **Runs in the browser.** An ONNX export with Grad-CAM inside the model and a bit-exact
+  JavaScript port of TensorFlow's resize give the Python model's answers in about 35 ms per
+  photo, on the user's device.
+- **Reproducible.** Config-driven experiments with fixed seeds, 186 tests and CI on Python
+  3.11–3.13, pinned package versions. One command rebuilds the splits and re-scores the released
+  model: a clean Colab session matched every reported test number exactly (GPU retraining is not
+  bit-for-bit deterministic, so a new training run can differ slightly; D-018).
+
+**Stack:** Python, TensorFlow / Keras, scikit-learn, ONNX Runtime Web, Gradio, GitHub Actions,
+Hugging Face Spaces, Google Colab (T4).
 
 ## Demo
 
@@ -30,8 +54,10 @@ Grad-CAM heat map of the region that drove the answer.
   <https://huggingface.co/spaces/AnarHummatli/plant-disease-detection>, also on GitHub Pages at
   <https://anarhummatli.github.io/plant-disease-detection/>. The model runs on your device
   (ONNX Runtime Web), so photos are not uploaded anywhere (D-023).
-- **Colab, Gradio app with a public link:** open `notebooks/09_demo.ipynb`, run all cells (CPU is
-  enough) and open the `*.gradio.live` link it prints.
+- **Colab, Gradio app with a public link:**
+  [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AnarHummatli/plant-disease-detection/blob/main/notebooks/09_demo.ipynb)
+  `notebooks/09_demo.ipynb`: run all cells (CPU is enough) and open the `*.gradio.live` link it
+  prints.
 - **Local** (Python ≥ 3.11): `pip install -e ".[tf,demo]"`, then `make demo` (or
   `python app/gradio/app.py`) and open <http://127.0.0.1:7860>.
 - **Command line:** `python -m plantdx.predict leaf.jpg` prints the verdict and the top-3.
@@ -113,17 +139,6 @@ the rule fixed before training (highest val macro-F1) the whole-backbone run is 
 Tuning budget: one configuration for the CNN, five for MobileNetV2. Per-run details:
 `reports/results.csv`, `reports/runs/`; learning curves: `reports/figures/curves_*.png`.
 
-## Why this project is different
-
-- **Honest evaluation.** PlantVillage contains several photos of the same physical leaf, some
-  of them near-identical re-shots. A random split puts them in train and test and inflates the
-  score. Here every leaf and every group of near-identical images is in exactly one split,
-  checked by automated tests. Known limits are stated openly (see [Data](#data)).
-- **Reliability.** Grad-CAM shows what the model looked at; low-confidence inputs get
-  "not sure" instead of a confident wrong answer.
-- **Engineering.** Config-driven experiments, fixed seeds, tests and CI. GPU training is not
-  bit-for-bit deterministic, so a re-run can differ slightly (D-018).
-
 ## Quick start
 
 ### Reproduce the results
@@ -134,7 +149,8 @@ official index files, the released model on the test split (macro-F1, accuracy, 
 (`mobilenetv2_head`, val macro-F1 within 0.01). Re-scoring the frozen release model reproduces
 published numbers and changes no decision, so the test split stays used once (D-024).
 
-- **Colab:** open `notebooks/10_reproduce.ipynb` on a new T4 session and run all cells (~25 min).
+- **Colab:** [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AnarHummatli/plant-disease-detection/blob/main/notebooks/10_reproduce.ipynb)
+  `notebooks/10_reproduce.ipynb` on a new T4 session, run all cells (~25 min).
 - **Shell** (Linux, a GPU for the training check):
 
 ```bash
@@ -235,8 +251,8 @@ tests/            pytest: splits, pipeline, baselines, models, trainer, evaluati
                   demo, browser build (ONNX export, JavaScript resize, translations), reproduction
 app/gradio/       Gradio demo (app.py) and seven example test photos with attribution
 app/web/          browser demo (static page; the model runs with ONNX Runtime Web)
-docs/             roadmap, problem statement, data card, decision log, error analysis, technical
-                  report (report.md, report.pdf, build_report.py)
+docs/             roadmap, problem statement, data card, model card, decision log, error analysis,
+                  technical report (report.md, report.pdf, build_report.py)
 reports/          results tables, per-run metrics, analysis, reproduction check; figures/ for the report
 requirements.lock exact package versions of the reproduction run
 ```
