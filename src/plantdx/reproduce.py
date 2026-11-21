@@ -7,8 +7,9 @@ Every check compares a number from the repository (reports/, splits/) with the s
 computed again in the current environment, and passes only within a stated tolerance:
 
 1. **Environment** (information): the installed versions against those the final model was
-   trained with (reports/runs/<final>/env.json). Writes requirements.lock: the exact versions of
-   every package that plantdx (all extras) and TensorFlow need, directly or indirectly.
+   trained with (reports/runs/<final>/env.json). Writes requirements.lock (repository root, or
+   --lock): the exact versions of every package that plantdx (all extras) and TensorFlow need,
+   directly or indirectly.
 2. **Splits**: rebuilt from the official index files and the committed grouping pairs into a
    temporary folder; every file must be byte-identical to splits/.
 3. **Released model on test**: inference.keras from the release (SHA-256 checked) scored on the
@@ -21,8 +22,8 @@ computed again in the current environment, and passes only within a stated toler
 6. **Training** (`--train`): configs/mobilenetv2_head.yaml trained again from scratch must reach
    the reported validation macro-F1 within 0.01 (GPU training is not bit-deterministic, D-018).
 
-Writes reproduction.md, reproduction.json and requirements.lock to --out (default
-reports/reproduction/) and exits with status 1 if any check fails.
+Writes reproduction.md and reproduction.json to --out (default reports/reproduction/) and
+exits with status 1 if any check fails.
 """
 
 from __future__ import annotations
@@ -179,7 +180,7 @@ def gpu_description() -> str:
     return ", ".join(names) or "none"
 
 
-def check_environment(out: Path) -> list[dict]:
+def check_environment(lock: Path) -> list[dict]:
     from plantdx.env import report
 
     now = report()
@@ -190,7 +191,7 @@ def check_environment(out: Path) -> list[dict]:
         same = a is not None and b is not None and str(a) == str(b)
         rows.append(check(f"version: {key}", "INFO", a, b, "same" if same else "differs"))
     rows.append(check("GPU", "INFO", "Tesla T4 (training)", gpu_description()))
-    n = write_lock(out / "requirements.lock")
+    n = write_lock(lock)
     rows.append(check("requirements.lock", "INFO", None, f"{n} packages"))
     return rows
 
@@ -404,11 +405,17 @@ def render(rows: list[dict], info: dict[str, str]) -> str:
     return "\n".join(lines)
 
 
-def run(data_root: str | Path, out: str | Path, do_train: bool = False) -> list[dict]:
+def run(
+    data_root: str | Path,
+    out: str | Path,
+    do_train: bool = False,
+    lock: str | Path | None = None,
+) -> list[dict]:
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
+    lock = Path(lock) if lock else repo_root() / "requirements.lock"
     steps = [
-        ("environment", lambda: check_environment(out)),
+        ("environment", lambda: check_environment(lock)),
         ("splits", check_splits),
         ("released model on test", lambda: check_release_model(data_root)),
         ("demo examples", check_examples),
@@ -444,9 +451,10 @@ def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--data-root", required=True, help="folder that contains raw/color/")
     parser.add_argument("--out", default=str(repo_root() / "reports" / "reproduction"))
+    parser.add_argument("--lock", default=str(repo_root() / "requirements.lock"))
     parser.add_argument("--train", action="store_true", help=f"also train {TRAIN_CONFIG} (~15 min)")
     args = parser.parse_args(argv)
-    rows = run(args.data_root, args.out, args.train)
+    rows = run(args.data_root, args.out, args.train, args.lock)
     fails = [r for r in rows if r["status"] == "FAIL"]
     print(f"\n{len(rows) - len(fails)} of {len(rows)} lines without failure; report: {args.out}")
     sys.exit(1 if fails else 0)

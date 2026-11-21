@@ -634,6 +634,13 @@ classes), where they are kept next to a class table generated from the splits.
   again computes numbers that are already published; its outcome cannot change the model, the
   threshold or any table. It is a check of the code and the environment, and the report says so.
   `plantdx.evaluate` still refuses a second test evaluation of a run (now covered by a test).
-- **Consequence.** `reports/reproduction/` holds the report of a clean Colab session (date,
-  commit, versions, every check) and `requirements.lock` the versions it ran with. A failed line
-  points to what changed: the data source, a dependency or the code.
+- **Outcome (new Colab session, T4, commit `d31022e`, 20 Nov 2026).** All 11 checks passed: the
+  six split files byte-identical; the released model on test with macro-F1 0.9816 and accuracy
+  0.9859 (leaf-verified part 0.9849 / 0.9867), the same 151 errors and 0 of 10,709 predictions
+  different, "not sure" coverage 0.9678 and accuracy 0.9951; the seven examples and the ONNX
+  export as expected; `mobilenetv2_head` trained again to val macro-F1 0.9198 (reported 0.9158,
+  best epoch 9 of 10, 14.1 min). The versions matched the training environment. A CPU run with
+  newer packages (Keras 3.15, NumPy 2.5) also gave 0 different test predictions.
+- **Consequence.** `reports/reproduction/` holds the report (date, commit, versions, every check)
+  and `requirements.lock` (repository root) the 112 packages it ran with. A failed line in a
+  later run points to what changed: the data source, a dependency or the code.

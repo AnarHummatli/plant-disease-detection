@@ -1,0 +1,150 @@
+{
+  "info": {
+    "Date": "2026-11-20 23:14 UTC",
+    "Commit": "d31022e",
+    "Python": "3.13.16 on Linux-6.6.159+-x86_64-with-glibc2.39",
+    "Training run included": "yes"
+  },
+  "checks": [
+    {
+      "check": "version: python",
+      "status": "INFO",
+      "reported": "3.13.16",
+      "reproduced": "3.13.16",
+      "note": "same"
+    },
+    {
+      "check": "version: tensorflow",
+      "status": "INFO",
+      "reported": "2.21.0",
+      "reproduced": "2.21.0",
+      "note": "same"
+    },
+    {
+      "check": "version: keras",
+      "status": "INFO",
+      "reported": "3.13.2",
+      "reproduced": "3.13.2",
+      "note": "same"
+    },
+    {
+      "check": "version: numpy",
+      "status": "INFO",
+      "reported": "2.4.6",
+      "reproduced": "2.4.6",
+      "note": "same"
+    },
+    {
+      "check": "version: pandas",
+      "status": "INFO",
+      "reported": "2.2.3",
+      "reproduced": "2.2.3",
+      "note": "same"
+    },
+    {
+      "check": "version: scikit-learn",
+      "status": "INFO",
+      "reported": "1.6.1",
+      "reproduced": "1.6.1",
+      "note": "same"
+    },
+    {
+      "check": "GPU",
+      "status": "INFO",
+      "reported": "Tesla T4 (training)",
+      "reproduced": "Tesla T4",
+      "note": ""
+    },
+    {
+      "check": "requirements.lock",
+      "status": "INFO",
+      "reported": null,
+      "reproduced": "112 packages",
+      "note": ""
+    },
+    {
+      "check": "splits rebuilt from the official index files",
+      "status": "PASS",
+      "reported": "6 committed files",
+      "reproduced": "identical",
+      "note": ""
+    },
+    {
+      "check": "released model, test: macro_f1",
+      "status": "PASS",
+      "reported": 0.9815763378110429,
+      "reproduced": 0.9815763378110429,
+      "note": ""
+    },
+    {
+      "check": "released model, test: accuracy",
+      "status": "PASS",
+      "reported": 0.9858997105238584,
+      "reproduced": 0.9858997105238584,
+      "note": ""
+    },
+    {
+      "check": "released model, test_verified: macro_f1",
+      "status": "PASS",
+      "reported": 0.9848902654914181,
+      "reproduced": 0.9848902654914181,
+      "note": ""
+    },
+    {
+      "check": "released model, test_verified: accuracy",
+      "status": "PASS",
+      "reported": 0.9866799452259429,
+      "reproduced": 0.9866799452259429,
+      "note": ""
+    },
+    {
+      "check": "released model, test: confusion matrix",
+      "status": "PASS",
+      "reported": "151 errors",
+      "reproduced": "151 errors, 0 predictions differ",
+      "note": "tolerance 5 of 10,709"
+    },
+    {
+      "check": "\"not sure\" at 0.947: coverage",
+      "status": "PASS",
+      "reported": 0.9677841068260342,
+      "reproduced": 0.9677841068260342,
+      "note": ""
+    },
+    {
+      "check": "\"not sure\" at 0.947: accuracy_answered",
+      "status": "PASS",
+      "reported": 0.9950791200308761,
+      "reproduced": 0.9950791200308761,
+      "note": ""
+    },
+    {
+      "check": "released model, test: scoring time",
+      "status": "INFO",
+      "reported": null,
+      "reproduced": "77 s for 10,709 images",
+      "note": ""
+    },
+    {
+      "check": "demo: the seven example photos",
+      "status": "PASS",
+      "reported": "7 expected answers (1 not sure)",
+      "reproduced": "all as expected",
+      "note": ""
+    },
+    {
+      "check": "browser export (ONNX)",
+      "status": "PASS",
+      "reported": "same top class, probs < 1e-4",
+      "reproduced": "probs 2.4e-06, Grad-CAM 2.9e-06",
+      "note": ""
+    },
+    {
+      "check": "training again: mobilenetv2_head, val macro-F1",
+      "status": "PASS",
+      "reported": 0.9157816456901439,
+      "reproduced": 0.9198003168457322,
+      "note": "tolerance 0.01 (D-018); 14.1 min, best epoch 9/10"
+    }
+  ]
+}

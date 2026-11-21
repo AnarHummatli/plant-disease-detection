@@ -48,8 +48,9 @@ model size and CPU time; criterion 3 met (automated tests; 0 cross-split pairs).
 (`docs/error_analysis.md`): criterion 2 completed with the confusion matrix; criterion 4 met (6 failure cases
 explained with Grad-CAM, plus a measured Grad-CAM check on 555 images). Demo (`app/gradio/app.py`, notebook 09,
 D-021; in the browser at a permanent public address, D-023): criterion 5 met (top-3, Grad-CAM overlay, "not sure"
-below 0.947). Criterion 6 follows with the final
-reproducibility check.
+below 0.947). Criterion 6 met: a new Colab session following the README (notebook 10,
+D-024) rebuilt the splits byte-identically, reproduced the test results of the released model exactly and trained one
+model again to within 0.004 of its reported validation macro-F1 (`reports/reproduction/`).
 
 ## 5. Out of scope
 

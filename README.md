@@ -9,10 +9,10 @@ browser.
 Neural Networks course project by Anar Hummatli, Azerbaijan State Oil and Industry University,
 Fall 2026 (topic 06).
 
-> **Status:** stages 1–6 of 8 done (leakage-checked data and pipeline; baselines and a CNN from
+> **Status:** stages 1–7 of 8 done (leakage-checked data and pipeline; baselines and a CNN from
 > scratch; MobileNetV2 transfer learning scored on test once; error analysis with Grad-CAM and a
-> "not sure" threshold; a browser demo and a Gradio app). Next: a reproducibility check and the
-> report.
+> "not sure" threshold; a browser demo and a Gradio app; a reproduction check in a clean
+> session). Next: the report.
 
 ## Demo
 
@@ -140,6 +140,13 @@ make reproduce DATA=data               # writes reports/reproduction/reproductio
 
 `python -m plantdx.reproduce --data-root data` without `--train` skips the training run (~5 min).
 `requirements.lock` holds the exact versions of the package tree that the reproduction ran with.
+
+**Last run** (new Colab session, T4, 20 Nov 2026,
+[`reports/reproduction/reproduction.md`](reports/reproduction/reproduction.md)): all 11 checks
+passed. The splits rebuilt byte-identical; the released model gave the reported test numbers
+exactly (macro-F1 0.9816, the same 151 errors, 0 of 10,709 predictions different); the demo
+examples and the ONNX export matched; `mobilenetv2_head` trained again reached val macro-F1
+0.9198 against the reported 0.9158 in 14 minutes.
 
 ### Google Colab (recommended for training)
 

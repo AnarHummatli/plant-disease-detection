@@ -77,7 +77,7 @@ def test_run_writes_report_and_keeps_going_after_a_crash(tmp_path, monkeypatch):
     def boom():
         raise RuntimeError("no network")
 
-    monkeypatch.setattr(R, "check_environment", lambda out: [R.check("env", "INFO", 1, 1)])
+    monkeypatch.setattr(R, "check_environment", lambda lock: [R.check("env", "INFO", 1, 1)])
     monkeypatch.setattr(R, "check_splits", boom)
     monkeypatch.setattr(R, "check_release_model", lambda root: [R.check("m", "PASS", 0.98, 0.98)])
     monkeypatch.setattr(R, "check_examples", lambda: R.check("demo", "PASS"))
