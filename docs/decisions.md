@@ -35,6 +35,9 @@ as "plan 4.2" or "step 7.2" point to that plan's stages: 1 foundation, 2 data, 3
 - **Update (stage 6, D-021).** The minimum is now Python 3.11: the released model was saved by
   Keras 3.13+ and cannot be loaded by Keras 3.12, the last version for Python 3.10 (which reached
   its end of life in October 2026). CI runs 3.11, 3.12 and 3.13, so the minimum is tested too.
+- **Update (stage 7, D-024).** `requirements.lock` was written by the clean-session reproduction
+  run, whose versions matched the training runs (Python 3.13.16, TensorFlow 2.21.0, Keras 3.13.2,
+  NumPy 2.4.6). It installs into a fresh Python 3.13 environment and the tests pass with it.
 
 ## D-003 · Repository language
 

@@ -1,5 +1,11 @@
 # Plant Disease Detection
 
+[![CI](https://github.com/AnarHummatli/plant-disease-detection/actions/workflows/ci.yml/badge.svg)](https://github.com/AnarHummatli/plant-disease-detection/actions/workflows/ci.yml)
+[![Browser demo](https://github.com/AnarHummatli/plant-disease-detection/actions/workflows/pages.yml/badge.svg)](https://anarhummatli.github.io/plant-disease-detection/)
+[![Release](https://img.shields.io/github/v/release/AnarHummatli/plant-disease-detection)](https://github.com/AnarHummatli/plant-disease-detection/releases)
+[![Demo on Hugging Face](https://img.shields.io/badge/demo-Hugging%20Face%20Space-yellow)](https://huggingface.co/spaces/AnarHummatli/plant-disease-detection)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+
 Classifies a leaf photo into one of **38 plant disease / healthy classes** (14 crops) with a
 CNN and MobileNetV2 transfer learning, evaluated on a **leaf-grouped, leakage-free split**, with
 Grad-CAM explanations, a "not sure" answer for low-confidence inputs, and a
@@ -50,7 +56,9 @@ leaf, shows the "not sure" answer ([screenshot](reports/figures/demo_not_sure.jp
 The final model is MobileNetV2 with the whole backbone fine-tuned (`mobilenetv2_ft_all`), chosen
 on validation. Every model below was chosen on validation within its family and scored on the
 test split exactly once (D-015). "Verified" is the part of the test split whose leaf ids are
-known (8,033 images, 30 classes), where same-leaf leakage is impossible by construction.
+known (8,033 images, 30 classes), where same-leaf leakage is impossible by construction. A new
+Colab session reproduced the final model's test numbers exactly (0 of 10,709 predictions
+different, D-024).
 
 | Model | Test macro-F1 | Test accuracy | Verified macro-F1 | Test top-3 | Size |
 |---|---|---|---|---|---|
@@ -133,13 +141,14 @@ published numbers and changes no decision, so the test split stays used once (D-
 ```bash
 git clone https://github.com/AnarHummatli/plant-disease-detection.git
 cd plant-disease-detection
-pip install -e ".[tf,demo,web,dev]"    # or the exact versions: pip install -r requirements.lock
+pip install -e ".[tf,demo,web,dev]"    # or the exact versions, see below
 make images DATA=data                  # PlantVillage images, ~2.2 GB
 make reproduce DATA=data               # writes reports/reproduction/reproduction.md
 ```
 
 `python -m plantdx.reproduce --data-root data` without `--train` skips the training run (~5 min).
-`requirements.lock` holds the exact versions of the package tree that the reproduction ran with.
+`requirements.lock` holds the exact versions of the package tree that the reproduction ran with
+(Linux, Python 3.13): `pip install -r requirements.lock`, then `pip install -e . --no-deps`.
 
 **Last run** (new Colab session, T4, 20 Nov 2026,
 [`reports/reproduction/reproduction.md`](reports/reproduction/reproduction.md)): all 11 checks

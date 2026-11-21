@@ -2,7 +2,7 @@
 
 **Project:** Plant Disease Detection Using Neural Networks (topic 06)
 **Author:** Anar Hummatli · Neural Networks course project · ASOIU, Fall 2026
-**Version:** 1.6 · 20 November 2026
+**Version:** 1.7 · 21 November 2026
 
 ## 1. Problem
 
