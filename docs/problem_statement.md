@@ -1,8 +1,8 @@
 # Problem statement
 
-**Project:** Plant Disease Detection Using Neural Networks (topic 06)
-**Author:** Anar Hummatli · Neural Networks course project · ASOIU, Fall 2026
-**Version:** 1.7 · 21 November 2026
+**Project:** Plant Disease Detection Using Neural Networks
+**Author:** Anar Hummatli, Computer Engineering (SABAH Groups), Azerbaijan State Oil and Industry University
+**Version:** 1.8 · 21 November 2026
 
 ## 1. Problem
 

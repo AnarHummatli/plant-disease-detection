@@ -5,6 +5,7 @@
 *.jpg binary
 *.jpeg binary
 *.zip binary
+*.pdf binary
 *.keras binary
 *.h5 binary
 *.tflite binary

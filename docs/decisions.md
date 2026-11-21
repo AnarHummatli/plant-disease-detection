@@ -2,8 +2,9 @@
 
 Short records of technical decisions that differ from the obvious default or from the
 original plan (v1.0, 18 Nov 2026). Each entry: context → decision → consequence. References such
-as "plan 4.2" or "step 7.2" point to that plan's stages: 1 foundation, 2 data, 3 baselines and CNN,
-4 transfer learning and test, 5 error analysis, 6 demo, 7 reproducibility, 8 report.
+as "plan 4.2" or "step 7.2" point to the steps of [`roadmap.md`](roadmap.md): 1 foundation, 2 data,
+3 baselines and CNN, 4 transfer learning and test, 5 error analysis, 6 demo, 7 reproducibility,
+8 write-up.
 
 ## D-001 · Read PlantVillage files directly instead of `datasets.load_dataset`
 
@@ -41,9 +42,8 @@ as "plan 4.2" or "step 7.2" point to that plan's stages: 1 foundation, 2 data, 3
 
 ## D-003 · Repository language
 
-- **Decision.** Code, README and `docs/` are written in English, because the repository is also a
-  public portfolio piece and the assignment itself is in English. Presentation and Q&A follow the
-  lecturer's language.
+- **Decision.** Code, README and `docs/` are written in English, because the repository is a
+  public portfolio project. The browser demo is in English and Azerbaijani (D-023).
 
 ## D-004 · Official split is not fully leaf-grouped: handling of "fallback" leaves
 

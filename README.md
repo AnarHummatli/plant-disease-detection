@@ -12,13 +12,14 @@ Grad-CAM explanations, a "not sure" answer for low-confidence inputs, and a
 [live demo](https://huggingface.co/spaces/AnarHummatli/plant-disease-detection) that runs in the
 browser.
 
-Neural Networks course project by Anar Hummatli, Azerbaijan State Oil and Industry University,
-Fall 2026 (topic 06).
+A personal deep-learning project by [Anar Hummatli](https://www.linkedin.com/in/anarhummatli),
+Computer Engineering (SABAH Groups), Azerbaijan State Oil and Industry University, 2026.
 
-> **Status:** stages 1–7 of 8 done (leakage-checked data and pipeline; baselines and a CNN from
-> scratch; MobileNetV2 transfer learning scored on test once; error analysis with Grad-CAM and a
-> "not sure" threshold; a browser demo and a Gradio app; a reproduction check in a clean
-> session). Next: the report.
+![The browser demo: three diagnoses with Grad-CAM, then a "not sure" answer](reports/figures/demo.gif)
+
+**Technical report** (7 pages): [`docs/report.pdf`](docs/report.pdf) ·
+**Roadmap** (8 stages, all done): [`docs/roadmap.md`](docs/roadmap.md) ·
+**Decision log** (D-001 to D-024): [`docs/decisions.md`](docs/decisions.md)
 
 ## Demo
 
@@ -48,8 +49,6 @@ Grad-CAM, 6.6 times faster than calling the model eagerly (D-021). The browser v
 ONNX export of the same model and gave the same class and verdict as Python on all 47 photos
 checked (D-023). Seven test photos are included as examples; one of them, a corner of a tomato
 leaf, shows the "not sure" answer ([screenshot](reports/figures/demo_not_sure.jpg)).
-
-![The browser demo diagnosing a grape leaf](reports/figures/demo_web.jpg)
 
 ## Final results (test split, evaluated once)
 
@@ -236,7 +235,8 @@ tests/            pytest: splits, pipeline, baselines, models, trainer, evaluati
                   demo, browser build (ONNX export, JavaScript resize, translations), reproduction
 app/gradio/       Gradio demo (app.py) and seven example test photos with attribution
 app/web/          browser demo (static page; the model runs with ONNX Runtime Web)
-docs/             problem statement, data card, decision log, error analysis (later: report)
+docs/             roadmap, problem statement, data card, decision log, error analysis, technical
+                  report (report.md, report.pdf, build_report.py)
 reports/          results tables, per-run metrics, analysis, reproduction check; figures/ for the report
 requirements.lock exact package versions of the reproduction run
 ```
@@ -275,6 +275,14 @@ What the data checks found (details in `docs/decisions.md`, D-004, D-006 and D-0
   (8,033 images, 30 classes), where leakage is excluded by construction.
 
 ![One example per class](reports/figures/eda_sample_grid.jpg)
+
+## How it was built
+
+Designed and built by Anar Hummatli. Claude (Anthropic), an AI assistant, was used during
+development: to discuss approaches, to write and review code and tests, and to draft the
+documentation. The author directed the project, made the final decisions, ran the training and
+evaluation on Google Colab and checked the results. Every reported number comes from the logged
+outputs in `reports/` and is recomputed by the reproduction check (D-024).
 
 ## Disclaimer
 

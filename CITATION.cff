@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this code or its results, please cite it as below."
+title: "Plant Disease Detection: transfer learning on a leakage-checked PlantVillage split"
+type: software
+authors:
+  - family-names: Hummatli
+    given-names: Anar
+    affiliation: "Azerbaijan State Oil and Industry University"
+repository-code: "https://github.com/AnarHummatli/plant-disease-detection"
+url: "https://huggingface.co/spaces/AnarHummatli/plant-disease-detection"
+license: MIT
+version: "1.2.0"
+date-released: "2026-11-20"
+keywords:
+  - plant disease detection
+  - deep learning
+  - transfer learning
+  - MobileNetV2
+  - Grad-CAM
+  - PlantVillage
+  - data leakage

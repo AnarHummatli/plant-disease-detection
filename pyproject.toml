@@ -27,6 +27,11 @@ dependencies = [
     "packaging>=23.0",
 ]
 
+[project.urls]
+Homepage = "https://github.com/AnarHummatli/plant-disease-detection"
+Demo = "https://huggingface.co/spaces/AnarHummatli/plant-disease-detection"
+Report = "https://github.com/AnarHummatli/plant-disease-detection/blob/main/docs/report.pdf"
+
 [project.optional-dependencies]
 tf = ["tensorflow>=2.19", "keras>=3.13"]
 # CPU-only TensorFlow for CI: runs the pipeline tests without CUDA libraries
